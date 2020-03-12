@@ -2,11 +2,16 @@
 
 package com.visumIT.Business.boost.models;
 
+import java.util.List;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
@@ -17,20 +22,19 @@ public class Empresa {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	
+	
+	@OneToMany
+    @JoinTable(name = "tbl_endereco", joinColumns =) 
+	private List<Endereco> endereco;
+	
+	@Column(name = "inscricao_estadual", columnDefinition = "VARCHAR(20)")
+	private String inscricaoEstadual;
+	
 	@Column(name = "razao", columnDefinition = "VARCHAR(60)")
 	private String razaoSocial;
 		
-	@Column(name = "nome_fantasia", columnDefinition = "VARCHAR(60)")
-	private String nome;
-	
-	@Column(name = "cnpj", columnDefinition = "VARCHAR(14)")
+	@Column(name = "cnpj", columnDefinition = "VARCHAR(20)")
 	private String cnpj;
-	
-	@Column(name = "fundacao", columnDefinition = "VARCHAR(30)")
-	private Long fundacao;
-	
-	@Column(name = "endereco", columnDefinition = "VARCHAR(60)")
-	private String endereco;
 	
 	@Column(name = "email", columnDefinition = "VARCHAR(40)")
 	private String email;
@@ -44,10 +48,7 @@ public class Empresa {
 	@Column(name = "telefone_opcao3", columnDefinition = "VARCHAR(15)")
 	private String telefoneOpcao3;
 	
-	@Column(name = "nicho", columnDefinition = "TEXT()")
-	private String nicho;
-	
-	@Column(name = "porte_empresa", columnDefinition = "VARCHAR()")
+	@Column(name = "porte_empresa", columnDefinition = "VARCHAR(40)")
 	private String porteEmpresa;
 	
 	@Column(name = "numero_funcionarios", columnDefinition = "VARCHAR(10)")
@@ -56,7 +57,7 @@ public class Empresa {
 	@Column(name = "senha", columnDefinition = "VARCHAR(150)")
 	private String senha;
 	
-	@Column(name = "descricao", columnDefinition = "TEXT()")
+	@Column(name = "descricao", columnDefinition = "VARCHAR(200)")
 	private String descricao;
 	
 	@Column(name = "logo", columnDefinition = "VARCHAR(40)")
@@ -64,9 +65,6 @@ public class Empresa {
 	
 	@Column(name = "imagem", columnDefinition = "VARCHAR(40)")
 	private String imagem;
-	
-	@Column(name = "metodo_pagamento", columnDefinition = "VARCHAR(40)")
-	private String metodoPagamento;
 
 	public Long getId() {
 		return id;
@@ -84,14 +82,6 @@ public class Empresa {
 		this.razaoSocial = razaoSocial;
 	}
 
-	public String getNome() {
-		return nome;
-	}
-
-	public void setNome(String nome) {
-		this.nome = nome;
-	}
-
 	public String getCnpj() {
 		return cnpj;
 	}
@@ -99,21 +89,23 @@ public class Empresa {
 	public void setCnpj(String cnpj) {
 		this.cnpj = cnpj;
 	}
+	
+	
 
-	public Long getFundacao() {
-		return fundacao;
-	}
-
-	public void setFundacao(Long fundacao) {
-		this.fundacao = fundacao;
-	}
-
-	public String getEndereco() {
+	public List<Endereco> getEndereco() {
 		return endereco;
 	}
 
-	public void setEndereco(String endereco) {
+	public void setEndereco(List<Endereco> endereco) {
 		this.endereco = endereco;
+	}
+
+	public String getInscricaoEstadual() {
+		return inscricaoEstadual;
+	}
+
+	public void setInscricaoEstadual(String inscricaoEstadual) {
+		this.inscricaoEstadual = inscricaoEstadual;
 	}
 
 	public String getEmail() {
@@ -146,14 +138,6 @@ public class Empresa {
 
 	public void setTelefoneOpcao3(String telefoneOpcao3) {
 		this.telefoneOpcao3 = telefoneOpcao3;
-	}
-
-	public String getNicho() {
-		return nicho;
-	}
-
-	public void setNicho(String nicho) {
-		this.nicho = nicho;
 	}
 
 	public String getPorteEmpresa() {
@@ -204,16 +188,6 @@ public class Empresa {
 		this.imagem = imagem;
 	}
 
-	public String getMetodoPagamento() {
-		return metodoPagamento;
-	}
 
-	public void setMetodoPagamento(String metodoPagamento) {
-		this.metodoPagamento = metodoPagamento;
-	}
-	
-	
-	
-	
-	
+
 }

@@ -8,8 +8,10 @@
 		<item key="incremental" value="false"/>
 		<item key="isRegEx" value="false"/>
 		<list key="findhistory">
-			<item value="cnpj"/>
+			<item value="cep"/>
+			<item value="nome"/>
 			<item value="cpf"/>
+			<item value="cnpj"/>
 		</list>
 		<list key="replacehistory">
 		</list>

@@ -1,0 +1,5 @@
+package com.visumIT.Business.boost.repository;
+
+public interface EnderecoRepository {
+
+}

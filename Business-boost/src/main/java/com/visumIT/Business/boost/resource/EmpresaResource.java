@@ -22,13 +22,13 @@ import com.visumIT.Business.boost.models.Empresa;
 import com.visumIT.Business.boost.repository.EmpresaRepository;
 
 @RestController
-@RequestMapping("empresa/")
+@RequestMapping("/empresa")
 public class EmpresaResource {
 
 	@Autowired
 	private EmpresaRepository empresaRepository;
 	
-	@GetMapping("/empresa")
+	@GetMapping("/")
 	public List<Empresa> getEmpresa() {
 		return empresaRepository.findAll();
 	}

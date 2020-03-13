@@ -9,7 +9,6 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
@@ -23,8 +22,8 @@ public class Empresa {
 	private Long id;
 	
 	
-	@OneToMany
-    @JoinTable(name = "tbl_endereco", joinColumns =) 
+	@OneToMany(orphanRemoval=true)
+	@JoinTable(name = "tbl_endereco")
 	private List<Endereco> endereco;
 	
 	@Column(name = "inscricao_estadual", columnDefinition = "VARCHAR(20)")
@@ -90,8 +89,7 @@ public class Empresa {
 		this.cnpj = cnpj;
 	}
 	
-	
-
+	@OneToMany
 	public List<Endereco> getEndereco() {
 		return endereco;
 	}

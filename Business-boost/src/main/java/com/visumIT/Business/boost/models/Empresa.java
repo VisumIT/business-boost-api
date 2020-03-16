@@ -2,6 +2,7 @@
 
 package com.visumIT.Business.boost.models;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.CascadeType;
@@ -29,8 +30,8 @@ public class Empresa {
 		
 	//mappedBy indica o atributo da classe de destino
 	//fetch eager carrega todos os endereços de uma vez, outra opção seria usar lazy para carregar por demanda
-	@OneToMany(mappedBy = "empresa", fetch=FetchType.EAGER, cascade = CascadeType.ALL, orphanRemoval = true)
-	private List<Endereco> endereco;
+	@OneToMany(mappedBy = "empresa", fetch=FetchType.EAGER)
+	private List<Endereco> endereco = new ArrayList<>();
 	
 	@Column(name = "inscricao_estadual", columnDefinition = "VARCHAR(20)")
 	private String inscricaoEstadual;

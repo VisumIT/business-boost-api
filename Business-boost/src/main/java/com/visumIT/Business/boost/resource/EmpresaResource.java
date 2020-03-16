@@ -28,12 +28,12 @@ public class EmpresaResource {
 	@Autowired
 	private EmpresaRepository empresaRepository;
 	
-	@GetMapping("/")
-	public List<Empresa> getEmpresa() {
+	@GetMapping
+	public List<Empresa> getEmpresas() {
 		return empresaRepository.findAll();
 	}
 	
-	@GetMapping("/empresa/{id}")
+	@GetMapping("/{id}")
 	public ResponseEntity<?> getEmpresa(@PathVariable Long id){
 		Optional<?> empresaProcurada = empresaRepository.findById(id);
 		return empresaProcurada.isPresent() ?
@@ -41,19 +41,19 @@ public class EmpresaResource {
 				ResponseEntity.notFound().build();
 	}
 	
-	@PostMapping("/empresa")
+	@PostMapping("/")
 	@ResponseStatus(HttpStatus.CREATED)
 	public Empresa gravar(@Valid @RequestBody Empresa empresa) {
 		return empresaRepository.save(empresa);
 	}
 	
-	@DeleteMapping("/empresa/{id}")
+	@DeleteMapping("/{id}")
 	@ResponseStatus(HttpStatus.NO_CONTENT)
 	public void excluir(@PathVariable Long id) {
 		empresaRepository.deleteById(id);
 	}
 	
-	@PutMapping("/empresa")
+	@PutMapping("/")
 	public void atualizar(@Valid @RequestBody Empresa empresa) {
 		empresaRepository.save(empresa);
 	}

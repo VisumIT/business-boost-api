@@ -2,10 +2,12 @@ package com.visumIT.Business.boost.models;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.ForeignKey;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
@@ -25,7 +27,11 @@ public class Endereco {
 
 	@Column(name = "logradouro", columnDefinition = "VARCHAR(10)")
 	private String logradouro;
-
+	
+	@ManyToOne
+	@JoinColumn(name="empresa_id")
+	private Empresa empresa;
+	
 	@Column(name = "bairro", columnDefinition = "VARCHAR(40)")
 	private String bairro;
 

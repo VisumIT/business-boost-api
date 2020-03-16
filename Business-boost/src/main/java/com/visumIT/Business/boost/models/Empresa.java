@@ -4,26 +4,32 @@ package com.visumIT.Business.boost.models;
 
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
-@Entity
+import lombok.Data;
+
+@Entity(name ="Empresa")
 @Table(name = "tbl_empresa")
+@Data
 public class Empresa {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
-	
-	
-	@OneToMany(orphanRemoval=true)
-	@JoinTable(name = "tbl_endereco")
+		
+	//mappedBy indica o atributo da classe de destino
+	//fetch eager carrega todos os endereços de uma vez, outra opção seria usar lazy para carregar por demanda
+	@OneToMany(mappedBy = "empresa", fetch=FetchType.EAGER, cascade = CascadeType.ALL, orphanRemoval = true)
 	private List<Endereco> endereco;
 	
 	@Column(name = "inscricao_estadual", columnDefinition = "VARCHAR(20)")
@@ -35,24 +41,21 @@ public class Empresa {
 	@Column(name = "cnpj", columnDefinition = "VARCHAR(20)")
 	private String cnpj;
 	
+	@Column(name = "nome_fantasia", columnDefinition = "VARCHAR(40)")
+	private String nomeFantasia;
+	
 	@Column(name = "email", columnDefinition = "VARCHAR(40)")
 	private String email;
 	
-	@Column(name = "telefone_opcao1", columnDefinition = "VARCHAR(15)")
+	/*@Column(name = "telefone_opcao1", columnDefinition = "VARCHAR(15)")
 	private String telefoneOpcao1;
 	
 	@Column(name = "telefone_opcao2", columnDefinition = "VARCHAR(15)")
 	private String telefoneOpcao2;
 	
 	@Column(name = "telefone_opcao3", columnDefinition = "VARCHAR(15)")
-	private String telefoneOpcao3;
-	
-	@Column(name = "porte_empresa", columnDefinition = "VARCHAR(40)")
-	private String porteEmpresa;
-	
-	@Column(name = "numero_funcionarios", columnDefinition = "VARCHAR(10)")
-	private Integer numeroFuncionarios;
-	
+	private String telefoneOpcao3;*/
+		
 	@Column(name = "senha", columnDefinition = "VARCHAR(150)")
 	private String senha;
 	
@@ -64,128 +67,4 @@ public class Empresa {
 	
 	@Column(name = "imagem", columnDefinition = "VARCHAR(40)")
 	private String imagem;
-
-	public Long getId() {
-		return id;
-	}
-
-	public void setId(Long id) {
-		this.id = id;
-	}
-
-	public String getRazaoSocial() {
-		return razaoSocial;
-	}
-
-	public void setRazaoSocial(String razaoSocial) {
-		this.razaoSocial = razaoSocial;
-	}
-
-	public String getCnpj() {
-		return cnpj;
-	}
-
-	public void setCnpj(String cnpj) {
-		this.cnpj = cnpj;
-	}
-	
-	@OneToMany
-	public List<Endereco> getEndereco() {
-		return endereco;
-	}
-
-	public void setEndereco(List<Endereco> endereco) {
-		this.endereco = endereco;
-	}
-
-	public String getInscricaoEstadual() {
-		return inscricaoEstadual;
-	}
-
-	public void setInscricaoEstadual(String inscricaoEstadual) {
-		this.inscricaoEstadual = inscricaoEstadual;
-	}
-
-	public String getEmail() {
-		return email;
-	}
-
-	public void setEmail(String email) {
-		this.email = email;
-	}
-
-	public String getTelefoneOpcao1() {
-		return telefoneOpcao1;
-	}
-
-	public void setTelefoneOpcao1(String telefoneOpcao1) {
-		this.telefoneOpcao1 = telefoneOpcao1;
-	}
-
-	public String getTelefoneOpcao2() {
-		return telefoneOpcao2;
-	}
-
-	public void setTelefoneOpcao2(String telefoneOpcao2) {
-		this.telefoneOpcao2 = telefoneOpcao2;
-	}
-
-	public String getTelefoneOpcao3() {
-		return telefoneOpcao3;
-	}
-
-	public void setTelefoneOpcao3(String telefoneOpcao3) {
-		this.telefoneOpcao3 = telefoneOpcao3;
-	}
-
-	public String getPorteEmpresa() {
-		return porteEmpresa;
-	}
-
-	public void setPorteEmpresa(String porteEmpresa) {
-		this.porteEmpresa = porteEmpresa;
-	}
-
-	public Integer getNumeroFuncionarios() {
-		return numeroFuncionarios;
-	}
-
-	public void setNumeroFuncionarios(Integer numeroFuncionarios) {
-		this.numeroFuncionarios = numeroFuncionarios;
-	}
-
-	public String getSenha() {
-		return senha;
-	}
-
-	public void setSenha(String senha) {
-		this.senha = senha;
-	}
-
-	public String getDescricao() {
-		return descricao;
-	}
-
-	public void setDescricao(String descricao) {
-		this.descricao = descricao;
-	}
-
-	public String getLogo() {
-		return logo;
-	}
-
-	public void setLogo(String logo) {
-		this.logo = logo;
-	}
-
-	public String getImagem() {
-		return imagem;
-	}
-
-	public void setImagem(String imagem) {
-		this.imagem = imagem;
-	}
-
-
-
 }

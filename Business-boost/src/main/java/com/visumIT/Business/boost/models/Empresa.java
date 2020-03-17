@@ -5,15 +5,12 @@ package com.visumIT.Business.boost.models;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
@@ -30,8 +27,11 @@ public class Empresa {
 		
 	//mappedBy indica o atributo da classe de destino
 	//fetch eager carrega todos os endereços de uma vez, outra opção seria usar lazy para carregar por demanda
-	@OneToMany(mappedBy = "empresa", fetch=FetchType.EAGER)
+	@OneToMany
 	private List<Endereco> endereco = new ArrayList<>();
+	
+	//@Column(name = "telefone", columnDefinition = "VARCHAR(15)")
+	//private List<Telefone> telefone = new  ArrayList<>();
 	
 	@Column(name = "inscricao_estadual", columnDefinition = "VARCHAR(20)")
 	private String inscricaoEstadual;
@@ -47,15 +47,6 @@ public class Empresa {
 	
 	@Column(name = "email", columnDefinition = "VARCHAR(40)")
 	private String email;
-	
-	/*@Column(name = "telefone_opcao1", columnDefinition = "VARCHAR(15)")
-	private String telefoneOpcao1;
-	
-	@Column(name = "telefone_opcao2", columnDefinition = "VARCHAR(15)")
-	private String telefoneOpcao2;
-	
-	@Column(name = "telefone_opcao3", columnDefinition = "VARCHAR(15)")
-	private String telefoneOpcao3;*/
 		
 	@Column(name = "senha", columnDefinition = "VARCHAR(150)")
 	private String senha;

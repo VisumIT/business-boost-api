@@ -18,46 +18,41 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.visumIT.Business.boost.models.Empresa;
-import com.visumIT.Business.boost.models.Endereco;
-import com.visumIT.Business.boost.repository.EmpresaRepository;
+import com.visumIT.Business.boost.models.Telefone;
+import com.visumIT.Business.boost.repository.TelefoneRepository;
 
 @RestController
-@RequestMapping("/empresa")
-public class EmpresaResource {
+@RequestMapping("/telefone")
+public class TelefoneResource {
 
 	@Autowired
-	private EmpresaRepository empresaRepository;
-	
+	private TelefoneRepository telefoneRepository;
+
 	@GetMapping
-	public List<Empresa> getEmpresas() {
-		return empresaRepository.findAll();
+	public List<Telefone> getTelefone() {
+		return telefoneRepository.findAll();
 	}
-	
+
 	@GetMapping("/{id}")
-	public ResponseEntity<?> getEmpresa(@PathVariable Long id){
-		Optional<?> empresaProcurada = empresaRepository.findById(id);
-		return empresaProcurada.isPresent() ?
-				ResponseEntity.ok(empresaProcurada.get()) :
-				ResponseEntity.notFound().build();
+	public ResponseEntity<?> getTelefone(@PathVariable Long id) {
+		Optional<?> telefoneProcurado = telefoneRepository.findById(id);
+		return telefoneProcurado.isPresent() ? ResponseEntity.ok(telefoneProcurado.get())
+				: ResponseEntity.notFound().build();
 	}
-	
+
 	@PostMapping
 	@ResponseStatus(HttpStatus.CREATED)
-	public Empresa gravar(@Valid @RequestBody Empresa empresa) {
-		List<Endereco> enderecos = empresa.getEndereco();
-		return empresaRepository.save(empresa);
+	public Telefone gravar(@Valid @RequestBody Telefone telefone) {
+		return telefoneRepository.save(telefone);
 	}
 	
 	@DeleteMapping("/{id}")
 	@ResponseStatus(HttpStatus.NO_CONTENT)
 	public void excluir(@PathVariable Long id) {
-		empresaRepository.deleteById(id);
+		telefoneRepository.deleteById(id);
 	}
-	
-	@PutMapping("/")
-	public void atualizar(@Valid @RequestBody Empresa empresa) {
-		empresaRepository.save(empresa);
+	@PutMapping
+	public void atualizar (@Valid @RequestBody Telefone telefone) {
+		telefoneRepository.save(telefone);
 	}
-	
 }

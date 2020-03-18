@@ -19,7 +19,6 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.visumIT.Business.boost.models.Empresa;
-import com.visumIT.Business.boost.models.Endereco;
 import com.visumIT.Business.boost.repository.EmpresaRepository;
 
 @RestController
@@ -42,10 +41,9 @@ public class EmpresaResource {
 				ResponseEntity.notFound().build();
 	}
 	
-	@PostMapping
+	@PostMapping("/")
 	@ResponseStatus(HttpStatus.CREATED)
 	public Empresa gravar(@Valid @RequestBody Empresa empresa) {
-		List<Endereco> enderecos = empresa.getEndereco();
 		return empresaRepository.save(empresa);
 	}
 	

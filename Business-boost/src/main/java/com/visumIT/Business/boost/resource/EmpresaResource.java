@@ -19,7 +19,9 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.visumIT.Business.boost.models.Empresa;
+import com.visumIT.Business.boost.models.Telefone;
 import com.visumIT.Business.boost.repository.EmpresaRepository;
+import com.visumIT.Business.boost.repository.TelefoneRepository;
 
 @RestController
 @RequestMapping("/empresa")
@@ -27,6 +29,14 @@ public class EmpresaResource {
 
 	@Autowired
 	private EmpresaRepository empresaRepository;
+	
+
+//	@Autowired
+//	private EnderecoRepository enderecoRepository;
+
+	@Autowired
+	private TelefoneRepository telefoneRepository;
+	
 	
 	@GetMapping
 	public List<Empresa> getEmpresas() {
@@ -41,10 +51,22 @@ public class EmpresaResource {
 				ResponseEntity.notFound().build();
 	}
 	
-	@PostMapping("/")
+	@PostMapping
 	@ResponseStatus(HttpStatus.CREATED)
 	public Empresa gravar(@Valid @RequestBody Empresa empresa) {
-		return empresaRepository.save(empresa);
+		Empresa e = empresaRepository.save(empresa);
+		for(Telefone tel : e.getTelefone()) {
+			tel.setEmpresa(e);
+			telefoneRepository.save(tel);
+		}
+		return e;
+//		return empresaRepository.save(empresa);
+//		Empresa e = empresaRepository.save(empresa);
+//		for(Endereco end : e.getEndereco()) {
+//			end.setEmpresa(e);
+//			enderecoRepository.save(end);
+//		}
+//		return e;
 	}
 	
 	@DeleteMapping("/{id}")

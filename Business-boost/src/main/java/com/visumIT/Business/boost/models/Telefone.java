@@ -9,6 +9,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import javax.validation.constraints.Size;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
@@ -23,7 +24,8 @@ public class Telefone {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	
-	@Column(name="numero")
+	@Size(min = 6, max = 20 )
+	@Column(name="numero", columnDefinition = "VARCHAR(20)")
 	private String numero;
 	
 	@JoinColumn(name = "empresa_id")

@@ -39,7 +39,6 @@ public class Empresa {
 	@Column(name="endereco", columnDefinition = "VARCHAR(150)")
 	private String endereco;
 	
-	@Size( min = 9, max = 20 )
 	@OneToMany(cascade=CascadeType.ALL, mappedBy = "empresa")
 	@Column(name = "telefone", columnDefinition = "VARCHAR(20)")
 	private List<Telefone> telefone = new  ArrayList<>();
@@ -50,7 +49,7 @@ public class Empresa {
 	@Column(name = "razao", columnDefinition = "VARCHAR(60)")
 	private String razaoSocial;
 	
-	@CNPJ
+	//@CNPJ
 	@Column(name = "cnpj", columnDefinition = "VARCHAR(20)")
 	private String cnpj;
 	

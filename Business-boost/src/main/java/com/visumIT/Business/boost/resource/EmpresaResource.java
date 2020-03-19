@@ -69,13 +69,21 @@ public class EmpresaResource {
 //		return e;
 	}
 	
+	//usando o retorno response entity para poder retornar o erro 404 caso tente deletar algo q não existe
 	@DeleteMapping("/{id}")
 	@ResponseStatus(HttpStatus.NO_CONTENT)
-	public void excluir(@PathVariable Long id) {
-		empresaRepository.deleteById(id);
+	public ResponseEntity<?> excluir(@PathVariable Long id) {
+		if(empresaRepository.existsById(id)) {
+			empresaRepository.deleteById(id); 
+			return ResponseEntity.noContent().build();
+		}
+		else {
+			return ResponseEntity.notFound().build();
+		}
 	}
 	
-	@PutMapping("/")
+	@PutMapping("/{id}")
+	@ResponseStatus(HttpStatus.OK)
 	public void atualizar(@Valid @RequestBody Empresa empresa) {
 		empresaRepository.save(empresa);
 	}

@@ -30,14 +30,34 @@ public class Empresa {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
-
-	 
-//	@OneToMany(cascade=CascadeType.ALL, mappedBy = "empresa")
-//	private List<Endereco> endereco = new ArrayList<>();
 	
+	//endereco
 	@Size(max = 150)
 	@Column(name="endereco", columnDefinition = "VARCHAR(150)")
 	private String endereco;
+	
+	@Column(name="logradouro", columnDefinition = "VARCHAR(20)")
+	private String logradouro;
+	
+	@Column(name="numero", columnDefinition = "VARCHAR(10)")
+	private String numero;
+	
+	@Column(name="uf", columnDefinition = "VARCHAR(20)")
+	private String uf;
+	
+	@Column(name="bairro", columnDefinition = "VARCHAR(50)")
+	private String bairro;
+	
+	@Column(name="cidade", columnDefinition = "VARCHAR(50)")
+	private String cidade;
+	
+	@Column(name="cep", columnDefinition = "VARCHAR(20)")
+	private String cep;
+	//********************
+	
+	
+	@Column(name="site", columnDefinition = "VARCHAR(100)") 
+	private String site;
 	
 	@OneToMany(cascade=CascadeType.ALL, mappedBy = "empresa")
 	@Column(name = "telefone", columnDefinition = "VARCHAR(20)")
@@ -59,7 +79,8 @@ public class Empresa {
 	@Column(name = "email", columnDefinition = "VARCHAR(40)")
 	private String email;
 		
-	@Column(name = "senha", columnDefinition = "VARCHAR(150)")
+	
+	@Column(name = "senha", columnDefinition = "VARCHAR(255)")
 	private String senha;
 	
 	@Column(name = "descricao", columnDefinition = "VARCHAR(200)")

@@ -1,4 +1,3 @@
- 
 package com.visumIT.Business.boost.resource;
 
 import java.util.List;

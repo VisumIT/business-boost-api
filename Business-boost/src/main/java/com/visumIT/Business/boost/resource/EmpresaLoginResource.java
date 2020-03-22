@@ -4,6 +4,7 @@ import java.util.Optional;
 
 import javax.validation.Valid;
 
+import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -22,19 +23,24 @@ public class EmpresaLoginResource {
 	private EmpresaRepository empresaRepository;
 
 	@PostMapping
-	private Boolean login(@Valid @RequestBody Empresa empresa) {
+	private ResponseEntity<Object> login(@Valid @RequestBody Empresa empresa) {
 		Optional<Empresa> e = empresaRepository.findByemail(empresa.getEmail());
 		if (e.isPresent()) {
 			if (empresa.getSenha().equals(e.get().getSenha()) ) {
 				ResponseEntity.ok().build();
-				return true;
+				return ResponseEntity.ok().body(e);
 			} else {
-				ResponseEntity.badRequest();
-				return false;
+				return ResponseEntity.badRequest()
+						.body(new JSONObject()
+						.put("message", "Login ou senha incorretos")
+						.toString());
 			}
 		} else {
 			ResponseEntity.notFound().build();
-			return false;
+			return ResponseEntity.badRequest()
+					.body(new JSONObject()
+					.put("message", "Login ou senha incorretos")
+					.toString());
 		}
 
 	}

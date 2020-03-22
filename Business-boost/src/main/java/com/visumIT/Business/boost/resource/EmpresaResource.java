@@ -1,4 +1,3 @@
- 
 package com.visumIT.Business.boost.resource;
 
 import java.util.List;
@@ -6,6 +5,7 @@ import java.util.Optional;
 
 import javax.validation.Valid;
 
+import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -30,37 +30,39 @@ public class EmpresaResource {
 
 	@Autowired
 	private EmpresaRepository empresaRepository;
-	
 
 //	@Autowired
 //	private EnderecoRepository enderecoRepository;
 
 	@Autowired
 	private TelefoneRepository telefoneRepository;
-	
-	
+
 	@GetMapping
 	public List<Empresa> getEmpresas() {
 		return empresaRepository.findAll();
 	}
-	
+
 	@GetMapping("/{id}")
-	public ResponseEntity<?> getEmpresa(@PathVariable Long id){
+	public ResponseEntity<?> getEmpresa(@PathVariable Long id) {
 		Optional<?> empresaProcurada = empresaRepository.findById(id);
-		return empresaProcurada.isPresent() ?
-				ResponseEntity.ok(empresaProcurada.get()) :
-				ResponseEntity.notFound().build();
+		return empresaProcurada.isPresent() ? ResponseEntity.ok(empresaProcurada.get())
+				: ResponseEntity.notFound().build();
 	}
-	
+
 	@PostMapping
 	@ResponseStatus(HttpStatus.CREATED)
-	public Empresa gravar(@Valid @RequestBody Empresa empresa) {
-		Empresa e = empresaRepository.save(empresa);
-		for(Telefone tel : e.getTelefone()) {
-			tel.setEmpresa(e);
-			telefoneRepository.save(tel);
+	public ResponseEntity<?> gravar(@Valid @RequestBody Empresa empresa) {
+		if (empresaRepository.existsByEmail(empresa.getEmail())) {
+			return ResponseEntity.badRequest().body(new JSONObject().put("message", "E-mail allready in use").toString());
+			
+		} else {
+			Empresa e = empresaRepository.save(empresa);
+			for (Telefone tel : e.getTelefone()) {
+				tel.setEmpresa(e);
+				telefoneRepository.save(tel);
+			}
+			return ResponseEntity.ok().body(new JSONObject().put("message", "Empresa cadastrada com sucesso").toString());
 		}
-		return e;
 //		return empresaRepository.save(empresa);
 //		Empresa e = empresaRepository.save(empresa);
 //		for(Endereco end : e.getEndereco()) {
@@ -69,24 +71,24 @@ public class EmpresaResource {
 //		}
 //		return e;
 	}
-	
-	//usando o retorno response entity para poder retornar o erro 404 caso tente deletar algo q não existe
+
+	// usando o retorno response entity para poder retornar o erro 404 caso tente
+	// deletar algo q não existe
 	@DeleteMapping("/{id}")
 	@ResponseStatus(HttpStatus.NO_CONTENT)
 	public ResponseEntity<?> excluir(@PathVariable Long id) {
-		if(empresaRepository.existsById(id)) {
-			empresaRepository.deleteById(id); 
+		if (empresaRepository.existsById(id)) {
+			empresaRepository.deleteById(id);
 			return ResponseEntity.noContent().build();
-		}
-		else {
+		} else {
 			return ResponseEntity.notFound().build();
 		}
 	}
-	
+
 	@PutMapping("/{id}")
 	@ResponseStatus(HttpStatus.OK)
 	public void atualizar(@Valid @RequestBody Empresa empresa) {
 		empresaRepository.save(empresa);
 	}
-	
+
 }

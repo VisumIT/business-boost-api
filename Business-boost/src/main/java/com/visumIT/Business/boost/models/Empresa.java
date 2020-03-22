@@ -15,9 +15,11 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Transient;
+import javax.validation.Constraint;
 import javax.validation.constraints.Size;
 
 import org.hibernate.annotations.Cascade;
+import org.hibernate.validator.constraints.UniqueElements;
 import org.hibernate.validator.constraints.br.CNPJ;
 
 import lombok.Data;
@@ -76,7 +78,7 @@ public class Empresa {
 	@Column(name = "nome_fantasia", columnDefinition = "VARCHAR(40)")
 	private String nomeFantasia;
 	
-	@Column(name = "email", columnDefinition = "VARCHAR(40)")
+	@Column(name = "email", columnDefinition = "VARCHAR(40)", unique=true)
 	private String email;
 		
 	
@@ -91,4 +93,5 @@ public class Empresa {
 	
 	@Column(name = "imagem", columnDefinition = "VARCHAR(40)")
 	private String imagem;
+
 }

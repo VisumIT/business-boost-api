@@ -9,6 +9,7 @@ import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -23,6 +24,8 @@ import com.visumIT.Business.boost.models.Empresa;
 import com.visumIT.Business.boost.models.Telefone;
 import com.visumIT.Business.boost.repository.EmpresaRepository;
 import com.visumIT.Business.boost.repository.TelefoneRepository;
+
+import exception.ValidationFormat;
 
 @RestController
 @RequestMapping("/empresa")
@@ -51,25 +54,22 @@ public class EmpresaResource {
 
 	@PostMapping
 	@ResponseStatus(HttpStatus.CREATED)
-	public ResponseEntity<?> gravar(@Valid @RequestBody Empresa empresa) {
+	public ResponseEntity<?> gravar(@Valid @RequestBody Empresa empresa, BindingResult bindingResult) {
 		if (empresaRepository.existsByEmail(empresa.getEmail())) {
 			return ResponseEntity.badRequest().body(new JSONObject().put("message", "E-mail allready in use").toString());
 			
-		} else {
+		} else if(bindingResult.hasErrors()){
+			return ResponseEntity.badRequest().body(ValidationFormat.formatarErros(bindingResult));
+		} 
+		else {
 			Empresa e = empresaRepository.save(empresa);
 			for (Telefone tel : e.getTelefone()) {
 				tel.setEmpresa(e);
 				telefoneRepository.save(tel);
 			}
-			return ResponseEntity.ok().body(new JSONObject().put("message", "Empresa cadastrada com sucesso").toString());
+			return ResponseEntity.ok().body(new JSONObject()
+					.put("message", "company successfully registered").toString());
 		}
-//		return empresaRepository.save(empresa);
-//		Empresa e = empresaRepository.save(empresa);
-//		for(Endereco end : e.getEndereco()) {
-//			end.setEmpresa(e);
-//			enderecoRepository.save(end);
-//		}
-//		return e;
 	}
 
 	// usando o retorno response entity para poder retornar o erro 404 caso tente

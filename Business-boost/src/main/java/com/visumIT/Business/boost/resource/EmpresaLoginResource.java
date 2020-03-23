@@ -27,19 +27,18 @@ public class EmpresaLoginResource {
 		Optional<Empresa> e = empresaRepository.findByemail(empresa.getEmail());
 		if (e.isPresent()) {
 			if (empresa.getSenha().equals(e.get().getSenha()) ) {
-				ResponseEntity.ok().build();
 				return ResponseEntity.ok().body(e);
 			} else {
 				return ResponseEntity.badRequest()
 						.body(new JSONObject()
-						.put("message", "Login ou senha incorretos")
+						.put("message", "Incorrect login or password")
 						.toString());
 			}
 		} else {
 			ResponseEntity.notFound().build();
 			return ResponseEntity.badRequest()
 					.body(new JSONObject()
-					.put("message", "Login ou senha incorretos")
+					.put("message", "Incorrect login or password")
 					.toString());
 		}
 

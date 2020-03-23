@@ -16,6 +16,10 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 import javax.validation.Constraint;
+import javax.validation.constraints.Email;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
 import org.hibernate.annotations.Cascade;
@@ -57,7 +61,6 @@ public class Empresa {
 	private String cep;
 	//********************
 	
-	
 	@Column(name="site", columnDefinition = "VARCHAR(100)") 
 	private String site;
 	
@@ -71,17 +74,21 @@ public class Empresa {
 	@Column(name = "razao", columnDefinition = "VARCHAR(60)")
 	private String razaoSocial;
 	
-	//@CNPJ
+	@NotBlank
+	@CNPJ
 	@Column(name = "cnpj", columnDefinition = "VARCHAR(20)")
 	private String cnpj;
 	
 	@Column(name = "nome_fantasia", columnDefinition = "VARCHAR(40)")
 	private String nomeFantasia;
 	
+	@NotBlank
+	@Email
 	@Column(name = "email", columnDefinition = "VARCHAR(40)", unique=true)
 	private String email;
-		
 	
+	@NotBlank
+	@Size(min = 8)
 	@Column(name = "senha", columnDefinition = "VARCHAR(255)")
 	private String senha;
 	

@@ -20,6 +20,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.visumIT.Business.boost.DTO.EmpresaDTO;
 import com.visumIT.Business.boost.exception.ValidationFormat;
 import com.visumIT.Business.boost.models.Empresa;
 import com.visumIT.Business.boost.models.Telefone;
@@ -33,6 +34,7 @@ public class EmpresaResource {
 	@Autowired
 	private EmpresaRepository empresaRepository;
 
+	private EmpresaDTO dto = new EmpresaDTO();
 //	@Autowired
 //	private EnderecoRepository enderecoRepository;
 
@@ -46,7 +48,12 @@ public class EmpresaResource {
 
 	@GetMapping("/{id}")
 	public ResponseEntity<?> getEmpresa(@PathVariable Long id) {
-		Optional<?> empresaProcurada = empresaRepository.findById(id);
+		Optional<Empresa> empresaProcurada = empresaRepository.findById(id);
+		if(empresaProcurada.isPresent()) {
+			EmpresaDTO dtoProcurada = dto.toEmpresaDTO(empresaProcurada.get());
+			return ResponseEntity.ok().body(dtoProcurada);
+		}
+		
 		return empresaProcurada.isPresent() ? ResponseEntity.ok(empresaProcurada.get())
 				: ResponseEntity.notFound().build();
 	}

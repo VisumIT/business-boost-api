@@ -1,4 +1,4 @@
-package exception;
+package com.visumIT.Business.boost.exception;
 //Classe tem o objetivo de tratar exceções para devolver mensagens de erros mais utéis e limpas
 
 
@@ -17,13 +17,13 @@ public class ValidationFormat {
 		List<FieldError> fieldErrorList = bindingResult.getFieldErrors();//lista de campos com erros
 		
 		for (FieldError erro: fieldErrorList) {
-			jsonObject = new JSONObject().put("campo", erro.getField());
+			jsonObject = new JSONObject().put("Field", erro.getField());
 			//jsonObject.put("valor", erro.getRejectedValue());
-			jsonObject.put("mensagem", erro.getDefaultMessage());
+			jsonObject.put("Message", erro.getDefaultMessage());
 			jsonArray.put(jsonObject);
 		}
 		
-		JSONObject json = new JSONObject().put("Erros", jsonArray);
+		JSONObject json = new JSONObject().put("Errors", jsonArray);
 		return json.toString();
 	}
 }

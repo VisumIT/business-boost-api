@@ -20,12 +20,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.visumIT.Business.boost.exception.ValidationFormat;
 import com.visumIT.Business.boost.models.Empresa;
 import com.visumIT.Business.boost.models.Telefone;
 import com.visumIT.Business.boost.repository.EmpresaRepository;
 import com.visumIT.Business.boost.repository.TelefoneRepository;
-
-import exception.ValidationFormat;
 
 @RestController
 @RequestMapping("/empresa")

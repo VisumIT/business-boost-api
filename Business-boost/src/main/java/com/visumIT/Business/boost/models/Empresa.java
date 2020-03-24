@@ -74,21 +74,21 @@ public class Empresa {
 	@Column(name = "razao", columnDefinition = "VARCHAR(60)")
 	private String razaoSocial;
 	
-	@NotBlank
-	@CNPJ
+	@NotBlank(message="{cnpj.not.blank}")
+	@CNPJ(message="{CNPJ.empresa.cnpj}")
 	@Column(name = "cnpj", columnDefinition = "VARCHAR(20)")
 	private String cnpj;
 	
 	@Column(name = "nome_fantasia", columnDefinition = "VARCHAR(40)")
 	private String nomeFantasia;
 	
-	@NotBlank
-	@Email
+	@NotBlank(message="{email.not.blank}")
+	@Email(message="{email.not.valid}")
 	@Column(name = "email", columnDefinition = "VARCHAR(40)", unique=true)
 	private String email;
 	
-	@NotBlank
-	@Size(min = 8)
+	@NotBlank(message="{senha.not.blank}")
+	@Size(min = 8, message="{Size.empresa.senha}")
 	@Column(name = "senha", columnDefinition = "VARCHAR(255)")
 	private String senha;
 	

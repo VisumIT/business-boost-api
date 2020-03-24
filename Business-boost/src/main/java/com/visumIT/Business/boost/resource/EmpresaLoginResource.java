@@ -2,8 +2,6 @@ package com.visumIT.Business.boost.resource;
 
 import java.util.Optional;
 
-import javax.validation.Valid;
-
 import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -12,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.visumIT.Business.boost.DTO.EmpresaDTO;
 import com.visumIT.Business.boost.models.Empresa;
 import com.visumIT.Business.boost.repository.EmpresaRepository;
 
@@ -21,13 +20,16 @@ public class EmpresaLoginResource {
 
 	@Autowired
 	private EmpresaRepository empresaRepository;
+	
+	private EmpresaDTO dto = new EmpresaDTO();
 
 	@PostMapping
-	private ResponseEntity<Object> login(@Valid @RequestBody Empresa empresa) {
+	private ResponseEntity<Object> login(@RequestBody Empresa empresa) {
 		Optional<Empresa> e = empresaRepository.findByemail(empresa.getEmail());
 		if (e.isPresent()) {
 			if (empresa.getSenha().equals(e.get().getSenha()) ) {
-				return ResponseEntity.ok().body(e);
+				EmpresaDTO dto2 = dto.toEmpresaDTO(e.get());
+				return ResponseEntity.ok().body(dto2);
 			} else {
 				return ResponseEntity.badRequest()
 						.body(new JSONObject()

@@ -1,4 +1,4 @@
-package exception;
+package com.visumIT.Business.boost.exception;
 
 public class ValidationException extends RuntimeException {
 

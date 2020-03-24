@@ -93,8 +93,15 @@ public class EmpresaResource {
 
 	@PutMapping("/{id}")
 	@ResponseStatus(HttpStatus.OK)
-	public void atualizar(@Valid @RequestBody Empresa empresa) {
-		empresaRepository.save(empresa);
+	public ResponseEntity<?>  atualizar(@Valid @RequestBody Empresa empresa, @PathVariable Long id) {
+		if(empresaRepository.existsById(id)) {
+			empresaRepository.save(empresa);
+			return ResponseEntity.ok().body(new JSONObject()
+					.put("message", "company successfully updated").toString());
+		}else {
+			return ResponseEntity.notFound().build();
+		}
+		
 	}
 
 }

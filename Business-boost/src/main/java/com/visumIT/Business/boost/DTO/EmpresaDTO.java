@@ -57,6 +57,7 @@ public class EmpresaDTO {
 	
 	public EmpresaDTO() {}
 	
+	//método converte um obj do tipo empresa para empresaDTO
 	public EmpresaDTO toEmpresaDTO( Empresa empresa) {
 		EmpresaDTO dto = new EmpresaDTO();
 		dto.setId(empresa.getId());
@@ -80,5 +81,15 @@ public class EmpresaDTO {
 		
 		return dto;
 	}
-
+	
+	public List<EmpresaDTO> toEmpresasDTO(List<Empresa> empresas) {
+		//criando o array de empresas dto 
+		EmpresaDTO dto = new EmpresaDTO();
+		List<EmpresaDTO> empresasDTO = new ArrayList<>();
+		for(Empresa empresa: empresas) {			
+			empresasDTO.add(dto.toEmpresaDTO(empresa));
+		}
+		return empresasDTO;
+	}
+ 	
 }

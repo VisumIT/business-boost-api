@@ -1,5 +1,6 @@
 package com.visumIT.Business.boost.resource;
 
+import java.net.URI;
 import java.util.List;
 import java.util.Optional;
 
@@ -34,6 +35,7 @@ public class EmpresaResource {
 	@Autowired
 	private EmpresaRepository empresaRepository;
 
+//  objeto servira para dar retorno ao front sem expor a senha 
 	private EmpresaDTO dto = new EmpresaDTO();
 //	@Autowired
 //	private EnderecoRepository enderecoRepository;
@@ -42,8 +44,9 @@ public class EmpresaResource {
 	private TelefoneRepository telefoneRepository;
 
 	@GetMapping
-	public List<Empresa> getEmpresas() {
-		return empresaRepository.findAll();
+	public List<EmpresaDTO> getEmpresas() {
+		List<Empresa> empresas = empresaRepository.findAll();
+		return dto.toEmpresasDTO(empresas);
 	}
 
 	@GetMapping("/{id}")
@@ -73,8 +76,8 @@ public class EmpresaResource {
 				tel.setEmpresa(e);
 				telefoneRepository.save(tel);
 			}
-			return ResponseEntity.ok().body(new JSONObject()
-					.put("message", "company successfully registered").toString());
+			EmpresaDTO dtoProcurada = dto.toEmpresaDTO(e);
+			return ResponseEntity.status(HttpStatus.CREATED).body(dtoProcurada);
 		}
 	}
 
@@ -95,6 +98,17 @@ public class EmpresaResource {
 	@ResponseStatus(HttpStatus.OK)
 	public ResponseEntity<?>  atualizar(@Valid @RequestBody Empresa empresa, @PathVariable Long id) {
 		if(empresaRepository.existsById(id)) {
+			empresa.setId(id);
+//			Empresa e = empresaRepository.save(empresa);
+//			System.out.println(empresa.getTelefone());
+//			List<Telefone> tels = empresa.getTelefone();
+//			System.out.println(tels);
+			for (Telefone tel : empresa.getTelefone()) {
+				tel.setEmpresa(empresa);
+			    tel.setId(tel.getId());
+				telefoneRepository.save(tel);
+				}
+			empresa.setId(id);
 			empresaRepository.save(empresa);
 			return ResponseEntity.ok().body(new JSONObject()
 					.put("message", "company successfully updated").toString());

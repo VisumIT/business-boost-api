@@ -22,7 +22,7 @@ import com.visumIT.Business.boost.models.Telefone;
 import com.visumIT.Business.boost.repository.TelefoneRepository;
 
 @RestController
-@RequestMapping("/telefone")
+@RequestMapping("empresa/telefone")
 public class TelefoneResource {
 
 	@Autowired

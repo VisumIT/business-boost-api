@@ -1,6 +1,6 @@
 package com.visumIT.Business.boost.resource;
 
-import java.net.URI;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -64,9 +64,14 @@ public class EmpresaResource {
 	@PostMapping
 	@ResponseStatus(HttpStatus.CREATED)
 	public ResponseEntity<?> gravar(@Valid @RequestBody Empresa empresa, BindingResult bindingResult) {
+		//verifica se o email já está cadastrado
 		if (empresaRepository.existsByEmail(empresa.getEmail())) {
 			return ResponseEntity.badRequest().body(new JSONObject().put("message", "E-mail allready in use").toString());
-			
+		 //verifica se o CNPJ já está cadastrado	
+		}else if(empresaRepository.existsBycnpj(empresa.getCnpj())) {
+			return ResponseEntity.badRequest().body(new JSONObject()
+					.put("message", "CNPJ allready in use")
+					.toString());
 		} else if(bindingResult.hasErrors()){
 			return ResponseEntity.badRequest().body(ValidationFormat.formatarErros(bindingResult));
 		} 
@@ -98,15 +103,16 @@ public class EmpresaResource {
 	@ResponseStatus(HttpStatus.OK)
 	public ResponseEntity<?>  atualizar(@Valid @RequestBody Empresa empresa, @PathVariable Long id) {
 		if(empresaRepository.existsById(id)) {
+			//setando o id da empresa para atualizar corretamente
+			Optional <Empresa> emp = empresaRepository.findById(id);
 			empresa.setId(id);
-//			Empresa e = empresaRepository.save(empresa);
-//			System.out.println(empresa.getTelefone());
-//			List<Telefone> tels = empresa.getTelefone();
-//			System.out.println(tels);
+			int i=0;
+			//seta os ids do telefone para poder atualizar
 			for (Telefone tel : empresa.getTelefone()) {
 				tel.setEmpresa(empresa);
-			    tel.setId(tel.getId());
+			    tel.setId(emp.get().getTelefone().get(i).getId());
 				telefoneRepository.save(tel);
+				i++;
 				}
 			empresa.setId(id);
 			empresaRepository.save(empresa);

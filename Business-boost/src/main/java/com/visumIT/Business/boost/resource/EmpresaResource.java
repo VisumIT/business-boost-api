@@ -1,6 +1,5 @@
 package com.visumIT.Business.boost.resource;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -37,6 +36,7 @@ public class EmpresaResource {
 
 //  objeto servira para dar retorno ao front sem expor a senha 
 	private EmpresaDTO dto = new EmpresaDTO();
+	
 //	@Autowired
 //	private EnderecoRepository enderecoRepository;
 
@@ -64,11 +64,13 @@ public class EmpresaResource {
 	@PostMapping
 	@ResponseStatus(HttpStatus.CREATED)
 	public ResponseEntity<?> gravar(@Valid @RequestBody Empresa empresa, BindingResult bindingResult) {
+		
 		//verifica se o email já está cadastrado
 		if (empresaRepository.existsByEmail(empresa.getEmail())) {
 			return ResponseEntity.badRequest().body(new JSONObject().put("message", "E-mail allready in use").toString());
-		 //verifica se o CNPJ já está cadastrado	
-		}else if(empresaRepository.existsBycnpj(empresa.getCnpj())) {
+		 
+			//verifica se o CNPJ já está cadastrado	
+		}else if(empresaRepository.existsByCnpj(empresa.getCnpj())) {
 			return ResponseEntity.badRequest().body(new JSONObject()
 					.put("message", "CNPJ allready in use")
 					.toString());

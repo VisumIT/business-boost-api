@@ -1,7 +1,7 @@
 package com.visumIT.Business.boost.models;
 
+import java.sql.Date;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 import javax.persistence.CascadeType;
@@ -53,7 +53,7 @@ public class Representante {
 	@Column(name="cpf", columnDefinition="VARCHAR(20)")
 	private String cpf;
 	
-	@Column(name="data_nascimento", columnDefinition="VARCHAR(10)")
+	@Column(name="data_nascimento")
 	private Date dataNascimento;
 	
 	@Column(name="sexo", columnDefinition="VARCHAR(1)")

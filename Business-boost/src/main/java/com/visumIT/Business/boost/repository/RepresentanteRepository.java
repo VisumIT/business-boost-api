@@ -6,4 +6,5 @@ import com.visumIT.Business.boost.models.Representante;
 
 public interface RepresentanteRepository extends JpaRepository<Representante, Long> {
 	Boolean existsByEmail(String email);
+	Boolean existsByCpf(String cpf);
 }

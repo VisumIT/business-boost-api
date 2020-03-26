@@ -10,13 +10,17 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.visumIT.Business.boost.exception.ValidationFormat;
 import com.visumIT.Business.boost.models.Representante;
 import com.visumIT.Business.boost.models.Telefone;
 import com.visumIT.Business.boost.repository.RepresentanteRepository;
@@ -29,6 +33,7 @@ public class RepresentanteResource {
 	@Autowired
 	private RepresentanteRepository representanteRepository;
 	
+	@Autowired
 	private TelefoneRepository telefoneRepository;
 	
 	//listar representantes
@@ -36,7 +41,6 @@ public class RepresentanteResource {
 	public List <Representante> getRepresentantes(){
 		return representanteRepository.findAll();
 	}
-	
 	
 	@GetMapping("/{id}")
 	public ResponseEntity<?> getRepresentate(@PathVariable Long id){
@@ -48,23 +52,67 @@ public class RepresentanteResource {
 	}
 	
 	@PostMapping
+	@ResponseStatus(HttpStatus.CREATED)
 	public ResponseEntity<?> gravar(@Valid @RequestBody Representante representante, BindingResult bindingResult) {
-		//verifica se o email já está cadastrado
-		if(representanteRepository.existsByEmail(representante.getEmail())) {
-			return ResponseEntity.badRequest().body(new JSONObject().put("message", "E-mail allready in use").toString());
 		
-		}else if(representanteRepository.existsByCpf(representante.getCpf())){
+		//verifica se o email já está cadastrado
+		if (representanteRepository.existsByEmail(representante.getEmail())) {
+			return ResponseEntity.badRequest().body(new JSONObject()
+					.put("message", "E-mail allready in use").toString());
+		 
+			//verifica se o cpf já está cadastrado	
+		}else if(representanteRepository.existsByCpf(representante.getCpf())) {
 			return ResponseEntity.badRequest().body(new JSONObject()
 					.put("message", "CPF allready in use")
 					.toString());
-		}else {
+		} else if(bindingResult.hasErrors()){
+			return ResponseEntity.badRequest().body(ValidationFormat.formatarErros(bindingResult));
+		} 
+		else {
 			Representante r = representanteRepository.save(representante);
 			for (Telefone tel : r.getTelefone()) {
 				tel.setRepresentante(r);
 				telefoneRepository.save(tel);
 			}
-			return ResponseEntity.status(HttpStatus.CREATED).body(representante);
+			
+			//EmpresaDTO dtoProcurada = dto.toEmpresaDTO(e);
+			return ResponseEntity.status(HttpStatus.CREATED).body(r);
 		}
 	}
+	
+	@DeleteMapping("{id}")
+	public ResponseEntity<?> excluir(@PathVariable Long id){
+		if(representanteRepository.existsById(id)) { 
+			representanteRepository.deleteById(id); 
+			return ResponseEntity.noContent().build(); 
+		}
+		else return ResponseEntity.notFound().build();
+	}
+	
+	@PutMapping("/{id}")
+	public ResponseEntity<?>  atualizar(@Valid @RequestBody Representante representante, @PathVariable Long id) {
+		if(representanteRepository.existsById(id)) {
+			
+			//setando o id do representante para atualizar corretamente
+			Optional <Representante> rep = representanteRepository.findById(id);
+			representante.setId(id);
+			int i=0;
+			//seta os ids do telefone para poder atualizar
+			for (Telefone tel : representante.getTelefone()) {
+				tel.setRepresentante(representante);
+			    tel.setId(rep.get().getTelefone().get(i).getId());
+				telefoneRepository.save(tel);
+				i++;
+				}
+			representante.setId(id);
+			representanteRepository.save(representante);
+			return ResponseEntity.ok().body(new JSONObject()
+					.put("message", "company successfully updated").toString());
+		}else {
+			return ResponseEntity.notFound().build();
+		}
+		
+	}
+	
 	
 }

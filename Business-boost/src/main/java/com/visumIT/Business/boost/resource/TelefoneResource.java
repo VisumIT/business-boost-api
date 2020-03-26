@@ -18,7 +18,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.visumIT.Business.boost.models.Empresa;
 import com.visumIT.Business.boost.models.Telefone;
+import com.visumIT.Business.boost.repository.EmpresaRepository;
 import com.visumIT.Business.boost.repository.TelefoneRepository;
 
 @RestController
@@ -27,6 +29,9 @@ public class TelefoneResource {
 
 	@Autowired
 	private TelefoneRepository telefoneRepository;
+	
+	@Autowired
+	private EmpresaRepository empresaRepository;
 
 	@GetMapping
 	public List<Telefone> getTelefone() {
@@ -39,10 +44,12 @@ public class TelefoneResource {
 		return telefoneProcurado.isPresent() ? ResponseEntity.ok(telefoneProcurado.get())
 				: ResponseEntity.notFound().build();
 	}
-
-	@PostMapping
+	//adicionar telefone ao uma empresa
+	@PostMapping("/{id}")
 	@ResponseStatus(HttpStatus.CREATED)
-	public Telefone gravar(@Valid @RequestBody Telefone telefone) {
+	public Telefone gravar(@Valid @RequestBody Telefone telefone, @PathVariable Long id) {		
+		Optional<Empresa> emp = empresaRepository.findById(id);
+		telefone.setEmpresa(emp.get());
 		return telefoneRepository.save(telefone);
 	}
 	

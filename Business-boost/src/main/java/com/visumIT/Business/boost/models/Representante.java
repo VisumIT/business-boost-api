@@ -10,9 +10,15 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.Email;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.visumIT.Business.boost.DTO.EmpresaDTO;
 
 import lombok.Data;
 
@@ -31,6 +37,14 @@ public class Representante {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
+	
+	//empresa
+	@ManyToMany
+	@JoinTable(name = "tbl_empresa_representante", joinColumns = @JoinColumn
+													(name = "representante_id", referencedColumnName = "id"),
+													inverseJoinColumns = @JoinColumn(name = "empresa_id", referencedColumnName = "id"))
+	private List <Empresa> empresas = new ArrayList<>();
+	
 	
 	@Column(name="nome", columnDefinition = "VARCHAR(40)")
 	private String nome;

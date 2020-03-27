@@ -9,7 +9,9 @@ package com.visumIT.Business.boost.DTO;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.visumIT.Business.boost.models.Empresa;
+import com.visumIT.Business.boost.models.Representante;
 import com.visumIT.Business.boost.models.Telefone;
 
 import lombok.AllArgsConstructor;
@@ -21,6 +23,10 @@ public class EmpresaDTO {
 
 
 	private Long id;
+	
+	//representantes
+	//@JsonIgnore
+	private List<Representante> representantes;
 	
 	//endereco
 	private String endereco;
@@ -81,7 +87,7 @@ public class EmpresaDTO {
 		dto.setSite(empresa.getSite());
 		dto.setTelefone(empresa.getTelefone());
 		dto.setUf(empresa.getUf());
-		
+		dto.setRepresentantes(empresa.getRepresentantes());
 		return dto;
 	}
 	

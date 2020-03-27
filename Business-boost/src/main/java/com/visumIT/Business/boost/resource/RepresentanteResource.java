@@ -20,7 +20,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.visumIT.Business.boost.DTO.RepresentanteDTO;
 import com.visumIT.Business.boost.exception.ValidationFormat;
+import com.visumIT.Business.boost.models.Empresa;
 import com.visumIT.Business.boost.models.Representante;
 import com.visumIT.Business.boost.models.Telefone;
 import com.visumIT.Business.boost.repository.RepresentanteRepository;
@@ -36,10 +38,14 @@ public class RepresentanteResource {
 	@Autowired
 	private TelefoneRepository telefoneRepository;
 	
+	private RepresentanteDTO dto = new RepresentanteDTO();
+	
+	
 	//listar representantes
 	@GetMapping
-	public List <Representante> getRepresentantes(){
-		return representanteRepository.findAll();
+	public List <RepresentanteDTO> getRepresentantes(){
+		List<Representante> representantes = representanteRepository.findAll();
+		return dto.toRepresentantesDTO(representantes);
 	}
 	
 	@GetMapping("/{id}")
@@ -75,8 +81,8 @@ public class RepresentanteResource {
 				telefoneRepository.save(tel);
 			}
 			
-			//EmpresaDTO dtoProcurada = dto.toEmpresaDTO(e);
-			return ResponseEntity.status(HttpStatus.CREATED).body(r);
+			RepresentanteDTO dtoProcurada = dto.toRepresentanteDTO(r);
+			return ResponseEntity.status(HttpStatus.CREATED).body(dtoProcurada);
 		}
 	}
 	
@@ -107,7 +113,7 @@ public class RepresentanteResource {
 			representante.setId(id);
 			representanteRepository.save(representante);
 			return ResponseEntity.ok().body(new JSONObject()
-					.put("message", "company successfully updated").toString());
+					.put("message", "User successfully updated").toString());
 		}else {
 			return ResponseEntity.notFound().build();
 		}

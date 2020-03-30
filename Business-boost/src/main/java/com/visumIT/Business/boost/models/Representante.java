@@ -15,10 +15,8 @@ import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.persistence.UniqueConstraint;
 import javax.validation.constraints.Email;
-
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.visumIT.Business.boost.DTO.EmpresaDTO;
 
 import lombok.Data;
 

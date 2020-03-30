@@ -60,7 +60,7 @@ public class RepresentanteResource {
 	@PostMapping
 	@ResponseStatus(HttpStatus.CREATED)
 	public ResponseEntity<?> gravar(@Valid @RequestBody Representante representante, BindingResult bindingResult) {
-		
+		//validações
 		//verifica se o email já está cadastrado
 		if (representanteRepository.existsByEmail(representante.getEmail())) {
 			return ResponseEntity.badRequest().body(new JSONObject()
@@ -74,6 +74,7 @@ public class RepresentanteResource {
 		} else if(bindingResult.hasErrors()){
 			return ResponseEntity.badRequest().body(ValidationFormat.formatarErros(bindingResult));
 		} 
+		//se não houver erros
 		else {
 			Representante r = representanteRepository.save(representante);
 			for (Telefone tel : r.getTelefone()) {

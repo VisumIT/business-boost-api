@@ -21,6 +21,7 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.visumIT.Business.boost.DTO.EmpresaDTO;
+import com.visumIT.Business.boost.DTO.RepresentanteDTO;
 import com.visumIT.Business.boost.exception.ValidationFormat;
 import com.visumIT.Business.boost.models.Empresa;
 import com.visumIT.Business.boost.models.Telefone;

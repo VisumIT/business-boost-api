@@ -3,7 +3,6 @@ package com.visumIT.Business.boost.DTO;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.visumIT.Business.boost.models.Representante;
 import com.visumIT.Business.boost.models.Telefone;
 
@@ -39,7 +38,8 @@ public class RepresentanteDTO {
 		dto.setCpf(representante.getCpf());
 		dto.setDescricao(representante.getDescricao());
 		dto.setEmail(representante.getEmail());
-		dto.setTelefone(representante.getTelefone());					
+		dto.setTelefone(representante.getTelefone());	
+		
 		dto.setEmpresas(empresaDTO.toEmpresasDTO(representante.getEmpresas()));
 		return dto;
 	}

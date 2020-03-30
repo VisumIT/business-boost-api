@@ -9,6 +9,7 @@ package com.visumIT.Business.boost.DTO;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.visumIT.Business.boost.models.Empresa;
 import com.visumIT.Business.boost.models.Representante;
 import com.visumIT.Business.boost.models.Telefone;
@@ -24,7 +25,7 @@ public class EmpresaDTO {
 	private Long id;
 	
 	//representantes
-	//@JsonIgnore
+	@JsonIgnore
 	private List<Representante> representantes;
 	
 	//endereco

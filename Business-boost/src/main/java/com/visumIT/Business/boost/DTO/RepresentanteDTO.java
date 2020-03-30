@@ -3,6 +3,7 @@ package com.visumIT.Business.boost.DTO;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.visumIT.Business.boost.models.Representante;
 import com.visumIT.Business.boost.models.Telefone;
 
@@ -25,7 +26,7 @@ public class RepresentanteDTO {
 	
 	private String nome;
 	
-	//@JsonIgnore
+	@JsonIgnore
 	private List<EmpresaDTO> empresas = new ArrayList<>();
 	
 

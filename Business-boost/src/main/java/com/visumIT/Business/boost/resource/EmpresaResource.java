@@ -79,7 +79,7 @@ public class EmpresaResource {
 			return ResponseEntity.ok().body(representantesDTO);
 
 		}
-		return null;
+		return ResponseEntity.notFound().build();
 	}
 
 	// cadastro da empresa
@@ -129,7 +129,7 @@ public class EmpresaResource {
 				
 				if(empresa.isPresent()) {
 					List<Empresa> empresas = new ArrayList<>();
-					empresas.add(emp.toOptionalEmpresa(empresa));
+					empresas.add(emp.optionalToEmpresa(empresa));
 					representante.setEmpresas(empresas);
 					
 					System.out.println(empresa);
@@ -151,7 +151,56 @@ public class EmpresaResource {
 		}
 
 	//associar representante já cadastrado
-		
+	@PutMapping("/{id_empresa}/representante/{id_representante}")
+	public ResponseEntity<?> adicionarRepresentante(@PathVariable Long id_empresa, @PathVariable Long id_representante){
+		if(empresaRepository.existsById(id_empresa) && representanteRepository.existsById(id_representante) ) {
+			Optional <Empresa> empresaOptional = empresaRepository.findById(id_empresa);
+			Optional<Representante> representanteOptional = representanteRepository.findById(id_representante);
+			//adicionar novo representante a lista de representantes da empresa
+			List <Representante> representantes = empresaOptional.get().getRepresentantes();
+			representantes.add(representanteOptional.get());
+			empresaOptional.get().setRepresentantes(representantes);
+			Empresa empresa = new Empresa();
+			empresaRepository.save(empresa.optionalToEmpresa(empresaOptional));
+			
+			//adicionar nova empresa a lista de empresas do representante
+			List <Empresa> empresas = representanteOptional.get().getEmpresas();
+			empresas.add(empresaOptional.get());
+			representanteOptional.get().setEmpresas(empresas);
+			Representante representante = new Representante();
+			representanteRepository.save(representante.optionalToRepresentante(representanteOptional));
+			
+			return ResponseEntity.ok().build();
+		}else return ResponseEntity.notFound().build();	
+	}	
+	
+	//desassociar representante
+	@PutMapping("/{id_empresa}/desassociar-representante/{id_representante}")
+	public ResponseEntity<?> desassociar(@PathVariable Long id_empresa, @PathVariable Long id_representante) {
+		if(empresaRepository.existsById(id_empresa) && representanteRepository.existsById(id_representante) ) {
+			Optional <Empresa> empresaOptional = empresaRepository.findById(id_empresa);
+			Optional<Representante> representanteOptional = representanteRepository.findById(id_representante);
+			//pegando lista de representantes para preservar outras associações da empresa
+			List <Representante> representantes = empresaOptional.get().getRepresentantes();
+			representantes.remove(representanteOptional.get());
+			empresaOptional.get().setRepresentantes(representantes);
+			Empresa empresa = new Empresa();
+			empresaRepository.save(empresa.optionalToEmpresa(empresaOptional));
+			
+			//pegando lista de empresas para preservar outras associações do representante
+			List <Empresa> empresas = representanteOptional.get().getEmpresas();
+			empresas.remove(empresaOptional.get());
+			representanteOptional.get().setEmpresas(empresas);
+			Representante representante = new Representante();
+			representanteRepository.save(representante.optionalToRepresentante(representanteOptional));
+			
+			return ResponseEntity.ok().build();
+			
+		}else return ResponseEntity.notFound().build();
+	}
+	
+	
+	
 	// usando o retorno response entity para poder retornar o erro 404 caso tente
 	// deletar algo q não existe
 	@DeleteMapping("/{id}")

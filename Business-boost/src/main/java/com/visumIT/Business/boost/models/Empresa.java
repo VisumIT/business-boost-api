@@ -105,7 +105,7 @@ public class Empresa {
 	
 	
 	
-	public Empresa toOptionalEmpresa( Optional<Empresa> optional) {
+	public Empresa optionalToEmpresa( Optional<Empresa> optional) {
 			Empresa empresa = new Empresa();
 			
 			empresa.setId(optional.get().getId());

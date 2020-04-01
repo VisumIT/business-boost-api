@@ -20,6 +20,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.visumIT.Business.boost.DTO.EmpresaDTO;
 import com.visumIT.Business.boost.DTO.RepresentanteDTO;
 import com.visumIT.Business.boost.exception.ValidationFormat;
 import com.visumIT.Business.boost.models.Empresa;
@@ -56,6 +57,21 @@ public class RepresentanteResource {
 			return ResponseEntity.ok().body(representanteProcurada);
 		}else return ResponseEntity.notFound().build();
 	}
+	
+	@GetMapping("/{id}/empresas")
+	public ResponseEntity<?> getEmpresas(@PathVariable Long id){
+		Optional<Representante> representanteProcurado = representanteRepository.findById(id);
+		
+		if (representanteProcurado.isPresent()) {
+			EmpresaDTO empresaDTO = new EmpresaDTO();
+			List<Empresa> emp = representanteProcurado.get().getEmpresas();
+			List<EmpresaDTO> representantesDTO = empresaDTO.toEmpresasDTO(emp);
+
+			return ResponseEntity.ok().body(representantesDTO);
+		
+		}else return ResponseEntity.notFound().build();
+	}
+	
 	
 	@PostMapping
 	@ResponseStatus(HttpStatus.CREATED)

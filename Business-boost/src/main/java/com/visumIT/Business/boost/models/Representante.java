@@ -3,6 +3,7 @@ package com.visumIT.Business.boost.models;
 import java.sql.Date;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -72,4 +73,20 @@ public class Representante {
 	
 	@Column(name="descricao")
 	private String descricao;
+	
+	public Representante optionalToRepresentante( Optional<Representante> optional) {
+		Representante rep = new Representante();
+		
+		rep.setId(optional.get().getId());
+		rep.setCpf(optional.get().getCpf());
+		rep.setDescricao(optional.get().getDescricao());
+		rep.setEmail(optional.get().getEmail());
+		rep.setFoto(optional.get().getFoto());
+		rep.setEmpresas(optional.get().getEmpresas());
+		rep.setSenha(optional.get().getSenha());
+		rep.setTelefone(optional.get().getTelefone());
+		
+		return rep;
+}
+	
 }

@@ -1,5 +1,8 @@
-//classe representa o modelo da entidade empresa
-
+/*
+*Author: Kaique
+*
+*classe representa o modelo da entidade empresa
+*/
 package com.visumIT.Business.boost.models;
 
 import java.util.ArrayList;

@@ -1,7 +1,6 @@
 /* Author: kaique
  * está classe tem o objetivo de retornar os dados da empresa sem comprometer a senha ou seja não retorna a 
  * senha da empresa
- * Alterado:
  * */
 
 package com.visumIT.Business.boost.DTO;

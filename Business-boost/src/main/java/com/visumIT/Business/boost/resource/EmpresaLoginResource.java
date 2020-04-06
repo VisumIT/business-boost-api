@@ -1,3 +1,9 @@
+/*
+* Author: Kaique
+*
+*  classe para tratar o login da empresa
+* */
+
 package com.visumIT.Business.boost.resource;
 
 import java.util.Optional;

@@ -1,3 +1,8 @@
+/*
+* Author: Kaique
+* classe para devolver os recursos da empresa
+* */
+
 package com.visumIT.Business.boost.resource;
 
 import java.util.ArrayList;
@@ -90,17 +95,21 @@ public class EmpresaResource {
 		if (empresaRepository.existsByEmail(empresa.getEmail())) {
 			return ResponseEntity.badRequest()
 					.body(new JSONObject().put("message", "E-mail allready in use").toString());
+
 			// verifica se o CNPJ já está cadastrado
 		} else if (empresaRepository.existsByCnpj(empresa.getCnpj())) {
 			return ResponseEntity.badRequest().body(new JSONObject().put("message", "CNPJ allready in use").toString());
+
 		} else if (bindingResult.hasErrors()) {
 			return ResponseEntity.badRequest().body(ValidationFormat.formatarErros(bindingResult));
+
 		} else {
 			Empresa e = empresaRepository.save(empresa);
 			for (Telefone tel : e.getTelefone()) {
 				tel.setEmpresa(e);
 				telefoneRepository.save(tel);
 			}
+
 			EmpresaDTO dtoProcurada = dto.toEmpresaDTO(e);
 			return ResponseEntity.status(HttpStatus.CREATED).body(dtoProcurada);
 		}

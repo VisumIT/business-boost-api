@@ -21,9 +21,8 @@ import javax.validation.constraints.Email;
 import lombok.Data;
 
 /* Author: kaique
- * 26/03/2020
  * Classe para representar a tabela de representante do banco
- * Alterado:
+*
  * */
 
 

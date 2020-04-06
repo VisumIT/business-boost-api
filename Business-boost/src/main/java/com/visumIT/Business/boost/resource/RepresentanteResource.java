@@ -1,3 +1,9 @@
+/*
+ * Author: Kaique
+ * classe para devolver os recursos do representante
+ * */
+
+
 package com.visumIT.Business.boost.resource;
 
 import java.util.List;

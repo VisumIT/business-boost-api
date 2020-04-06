@@ -1,3 +1,8 @@
+/*
+* Author: Kaique
+* classe para tratar o retorno do representante sem comprometer informações sensiveis
+* */
+
 package com.visumIT.Business.boost.DTO;
 
 import java.util.ArrayList;

@@ -58,7 +58,7 @@ public class TelefoneResource {
 		return telefoneRepository.save(telefone);
 	}
 	
-	//adicionar telefone ao um representante
+	//adicionar telefone a um representante
 	@PostMapping("/representante/{id}")
 	@ResponseStatus(HttpStatus.CREATED)
 	public Telefone gravarTelefoneRepresentante(@Valid @RequestBody Telefone telefone, @PathVariable Long id) {		

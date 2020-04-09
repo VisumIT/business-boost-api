@@ -32,4 +32,9 @@ public class Telefone {
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JsonIgnore
 	private Empresa empresa;
+	
+	@JoinColumn(name = "representante_id")
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JsonIgnore
+	private Representante representante;
 }

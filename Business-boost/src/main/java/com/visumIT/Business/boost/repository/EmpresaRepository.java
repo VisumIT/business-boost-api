@@ -11,6 +11,6 @@ import com.visumIT.Business.boost.models.Empresa;
 public interface EmpresaRepository extends JpaRepository<Empresa, Long>{
 	Optional <Empresa> findByemail(String email);
 	Boolean existsByEmail(String email);
-	Boolean existsBycnpj(String cnpj);
+	Boolean existsByCnpj(String cnpj);
 
 }

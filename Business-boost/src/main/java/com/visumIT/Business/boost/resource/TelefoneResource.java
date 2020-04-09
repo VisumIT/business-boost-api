@@ -19,12 +19,14 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.visumIT.Business.boost.models.Empresa;
+import com.visumIT.Business.boost.models.Representante;
 import com.visumIT.Business.boost.models.Telefone;
 import com.visumIT.Business.boost.repository.EmpresaRepository;
+import com.visumIT.Business.boost.repository.RepresentanteRepository;
 import com.visumIT.Business.boost.repository.TelefoneRepository;
 
 @RestController
-@RequestMapping("empresa/telefone")
+@RequestMapping("/telefone")
 public class TelefoneResource {
 
 	@Autowired
@@ -33,6 +35,9 @@ public class TelefoneResource {
 	@Autowired
 	private EmpresaRepository empresaRepository;
 
+	@Autowired
+	private RepresentanteRepository representanteRepository;
+	
 	@GetMapping
 	public List<Telefone> getTelefone() {
 		return telefoneRepository.findAll();
@@ -45,11 +50,20 @@ public class TelefoneResource {
 				: ResponseEntity.notFound().build();
 	}
 	//adicionar telefone ao uma empresa
-	@PostMapping("/{id}")
+	@PostMapping("/empresa/{id}")
 	@ResponseStatus(HttpStatus.CREATED)
-	public Telefone gravar(@Valid @RequestBody Telefone telefone, @PathVariable Long id) {		
+	public Telefone gravarTelefoneEmpresa(@Valid @RequestBody Telefone telefone, @PathVariable Long id) {		
 		Optional<Empresa> emp = empresaRepository.findById(id);
 		telefone.setEmpresa(emp.get());
+		return telefoneRepository.save(telefone);
+	}
+	
+	//adicionar telefone ao um representante
+	@PostMapping("/representante/{id}")
+	@ResponseStatus(HttpStatus.CREATED)
+	public Telefone gravarTelefoneRepresentante(@Valid @RequestBody Telefone telefone, @PathVariable Long id) {		
+		Optional<Representante> rep = representanteRepository.findById(id);
+		telefone.setRepresentante(rep.get());
 		return telefoneRepository.save(telefone);
 	}
 	

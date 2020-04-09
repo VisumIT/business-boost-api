@@ -22,10 +22,13 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.visumIT.Business.boost.DTO.EmpresaDTO;
+import com.visumIT.Business.boost.DTO.RepresentanteDTO;
 import com.visumIT.Business.boost.exception.ValidationFormat;
 import com.visumIT.Business.boost.models.Empresa;
+import com.visumIT.Business.boost.models.Representante;
 import com.visumIT.Business.boost.models.Telefone;
 import com.visumIT.Business.boost.repository.EmpresaRepository;
+import com.visumIT.Business.boost.repository.RepresentanteRepository;
 import com.visumIT.Business.boost.repository.TelefoneRepository;
 
 @RestController
@@ -34,6 +37,9 @@ public class EmpresaResource {
 
 	@Autowired
 	private EmpresaRepository empresaRepository;
+
+	@Autowired
+	private RepresentanteRepository representanteRepository;
 
 //  objeto servira para dar retorno ao front sem expor a senha 
 	private EmpresaDTO dto = new EmpresaDTO();
@@ -52,30 +58,44 @@ public class EmpresaResource {
 	@GetMapping("/{id}")
 	public ResponseEntity<?> getEmpresa(@PathVariable Long id) {
 		Optional<Empresa> empresaProcurada = empresaRepository.findById(id);
-		if(empresaProcurada.isPresent()) {
+		if (empresaProcurada.isPresent()) {
 			EmpresaDTO dtoProcurada = dto.toEmpresaDTO(empresaProcurada.get());
 			return ResponseEntity.ok().body(dtoProcurada);
 		}
-		
+
 		return empresaProcurada.isPresent() ? ResponseEntity.ok(empresaProcurada.get())
 				: ResponseEntity.notFound().build();
 	}
 
+	@GetMapping("/{id}/representantes")
+	public ResponseEntity<?> getRepresentantes(@PathVariable Long id) {
+		Optional<Empresa> empresaProcurada = empresaRepository.findById(id);
+
+		if (empresaProcurada.isPresent()) {
+			RepresentanteDTO representanteDTO = new RepresentanteDTO();
+			List<Representante> rep = empresaProcurada.get().getRepresentantes();
+			List<RepresentanteDTO> representantesDTO = representanteDTO.toRepresentantesDTO(rep);
+
+			return ResponseEntity.ok().body(representantesDTO);
+
+		}
+		return ResponseEntity.notFound().build();
+	}
+
+	// cadastro da empresa
 	@PostMapping
 	@ResponseStatus(HttpStatus.CREATED)
 	public ResponseEntity<?> gravar(@Valid @RequestBody Empresa empresa, BindingResult bindingResult) {
-		//verifica se o email já está cadastrado
+		// verifica se o email já está cadastrado
 		if (empresaRepository.existsByEmail(empresa.getEmail())) {
-			return ResponseEntity.badRequest().body(new JSONObject().put("message", "E-mail allready in use").toString());
-		 //verifica se o CNPJ já está cadastrado	
-		}else if(empresaRepository.existsBycnpj(empresa.getCnpj())) {
-			return ResponseEntity.badRequest().body(new JSONObject()
-					.put("message", "CNPJ allready in use")
-					.toString());
-		} else if(bindingResult.hasErrors()){
+			return ResponseEntity.badRequest()
+					.body(new JSONObject().put("message", "E-mail allready in use").toString());
+			// verifica se o CNPJ já está cadastrado
+		} else if (empresaRepository.existsByCnpj(empresa.getCnpj())) {
+			return ResponseEntity.badRequest().body(new JSONObject().put("message", "CNPJ allready in use").toString());
+		} else if (bindingResult.hasErrors()) {
 			return ResponseEntity.badRequest().body(ValidationFormat.formatarErros(bindingResult));
-		} 
-		else {
+		} else {
 			Empresa e = empresaRepository.save(empresa);
 			for (Telefone tel : e.getTelefone()) {
 				tel.setEmpresa(e);
@@ -86,6 +106,101 @@ public class EmpresaResource {
 		}
 	}
 
+	// cadastro de novo representante
+	@PostMapping("/{id}/novo-representante")
+	public ResponseEntity<?> gravarRepresentante(@Valid @RequestBody Representante representante, @PathVariable Long id, BindingResult bindingResult ){
+			//validações
+			//verifica se o email já está cadastrado
+			if (representanteRepository.existsByEmail(representante.getEmail())) {
+				return ResponseEntity.badRequest().body(new JSONObject()
+						.put("message", "E-mail allready in use").toString());
+			 
+				//verifica se o cpf já está cadastrado	
+			}else if(representanteRepository.existsByCpf(representante.getCpf())) {
+				return ResponseEntity.badRequest().body(new JSONObject()
+						.put("message", "CPF allready in use")
+						.toString());
+			} else if(bindingResult.hasErrors()){
+				return ResponseEntity.badRequest().body(ValidationFormat.formatarErros(bindingResult));
+			}else {
+				Representante r = representanteRepository.save(representante);
+				Optional<Empresa> empresa = empresaRepository.findById(id);
+				Empresa emp = new Empresa();
+				
+				if(empresa.isPresent()) {
+					List<Empresa> empresas = new ArrayList<>();
+					empresas.add(emp.optionalToEmpresa(empresa));
+					representante.setEmpresas(empresas);
+					
+					System.out.println(empresa);
+					
+					for (Telefone tel : r.getTelefone()) {
+						tel.setRepresentante(r);
+						telefoneRepository.save(tel);
+					}
+					
+					RepresentanteDTO representanteDTO = new RepresentanteDTO();
+					RepresentanteDTO dtoProcurada = representanteDTO.toRepresentanteDTO(r);
+					return ResponseEntity.status(HttpStatus.CREATED).body(dtoProcurada);
+				
+				}else return ResponseEntity.badRequest().build();
+
+				
+
+			}
+		}
+
+	//associar representante já cadastrado
+	@PutMapping("/{id_empresa}/representante/{id_representante}")
+	public ResponseEntity<?> adicionarRepresentante(@PathVariable Long id_empresa, @PathVariable Long id_representante){
+		if(empresaRepository.existsById(id_empresa) && representanteRepository.existsById(id_representante) ) {
+			Optional <Empresa> empresaOptional = empresaRepository.findById(id_empresa);
+			Optional<Representante> representanteOptional = representanteRepository.findById(id_representante);
+			//adicionar novo representante a lista de representantes da empresa
+			List <Representante> representantes = empresaOptional.get().getRepresentantes();
+			representantes.add(representanteOptional.get());
+			empresaOptional.get().setRepresentantes(representantes);
+			Empresa empresa = new Empresa();
+			empresaRepository.save(empresa.optionalToEmpresa(empresaOptional));
+			
+			//adicionar nova empresa a lista de empresas do representante
+			List <Empresa> empresas = representanteOptional.get().getEmpresas();
+			empresas.add(empresaOptional.get());
+			representanteOptional.get().setEmpresas(empresas);
+			Representante representante = new Representante();
+			representanteRepository.save(representante.optionalToRepresentante(representanteOptional));
+			
+			return ResponseEntity.ok().build();
+		}else return ResponseEntity.notFound().build();	
+	}	
+	
+	//desassociar representante
+	@PutMapping("/{id_empresa}/desassociar-representante/{id_representante}")
+	public ResponseEntity<?> desassociar(@PathVariable Long id_empresa, @PathVariable Long id_representante) {
+		if(empresaRepository.existsById(id_empresa) && representanteRepository.existsById(id_representante) ) {
+			Optional <Empresa> empresaOptional = empresaRepository.findById(id_empresa);
+			Optional<Representante> representanteOptional = representanteRepository.findById(id_representante);
+			//pegando lista de representantes para preservar outras associações da empresa
+			List <Representante> representantes = empresaOptional.get().getRepresentantes();
+			representantes.remove(representanteOptional.get());
+			empresaOptional.get().setRepresentantes(representantes);
+			Empresa empresa = new Empresa();
+			empresaRepository.save(empresa.optionalToEmpresa(empresaOptional));
+			
+			//pegando lista de empresas para preservar outras associações do representante
+			List <Empresa> empresas = representanteOptional.get().getEmpresas();
+			empresas.remove(empresaOptional.get());
+			representanteOptional.get().setEmpresas(empresas);
+			Representante representante = new Representante();
+			representanteRepository.save(representante.optionalToRepresentante(representanteOptional));
+			
+			return ResponseEntity.ok().build();
+			
+		}else return ResponseEntity.notFound().build();
+	}
+	
+	
+	
 	// usando o retorno response entity para poder retornar o erro 404 caso tente
 	// deletar algo q não existe
 	@DeleteMapping("/{id}")
@@ -101,27 +216,26 @@ public class EmpresaResource {
 
 	@PutMapping("/{id}")
 	@ResponseStatus(HttpStatus.OK)
-	public ResponseEntity<?>  atualizar(@Valid @RequestBody Empresa empresa, @PathVariable Long id) {
-		if(empresaRepository.existsById(id)) {
-			//setando o id da empresa para atualizar corretamente
-			Optional <Empresa> emp = empresaRepository.findById(id);
+	public ResponseEntity<?> atualizar(@Valid @RequestBody Empresa empresa, @PathVariable Long id) {
+		if (empresaRepository.existsById(id)) {
+			// setando o id da empresa para atualizar corretamente
+			Optional<Empresa> emp = empresaRepository.findById(id);
 			empresa.setId(id);
-			int i=0;
-			//seta os ids do telefone para poder atualizar
+			int i = 0;
+			// seta os ids do telefone para poder atualizar
 			for (Telefone tel : empresa.getTelefone()) {
 				tel.setEmpresa(empresa);
-			    tel.setId(emp.get().getTelefone().get(i).getId());
+				tel.setId(emp.get().getTelefone().get(i).getId());
 				telefoneRepository.save(tel);
 				i++;
-				}
+			}
 			empresa.setId(id);
 			empresaRepository.save(empresa);
-			return ResponseEntity.ok().body(new JSONObject()
-					.put("message", "company successfully updated").toString());
-		}else {
+			return ResponseEntity.ok().body(new JSONObject().put("message", "company successfully updated").toString());
+		} else {
 			return ResponseEntity.notFound().build();
 		}
-		
+
 	}
 
 }

@@ -10,6 +10,7 @@ import java.util.List;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.visumIT.Business.boost.models.Empresa;
+import com.visumIT.Business.boost.models.Funcionario;
 import com.visumIT.Business.boost.models.Representante;
 import com.visumIT.Business.boost.models.Telefone;
 
@@ -46,6 +47,8 @@ public class EmpresaDTO {
 	private String site;
 	
 	private List<Telefone> telefone = new  ArrayList<>();
+
+	private List<Funcionario> funcionarios = new  ArrayList<>();
 	
 	private String inscricaoEstadual;
 	
@@ -86,6 +89,7 @@ public class EmpresaDTO {
 		dto.setSite(empresa.getSite());
 		dto.setTelefone(empresa.getTelefone());
 		dto.setUf(empresa.getUf());
+		dto.setFuncionarios(empresa.getFuncionarios());
 		
 		//representante
 		//RepresentanteDTO representanteDTO = new RepresentanteDTO();

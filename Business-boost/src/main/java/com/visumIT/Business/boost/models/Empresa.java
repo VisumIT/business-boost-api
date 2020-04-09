@@ -104,10 +104,12 @@ public class Empresa {
 	
 	@Column(name = "imagem", columnDefinition = "VARCHAR(40)")
 	private String imagem;
-	
-	
-	
-	
+
+	@OneToMany(cascade=CascadeType.ALL, mappedBy = "empresa")
+	@Column(name="funcionarios")
+	private List<Funcionario> funcionarios = new  ArrayList<>();
+
+
 	public Empresa optionalToEmpresa( Optional<Empresa> optional) {
 			Empresa empresa = new Empresa();
 			
@@ -408,14 +410,15 @@ public class Empresa {
 		return imagem;
 	}
 
-
-
-
 	public void setImagem(String imagem) {
 		this.imagem = imagem;
 	}
 
-	
-	
-	
+	public List<Funcionario> getFuncionarios() {
+		return funcionarios;
+	}
+
+	public void setFuncionarios(List<Funcionario> funcionarios) {
+		this.funcionarios = funcionarios;
+	}
 }

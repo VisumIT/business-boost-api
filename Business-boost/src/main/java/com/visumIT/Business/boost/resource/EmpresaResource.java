@@ -48,8 +48,6 @@ public class EmpresaResource {
 
 //  objeto servira para dar retorno ao front sem expor a senha 
 	private EmpresaDTO dto = new EmpresaDTO();
-//	@Autowired
-//	private EnderecoRepository enderecoRepository;
 
 	@Autowired
 	private TelefoneRepository telefoneRepository;
@@ -72,14 +70,15 @@ public class EmpresaResource {
 				: ResponseEntity.notFound().build();
 	}
 
+	//retorna representantes de um empresa
 	@GetMapping("/{id}/representantes")
 	public ResponseEntity<?> getRepresentantes(@PathVariable Long id) {
 		Optional<Empresa> empresaProcurada = empresaRepository.findById(id);
 
 		if (empresaProcurada.isPresent()) {
 			RepresentanteDTO representanteDTO = new RepresentanteDTO();
-			List<Representante> rep = empresaProcurada.get().getRepresentantes();
-			List<RepresentanteDTO> representantesDTO = representanteDTO.toRepresentantesDTO(rep);
+			List<RepresentanteDTO> representantesDTO = representanteDTO.toRepresentantesDTO(empresaProcurada.get()
+					.getRepresentantes());
 
 			return ResponseEntity.ok().body(representantesDTO);
 
@@ -140,8 +139,6 @@ public class EmpresaResource {
 					List<Empresa> empresas = new ArrayList<>();
 					empresas.add(emp.optionalToEmpresa(empresa));
 					representante.setEmpresas(empresas);
-					
-					System.out.println(empresa);
 					
 					for (Telefone tel : r.getTelefone()) {
 						tel.setRepresentante(r);

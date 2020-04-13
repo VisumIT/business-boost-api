@@ -16,9 +16,11 @@ import com.visumIT.Business.boost.models.Telefone;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 @Data
 @AllArgsConstructor
+@NoArgsConstructor
 public class EmpresaDTO {
 
 
@@ -65,9 +67,7 @@ public class EmpresaDTO {
 	private String logo;
 	
 	private String imagem;
-	
-	public EmpresaDTO() {}
-	
+
 	//método converte um obj do tipo empresa para empresaDTO
 	public EmpresaDTO toEmpresaDTO( Empresa empresa) {
 		EmpresaDTO dto = new EmpresaDTO();

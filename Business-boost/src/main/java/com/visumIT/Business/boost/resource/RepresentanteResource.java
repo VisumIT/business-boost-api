@@ -63,7 +63,7 @@ public class RepresentanteResource {
 			return ResponseEntity.ok().body(representanteProcurada);
 		}else return ResponseEntity.notFound().build();
 	}
-	
+	//lista de empresas de um representante
 	@GetMapping("/{id}/empresas")
 	public ResponseEntity<?> getEmpresas(@PathVariable Long id){
 		Optional<Representante> representanteProcurado = representanteRepository.findById(id);

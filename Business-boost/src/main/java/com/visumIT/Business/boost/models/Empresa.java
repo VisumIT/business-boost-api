@@ -45,36 +45,47 @@ public class Empresa {
 	@Size(max = 150)
 	@Column(name="endereco", columnDefinition = "VARCHAR(150)")
 	private String endereco;
-	
+
+	@Size(min = 3, max = 20)
 	@Column(name="logradouro", columnDefinition = "VARCHAR(20)")
 	private String logradouro;
-	
+
+	@Size(max = 10)
 	@Column(name="numero", columnDefinition = "VARCHAR(10)")
 	private String numero;
-	
+
+	@Size(min = 2)
 	@Column(name="uf", columnDefinition = "VARCHAR(20)")
 	private String uf;
-	
+
+	@Size(max = 50)
 	@Column(name="bairro", columnDefinition = "VARCHAR(50)")
 	private String bairro;
-	
+
+	@Size(max = 50)
 	@Column(name="cidade", columnDefinition = "VARCHAR(50)")
 	private String cidade;
-	
+
+	@Size(min = 8)
 	@Column(name="cep", columnDefinition = "VARCHAR(20)")
 	private String cep;
 	//********************
-	
+
+	@Size(max = 100)
 	@Column(name="site", columnDefinition = "VARCHAR(100)") 
 	private String site;
-	
+
 	@OneToMany(cascade=CascadeType.ALL, mappedBy = "empresa")
 	@Column(name = "telefone", columnDefinition = "VARCHAR(20)")
 	private List<Telefone> telefone = new  ArrayList<>();
-	
+
+	@Size(min = 14, max = 20)
+	@NotBlank
 	@Column(name = "inscricao_estadual", columnDefinition = "VARCHAR(20)")
 	private String inscricaoEstadual;
-	
+
+	@Size(max = 60)
+	@NotBlank
 	@Column(name = "razao", columnDefinition = "VARCHAR(60)")
 	private String razaoSocial;
 	
@@ -82,7 +93,8 @@ public class Empresa {
 	@CNPJ(message="{CNPJ.empresa.cnpj}")
 	@Column(name = "cnpj", columnDefinition = "VARCHAR(20)")
 	private String cnpj;
-	
+
+	@Size(max = 40)
 	@Column(name = "nome_fantasia", columnDefinition = "VARCHAR(40)")
 	private String nomeFantasia;
 	
@@ -105,11 +117,12 @@ public class Empresa {
 	@Column(name = "imagem", columnDefinition = "VARCHAR(40)")
 	private String imagem;
 
+	@JsonIgnore
 	@OneToMany(cascade=CascadeType.ALL, mappedBy = "empresa")
 	@Column(name="funcionarios")
 	private List<Funcionario> funcionarios = new  ArrayList<>();
 
-
+	//transformar um tipo opcional no tipo empresa
 	public Empresa optionalToEmpresa( Optional<Empresa> optional) {
 			Empresa empresa = new Empresa();
 			
@@ -410,13 +423,22 @@ public class Empresa {
 		return imagem;
 	}
 
+
+
+
 	public void setImagem(String imagem) {
 		this.imagem = imagem;
 	}
 
+
+
+
 	public List<Funcionario> getFuncionarios() {
 		return funcionarios;
 	}
+
+
+
 
 	public void setFuncionarios(List<Funcionario> funcionarios) {
 		this.funcionarios = funcionarios;

@@ -37,4 +37,9 @@ public class Telefone {
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JsonIgnore
 	private Representante representante;
+
+	@JoinColumn(name = "funcionario_id")
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JsonIgnore
+	private Funcionario funcionario;
 }

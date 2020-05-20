@@ -222,11 +222,15 @@ public class EmpresaResource {
 
 	@PutMapping("/{id}")
 	@ResponseStatus(HttpStatus.OK)
-	public ResponseEntity<?> atualizar(@Valid @RequestBody Empresa empresa, @PathVariable Long id) {
+	public ResponseEntity<?> atualizar(@RequestBody Empresa empresa, @PathVariable Long id) {
 		if (empresaRepository.existsById(id)) {
 			// setando o id da empresa para atualizar corretamente
 			Optional<Empresa> emp = empresaRepository.findById(id);
 			empresa.setId(id);
+			/*Garantindo que a senha nunca fique nula*/
+			if(empresa.getSenha()==null || empresa.getSenha()=="" ) {
+				empresa.setSenha(emp.get().getSenha());
+			}
 			int i = 0;
 			// seta os ids do telefone para poder atualizar
 			for (Telefone tel : empresa.getTelefone()) {
@@ -236,8 +240,9 @@ public class EmpresaResource {
 				i++;
 			}
 			empresa.setId(id);
+
 			empresaRepository.save(empresa);
-			return ResponseEntity.ok().body(new JSONObject().put("message", "company successfully updated").toString());
+			return ResponseEntity.ok().body(dto.toEmpresaDTO(empresa));
 		} else {
 			return ResponseEntity.notFound().build();
 		}

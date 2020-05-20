@@ -27,7 +27,7 @@ import org.hibernate.validator.constraints.br.CNPJ;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import lombok.Data;
-
+@Data
 @Entity(name ="Empresa")
 @Table(name = "tbl_empresa")
 public class Empresa {
@@ -152,6 +152,10 @@ public class Empresa {
 
 
 
+	/*getter and setters*/
+	public List<Representante> getRepresentantes() {
+		return representantes;
+	}
 
 	public Long getId() {
 		return id;
@@ -164,169 +168,93 @@ public class Empresa {
 		this.id = id;
 	}
 
-
-
-
-	public List<Representante> getRepresentantes() {
-		return representantes;
-	}
-
-
-
-
 	public void setRepresentantes(List<Representante> representantes) {
 		this.representantes = representantes;
 	}
-
-
-
 
 	public String getEndereco() {
 		return endereco;
 	}
 
-
-
-
 	public void setEndereco(String endereco) {
 		this.endereco = endereco;
 	}
-
-
-
 
 	public String getLogradouro() {
 		return logradouro;
 	}
 
-
-
-
 	public void setLogradouro(String logradouro) {
 		this.logradouro = logradouro;
 	}
-
-
-
 
 	public String getNumero() {
 		return numero;
 	}
 
-
-
-
 	public void setNumero(String numero) {
 		this.numero = numero;
 	}
-
-
-
 
 	public String getUf() {
 		return uf;
 	}
 
-
-
-
 	public void setUf(String uf) {
 		this.uf = uf;
 	}
-
-
-
 
 	public String getBairro() {
 		return bairro;
 	}
 
-
-
-
 	public void setBairro(String bairro) {
 		this.bairro = bairro;
 	}
-
-
-
 
 	public String getCidade() {
 		return cidade;
 	}
 
-
-
-
 	public void setCidade(String cidade) {
 		this.cidade = cidade;
 	}
-
-
-
 
 	public String getCep() {
 		return cep;
 	}
 
-
-
-
 	public void setCep(String cep) {
 		this.cep = cep;
 	}
-
-
-
 
 	public String getSite() {
 		return site;
 	}
 
-
-
-
 	public void setSite(String site) {
 		this.site = site;
 	}
-
-
-
 
 	public List<Telefone> getTelefone() {
 		return telefone;
 	}
 
-
-
-
 	public void setTelefone(List<Telefone> telefone) {
 		this.telefone = telefone;
 	}
-
-
-
 
 	public String getInscricaoEstadual() {
 		return inscricaoEstadual;
 	}
 
-
-
-
 	public void setInscricaoEstadual(String inscricaoEstadual) {
 		this.inscricaoEstadual = inscricaoEstadual;
 	}
 
-
-
-
 	public String getRazaoSocial() {
 		return razaoSocial;
 	}
-
-
-
 
 	public void setRazaoSocial(String razaoSocial) {
 		this.razaoSocial = razaoSocial;

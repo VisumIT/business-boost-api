@@ -84,8 +84,11 @@ public class Representante {
 		rep.setEmpresas(optional.get().getEmpresas());
 		rep.setSenha(optional.get().getSenha());
 		rep.setTelefone(optional.get().getTelefone());
+		rep.setNome(optional.get().getNome());
 		
 		return rep;
 }
+	
+	
 	
 }

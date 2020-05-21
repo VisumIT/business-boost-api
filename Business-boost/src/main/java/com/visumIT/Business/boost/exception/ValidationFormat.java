@@ -18,7 +18,6 @@ public class ValidationFormat {
 		
 		for (FieldError erro: fieldErrorList) {
 			jsonObject = new JSONObject().put("Field", erro.getField());
-			//jsonObject.put("valor", erro.getRejectedValue());
 			jsonObject.put("Message", erro.getDefaultMessage());
 			jsonArray.put(jsonObject);
 		}

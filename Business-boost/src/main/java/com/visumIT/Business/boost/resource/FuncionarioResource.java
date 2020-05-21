@@ -1,5 +1,9 @@
+/*
+ * Author: Kaique
+ * */
 package com.visumIT.Business.boost.resource;
 
+import com.visumIT.Business.boost.DTO.FuncionarioDTO;
 import com.visumIT.Business.boost.exception.ValidationFormat;
 import com.visumIT.Business.boost.models.Empresa;
 import com.visumIT.Business.boost.models.Funcionario;
@@ -39,12 +43,28 @@ public class FuncionarioResource {
 
         if(empresaProcurada.isPresent()){
             List<Funcionario> funcionarios = funcionarioRepository.findAll();
-            
-            return ResponseEntity.ok().body(funcionarios);
+            FuncionarioDTO funcionarioDTO = new FuncionarioDTO(); 
+            //protegendo a senha dos usuarios
+            List<FuncionarioDTO> funcionariosDTO = funcionarioDTO.toFuncionariosDTO(funcionarios);
+            return ResponseEntity.ok().body(funcionariosDTO);
         }else
             return ResponseEntity.notFound().build();
     }
-
+    
+    /*Retorna um funcionario especifico*/
+    @GetMapping("{id_funcionario}")
+    public ResponseEntity<?> getFuncionario(@PathVariable(name="id") Long id_empresa, @PathVariable(name="id_funcionario") Long id_funcionario){
+    	Optional<Funcionario> funcionarioProcurado = funcionarioRepository.findById(id_funcionario);
+    	Optional<Empresa> empresaProcurada = empresaRepository.findById(id_empresa);
+    	
+    	if(empresaProcurada.isPresent()&& funcionarioProcurado.isPresent()) {
+    		FuncionarioDTO dto = new FuncionarioDTO();
+    		return ResponseEntity.ok(dto.optionalToFuncionarioDTO(funcionarioProcurado));
+    	}else {
+    		return ResponseEntity.notFound().build();
+    	}
+    	
+    }
     //cadastro de um novo funcionario
     @PostMapping
     public ResponseEntity<?> gravarFuncionario(@Valid @RequestBody Funcionario funcionario,@PathVariable(name = "id") Long id_empresa,
@@ -58,12 +78,15 @@ public class FuncionarioResource {
         if(funcionarioRepository.existsByEmail(funcionario.getEmail())){
             return ResponseEntity.badRequest().body(new JSONObject()
                     .put("message", "E-mail allready in use").toString());
+            
         }else if(funcionarioRepository.existsByMatricula(funcionario.getMatricula())){
             return ResponseEntity.badRequest().body(new JSONObject()
                     .put("message", "Matricula allready in use")
                     .toString());
+            
         }else if(bindingResult.hasErrors()){
             return ResponseEntity.badRequest().body(ValidationFormat.formatarErros(bindingResult));
+            
         }else{
             funcionarioRepository.save(funcionario);
             Optional<Empresa> empresaOptional = empresaRepository.findById(id_empresa);
@@ -82,6 +105,7 @@ public class FuncionarioResource {
                 return ResponseEntity.badRequest().build();
         }
     }
+    
     /*alterar um funcionario*/
     @PutMapping("/{id_funcionario}")
     public ResponseEntity<?> atualizarFuncionario(@Valid @RequestBody Funcionario funcionario, @PathVariable(name="id") Long id_empresa ,
@@ -109,16 +133,23 @@ public class FuncionarioResource {
 			funcionarioRepository.save(funcionario);
 			return ResponseEntity.status(HttpStatus.OK).body(funcionario);
     
-        }else {
+        }else if(bindingResult.hasErrors()){
+            return ResponseEntity.badRequest().body(ValidationFormat.formatarErros(bindingResult));
+            }
+        else {
         	return ResponseEntity.notFound().build();
         }	
     }
        
     /*deletar funcionario*/
-    @Delete("/{id_funcionario}")
+    @DeleteMapping("/{id_funcionario}")
     public ResponseEntity<?> deletarFuncionario(@PathVariable Long id_funcionario){
     	if(funcionarioRepository.existsById(id_funcionario)) {
-    		
+    		funcionarioRepository.deleteById(id_funcionario);
+    		return ResponseEntity.noContent().build();
+    	}
+    	else {
+    		return ResponseEntity.notFound().build();
     	}
     }
 }

@@ -7,8 +7,10 @@ package com.visumIT.Business.boost.DTO;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.visumIT.Business.boost.models.Funcionario;
 import com.visumIT.Business.boost.models.Representante;
 import com.visumIT.Business.boost.models.Telefone;
 
@@ -31,7 +33,6 @@ public class RepresentanteDTO {
 	
 	private String nome;
 	
-	@JsonIgnore
 	private List<EmpresaDTO> empresas = new ArrayList<>();
 	
 
@@ -45,6 +46,7 @@ public class RepresentanteDTO {
 		dto.setDescricao(representante.getDescricao());
 		dto.setEmail(representante.getEmail());
 		dto.setTelefone(representante.getTelefone());	
+		dto.setFoto(representante.getFoto());
 		
 		dto.setEmpresas(empresaDTO.toEmpresasDTO(representante.getEmpresas()));
 		return dto;
@@ -61,6 +63,21 @@ public class RepresentanteDTO {
 		return representantesDTO;
 	}	
 	
+    public RepresentanteDTO optionalToRepresentanteDTO(Optional<Representante> optional){
+    	RepresentanteDTO dto = new RepresentanteDTO();
+    	EmpresaDTO dtoEmpresa = new EmpresaDTO();
+    	
+    	dto.setId(optional.get().getId());
+    	dto.setEmail(optional.get().getEmail());
+    	dto.setEmpresas(dtoEmpresa.toEmpresasDTO(optional.get().getEmpresas()));
+    	dto.setFoto(optional.get().getFoto());
+    	dto.setNome(optional.get().getNome());
+    	dto.setTelefone(optional.get().getTelefone());
+    	dto.setCpf(optional.get().getCpf());
+    	dto.setDescricao(optional.get().getDescricao());
+    	
+    	return dto;
+    }
 	
 	
 	//Construtor

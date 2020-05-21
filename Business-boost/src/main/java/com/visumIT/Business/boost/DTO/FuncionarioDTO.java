@@ -12,6 +12,7 @@ import javax.persistence.*;
 import javax.validation.constraints.Email;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @Data
 @AllArgsConstructor
@@ -36,6 +37,7 @@ public class FuncionarioDTO {
     //converte objeto do tipo funcionario para funcionarioDTO
     public FuncionarioDTO toFuncionarioDTO (Funcionario funcionario) {
         FuncionarioDTO dto = new FuncionarioDTO();
+        
         dto.setEmail(funcionario.getEmail());
         dto.setEmpresa(funcionario.getEmpresa());
         dto.setFoto(funcionario.getFoto());
@@ -55,5 +57,19 @@ public class FuncionarioDTO {
         }
         return funcionariosDTO;
     }
-
+    
+    public FuncionarioDTO optionalToFuncionarioDTO(Optional<Funcionario> optional){
+    	FuncionarioDTO dto = new FuncionarioDTO();
+    	
+    	dto.setId(optional.get().getId());
+    	dto.setEmail(optional.get().getEmail());
+    	dto.setEmpresa(optional.get().getEmpresa());
+    	dto.setFoto(optional.get().getFoto());
+    	dto.setMatricula(optional.get().getMatricula());
+    	dto.setNome(optional.get().getNome());
+    	dto.setTelefone(optional.get().getTelefone());
+    	
+    	return dto;
+    }
+    
 }

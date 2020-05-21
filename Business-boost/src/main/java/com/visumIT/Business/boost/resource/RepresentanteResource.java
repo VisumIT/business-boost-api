@@ -57,10 +57,12 @@ public class RepresentanteResource {
 	
 	@GetMapping("/{id}")
 	public ResponseEntity<?> getRepresentate(@PathVariable Long id){
-		Optional<Representante> representanteProcurada = representanteRepository.findById(id);
-		if(representanteProcurada.isPresent()) {
+		Optional<Representante> representanteProcurado = representanteRepository.findById(id);
+		if(representanteProcurado.isPresent()) {
 			//EmpresaDTO dtoProcurada = dto.toEmpresaDTO(empresaProcurada.get());
-			return ResponseEntity.ok().body(representanteProcurada);
+			dto = dto.optionalToRepresentanteDTO(representanteProcurado);
+			
+			return ResponseEntity.ok().body(dto);
 		}else return ResponseEntity.notFound().build();
 	}
 	//lista de empresas de um representante

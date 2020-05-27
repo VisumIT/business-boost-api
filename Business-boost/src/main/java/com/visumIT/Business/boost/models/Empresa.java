@@ -41,6 +41,13 @@ public class Empresa {
 	@JsonIgnore
 	private List<Representante> representantes = new ArrayList<>();
 	
+	@OneToMany(cascade=CascadeType.ALL, mappedBy = "empresa")
+	@Column(name = "telefone", columnDefinition = "VARCHAR(20)")
+	private List<Telefone> telefone = new  ArrayList<>();
+
+	@OneToMany(cascade=CascadeType.ALL, mappedBy = "empresa")
+	private List<Marca> marca = new  ArrayList<>();
+
 	//endereco
 	@Size(max = 150)
 	@Column(name="endereco", columnDefinition = "VARCHAR(150)")
@@ -74,14 +81,6 @@ public class Empresa {
 	@Size(max = 100)
 	@Column(name="site", columnDefinition = "VARCHAR(100)") 
 	private String site;
-
-	@OneToMany(cascade=CascadeType.ALL, mappedBy = "empresa")
-	@Column(name = "telefone", columnDefinition = "VARCHAR(20)")
-	private List<Telefone> telefone = new  ArrayList<>();
-
-	@OneToMany(cascade=CascadeType.ALL, mappedBy = "empresa")
-	@Column(name = "marcas")
-	private List<Marca> marcas = new  ArrayList<>();
 
 	@Size(min = 14, max = 20)
 	@NotBlank

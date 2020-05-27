@@ -24,8 +24,6 @@ public class Marca {
     @Column(name="nome", columnDefinition = "VARCHAR(30)")
     private String nome;
 
-    @NotBlank
-    @JoinColumn(name = "empresa")
     @ManyToOne(fetch = FetchType.LAZY)
     @JsonIgnore
     private Empresa empresa;

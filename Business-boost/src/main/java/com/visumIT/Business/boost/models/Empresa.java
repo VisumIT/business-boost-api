@@ -79,6 +79,10 @@ public class Empresa {
 	@Column(name = "telefone", columnDefinition = "VARCHAR(20)")
 	private List<Telefone> telefone = new  ArrayList<>();
 
+	@OneToMany(cascade=CascadeType.ALL, mappedBy = "empresa")
+	@Column(name = "marcas")
+	private List<Marca> marcas = new  ArrayList<>();
+
 	@Size(min = 14, max = 20)
 	@NotBlank
 	@Column(name = "inscricao_estadual", columnDefinition = "VARCHAR(20)")

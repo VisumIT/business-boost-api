@@ -1,29 +1,25 @@
-package com.visumIT.Business.boost.resource;
+package com.visumIT.Business.boost.models;
 
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 @RestController
-public class ImagemResource {
+public class Image {
 	
 	private String uploadedFolder = "/home/karl/TCC/Desenvolvimento/tmp/imagens/";
 
-	
-	@PostMapping("/upload")
 	public String singleFileUpload(@RequestBody MultipartFile file, RedirectAttributes redirectAttributes) {
 		
 		if(file.isEmpty()) {
 			redirectAttributes.addFlashAttribute("message", "Please select a file to upload");
-			return "redirect:uploadStatus";
+			return "redirect:uploadStatus: ";
 		}
 		try {
 			byte[] bytes = file.getBytes();
@@ -39,8 +35,8 @@ public class ImagemResource {
 		return "redirect:/uploadStatus";
 	}
 	
-	@GetMapping("/uploadStatus")
 	public String uploadStatus() {
 		return "uploadStatus";
 	}
 }
+

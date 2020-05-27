@@ -89,7 +89,7 @@ public class EmpresaResource {
 	// cadastro da empresa
 	@PostMapping
 	@ResponseStatus(HttpStatus.CREATED)
-	public ResponseEntity<?> gravar(@Valid @RequestBody Empresa empresa, BindingResult bindingResult) {
+	public ResponseEntity<?> saveEmpresa(@Valid @RequestBody Empresa empresa, BindingResult bindingResult) {
 		// verifica se o email já está cadastrado
 		if (empresaRepository.existsByEmail(empresa.getEmail())) {
 			return ResponseEntity.badRequest()
@@ -99,7 +99,11 @@ public class EmpresaResource {
 		} else if (empresaRepository.existsByCnpj(empresa.getCnpj())) {
 			return ResponseEntity.badRequest().body(new JSONObject().put("message", "CNPJ allready in use").toString());
 
-		} else if (bindingResult.hasErrors()) {
+		}else if(empresa.getSenha().length()<8){
+			return ResponseEntity.badRequest().body(new JSONObject().put("message",
+					"Password must be at least 8 characters").toString());
+		}
+		else if (bindingResult.hasErrors()) {
 			return ResponseEntity.badRequest().body(ValidationFormat.formatarErros(bindingResult));
 
 		} else {
@@ -116,7 +120,7 @@ public class EmpresaResource {
 
 	// cadastro de novo representante
 	@PostMapping("/{id}/novo-representante")
-	public ResponseEntity<?> gravarRepresentante(@Valid @RequestBody Representante representante, @PathVariable Long id, BindingResult bindingResult ){
+	public ResponseEntity<?> saveRepresentante(@Valid @RequestBody Representante representante, @PathVariable Long id, BindingResult bindingResult ){
 			//validações
 			//verifica se o email já está cadastrado
 			if (representanteRepository.existsByEmail(representante.getEmail())) {
@@ -158,7 +162,7 @@ public class EmpresaResource {
 
 	//associar representante já cadastrado
 	@PutMapping("/{id_empresa}/representante/{id_representante}")
-	public ResponseEntity<?> adicionarRepresentante(@PathVariable Long id_empresa, @PathVariable Long id_representante){
+	public ResponseEntity<?> addRepresentante(@PathVariable Long id_empresa, @PathVariable Long id_representante){
 		if(empresaRepository.existsById(id_empresa) && representanteRepository.existsById(id_representante) ) {
 			Optional <Empresa> empresaOptional = empresaRepository.findById(id_empresa);
 			Optional<Representante> representanteOptional = representanteRepository.findById(id_representante);
@@ -182,7 +186,7 @@ public class EmpresaResource {
 	
 	//desassociar representante
 	@PutMapping("/{id_empresa}/desassociar-representante/{id_representante}")
-	public ResponseEntity<?> desassociar(@PathVariable Long id_empresa, @PathVariable Long id_representante) {
+	public ResponseEntity<?> removeRepresentante(@PathVariable Long id_empresa, @PathVariable Long id_representante) {
 		if(empresaRepository.existsById(id_empresa) && representanteRepository.existsById(id_representante) ) {
 			Optional <Empresa> empresaOptional = empresaRepository.findById(id_empresa);
 			Optional<Representante> representanteOptional = representanteRepository.findById(id_representante);
@@ -211,7 +215,7 @@ public class EmpresaResource {
 	// deletar algo q não existe
 	@DeleteMapping("/{id}")
 	@ResponseStatus(HttpStatus.NO_CONTENT)
-	public ResponseEntity<?> excluir(@PathVariable Long id) {
+	public ResponseEntity<?> deleteEmpresa(@PathVariable Long id) {
 		if (empresaRepository.existsById(id)) {
 			empresaRepository.deleteById(id);
 			return ResponseEntity.noContent().build();
@@ -222,7 +226,7 @@ public class EmpresaResource {
 
 	@PutMapping("/{id}")
 	@ResponseStatus(HttpStatus.OK)
-	public ResponseEntity<?> atualizar(@RequestBody Empresa empresa, @PathVariable Long id) {
+	public ResponseEntity<?> update(@RequestBody Empresa empresa, @PathVariable Long id) {
 		if (empresaRepository.existsById(id)) {
 			// setando o id da empresa para atualizar corretamente
 			Optional<Empresa> emp = empresaRepository.findById(id);

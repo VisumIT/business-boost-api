@@ -39,7 +39,7 @@ public class TelefoneResource {
 	private RepresentanteRepository representanteRepository;
 	
 	@GetMapping
-	public List<Telefone> getTelefone() {
+	public List<Telefone> getTelefones() {
 		return telefoneRepository.findAll();
 	}
 
@@ -52,7 +52,7 @@ public class TelefoneResource {
 	//adicionar telefone ao uma empresa
 	@PostMapping("/empresa/{id}")
 	@ResponseStatus(HttpStatus.CREATED)
-	public Telefone gravarTelefoneEmpresa(@Valid @RequestBody Telefone telefone, @PathVariable Long id) {		
+	public Telefone saveTelefoneEmpresa(@Valid @RequestBody Telefone telefone, @PathVariable Long id) {
 		Optional<Empresa> emp = empresaRepository.findById(id);
 		telefone.setEmpresa(emp.get());
 		return telefoneRepository.save(telefone);
@@ -61,7 +61,7 @@ public class TelefoneResource {
 	//adicionar telefone a um representante
 	@PostMapping("/representante/{id}")
 	@ResponseStatus(HttpStatus.CREATED)
-	public Telefone gravarTelefoneRepresentante(@Valid @RequestBody Telefone telefone, @PathVariable Long id) {		
+	public Telefone saveTelefoneRepresentante(@Valid @RequestBody Telefone telefone, @PathVariable Long id) {
 		Optional<Representante> rep = representanteRepository.findById(id);
 		telefone.setRepresentante(rep.get());
 		return telefoneRepository.save(telefone);
@@ -69,11 +69,11 @@ public class TelefoneResource {
 	
 	@DeleteMapping("/{id}")
 	@ResponseStatus(HttpStatus.NO_CONTENT)
-	public void excluir(@PathVariable Long id) {
+	public void delete(@PathVariable Long id) {
 		telefoneRepository.deleteById(id);
 	}
 	@PutMapping
-	public void atualizar (@Valid @RequestBody Telefone telefone) {
+	public void update (@Valid @RequestBody Telefone telefone) {
 		telefoneRepository.save(telefone);
 	}
 }

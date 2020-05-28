@@ -6,11 +6,10 @@
 package com.visumIT.Business.boost.DTO;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.visumIT.Business.boost.models.Funcionario;
 import com.visumIT.Business.boost.models.Representante;
 import com.visumIT.Business.boost.models.Telefone;
 
@@ -33,6 +32,8 @@ public class RepresentanteDTO {
 	
 	private String nome;
 	
+	private Date dataNascimento;
+	
 	private List<EmpresaDTO> empresas = new ArrayList<>();
 	
 
@@ -47,6 +48,7 @@ public class RepresentanteDTO {
 		dto.setEmail(representante.getEmail());
 		dto.setTelefone(representante.getTelefone());	
 		dto.setFoto(representante.getFoto());
+		dto.setDataNascimento(representante.getDataNascimento());
 		
 		dto.setEmpresas(empresaDTO.toEmpresasDTO(representante.getEmpresas()));
 		return dto;
@@ -75,6 +77,7 @@ public class RepresentanteDTO {
     	dto.setTelefone(optional.get().getTelefone());
     	dto.setCpf(optional.get().getCpf());
     	dto.setDescricao(optional.get().getDescricao());
+    	dto.setDataNascimento(optional.get().getDataNascimento());
     	
     	return dto;
     }
@@ -85,6 +88,7 @@ public class RepresentanteDTO {
 
 
 //******************************************GETTERS e SETTERS***********************/
+	
 	public Long getId() {
 		return id;
 	}
@@ -175,6 +179,16 @@ public class RepresentanteDTO {
 
 	public void setNome(String nome) {
 		this.nome = nome;
+	}
+
+
+	public Date getDataNascimento() {
+		return dataNascimento;
+	}
+
+
+	public void setDataNascimento(Date dataNascimento) {
+		this.dataNascimento = dataNascimento;
 	}
 	
 	

@@ -20,7 +20,7 @@ import javax.validation.Valid;
 
 
 @RestController
-@RequestMapping("/empresa/{id_empresa}/marca")
+@RequestMapping("/empresas/{id_empresa}/marcas")
 public class MarcaResource {
 
 	@Autowired

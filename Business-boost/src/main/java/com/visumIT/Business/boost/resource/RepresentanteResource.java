@@ -36,7 +36,7 @@ import com.visumIT.Business.boost.repository.RepresentanteRepository;
 import com.visumIT.Business.boost.repository.TelefoneRepository;
 
 @RestController
-@RequestMapping("/representante")
+@RequestMapping("/representantes")
 public class RepresentanteResource {
 	
 	@Autowired

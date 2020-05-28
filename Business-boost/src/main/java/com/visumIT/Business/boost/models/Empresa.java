@@ -114,11 +114,8 @@ public class Empresa {
 	@Column(name = "descricao", columnDefinition = "VARCHAR(200)")
 	private String descricao;
 	
-	@Column(name = "logo", columnDefinition = "VARCHAR(40)")
+	@Column(name = "logo", columnDefinition = "VARCHAR(255)")
 	private String logo;
-	
-	@Column(name = "imagem", columnDefinition = "VARCHAR(40)")
-	private String imagem;
 
 	@JsonIgnore
 	@OneToMany(cascade=CascadeType.ALL, mappedBy = "empresa")
@@ -137,7 +134,6 @@ public class Empresa {
 			empresa.setDescricao(optional.get().getDescricao());
 			empresa.setEmail(optional.get().getEmail());
 			empresa.setEndereco(optional.get().getEndereco());
-			empresa.setImagem(optional.get().getImagem());
 			empresa.setInscricaoEstadual(optional.get().getInscricaoEstadual());
 			empresa.setLogo(optional.get().getLogo());
 			empresa.setLogradouro(optional.get().getLogradouro());
@@ -346,22 +342,6 @@ public class Empresa {
 	public void setLogo(String logo) {
 		this.logo = logo;
 	}
-
-
-
-
-	public String getImagem() {
-		return imagem;
-	}
-
-
-
-
-	public void setImagem(String imagem) {
-		this.imagem = imagem;
-	}
-
-
 
 
 	public List<Funcionario> getFuncionarios() {

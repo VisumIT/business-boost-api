@@ -66,7 +66,6 @@ public class EmpresaDTO {
 	
 	private String logo;
 	
-	private String imagem;
 
 	//método converte um obj do tipo empresa para empresaDTO
 	public EmpresaDTO toEmpresaDTO( Empresa empresa) {
@@ -79,7 +78,6 @@ public class EmpresaDTO {
 		dto.setDescricao(empresa.getDescricao());
 		dto.setEmail(empresa.getEmail());
 		dto.setEndereco(empresa.getEndereco());
-		dto.setImagem(empresa.getImagem());
 		dto.setInscricaoEstadual(empresa.getInscricaoEstadual());
 		dto.setLogo(empresa.getLogo());
 		dto.setLogradouro(empresa.getLogradouro());

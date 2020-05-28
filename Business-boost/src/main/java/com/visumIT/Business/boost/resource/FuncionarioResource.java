@@ -24,7 +24,7 @@ import java.util.List;
 import java.util.Optional;
 
 @RestController
-@RequestMapping("/empresa/{id}/funcionarios")
+@RequestMapping("/empresas/{id}/funcionarios")
 public class FuncionarioResource {
 
     @Autowired
@@ -67,7 +67,7 @@ public class FuncionarioResource {
     }
     //cadastro de um novo funcionario
     @PostMapping
-    public ResponseEntity<?> gravarFuncionario(@Valid @RequestBody Funcionario funcionario,@PathVariable(name = "id") Long id_empresa,
+    public ResponseEntity<?> saveFuncionario(@Valid @RequestBody Funcionario funcionario,@PathVariable(name = "id") Long id_empresa,
     		BindingResult bindingResult){
     	
     	Optional<Empresa> empresaProcurada = empresaRepository.findById(id_empresa);

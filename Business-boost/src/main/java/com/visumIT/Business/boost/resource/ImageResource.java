@@ -8,44 +8,42 @@ import java.util.ArrayList;
 import java.util.Calendar;
 
 import org.json.JSONObject;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+import java.util.Optional;
+
+import com.visumIT.Business.boost.models.Empresa;
+import com.visumIT.Business.boost.repository.EmpresaRepository;
+
 
 @RestController
-public class ImagemResource {
+public class ImageResource {
 	
 	private String uploadedFolder = "/home/karl/TCC/Desenvolvimento/tmp/imagens/";
 	
 	private ArrayList<String> lista= new ArrayList<>();
-	
-	//se a string recebida existir no array retorna verdadeiro
-	public Boolean contain(String e, String[] types) {
-		for(int i = 0; i<types.length;++i) {
-			if(e.equals(types[i])) {
-				return true;
-			}
-		}return false;
-		
-	}
-	
-	@PostMapping("/upload")
-	public ResponseEntity<?> singleFileUpload(@RequestBody MultipartFile file, RedirectAttributes redirectAttributes) {
-	
 
+	@Autowired
+	private EmpresaRepository empresaRepository;
+	
+	public Path uploadImage(MultipartFile file,
+			RedirectAttributes redirectAttributes) {
+	
 		lista.add("image/png");
 		lista.add("image/jpg");
 		
 		String imageType = file.getContentType().toString();
 
 		if(file.isEmpty() || !lista.contains(imageType) ){
-			redirectAttributes.addFlashAttribute("message", "Please select a image to upload");
-			//return ResponseEntity.badRequest().body(imageType);
-			return ResponseEntity.badRequest().body(new JSONObject().put("message", "Please select a image to upload").toString());
+			Path path=Paths.get("404");
+			return path;
 		}
 		try {
 			byte[] bytes = file.getBytes();
@@ -53,12 +51,35 @@ public class ImagemResource {
 			String name = calendar.getTimeInMillis() +file.getOriginalFilename();
 			Path path = Paths.get(uploadedFolder + name);
 			Files.write(path, bytes);
-			return ResponseEntity.ok().body(path);
+			return path;
 		}catch(IOException e) {
 			e.printStackTrace();
 		}
+		Path path=Paths.get("404");
+		return path;
+	}
+	@PostMapping("/empresas/logo/{id}")
+	public ResponseEntity<?> uploadLogo(@RequestBody MultipartFile file,
+			RedirectAttributes redirectAttributes,@PathVariable Long id) {
+	
+		Path path = uploadImage(file, redirectAttributes);
+		if(path.equals("404")) {
+			return ResponseEntity.badRequest().body(new JSONObject().put("message", "Invalid file")
+					.toString());			
+		}
+		//verifica se a empresa existe
 		
+		if(empresaRepository.existsById(id)) {
+			Empresa empresa = new Empresa();
+			Optional<Empresa> empresaOptional = empresaRepository.findById(id);
+			empresa = empresa.optionalToEmpresa(empresaOptional);
+			empresa.setLogo(path.toString());
+			empresaRepository.save(empresa);
+			return ResponseEntity.ok(path);
+		}
 		return ResponseEntity.badRequest().build();
+				
+
 	}
 	
 	@GetMapping("/uploadStatus")

@@ -26,7 +26,7 @@ import com.visumIT.Business.boost.repository.RepresentanteRepository;
 import com.visumIT.Business.boost.repository.TelefoneRepository;
 
 @RestController
-@RequestMapping("/telefone")
+@RequestMapping("/telefones")
 public class TelefoneResource {
 
 	@Autowired
@@ -50,7 +50,7 @@ public class TelefoneResource {
 				: ResponseEntity.notFound().build();
 	}
 	//adicionar telefone ao uma empresa
-	@PostMapping("/empresa/{id}")
+	@PostMapping("/empresas/{id}")
 	@ResponseStatus(HttpStatus.CREATED)
 	public Telefone saveTelefoneEmpresa(@Valid @RequestBody Telefone telefone, @PathVariable Long id) {
 		Optional<Empresa> emp = empresaRepository.findById(id);
@@ -59,7 +59,7 @@ public class TelefoneResource {
 	}
 	
 	//adicionar telefone a um representante
-	@PostMapping("/representante/{id}")
+	@PostMapping("/representantes/{id}")
 	@ResponseStatus(HttpStatus.CREATED)
 	public Telefone saveTelefoneRepresentante(@Valid @RequestBody Telefone telefone, @PathVariable Long id) {
 		Optional<Representante> rep = representanteRepository.findById(id);

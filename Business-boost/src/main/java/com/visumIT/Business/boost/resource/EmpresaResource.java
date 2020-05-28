@@ -37,7 +37,7 @@ import com.visumIT.Business.boost.repository.RepresentanteRepository;
 import com.visumIT.Business.boost.repository.TelefoneRepository;
 
 @RestController
-@RequestMapping("/empresa")
+@RequestMapping("/empresas")
 public class EmpresaResource {
 
 	@Autowired
@@ -107,6 +107,10 @@ public class EmpresaResource {
 			return ResponseEntity.badRequest().body(ValidationFormat.formatarErros(bindingResult));
 
 		} else {
+			ImageResource imageResource = new ImageResource();
+			if(empresa.getLogo()==null) {
+				empresa.setLogo("/home/karl/TCC/Desenvolvimento/tmp/imagens/company.png");
+			}
 			Empresa e = empresaRepository.save(empresa);
 			for (Telefone tel : e.getTelefone()) {
 				tel.setEmpresa(e);
@@ -117,7 +121,7 @@ public class EmpresaResource {
 			return ResponseEntity.status(HttpStatus.CREATED).body(dtoProcurada);
 		}
 	}
-
+	
 	// cadastro de novo representante
 	@PostMapping("/{id}/novo-representante")
 	public ResponseEntity<?> saveRepresentante(@Valid @RequestBody Representante representante, @PathVariable Long id, BindingResult bindingResult ){

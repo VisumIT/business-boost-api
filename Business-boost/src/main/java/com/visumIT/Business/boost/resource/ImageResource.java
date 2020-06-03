@@ -19,8 +19,8 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import java.util.Optional;
 
-import com.visumIT.Business.boost.models.Empresa;
-import com.visumIT.Business.boost.repository.EmpresaRepository;
+import com.visumIT.Business.boost.models.Company;
+import com.visumIT.Business.boost.repository.CompanyRepository;
 
 
 @RestController
@@ -31,7 +31,7 @@ public class ImageResource {
 	private ArrayList<String> lista= new ArrayList<>();
 
 	@Autowired
-	private EmpresaRepository empresaRepository;
+	private CompanyRepository companyRepository;
 	
 	public Path uploadImage(MultipartFile file,
 			RedirectAttributes redirectAttributes) {
@@ -58,7 +58,7 @@ public class ImageResource {
 		Path path=Paths.get("404");
 		return path;
 	}
-	@PostMapping("/empresas/logo/{id}")
+	@PostMapping("/companiess/logo/{id}")
 	public ResponseEntity<?> uploadLogo(@RequestBody MultipartFile file,
 			RedirectAttributes redirectAttributes,@PathVariable Long id) {
 	
@@ -67,14 +67,14 @@ public class ImageResource {
 			return ResponseEntity.badRequest().body(new JSONObject().put("message", "Invalid file")
 					.toString());			
 		}
-		//verifica se a empresa existe
+		//verifica se a companies existe
 		
-		if(empresaRepository.existsById(id)) {
-			Empresa empresa = new Empresa();
-			Optional<Empresa> empresaOptional = empresaRepository.findById(id);
-			empresa = empresa.optionalToEmpresa(empresaOptional);
-			empresa.setLogo(path.toString());
-			empresaRepository.save(empresa);
+		if(companyRepository.existsById(id)) {
+			Company companies = new Company();
+			Optional<Company> companiesOptional = companyRepository.findById(id);
+			companies = companies.optionalToCompany(companiesOptional);
+			companies.setLogo(path.toString());
+			companyRepository.save(companies);
 			return ResponseEntity.ok(path);
 		}
 		return ResponseEntity.badRequest().build();

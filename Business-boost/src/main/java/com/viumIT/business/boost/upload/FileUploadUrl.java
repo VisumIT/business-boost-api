@@ -4,7 +4,6 @@ public class FileUploadUrl {
 	private String url;
 
 	public FileUploadUrl(String url) {
-		super();
 		this.url = url;
 	}
 

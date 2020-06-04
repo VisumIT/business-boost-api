@@ -18,6 +18,8 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.Email;
 
+import org.hibernate.validator.constraints.br.CPF;
+
 import lombok.Data;
 
 /* Author: kaique
@@ -26,8 +28,8 @@ import lombok.Data;
  * */
 
 
-@Entity(name="Representative")
-@Table(name="tbl_representative")
+@Entity
+@Table(name="tbl_representatives")
 public class Representative {
 
 	@Id
@@ -39,7 +41,7 @@ public class Representative {
 	@JoinTable(name = "tbl_company_representative", joinColumns = @JoinColumn
 													(name = "representative_id", referencedColumnName = "id"),
 													inverseJoinColumns = @JoinColumn(name = "company_id", referencedColumnName = "id"))
-	private List <Company> companys = new ArrayList<>();
+	private List <Company> companies = new ArrayList<>();
 	
 	
 	@Column(name="name", columnDefinition = "VARCHAR(40)")
@@ -58,12 +60,13 @@ public class Representative {
 	//relação
 	@OneToMany(cascade=CascadeType.ALL, mappedBy = "representative")
 	@Column(name = "phone", columnDefinition = "VARCHAR(20)")
-	private List<Phone> phone = new  ArrayList<>();
+	private List<Phone> phones = new  ArrayList<>();
 	
+	//@CPF
 	@Column(name="cpf", columnDefinition="VARCHAR(20)")
 	private String cpf;
 	
-	@Column(name="data_nascimento")
+	@Column(name="date_birth")
 	private Date dateOfBirth;
 	
 	@Column(name="gender", columnDefinition="VARCHAR(1)")
@@ -97,11 +100,11 @@ public class Representative {
 	}
 
 	public List<Company> getCompanies() {
-		return companys;
+		return companies;
 	}
 
-	public void setCompanies(List<Company> companys) {
-		this.companys = companys;
+	public void setCompanies(List<Company> companies) {
+		this.companies = companies;
 	}
 
 	public String getName() {
@@ -137,11 +140,11 @@ public class Representative {
 	}
 
 	public List<Phone> getPhones() {
-		return phone;
+		return phones;
 	}
 
 	public void setPhones(List<Phone> phone) {
-		this.phone = phone;
+		this.phones = phone;
 	}
 
 	public String getCpf() {

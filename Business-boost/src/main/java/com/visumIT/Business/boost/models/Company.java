@@ -27,8 +27,8 @@ import org.hibernate.validator.constraints.br.CNPJ;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import lombok.Data;
-@Entity(name ="Company")
-@Table(name = "tbl_company")
+@Entity
+@Table(name = "tbl_companies")
 public class Company {
 
 	@Id
@@ -117,7 +117,7 @@ public class Company {
 	private String logo;
 
 	@JsonIgnore
-	@OneToMany(cascade=CascadeType.ALL, mappedBy = "Company")
+	@OneToMany(cascade=CascadeType.ALL, mappedBy = "company")
 	@Column(name="employees")
 	private List<Employee> employees = new  ArrayList<>();
 

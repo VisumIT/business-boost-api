@@ -2,6 +2,7 @@ package com.visumIT.Business.boost.models;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -17,11 +18,9 @@ import javax.persistence.Table;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.Size;
 
-import org.hibernate.validator.constraints.br.CNPJ;
-
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
-@Entity(name="Employee")
+@Entity
 @Table(name="tbl_employees")
 public class Employee {
 
@@ -41,8 +40,8 @@ public class Employee {
     private String name;
 
     @OneToMany(cascade=CascadeType.ALL, mappedBy = "employee")
-    @Column(name = "phone", columnDefinition = "VARCHAR(20)")
-    private List<Phone> phone = new ArrayList<>();
+    @Column(name = "phones", columnDefinition = "VARCHAR(20)")
+    private List<Phone> phones = new ArrayList<>();
 
     @Email
     @Column(name = "email", columnDefinition = "VARCHAR(40)")
@@ -51,11 +50,28 @@ public class Employee {
     @Column(name = "password", columnDefinition = "VARCHAR(150)")
     private String password;
 
-    @Size(min=0, max=40, message="{Size.employee.photograph}")
-    @Column(name="photograph", columnDefinition = "VARCHAR(45)")
+    @Column(name="photograph")
     private String photograph;
 
-
+    
+    public Employee optionalToEmployee(Optional<Employee> optionalEmployee){
+    	Employee employee = new Employee();
+    	
+    	employee.setCompany(optionalEmployee.get().getCompany());
+    	employee.setEmail(optionalEmployee.get().getEmail());
+    	employee.setId(optionalEmployee.get().getId());
+    	employee.setName(optionalEmployee.get().getName());
+    	employee.setPassword(optionalEmployee.get().getPassword());
+    	employee.setPhones(optionalEmployee.get().getPhones());
+    	employee.setPhotograph(optionalEmployee.get().getPhotograph());
+    	employee.setRegistration(optionalEmployee.get().getRegistration());
+    	
+    	return employee;
+    }
+    
+    
+    
+/*#############################Getters and Setters*/
     public Long getId() {
         return id;
     }
@@ -113,10 +129,10 @@ public class Employee {
     }
 
     public List<Phone> getPhones() {
-        return phone;
+        return phones;
     }
 
-    public void setPhones(List<Phone> phone) {
-        this.phone = phone;
+    public void setPhones(List<Phone> phones) {
+        this.phones = phones;
     }
 }

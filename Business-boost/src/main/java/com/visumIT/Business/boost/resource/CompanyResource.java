@@ -18,6 +18,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
@@ -30,12 +31,14 @@ import com.visumIT.Business.boost.DTO.CompanyDTO;
 import com.visumIT.Business.boost.DTO.RepresentativeDTO;
 import com.visumIT.Business.boost.exception.ValidationFormat;
 import com.visumIT.Business.boost.models.Company;
-import com.visumIT.Business.boost.models.Representative;
 import com.visumIT.Business.boost.models.Phone;
+import com.visumIT.Business.boost.models.Representative;
 import com.visumIT.Business.boost.repository.CompanyRepository;
-import com.visumIT.Business.boost.repository.RepresentativeRepository;
 import com.visumIT.Business.boost.repository.PhoneRepository;
-import com.viumIT.business.boost.upload.*;
+import com.visumIT.Business.boost.repository.RepresentativeRepository;
+import com.viumIT.business.boost.upload.FileUpload;
+import com.viumIT.business.boost.upload.FileUploadUrl;
+import com.viumIT.business.boost.upload.FirebaseStorageService;
 
 @RestController
 @RequestMapping("/companies")
@@ -46,7 +49,7 @@ public class CompanyResource {
 
 	@Autowired
 	private RepresentativeRepository representativeRepository;
-
+	
 	private FirebaseStorageService firebase = new FirebaseStorageService();
 
 //  objeto servira para dar retorno ao front sem expor a password 
@@ -56,13 +59,13 @@ public class CompanyResource {
 	private PhoneRepository phoneRepository;
 	
 	//imagem
-	private String imagemPadrao = "https://firebasestorage.googleapis.com/v0/b/teste-ds3-5ded5.appspot.com/o/teste.jpg?alt=media&token=3e676fe1-6744-416f-a550-dcb07b57c1b8";
-
+	private String standardImage = "https://firebasestorage.googleapis.com/v0/b/teste-ds3-5ded5.appspot.com/o/teste.jpg?alt=media&token=3e676fe1-6744-416f-a550-dcb07b57c1b8";
+	
 	private FileUpload file = new FileUpload();
 	
 	private ArrayList<String> allowedExtensions = new ArrayList<>();
 	
-	//valida algumns campos para cadastro da company
+	//valida alguns campos para cadastro da company
 	private String validateCompany(Company company) {
 		if(companyRepository.existsByEmail(company.getEmail())) {
 			return "E-mail allready in use";
@@ -74,13 +77,95 @@ public class CompanyResource {
 			return "valid";
 		}
 	}
+	//valida alguns campos de representantes para cadastro
+	private String validateRepresentative(Representative representative) {
+		if(representativeRepository.existsByEmail(representative.getEmail())) {
+			return "E-mail allready in use";
+		}else if(representativeRepository.existsByCpf(representative.getCpf())) {
+			return "CPF allready in use";
+		}else if(representative.getPassword().length()<8) {
+			return "Password must be at least 8 characters";
+		}else {
+			return "valid";
+		}
+	}
 	
+	//valida campos para update
+	private Company validUpdate(Company bodyCompany, Long id) {
+		Company baseCompany =  bodyCompany.optionalToCompany(companyRepository.findById(id));
+		bodyCompany.setId(id);
+		if(bodyCompany.getAddress()==null) {
+			bodyCompany.setAddress(baseCompany.getAddress());
+		}
+		if(bodyCompany.getBrand()==null) {
+			bodyCompany.setBrand(baseCompany.getBrand());
+		}
+		if(bodyCompany.getCep()==null) {
+			bodyCompany.setCep(baseCompany.getCep());
+		}
+		if(bodyCompany.getCity()==null) {
+			bodyCompany.setCity(baseCompany.getCity());
+		}
+		if(bodyCompany.getCnpj()==null) {
+			bodyCompany.setCnpj(baseCompany.getCnpj());
+		}
+		if(bodyCompany.getCompanyName()==null) {
+			bodyCompany.setCompanyName(baseCompany.getCompanyName());
+		}
+		if(bodyCompany.getDescription()==null) {
+			bodyCompany.setDescription(baseCompany.getDescription());
+		}
+		if(bodyCompany.getEmail()==null) {
+			bodyCompany.setEmail(baseCompany.getEmail());
+		}
+		if(bodyCompany.getEmployees()==null) {
+			bodyCompany.setEmployees(baseCompany.getEmployees());
+		}
+		if(bodyCompany.getFictitiousName()==null) {
+			bodyCompany.setFictitiousName(baseCompany.getFictitiousName());
+		}
+		if(bodyCompany.getLogo()==null) {
+			bodyCompany.setLogo(baseCompany.getLogo());
+		}
+		if(bodyCompany.getNeighborhood() ==null) {
+			bodyCompany.setNeighborhood(baseCompany.getNeighborhood());
+		}
+		if(bodyCompany.getNumber()==null) {
+			bodyCompany.setNumber(baseCompany.getNumber());
+		}
+		if(bodyCompany.getPassword()==null) {
+			bodyCompany.setPassword(baseCompany.getPassword());
+		}
+		if(bodyCompany.getPhones()==null) {
+			bodyCompany.setPhones(baseCompany.getPhones());
+		}
+		if(bodyCompany.getPublicPlace()==null) {
+			bodyCompany.setPublicPlace(baseCompany.getPublicPlace());
+		}
+		if(bodyCompany.getRepresentatives()==null) {
+			bodyCompany.setRepresentatives(baseCompany.getRepresentatives());
+		}
+		if(bodyCompany.getSite()==null) {
+			bodyCompany.setSite(baseCompany.getSite());
+		}
+		if(bodyCompany.getStateRegistration()==null) {
+			bodyCompany.setStateRegistration(baseCompany.getStateRegistration());
+		}
+		if(bodyCompany.getUf()==null) {
+			bodyCompany.setUf(baseCompany.getUf());
+		}
+		return bodyCompany;
+	} 
+	
+	
+	
+	//lista todas as empresas
 	@GetMapping
 	public List<CompanyDTO> getCompanies() {
 		List<Company> companies = companyRepository.findAll();
 		return dto.toCompaniesDTO(companies);
 	}
-
+	//detalhes da empresa, está rota deve ser protegida
 	@GetMapping("/{id}")
 	public ResponseEntity<?> getCompany(@PathVariable Long id) {
 		Optional<Company> companyProcurada = companyRepository.findById(id);
@@ -116,7 +201,7 @@ public class CompanyResource {
 
 		} else {
 			//ImageResource imageResource = new ImageResource();
-			company.setLogo(imagemPadrao);
+			company.setLogo(standardImage);
 			Company e = companyRepository.save(company);
 			for (Phone tel : e.getPhones()) {
 				tel.setCompany(e);
@@ -132,20 +217,16 @@ public class CompanyResource {
 	@PostMapping("/{id}/novo-representative")
 	public ResponseEntity<?> saveRepresentative(@Valid @RequestBody Representative representative, @PathVariable Long id, BindingResult bindingResult ){
 			//validações
-			//verifica se o email já está cadastrado
-			if (representativeRepository.existsByEmail(representative.getEmail())) {
-				return ResponseEntity.badRequest().body(new JSONObject()
-						.put("message", "E-mail allready in use").toString());
-			 
-				//verifica se o cpf já está cadastrado	
-			}else if(representativeRepository.existsByCpf(representative.getCpf())) {
-				return ResponseEntity.badRequest().body(new JSONObject()
-						.put("message", "CPF allready in use")
-						.toString());
+		if(!validateRepresentative(representative).contains("valid")) {
+			String message = validateRepresentative(representative);
+			return ResponseEntity.badRequest().body(new JSONObject()
+							.put("message", message).toString());
+			
 			} else if(bindingResult.hasErrors()){
 				return ResponseEntity.badRequest().body(ValidationFormat.formatarErros(bindingResult));
+			
 			}else {
-				Representative r = representativeRepository.save(representative);
+				//Representative r = representativeRepository.save(representative);
 				Optional<Company> company = companyRepository.findById(id);
 				Company emp = new Company();
 				
@@ -154,14 +235,14 @@ public class CompanyResource {
 					companies.add(emp.optionalToCompany(company));
 					representative.setCompanies(companies);
 					
-					for (Phone tel : r.getPhones()) {
-						tel.setRepresentative(r);
+					for (Phone tel : representative.getPhones()) {
+						tel.setRepresentative(representative);
 						phoneRepository.save(tel);
 					}
 					
 					RepresentativeDTO representativeDTO = new RepresentativeDTO();
-					RepresentativeDTO dtoProcurada = representativeDTO.toRepresentativeDTO(r);
-					return ResponseEntity.status(HttpStatus.CREATED).body(dtoProcurada);
+					RepresentativeDTO dtoWanted = representativeDTO.toRepresentativeDTO(representative);
+					return ResponseEntity.status(HttpStatus.CREATED).body(dtoWanted);
 				
 				}else return ResponseEntity.badRequest().build();
 
@@ -171,7 +252,7 @@ public class CompanyResource {
 		}
 
 	//associar representative já cadastrado
-	@PutMapping("/{id_company}/representative/{id_representative}")
+	@PatchMapping("/{id_company}/representatives/{id_representative}")
 	public ResponseEntity<?> addRepresentative(@PathVariable Long id_company, @PathVariable Long id_representative){
 		if(companyRepository.existsById(id_company) && representativeRepository.existsById(id_representative) ) {
 			Optional <Company> companyOptional = companyRepository.findById(id_company);
@@ -195,7 +276,7 @@ public class CompanyResource {
 	}	
 	
 	//desassociar representative
-	@PutMapping("/{id_company}/disassociate-representative/{id_representative}")
+	@PatchMapping("/{id_company}/disassociate-representative/{id_representative}")
 	public ResponseEntity<?> removeRepresentative(@PathVariable Long id_company, @PathVariable Long id_representative) {
 		if(companyRepository.existsById(id_company) && representativeRepository.existsById(id_representative) ) {
 			Optional <Company> companyOptional = companyRepository.findById(id_company);
@@ -232,9 +313,21 @@ public class CompanyResource {
 		}
 	}
 
+	//atualização parcial da company
+	@PatchMapping("/{id}")
+	public ResponseEntity<?> partialCompanyUpdate(@PathVariable Long id,@RequestBody Company company){
+		company = validUpdate(company, id);
+		company.setId(id);
+		companyRepository.save(company);
+		dto = dto.toCompanyDTO(company); 
+		return ResponseEntity.ok(dto);
+	}
+	
+
+	//atualização completa
 	@PutMapping("/{id}")
 	@ResponseStatus(HttpStatus.OK)
-	public ResponseEntity<?> update(@RequestBody Company company, @PathVariable Long id) {
+	public ResponseEntity<?> fullCompanyUpdate(@RequestBody Company company, @PathVariable Long id) {
 		if (companyRepository.existsById(id)) {
 			// setando o id da company para atualizar corretamente
 			Optional<Company> emp = companyRepository.findById(id);
@@ -251,7 +344,6 @@ public class CompanyResource {
 				phoneRepository.save(tel);
 				i++;
 			}
-			company.setId(id);
 
 			companyRepository.save(company);
 			return ResponseEntity.ok().body(dto.toCompanyDTO(company));
@@ -336,12 +428,12 @@ public class CompanyResource {
 		this.phoneRepository = phoneRepository;
 	}
 
-	public String getImagemPadrao() {
-		return imagemPadrao;
+	public String getStandardImage() {
+		return standardImage;
 	}
 
-	public void setImagemPadrao(String imagemPadrao) {
-		this.imagemPadrao = imagemPadrao;
+	public void setStandardImage(String standardImage) {
+		this.standardImage = standardImage;
 	}
 
 	public FileUpload getFile() {

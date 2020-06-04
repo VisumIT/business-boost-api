@@ -5,6 +5,7 @@ import java.util.Optional;
 
 import javax.validation.Valid;
 
+import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -52,10 +53,12 @@ public class PhoneResource {
 	//adicionar telefone ao uma company
 	@PostMapping("/companies/{id}")
 	@ResponseStatus(HttpStatus.CREATED)
-	public Phone savePhoneCompany(@Valid @RequestBody Phone phone, @PathVariable Long id) {
+	public ResponseEntity<String> savePhoneCompany(@Valid @RequestBody Phone phone, @PathVariable Long id) {
 		Optional<Company> emp = companyRepository.findById(id);
 		phone.setCompany(emp.get());
-		return phoneRepository.save(phone);
+		phoneRepository.save(phone);
+		return ResponseEntity.status(HttpStatus.CREATED).body(new JSONObject()
+				.put("message", "Phone successfully added").put("Phone", phone.getNumber()).toString());
 	}
 	
 	//adicionar telefone a um representante

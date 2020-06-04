@@ -11,7 +11,7 @@ import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
 
 @Entity
-@Table(name="tbl_brand")
+@Table(name="tbl_brands")
 public class Brand {
 
     @Id
@@ -23,6 +23,7 @@ public class Brand {
     @Column(name="name", columnDefinition = "VARCHAR(30)")
     private String name;
 
+    @JoinColumn(name = "company")
     @ManyToOne(fetch = FetchType.LAZY)
     @JsonIgnore
     private Company company;

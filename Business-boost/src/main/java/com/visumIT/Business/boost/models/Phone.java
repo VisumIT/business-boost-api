@@ -16,7 +16,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
 
 @Entity
-@Table(name="tbl_phone")
+@Table(name="tbl_phones")
 public class Phone {
 	
 	@Id
@@ -37,7 +37,7 @@ public class Phone {
 	@JsonIgnore
 	private Representative representative;
 
-	@JoinColumn(name = "funcionario_id")
+	@JoinColumn(name = "employees_id")
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JsonIgnore
 	private Employee employee;

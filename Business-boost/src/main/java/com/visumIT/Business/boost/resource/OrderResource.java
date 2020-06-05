@@ -31,11 +31,11 @@ public class OrderResource {
 	}
 	
 	
-	@GetMapping("/company/{id}")
+	/*@GetMapping("/company/{id}")
 	public List<Order> getOrdersCompany(@PathVariable Long id){
 		List<Order> orders = orderRepository.findAllByCompanyId(id);
 		return orders;
-	}
+	}*/
 	
 	@GetMapping("/representantive/{id}")
 	public List<Order> getOrdersRepresentantive(@PathVariable Long id){
@@ -52,6 +52,13 @@ public class OrderResource {
 	
 	@PostMapping
 	public Order create(@Valid @RequestBody Order order) {
+		/*Long companyid =  order.getCompanyId();
+		System.out.println(companyid);
+		
+		if(orderRepository.findById(companyid).isPresent()) {
+			return order;
+		}	*/
+		
 		return orderRepository.save(order);
 	}
 	

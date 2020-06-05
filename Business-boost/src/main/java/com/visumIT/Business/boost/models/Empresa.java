@@ -121,6 +121,9 @@ public class Empresa {
 	@OneToMany(cascade=CascadeType.ALL, mappedBy = "empresa")
 	@Column(name="funcionarios")
 	private List<Funcionario> funcionarios = new  ArrayList<>();
+	
+	@OneToMany(mappedBy = "empresa", cascade = CascadeType.ALL)
+	private List<Order> orders;
 
 	//transformar um tipo opcional no tipo empresa
 	public Empresa optionalToEmpresa( Optional<Empresa> optional) {

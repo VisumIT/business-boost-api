@@ -1,6 +1,0 @@
-package com.visumIT.Business.boost.repository;
-
-public class EmpresaRepository JpaRepository <Empresa, Long>{
-	
-
-}

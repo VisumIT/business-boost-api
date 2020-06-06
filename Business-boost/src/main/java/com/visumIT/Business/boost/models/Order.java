@@ -29,7 +29,7 @@ public class Order {
 	private Long id;
 	
 	@ManyToOne
-	private Empresa empresa;
+	private Company company;
 	
 	private Long representativeId;
 	

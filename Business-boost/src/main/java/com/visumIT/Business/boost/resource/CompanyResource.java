@@ -15,6 +15,7 @@ import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.stereotype.Service;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -50,7 +51,8 @@ public class CompanyResource {
 	@Autowired
 	private RepresentativeRepository representativeRepository;
 	
-	private FirebaseStorageService firebase = new FirebaseStorageService();
+	@Autowired
+	private FirebaseStorageService firebase;
 
 //  objeto servira para dar retorno ao front sem expor a password 
 	private CompanyDTO dto = new CompanyDTO();

@@ -6,6 +6,8 @@ package com.visumIT.Business.boost.models;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
 
+import java.util.Optional;
+
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
@@ -28,12 +30,27 @@ public class Brand {
     @JsonIgnore
     private Company company;
 
-    @Column(columnDefinition = "VARCHAR(50)")
+    @Column
     private String logo;
     
     @Column(columnDefinition = "VARCHAR(200)")
     private String description;
 
+    
+    
+    
+    
+    public Brand optionalToBrand(Optional<Brand> optionalBrand) {
+    	Brand brand = new Brand();
+    	
+    	brand.setCompany(optionalBrand.get().getCompany());
+    	brand.setDescription(optionalBrand.get().getDescription());
+    	brand.setId(optionalBrand.get().getId());
+    	brand.setLogo(optionalBrand.get().getLogo());
+    	brand.setName(optionalBrand.get().getName());    	
+    	
+    	return brand;
+    }
     
     /*############# Getters and Setters ######################*/
 	public Long getId() {

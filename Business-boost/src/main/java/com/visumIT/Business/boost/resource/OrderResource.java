@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Optional;
 
 import javax.validation.Valid;
+import javax.websocket.server.PathParam;
 
 import org.aspectj.weaver.ast.Or;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,15 +16,26 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.visumIT.Business.boost.DTO.OrderDTO;
+import com.visumIT.Business.boost.models.Company;
 import com.visumIT.Business.boost.models.Order;
+import com.visumIT.Business.boost.models.Representative;
+import com.visumIT.Business.boost.repository.CompanyRepository;
 import com.visumIT.Business.boost.repository.OrderRepository;
+import com.visumIT.Business.boost.repository.RepresentativeRepository;
 
 @RestController
-@RequestMapping("/orders")
+@RequestMapping("/")
 public class OrderResource {
 	
 	@Autowired
 	private OrderRepository orderRepository;
+	
+	@Autowired
+	private CompanyRepository companyRepository;
+	
+	@Autowired
+	private RepresentativeRepository representativeRepository;
 	
 	@GetMapping
 	public List<Order> getOrders(){
@@ -31,35 +43,49 @@ public class OrderResource {
 	}
 	
 	
-	/*@GetMapping("/company/{id}")
+	/*@GetMapping("/orders/company/{id}")
 	public List<Order> getOrdersCompany(@PathVariable Long id){
-		List<Order> orders = orderRepository.findAllByCompanyId(id);
+		List<Order> orders = orderRepository.findAllByCompabyId(id);
 		return orders;
 	}*/
 	
-	@GetMapping("/representantive/{id}")
+	@GetMapping("/orders/representantive/{id}")
 	public List<Order> getOrdersRepresentantive(@PathVariable Long id){
 		List<Order> orders = orderRepository.findAllByRepresentativeId(id);
 		return orders;
 	}
 	
-	@GetMapping("/client/{id}")
+	@GetMapping("/orders/client/{id}")
 	public List<Order> getOrdersClientId(@PathVariable Long id){
 		List<Order> orders = orderRepository.findAllByClientId(id);
 		return orders;
 	}
 	
 	
-	@PostMapping
-	public Order create(@Valid @RequestBody Order order) {
-		/*Long companyid =  order.getCompanyId();
-		System.out.println(companyid);
+	@PostMapping("/company/{idCompany}/representantive/{idRepresentantive}/client/{idClient}/orders")
+	public ResponseEntity<?> create(@PathVariable("idCompany") Long idCompany,
+						@PathVariable("idRepresentantive") Long idRepresentantive,
+						@PathVariable("idClient") Long idClient,
+			@Valid @RequestBody Order order) {
+		Optional<Company> company = companyRepository.findById(idCompany);
 		
-		if(orderRepository.findById(companyid).isPresent()) {
-			return order;
-		}	*/
+		System.out.println("idCompany -> " + idCompany);
+		if(company.toString() == null) {
+			System.out.println("sem empresa");
+			return ResponseEntity.notFound().build();
+		}
 		
-		return orderRepository.save(order);
+		Optional<Representative> representative = representativeRepository.findById(idRepresentantive);
+		
+		System.out.println("idRepresentantive -> " + idRepresentantive);
+		if(company.toString() == null) {
+			System.out.println("sem representante");
+			return ResponseEntity.notFound().build();
+		}
+		
+		OrderDTO order1 = new OrderDTO(order, company, representative);
+		
+		return ResponseEntity.ok(order1);
 	}
 	
 	

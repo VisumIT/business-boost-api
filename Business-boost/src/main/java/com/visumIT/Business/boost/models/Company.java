@@ -35,6 +35,9 @@ public class Company {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	
+	//@OneToMany(mappedBy = "company", cascade = CascadeType.ALL)
+	//private List<Order> order; 
+	
 	//Representative
 	@ManyToMany(mappedBy = "companies")
 	@JsonIgnore

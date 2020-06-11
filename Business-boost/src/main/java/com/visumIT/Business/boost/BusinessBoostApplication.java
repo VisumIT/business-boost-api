@@ -16,5 +16,7 @@ public class BusinessBoostApplication {
 	public FirebaseStorageService init() {
 		return new FirebaseStorageService();
 	}
+	
+	
 
 }

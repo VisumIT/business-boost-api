@@ -28,8 +28,8 @@ public class Order {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	
-	@ManyToOne
-	private Company company;
+	//@ManyToOne
+	private Long companyid;
 	
 	private Long representativeId;
 	

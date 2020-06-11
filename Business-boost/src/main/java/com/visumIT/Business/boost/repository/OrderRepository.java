@@ -11,7 +11,7 @@ import com.visumIT.Business.boost.models.Order;
 public interface OrderRepository extends JpaRepository<Order, Long>{
 	
 	
-	//public List<Order> findAllByList
+	//public List<Order> findAllByCompabyId(Long id);
 	public List<Order> findAllByRepresentativeId(Long id);
 	public List<Order> findAllByClientId(Long id);
 }

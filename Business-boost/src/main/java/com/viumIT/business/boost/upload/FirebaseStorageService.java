@@ -13,6 +13,7 @@ import com.google.auth.oauth2.GoogleCredentials;
 import com.google.cloud.storage.Acl;
 import com.google.cloud.storage.Blob;
 import com.google.cloud.storage.Bucket;
+import com.google.cloud.storage.Storage;
 import com.google.firebase.FirebaseApp;
 import com.google.firebase.FirebaseOptions;
 import com.google.firebase.cloud.StorageClient;
@@ -63,4 +64,14 @@ public class FirebaseStorageService {
 		String url = "https://storage.googleapis.com/" + bucket.getName() + "/" + file.getFileName();
 		return url;
 	}
+	
+	public Boolean delete(String nameBucket, String nameFile) {
+		Bucket bucket = StorageClient.getInstance().bucket();
+		boolean res = bucket.getStorage().delete(nameBucket, nameFile);
+		System.out.println("---------------------------");
+		System.out.println(res);
+		return res;
+	}
+	
+	
 }

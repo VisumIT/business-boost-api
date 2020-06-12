@@ -34,13 +34,13 @@ public class RepresentativeDTO {
 	
 	private Date dateOfBirth;
 	
-	private List<CompanyDTO> empresas = new ArrayList<>();
+	private List<CompanyWithoutEmployeesDTO> companies = new ArrayList<>();
 	
 
 	
 	public RepresentativeDTO toRepresentativeDTO( Representative representative) {	
 		RepresentativeDTO dto = new RepresentativeDTO();
-		CompanyDTO companyDTO = new CompanyDTO();
+		CompanyWithoutEmployeesDTO companyDTO = new CompanyWithoutEmployeesDTO();
 		dto.setName(representative.getName());
 		dto.setId(representative.getId());
 		dto.setCpf(representative.getCpf());
@@ -67,7 +67,7 @@ public class RepresentativeDTO {
 	
     public RepresentativeDTO optionalToRepresentativeDTO(Optional<Representative> optional){
     	RepresentativeDTO dto = new RepresentativeDTO();
-    	CompanyDTO dtoCompany = new CompanyDTO();
+    	CompanyWithoutEmployeesDTO dtoCompany = new CompanyWithoutEmployeesDTO();
     	
     	dto.setId(optional.get().getId());
     	dto.setEmail(optional.get().getEmail());
@@ -167,14 +167,17 @@ public class RepresentativeDTO {
 	}
 
 
-	public List<CompanyDTO> getCompanies() {
-		return empresas;
+	public List<CompanyWithoutEmployeesDTO> getCompanies() {
+		return companies;
 	}
 
 
-	public void setCompanies(List<CompanyDTO> empresas) {
-		this.empresas = empresas;
+	public void setCompanies(List<CompanyWithoutEmployeesDTO> companies) {
+		this.companies = companies;
 	}
+
+
+
 
 
 

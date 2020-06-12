@@ -174,7 +174,7 @@ public class BrandResource {
 				firebase.delete(fileName[4]);
 			}
 
-			// garantindo nome único, função será separada depois
+			// garantindo nome único
 			Calendar calendar = Calendar.getInstance();
 			String name = calendar.getTimeInMillis() + file.getFileName();
 

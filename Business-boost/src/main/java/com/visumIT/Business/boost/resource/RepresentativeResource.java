@@ -6,6 +6,7 @@
 
 package com.visumIT.Business.boost.resource;
 
+import java.util.Calendar;
 import java.util.List;
 import java.util.Optional;
 
@@ -18,6 +19,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
@@ -29,10 +31,15 @@ import org.springframework.web.bind.annotation.RestController;
 import com.visumIT.Business.boost.DTO.CompanyDTO;
 import com.visumIT.Business.boost.DTO.RepresentativeDTO;
 import com.visumIT.Business.boost.exception.ValidationFormat;
+import com.visumIT.Business.boost.functions.ImageValidations;
 import com.visumIT.Business.boost.models.Company;
 import com.visumIT.Business.boost.models.Representative;
 import com.visumIT.Business.boost.models.Phone;
 import com.visumIT.Business.boost.repository.RepresentativeRepository;
+import com.viumIT.business.boost.upload.FileUpload;
+import com.viumIT.business.boost.upload.FileUploadUrl;
+import com.viumIT.business.boost.upload.FirebaseStorageService;
+import com.visumIT.Business.boost.repository.CompanyRepository;
 import com.visumIT.Business.boost.repository.PhoneRepository;
 
 @RestController
@@ -47,7 +54,47 @@ public class RepresentativeResource {
 	
 	private RepresentativeDTO dto = new RepresentativeDTO();
 	
+	@Autowired
+	private FirebaseStorageService firebase;
 	
+	//valida o update de representante
+	private Representative validUpdate(Representative bodyRepresentative, Long id) {
+		Representative baseRepresentative = bodyRepresentative.optionalToRepresentative(representativeRepository.findById(id));
+		bodyRepresentative.setId(id);
+		if(bodyRepresentative.getCompanies()== null) {
+			bodyRepresentative.setCompanies(baseRepresentative.getCompanies());
+		}
+		if(bodyRepresentative.getCpf()== null) {
+			bodyRepresentative.setCpf(baseRepresentative.getCpf());
+		}
+		if(bodyRepresentative.getDateOfBirth()== null) {
+			bodyRepresentative.setDateOfBirth(baseRepresentative.getDateOfBirth());
+		}
+		if(bodyRepresentative.getDescription()== null) {
+			bodyRepresentative.setDescription(baseRepresentative.getDescription());
+		}
+		if(bodyRepresentative.getEmail()== null) {
+			bodyRepresentative.setEmail(baseRepresentative.getEmail());
+		}
+		if(bodyRepresentative.getGender()== null) {
+			bodyRepresentative.setGender(baseRepresentative.getGender());
+		}
+		if(bodyRepresentative.getName()== null) {
+			bodyRepresentative.setName(baseRepresentative.getName());
+		}
+		if(bodyRepresentative.getPassword()== null) {
+			bodyRepresentative.setPassword(baseRepresentative.getPassword());
+		}
+		if(bodyRepresentative.getPhones()== null) {
+			bodyRepresentative.setPhones(baseRepresentative.getPhones());
+		}
+		if(bodyRepresentative.getPhotograph()== null) {
+			bodyRepresentative.setPhotograph(baseRepresentative.getPhotograph());
+		}
+	
+		return bodyRepresentative;
+	}
+		
 	//listar representatives
 	@GetMapping
 	public List <RepresentativeDTO> getRepresentatives(){
@@ -111,7 +158,7 @@ public class RepresentativeResource {
 		}
 	}
 	
-	@DeleteMapping("{id}")
+	@DeleteMapping("/{id}")
 	public ResponseEntity<?> deleteRepresentative(@PathVariable Long id){
 		if(representativeRepository.existsById(id)) { 
 			representativeRepository.deleteById(id); 
@@ -121,7 +168,7 @@ public class RepresentativeResource {
 	}
 	
 	@PutMapping("/{id}")
-	public ResponseEntity<?>  updateRepresentative(@Valid @RequestBody Representative representative, @PathVariable Long id) {
+	public ResponseEntity<?>  fullUpdateRepresentative(@Valid @RequestBody Representative representative, @PathVariable Long id) {
 		if(representativeRepository.existsById(id)) {
 			
 			//setando o id do representative para atualizar corretamente
@@ -145,5 +192,41 @@ public class RepresentativeResource {
 		
 	}
 	
-	
+	/*update parcial do representante*/
+	@PatchMapping("/{id}")
+	public ResponseEntity<?> partialUpdateRepresentative(@PathVariable Long id, Representative bodyRepresentative) {
+		
+		if(representativeRepository.existsById(id)) {
+			bodyRepresentative=validUpdate(bodyRepresentative, id);
+			representativeRepository.save(bodyRepresentative);
+			dto = dto.toRepresentativeDTO(bodyRepresentative);
+			return ResponseEntity.ok().body(dto);
+		}
+		return ResponseEntity.notFound().build();
+	}
+	/*upload de foto*/
+	@PatchMapping("{id}/photos")
+	public ResponseEntity<?> uploadPhotograph(@RequestBody FileUpload file, @PathVariable Long id ) {
+		ImageValidations imageValidations = new ImageValidations();
+		if(!imageValidations.validImage(file)) {
+			return ResponseEntity.badRequest()
+					.body(new JSONObject().put("message", "please only image files").toString());
+		}else if(representativeRepository.existsById(id)) {
+			Optional<Representative> representativeOptional = representativeRepository.findById(id);
+			String[] fileName = representativeOptional.get().getPhotograph().split("/");
+			firebase.delete(fileName[4]);
+			//nome único
+			Calendar calendar = Calendar.getInstance();
+			String name = calendar.getTimeInMillis() +file.getFileName();
+			
+			FileUploadUrl url = new FileUploadUrl(firebase.upload(file, name));
+			
+			Representative representative = new Representative();
+			representative = representative.optionalToRepresentative(representativeOptional);
+			representative.setPhotograph(url.getUrl());
+			representativeRepository.save(representative);
+			return ResponseEntity.ok().body(representative.getPhotograph());
+		}
+		return ResponseEntity.badRequest().build();
+	}
 }

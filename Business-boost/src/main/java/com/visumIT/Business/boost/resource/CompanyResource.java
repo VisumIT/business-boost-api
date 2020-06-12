@@ -29,6 +29,7 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.visumIT.Business.boost.DTO.CompanyDTO;
+import com.visumIT.Business.boost.DTO.CompanyWithoutEmployeesDTO;
 import com.visumIT.Business.boost.DTO.RepresentativeDTO;
 import com.visumIT.Business.boost.exception.ValidationFormat;
 import com.visumIT.Business.boost.functions.ImageValidations;
@@ -165,9 +166,10 @@ public class CompanyResource {
 
 	// lista todas as empresas
 	@GetMapping
-	public List<CompanyDTO> getCompanies() {
+	public List<CompanyWithoutEmployeesDTO> getCompanies() {
 		List<Company> companies = companyRepository.findAll();
-		return dto.toCompaniesDTO(companies);
+		CompanyWithoutEmployeesDTO companiesWithout = new CompanyWithoutEmployeesDTO();
+		return companiesWithout.toCompaniesDTO(companies);
 	}
 
 	// detalhes da empresa, está rota deve ser protegida

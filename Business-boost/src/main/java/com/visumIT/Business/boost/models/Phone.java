@@ -27,7 +27,7 @@ public class Phone {
 	@Column(name="number", columnDefinition = "VARCHAR(20)")
 	private String number;
 	
-	@JoinColumn(name = "company")
+	@JoinColumn(name = "company")	
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JsonIgnore
 	private Company company;

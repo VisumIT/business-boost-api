@@ -19,9 +19,6 @@ public class ProductInformation {
 	private Long id;
 	
 	@NotNull
-	private Double price;
-	
-	@NotNull
 	private int stock;
 	
 	private String size;

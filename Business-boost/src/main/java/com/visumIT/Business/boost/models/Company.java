@@ -38,6 +38,11 @@ public class Company {
 	//@OneToMany(mappedBy = "company", cascade = CascadeType.ALL)
 	//private List<Order> order; 
 	
+	@OneToMany(cascade = CascadeType.ALL, mappedBy = "company")
+	@Column(name = "products")
+	private List<Product> product = new ArrayList<>();
+	
+	
 	//Representative
 	@ManyToMany(mappedBy = "companies")
 	@JsonIgnore
@@ -318,4 +323,12 @@ public class Company {
 	public void setEmployees(List<Employee> employees) {
 		this.employees = employees;
 	}
+	public List<Product> getProduct() {
+		return product;
+	}
+	public void setProduct(List<Product> product) {
+		this.product = product;
+	}
+	
+	
 }

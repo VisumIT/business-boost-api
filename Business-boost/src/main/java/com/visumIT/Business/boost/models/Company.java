@@ -15,6 +15,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
@@ -38,9 +39,8 @@ public class Company {
 	//@OneToMany(mappedBy = "company", cascade = CascadeType.ALL)
 	//private List<Order> order; 
 	
-	@OneToMany(cascade = CascadeType.ALL, mappedBy = "company")
-	@Column(name = "products")
-	private List<Product> product = new ArrayList<>();
+	@OneToMany(mappedBy = "company")
+	private List<Product> products = new ArrayList<>();
 	
 	
 	//Representative
@@ -324,10 +324,10 @@ public class Company {
 		this.employees = employees;
 	}
 	public List<Product> getProduct() {
-		return product;
+		return products;
 	}
-	public void setProduct(List<Product> product) {
-		this.product = product;
+	public void setProduct(List<Product> products) {
+		this.products = products;
 	}
 	
 	

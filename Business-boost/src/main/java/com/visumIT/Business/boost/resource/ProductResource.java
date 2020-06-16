@@ -21,6 +21,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.visumIT.Business.boost.models.Company;
 import com.visumIT.Business.boost.models.Product;
 import com.visumIT.Business.boost.repository.CompanyRepository;
@@ -39,48 +40,53 @@ public class ProductResource {
 	// Listar produtos da empresa
 	@GetMapping("/{idCompany}/products")
 	public ResponseEntity<?> getProductCompany(@PathVariable Long idCompany){
-		//List<Product> = productRepository.findAll();
-		//companyRepository.findByProduct(idCompany);
-		return ResponseEntity.ok( companyRepository.findById(idCompany));
+		Optional<Company> product = companyRepository.findById(idCompany);
+		
+		if(product.isEmpty()) {
+			return ResponseEntity.notFound().build();
+		}
+			
+		return ResponseEntity.ok( product.get().getProduct());
 	}
 	
 	// Listar produto por id 
 	@GetMapping("/products/{idProduct}")
 	public ResponseEntity<?> getProductById( @PathVariable Long idProduct) {
 		Optional<?> information = productRepository.findById(idProduct);
-		
 		return information.isPresent() ? ResponseEntity.ok(information.get()) : ResponseEntity.notFound().build();
 	}
 	
 	
 	// cadastrar produto da empresa
-	@PostMapping("/company/{idCompany}/products")
-	public ResponseEntity<?> saveProductCompany(@PathVariable Long idCompany ,@Validated @RequestBody Product product) {
-		
+	
+	@PostMapping("/{idCompany}/products")
+	public ResponseEntity<?> saveProductCompany(
+								@PathVariable Long idCompany ,
+								@Validated @RequestBody Product product) {
 		Optional<Company> company = companyRepository.findById(idCompany);
+		
 		if(company.isEmpty()) {
-			return ResponseEntity.notFound().build();
+			return ResponseEntity.status(400).build();
 		}
-		System.out.println(company.get().toString());
+
 		product.setStatus("active");
 		product.setSold(0);
 		product.setCompany(company.get());
 		product = productRepository.save(product);
+		
 		
 		return ResponseEntity.ok(product);
 	}
 	
 	@PutMapping("/{idCompany}/products")
 	public ResponseEntity<?> updateProduct(@PathVariable Long idCompany ,@Validated @RequestBody Product product) {
-		
 		Optional<Company> company = companyRepository.findById(idCompany);
+		
 		if(company.isEmpty()) {
 			return ResponseEntity.notFound().build();
 		}
-		System.out.println(company.get().toString());
 		
 		product.setCompany(company.get());
-		
 		return ResponseEntity.ok(productRepository.save(product));
 	}
 	

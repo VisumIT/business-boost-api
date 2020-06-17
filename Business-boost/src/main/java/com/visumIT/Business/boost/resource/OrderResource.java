@@ -1,11 +1,13 @@
 package com.visumIT.Business.boost.resource;
 
+import java.text.DecimalFormat;
 import java.util.List;
 import java.util.Optional;
 
 import javax.validation.Valid;
 import javax.websocket.server.PathParam;
 
+import org.apache.tomcat.util.http.fileupload.ParameterParser;
 import org.aspectj.weaver.ast.Or;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -22,14 +24,16 @@ import com.visumIT.Business.boost.models.Company;
 import com.visumIT.Business.boost.models.Order;
 import com.visumIT.Business.boost.models.OrderItem;
 import com.visumIT.Business.boost.models.Phone;
+import com.visumIT.Business.boost.models.Product;
 import com.visumIT.Business.boost.models.Representative;
 import com.visumIT.Business.boost.repository.CompanyRepository;
 import com.visumIT.Business.boost.repository.OrderItemRepository;
 import com.visumIT.Business.boost.repository.OrderRepository;
+import com.visumIT.Business.boost.repository.ProductRepository;
 import com.visumIT.Business.boost.repository.RepresentativeRepository;
 
 @RestController
-@RequestMapping("/")
+@RequestMapping("")
 public class OrderResource {
 	
 	@Autowired
@@ -37,6 +41,9 @@ public class OrderResource {
 	
 	@Autowired
 	private CompanyRepository companyRepository;
+	
+	@Autowired
+	private ProductRepository productRepository;
 	
 	@Autowired
 	private RepresentativeRepository representativeRepository;
@@ -74,28 +81,55 @@ public class OrderResource {
 						@PathVariable("idRepresentantive") Long idRepresentantive,
 						@PathVariable("idClient") Long idClient,
 						@RequestBody Order order) {
+		// Verificando empresa
 		Optional<Company> company = companyRepository.findById(idCompany);
-				
-		System.out.println("idCompany -> " + idCompany);
-		if(company.isEmpty()) {
-			System.out.println("Nao encontrou nenhuma empresa");
-			return ResponseEntity.notFound().build();
+		
+		if(!company.isPresent()) {
+			return ResponseEntity.status(458).build();
+		}
+		order.setCompany(company.get());
+		order.setRepresentativeId(1L);
+		order.setClientId(1L);
+		
+		// Calcular preço total do pedido
+		Double totalPrice = 0.0;
+		for(int i = 0; i < order.getItems().size(); i++) {
+			OrderItem orderItem = order.getItems().get(i);
+			Optional<Product> product = productRepository.findById(orderItem.getProductId());
+			Double priceItemQuantity = orderItem.getQuantity() * product.get().getPrice();
+			totalPrice += priceItemQuantity;
 		}
 		
-		System.out.println("1");
+		//DecimalFormat df = new DecimalFormat("#0.00");
+		order.setTotalPrice(totalPrice);
+		order.setStatus("created");
 		
-		// Atualizar a chave estrangeira no banco de dados
 		Order orderSave = orderRepository.save(order);
-		for (OrderItem item : orderSave.getItems()) {
+		
+		return ResponseEntity.status(HttpStatus.CREATED).body(orderSave);
+		
+		
+		//return ResponseEntity.ok(null);
+		
+		/*for (OrderItem item : orderSave.getItems()) {
+			item.setOrder(orderSave);
+			orderItemRepository.save(item);
+			
+		}
+		
+		Order orderSave = orderRepository.save(order);
+		
+		
+		/*for (OrderItem item : orderSave.getItems()) {
 			item.setOrder(orderSave);
 			orderItemRepository.save(item);
 			System.out.println("2");
-		}
-		System.out.println("3");
+		}*/
 		
-		Optional<Order> res = orderRepository.findById(orderSave.getId());
 		
-		return ResponseEntity.status(HttpStatus.CREATED).body(res);
+		/*Optional<Order> res = orderRepository.findById(orderSave.getId());
+		
+		return ResponseEntity.status(HttpStatus.CREATED).body(res);*/
 		/*Optional<Company> company = companyRepository.findById(idCompany);
 		
 		System.out.println("idCompany -> " + idCompany);

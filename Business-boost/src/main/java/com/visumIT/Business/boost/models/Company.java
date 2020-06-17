@@ -36,8 +36,8 @@ public class Company {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	
-	//@OneToMany(mappedBy = "company", cascade = CascadeType.ALL)
-	//private List<Order> order; 
+	@OneToMany(mappedBy = "company")
+	private List<Order> orders = new ArrayList<>();
 	
 	@OneToMany(mappedBy = "company")
 	private List<Product> products = new ArrayList<>();

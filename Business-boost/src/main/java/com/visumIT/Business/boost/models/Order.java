@@ -20,31 +20,44 @@ import javax.persistence.Table;
 
 import org.hibernate.annotations.ManyToAny;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
+import lombok.ToString;
 
 @Entity
-@Table(name = "tbl_orders")
+@ToString
+@NoArgsConstructor
+@AllArgsConstructor
 @Data
+@Table(name = "tbl_orders")
 public class Order implements Serializable{
 	
 	/**
-	 * 
+	 * Wesley Meneghini
+	 * Version 0.0.1
 	 */
-	private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = 1453613543921637790L;
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	
-	private Long company;
+	
+	@ManyToOne
+	@JoinColumn(nullable = false)
+	private Company company;
+	
 	private Long representativeId;
 	private Long clientId;
-	private Double dicountId;
+	private Long dicountId;
 	private String status;
+	private Double totalPrice;
 	private Calendar createDate = Calendar.getInstance();
 	
-	
-	@OneToMany(cascade = CascadeType.ALL, mappedBy = "order")
+	@OneToMany(mappedBy = "order")
 	private List<OrderItem> items = new ArrayList<OrderItem>();
 	
 }

@@ -23,28 +23,39 @@ import org.hibernate.mapping.Table.ForeignKeyKey;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
+import lombok.ToString;
 
 @Entity
-@Table(name = "tbl_items")
+@ToString
+@NoArgsConstructor
+@AllArgsConstructor
 @Data
-public class OrderItem {
+@Table(name = "tbl_items")
+public class OrderItem implements Serializable{
+
+	/**
+	 * Wesley Meneghini
+	 */
+	private static final long serialVersionUID = -8431513671686721324L;
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Long ids;
+	private Long id;
 	
 	private Double price;
 	private int quantity;
 	
 	/*@JsonIgnore
 	@OneToOne(cascade = CascadeType.ALL)
-	@JoinColumn(name = "fk_product")
-	private Product product;*/
+	@JoinColumn(name = "fk_product")*/
+	private Long productId;
 	
-	@JsonIgnore
+	//@JsonIgnore
 	@ManyToOne
-	@JoinColumn(name = "order_id")
+	@JoinColumn(nullable = false, referencedColumnName = "id")
 	private Order order;
 
 }

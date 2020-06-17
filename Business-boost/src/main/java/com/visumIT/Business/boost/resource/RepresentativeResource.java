@@ -54,8 +54,7 @@ public class RepresentativeResource {
 	
 	private RepresentativeDTO dto = new RepresentativeDTO();
 	
-	@Autowired
-	private FirebaseStorageService firebase;
+	private FirebaseStorageService firebase = new FirebaseStorageService();
 	
 	//valida o update de representante
 	private Representative validUpdate(Representative bodyRepresentative, Long id) {
@@ -213,20 +212,44 @@ public class RepresentativeResource {
 					.body(new JSONObject().put("message", "please only image files").toString());
 		}else if(representativeRepository.existsById(id)) {
 			Optional<Representative> representativeOptional = representativeRepository.findById(id);
-			String[] fileName = representativeOptional.get().getPhotograph().split("/");
-			firebase.delete(fileName[4]);
+			Representative representative = new Representative();
+			representative = representative.optionalToRepresentative(representativeOptional);
+			
+			if (representative.getPhotograph().isEmpty()) {
+				String[] fileName = representativeOptional.get().getPhotograph().split("/");
+				firebase.delete(fileName[4]);
+			}			
 			//nome único
 			Calendar calendar = Calendar.getInstance();
 			String name = calendar.getTimeInMillis() +file.getFileName();
 			
 			FileUploadUrl url = new FileUploadUrl(firebase.upload(file, name));
 			
-			Representative representative = new Representative();
-			representative = representative.optionalToRepresentative(representativeOptional);
+			
 			representative.setPhotograph(url.getUrl());
 			representativeRepository.save(representative);
 			return ResponseEntity.ok().body(representative.getPhotograph());
 		}
 		return ResponseEntity.badRequest().build();
 	}
+	@DeleteMapping("/{id}/photos")
+	public ResponseEntity<?> deltePhotograph(@PathVariable Long id){
+		if(representativeRepository.existsById(id)) {
+			Representative representative = new Representative();
+			representative = representative.optionalToRepresentative(representativeRepository.findById(id));
+			
+			String[] fileName = representative.getPhotograph().split("/");
+		
+			if(firebase.delete(fileName[4])) {
+				representative.setPhotograph(" ");
+				representativeRepository.save(representative);
+				
+				return ResponseEntity.noContent().build();
+			}
+			
+		}
+		return ResponseEntity.notFound().build();
+	}
+	
+	
 }

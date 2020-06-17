@@ -71,5 +71,5 @@ public class FirebaseStorageService {
 		boolean arquivo = bucket.getStorage().delete("teste-ds3-5ded5.appspot.com",file);
 		return arquivo;
 	}
-	
+
 }

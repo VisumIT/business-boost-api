@@ -248,7 +248,7 @@ public class EmployeeResource {
 	}
 	
 	/*deletar foto*/
-	@DeleteMapping("{id_employee}/logo")
+	@DeleteMapping("{id_employee}/photos")
 	public ResponseEntity<?> deleteLogo(@PathVariable(name = "id_employee") Long id_employee, @PathVariable(name = "id") Long id_company){
 		Company company = new Company();
 		company = company.optionalToCompany(companyRepository.findById(id_company));

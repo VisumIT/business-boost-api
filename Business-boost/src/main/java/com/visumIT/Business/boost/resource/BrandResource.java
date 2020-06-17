@@ -33,8 +33,8 @@ public class BrandResource {
 	@Autowired
 	private CompanyRepository companyRepository;
 
-	@Autowired
-	private FirebaseStorageService firebase;
+	
+	private FirebaseStorageService firebase = new FirebaseStorageService();
 
 	private Company company = new Company();
 
@@ -157,36 +157,41 @@ public class BrandResource {
 	/* ######################### upload do logo ############################# */
 
 	@PatchMapping("{id_brand}/logo")
-	public ResponseEntity<?> updateLogoCompany(@RequestBody FileUpload file,
-			@PathVariable(name = "id_brand") Long id_brand, @PathVariable(name = "id_company") Long id_company) {
+	public ResponseEntity<?> updateLogoCompany(@RequestBody FileUpload file, @PathVariable(name="id_brand") Long id_brand,
+			@PathVariable(name="id_company")Long id_company) {
 		ImageValidations imageValidations = new ImageValidations();
 		company = company.optionalToCompany(companyRepository.findById(id_company));
 		if (!imageValidations.validImage(file)) {
 			return ResponseEntity.badRequest()
 					.body(new JSONObject().put("message", "please only image files").toString());
-
+			
 		} else if (brandRepository.existsByCompany(company)) {
+			Optional<Brand> brandOptional = brandRepository.findById(id_brand);
 			Brand brand = new Brand();
-			brand = brand.optionalToBrand(brandRepository.findById(id_brand));
-
-			if (brand.getLogo() != null) {
-				String[] fileName = brand.getLogo().split("/");
+			brand = brand.optionalToBrand(brandOptional);
+				
+			
+			if (brand.getLogo().isEmpty()) {
+				String[] fileName = brandOptional.get().getLogo().split("/");
 				firebase.delete(fileName[4]);
 			}
 
-			// garantindo nome único
+			//garantindo nome único, função será separada depois
 			Calendar calendar = Calendar.getInstance();
-			String name = calendar.getTimeInMillis() + file.getFileName();
-
+			String name = calendar.getTimeInMillis() +file.getFileName();
+			
 			FileUploadUrl url = new FileUploadUrl(firebase.upload(file, name));
+				
 
 			brand.setLogo(url.getUrl());
 			brandRepository.save(brand);
-
 			return ResponseEntity.ok().body(brand.getLogo());
 		}
-		return ResponseEntity.notFound().build();
+		return ResponseEntity.badRequest().build();
 	}
+
+
+
 
 	// deletar logo da marca
 	@DeleteMapping("{id_brand}/logo")

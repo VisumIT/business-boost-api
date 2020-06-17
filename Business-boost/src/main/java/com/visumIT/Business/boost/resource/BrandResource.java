@@ -2,6 +2,7 @@ package com.visumIT.Business.boost.resource;
 
 import com.visumIT.Business.boost.exception.ValidationFormat;
 import com.visumIT.Business.boost.functions.ImageValidations;
+import com.visumIT.Business.boost.functions.PartialUpdateValidation;
 import com.visumIT.Business.boost.models.Company;
 import com.visumIT.Business.boost.models.Brand;
 import com.visumIT.Business.boost.repository.CompanyRepository;
@@ -100,13 +101,18 @@ public class BrandResource {
 	// atualização parcial da brand
 	@PatchMapping("{id_brand}")
 	public ResponseEntity<?> partialUpdateBrand(@PathVariable(name = "id_company") Long id_company,
-			@PathVariable(name = "id_brand") Long id_brand, Brand brand) {
+			@PathVariable(name = "id_brand") Long id_brand, Brand bodyBrand) 
+					throws IllegalAccessException{
 		if (companyRepository.existsById(id_company) && brandRepository.existsById(id_brand)) {
 			// garantir que a marca pertence a empresa
 			if (brandRepository.existsByCompany(company)) {
-				brand = validUpdate(brand, id_brand);
-				brandRepository.save(brand);
-				return ResponseEntity.ok(brand);
+				//brand = validUpdate(brand, id_brand);
+				Brand baseBrand = new Brand();
+				baseBrand = baseBrand.optionalToBrand(brandRepository.findById(id_brand));
+				PartialUpdateValidation validation = new PartialUpdateValidation();
+				bodyBrand = (Brand)validation.updateFields(bodyBrand, baseBrand);
+				brandRepository.save(bodyBrand);
+				return ResponseEntity.ok(bodyBrand);
 			}
 			return ResponseEntity.badRequest().build();
 		}
@@ -171,7 +177,7 @@ public class BrandResource {
 			brand = brand.optionalToBrand(brandOptional);
 				
 			
-			if (brand.getLogo().isEmpty()) {
+			if (!brand.getLogo().isEmpty()) {
 				String[] fileName = brandOptional.get().getLogo().split("/");
 				firebase.delete(fileName[4]);
 			}

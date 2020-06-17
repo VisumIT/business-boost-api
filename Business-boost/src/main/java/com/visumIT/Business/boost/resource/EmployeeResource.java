@@ -6,7 +6,7 @@ package com.visumIT.Business.boost.resource;
 import com.visumIT.Business.boost.DTO.EmployeeDTO;
 import com.visumIT.Business.boost.exception.ValidationFormat;
 import com.visumIT.Business.boost.functions.ImageValidations;
-import com.visumIT.Business.boost.models.Brand;
+import com.visumIT.Business.boost.functions.PartialUpdateValidation;
 import com.visumIT.Business.boost.models.Company;
 import com.visumIT.Business.boost.models.Employee;
 import com.visumIT.Business.boost.models.Phone;
@@ -45,35 +45,6 @@ public class EmployeeResource {
 
 	@Autowired
 	private PhoneRepository phoneRepository;
-
-	// valida update de funcionarios
-	private Employee validUpdate(Employee bodyEmployee, Long id) {
-		Employee baseEmployee = bodyEmployee.optionalToEmployee(employeeRepository.findById(id));
-		bodyEmployee.setId(id);
-		if (bodyEmployee.getCompany() == null) {
-			bodyEmployee.setCompany(baseEmployee.getCompany());
-		}
-		if (bodyEmployee.getEmail() == null) {
-			bodyEmployee.setEmail(baseEmployee.getEmail());
-		}
-		if (bodyEmployee.getName() == null) {
-			bodyEmployee.setName(baseEmployee.getName());
-		}
-		if (bodyEmployee.getPassword() == null) {
-			bodyEmployee.setPassword(baseEmployee.getPassword());
-		}
-		if (bodyEmployee.getPhones() == null) {
-			bodyEmployee.setPhones(baseEmployee.getPhones());
-		}
-		if (bodyEmployee.getPhotograph() == null) {
-			bodyEmployee.setPhotograph(baseEmployee.getPhotograph());
-		}
-		if (bodyEmployee.getRegistration() == null) {
-			bodyEmployee.setRegistration(baseEmployee.getRegistration());
-		}
-
-		return bodyEmployee;
-	}
 
 	private String validEmployee(Long id, Employee employee) {
 		Company company = new Company();
@@ -155,18 +126,22 @@ public class EmployeeResource {
 
 	// update parcial
 	@PatchMapping("/{id_employee}")
-	public ResponseEntity<?> partialUpdate(@Valid @RequestBody Employee employee,
-			@PathVariable(name = "id_employee") Long id_employee, @PathVariable(name = "id") Long id_company) {
+	public ResponseEntity<?> partialUpdate(@Valid @RequestBody Employee bodyEmployee,
+			@PathVariable(name = "id_employee") Long id_employee, @PathVariable(name = "id") Long id_company) 
+					throws IllegalAccessException {
 		
 		Optional<Company> companyWanted = companyRepository.findById(id_company);
 		Company company = new Company();
 		company = company.optionalToCompany(companyWanted);
 
 		if (employeeRepository.existsByCompany(company)) {
-			employee = validUpdate(employee, id_employee);
-			employeeRepository.save(employee);
+			PartialUpdateValidation validation = new PartialUpdateValidation();
+			Employee baseEmployee = new Employee();
+			baseEmployee = baseEmployee.optionalToEmployee(employeeRepository.findById(id_employee));
+			bodyEmployee = (Employee)validation.updateFields(bodyEmployee, baseEmployee);
+			employeeRepository.save(bodyEmployee);
 			EmployeeDTO dto = new EmployeeDTO();
-			return ResponseEntity.status(HttpStatus.CREATED).body(dto.toEmployeeDTO(employee));
+			return ResponseEntity.status(HttpStatus.CREATED).body(dto.toEmployeeDTO(bodyEmployee));
 		} else {
 			return ResponseEntity.badRequest().build();
 		}
@@ -229,7 +204,7 @@ public class EmployeeResource {
 		}else if(employeeRepository.existsByCompany(company)) {
 			Employee employee = new Employee();
 			employee = employee.optionalToEmployee(employeeRepository.findById(id_employee));
-			if(employee.getPhotograph() != null) {
+			if(!employee.getPhotograph().isEmpty()) {
 				String[] fileName = employee.getPhotograph().split("/");
 				firebase.delete(fileName[4]);
 			}

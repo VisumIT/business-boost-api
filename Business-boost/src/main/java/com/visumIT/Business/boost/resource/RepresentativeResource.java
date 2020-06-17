@@ -32,6 +32,7 @@ import com.visumIT.Business.boost.DTO.CompanyDTO;
 import com.visumIT.Business.boost.DTO.RepresentativeDTO;
 import com.visumIT.Business.boost.exception.ValidationFormat;
 import com.visumIT.Business.boost.functions.ImageValidations;
+import com.visumIT.Business.boost.functions.PartialUpdateValidation;
 import com.visumIT.Business.boost.models.Company;
 import com.visumIT.Business.boost.models.Representative;
 import com.visumIT.Business.boost.models.Phone;
@@ -39,7 +40,6 @@ import com.visumIT.Business.boost.repository.RepresentativeRepository;
 import com.viumIT.business.boost.upload.FileUpload;
 import com.viumIT.business.boost.upload.FileUploadUrl;
 import com.viumIT.business.boost.upload.FirebaseStorageService;
-import com.visumIT.Business.boost.repository.CompanyRepository;
 import com.visumIT.Business.boost.repository.PhoneRepository;
 
 @RestController
@@ -56,44 +56,6 @@ public class RepresentativeResource {
 	
 	private FirebaseStorageService firebase = new FirebaseStorageService();
 	
-	//valida o update de representante
-	private Representative validUpdate(Representative bodyRepresentative, Long id) {
-		Representative baseRepresentative = bodyRepresentative.optionalToRepresentative(representativeRepository.findById(id));
-		bodyRepresentative.setId(id);
-		if(bodyRepresentative.getCompanies()== null) {
-			bodyRepresentative.setCompanies(baseRepresentative.getCompanies());
-		}
-		if(bodyRepresentative.getCpf()== null) {
-			bodyRepresentative.setCpf(baseRepresentative.getCpf());
-		}
-		if(bodyRepresentative.getDateOfBirth()== null) {
-			bodyRepresentative.setDateOfBirth(baseRepresentative.getDateOfBirth());
-		}
-		if(bodyRepresentative.getDescription()== null) {
-			bodyRepresentative.setDescription(baseRepresentative.getDescription());
-		}
-		if(bodyRepresentative.getEmail()== null) {
-			bodyRepresentative.setEmail(baseRepresentative.getEmail());
-		}
-		if(bodyRepresentative.getGender()== null) {
-			bodyRepresentative.setGender(baseRepresentative.getGender());
-		}
-		if(bodyRepresentative.getName()== null) {
-			bodyRepresentative.setName(baseRepresentative.getName());
-		}
-		if(bodyRepresentative.getPassword()== null) {
-			bodyRepresentative.setPassword(baseRepresentative.getPassword());
-		}
-		if(bodyRepresentative.getPhones()== null) {
-			bodyRepresentative.setPhones(baseRepresentative.getPhones());
-		}
-		if(bodyRepresentative.getPhotograph()== null) {
-			bodyRepresentative.setPhotograph(baseRepresentative.getPhotograph());
-		}
-	
-		return bodyRepresentative;
-	}
-		
 	//listar representatives
 	@GetMapping
 	public List <RepresentativeDTO> getRepresentatives(){
@@ -193,10 +155,15 @@ public class RepresentativeResource {
 	
 	/*update parcial do representante*/
 	@PatchMapping("/{id}")
-	public ResponseEntity<?> partialUpdateRepresentative(@PathVariable Long id, Representative bodyRepresentative) {
+	public ResponseEntity<?> partialUpdateRepresentative(@PathVariable Long id, Representative bodyRepresentative)
+			throws IllegalAccessException{
 		
 		if(representativeRepository.existsById(id)) {
-			bodyRepresentative=validUpdate(bodyRepresentative, id);
+			//bodyRepresentative=validUpdate(bodyRepresentative, id)
+			Representative baseRepresentative = new Representative();
+			baseRepresentative = baseRepresentative.optionalToRepresentative(representativeRepository.findById(id));
+			PartialUpdateValidation validation = new PartialUpdateValidation();;
+			bodyRepresentative = (Representative)validation.updateFields(bodyRepresentative, baseRepresentative);
 			representativeRepository.save(bodyRepresentative);
 			dto = dto.toRepresentativeDTO(bodyRepresentative);
 			return ResponseEntity.ok().body(dto);

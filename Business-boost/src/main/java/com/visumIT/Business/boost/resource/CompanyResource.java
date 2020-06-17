@@ -33,6 +33,7 @@ import com.visumIT.Business.boost.DTO.CompanyWithoutEmployeesDTO;
 import com.visumIT.Business.boost.DTO.RepresentativeDTO;
 import com.visumIT.Business.boost.exception.ValidationFormat;
 import com.visumIT.Business.boost.functions.ImageValidations;
+import com.visumIT.Business.boost.functions.PartialUpdateValidation;
 import com.visumIT.Business.boost.models.Company;
 import com.visumIT.Business.boost.models.Phone;
 import com.visumIT.Business.boost.models.Representative;
@@ -94,75 +95,6 @@ public class CompanyResource {
 			return "valid";
 		}
 	}
-
-	// valida campos para update
-	private Company validUpdate(Company bodyCompany, Long id) {
-		Company baseCompany = bodyCompany.optionalToCompany(companyRepository.findById(id));
-		bodyCompany.setId(id);
-		if (bodyCompany.getAddress() == null) {
-			bodyCompany.setAddress(baseCompany.getAddress());
-		}
-		if (bodyCompany.getBrand() == null) {
-			bodyCompany.setBrand(baseCompany.getBrand());
-		}
-		if (bodyCompany.getCep() == null) {
-			bodyCompany.setCep(baseCompany.getCep());
-		}
-		if (bodyCompany.getCity() == null) {
-			bodyCompany.setCity(baseCompany.getCity());
-		}
-		if (bodyCompany.getCnpj() == null) {
-			bodyCompany.setCnpj(baseCompany.getCnpj());
-		}
-		if (bodyCompany.getCompanyName() == null) {
-			bodyCompany.setCompanyName(baseCompany.getCompanyName());
-		}
-		if (bodyCompany.getDescription() == null) {
-			bodyCompany.setDescription(baseCompany.getDescription());
-		}
-		if (bodyCompany.getEmail() == null) {
-			bodyCompany.setEmail(baseCompany.getEmail());
-		}
-		if (bodyCompany.getEmployees() == null) {
-			bodyCompany.setEmployees(baseCompany.getEmployees());
-		}
-		if (bodyCompany.getFictitiousName() == null) {
-			bodyCompany.setFictitiousName(baseCompany.getFictitiousName());
-		}
-		if (bodyCompany.getLogo() == null) {
-			bodyCompany.setLogo(baseCompany.getLogo());
-		}
-		if (bodyCompany.getNeighborhood() == null) {
-			bodyCompany.setNeighborhood(baseCompany.getNeighborhood());
-		}
-		if (bodyCompany.getNumber() == null) {
-			bodyCompany.setNumber(baseCompany.getNumber());
-		}
-		if (bodyCompany.getPassword() == null) {
-			bodyCompany.setPassword(baseCompany.getPassword());
-		}
-		if (bodyCompany.getPhones() == null) {
-			bodyCompany.setPhones(baseCompany.getPhones());
-		}
-		if (bodyCompany.getPublicPlace() == null) {
-			bodyCompany.setPublicPlace(baseCompany.getPublicPlace());
-		}
-		if (bodyCompany.getRepresentatives() == null) {
-			bodyCompany.setRepresentatives(baseCompany.getRepresentatives());
-		}
-		if (bodyCompany.getSite() == null) {
-			bodyCompany.setSite(baseCompany.getSite());
-		}
-		if (bodyCompany.getStateRegistration() == null) {
-			bodyCompany.setStateRegistration(baseCompany.getStateRegistration());
-		}
-		if (bodyCompany.getUf() == null) {
-			bodyCompany.setUf(baseCompany.getUf());
-		}
-		return bodyCompany;
-	}
-
-	
 
 	// lista todas as empresas
 	@GetMapping
@@ -322,11 +254,17 @@ public class CompanyResource {
 
 	// atualização parcial da company
 	@PatchMapping("/{id}")
-	public ResponseEntity<?> partialCompanyUpdate(@PathVariable Long id, @RequestBody Company company) {
-		company = validUpdate(company, id);
-		company.setId(id);
-		companyRepository.save(company);
-		dto = dto.toCompanyDTO(company);
+	public ResponseEntity<?> partialCompanyUpdate(@PathVariable Long id, @RequestBody Company bodyCompany)
+	throws IllegalAccessException{
+		Company baseCompany = new Company();
+		baseCompany = baseCompany.optionalToCompany(companyRepository.findById(id));
+		PartialUpdateValidation validation = new PartialUpdateValidation();
+		
+		bodyCompany = (Company)validation.updateFields(bodyCompany, baseCompany);
+		
+		bodyCompany.setId(id);
+		companyRepository.save(bodyCompany);
+		dto = dto.toCompanyDTO(bodyCompany);
 		return ResponseEntity.ok(dto);
 	}
 
@@ -369,17 +307,20 @@ public class CompanyResource {
 
 		} else if (companyRepository.existsById(id)) {
 			Optional<Company> companyOptional = companyRepository.findById(id);
-			String[] fileName = companyOptional.get().getLogo().split("/");	
-			firebase.delete(fileName[4]);
+				
+			Company company = new Company();
+			company = company.optionalToCompany(companyOptional);
+			if(!company.getLogo().isEmpty()) {
+				String[] fileName = companyOptional.get().getLogo().split("/");
+				firebase.delete(fileName[4]);
+			}
+						
 			//garantindo nome único, função será separada depois
 			Calendar calendar = Calendar.getInstance();
 			String name = calendar.getTimeInMillis() +file.getFileName();
 			
 			FileUploadUrl url = new FileUploadUrl(firebase.upload(file, name));
 			
-			
-			
-			Company company = new Company();
 			company = company.optionalToCompany(companyOptional);
 			company.setLogo(url.getUrl());
 			companyRepository.save(company);

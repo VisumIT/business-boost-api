@@ -10,4 +10,5 @@ import java.util.List;
 @Repository
 public interface BrandRepository  extends JpaRepository<Brand, Long> {
     List<Brand> findByCompany(Company company);
+    Boolean existsByCompany(Company company);
 }

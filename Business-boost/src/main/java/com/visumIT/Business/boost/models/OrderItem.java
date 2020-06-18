@@ -30,10 +30,8 @@ import lombok.ToString;
 
 @Entity
 @ToString
-@NoArgsConstructor
-@AllArgsConstructor
 @Data
-@Table(name = "tbl_items")
+@Table(name = "tbl_teste")
 public class OrderItem implements Serializable{
 
 	/**
@@ -53,9 +51,9 @@ public class OrderItem implements Serializable{
 	@JoinColumn(name = "fk_product")*/
 	private Long productId;
 	
-	//@JsonIgnore
+	@JsonIgnore
 	@ManyToOne
-	@JoinColumn(nullable = false, referencedColumnName = "id")
+	@JoinColumn(name = "order_id", referencedColumnName = "id")
 	private Order order;
 
 }

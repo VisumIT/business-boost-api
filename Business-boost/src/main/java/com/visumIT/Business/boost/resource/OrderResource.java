@@ -97,6 +97,8 @@ public class OrderResource {
 		for(int i = 0; i < order.getItems().size(); i++) {
 			OrderItem orderItem = order.getItems().get(i);
 			Optional<Product> product = productRepository.findById(orderItem.getProductId());
+			
+			
 			Double priceItemQuantity = orderItem.getQuantity() * product.get().getPrice();
 			totalPrice += priceItemQuantity;
 		}

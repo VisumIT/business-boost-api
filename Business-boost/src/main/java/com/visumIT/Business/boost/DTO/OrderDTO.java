@@ -1,11 +1,16 @@
 package com.visumIT.Business.boost.DTO;
 
+import java.util.List;
 import java.util.Optional;
 
 import javax.validation.Valid;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.google.cloud.Date;
 import com.visumIT.Business.boost.models.Company;
 import com.visumIT.Business.boost.models.Order;
+import com.visumIT.Business.boost.models.OrderItem;
 import com.visumIT.Business.boost.models.Representative;
 
 import lombok.Data;
@@ -13,17 +18,18 @@ import lombok.Data;
 @Data
 public class OrderDTO {
 	
-	public OrderDTO(@Valid Order order2, Optional<Company> company, Optional<Representative> representative) {
-		super();
-		this.order = order2;
-		this.company = company;
-		this.representative = representative;
-	}
+	private Long id;
+	private Long representante;
+	private Long clientId;
+	private Long dicountId;
+	private String status;
+	private Double totalPrice;
+	private Date createDate;
+	private List<OrderItem> items;
+	@JsonIgnoreProperties({"product"})
+	private Company company;
 
-	private @Valid Order order;
 	
-	private Optional<Company> company;
 	
-	private Optional<Representative> representative;
 	
 }

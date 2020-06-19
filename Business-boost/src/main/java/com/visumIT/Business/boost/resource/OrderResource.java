@@ -1,6 +1,7 @@
 package com.visumIT.Business.boost.resource;
 
 import java.text.DecimalFormat;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -13,6 +14,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -44,6 +46,9 @@ public class OrderResource {
 	private CompanyRepository companyRepository;
 	
 	@Autowired
+	private OrderItemRepository orderItemRepository;
+	
+	@Autowired
 	private ProductRepository productRepository;
 	
 	@Autowired
@@ -73,8 +78,7 @@ public class OrderResource {
 		return orders;
 	}*/
 	
-	@Autowired
-	private OrderItemRepository orderItemRepository;
+	
 	
 	@PostMapping("/company/{idCompany}/representantive/{idRepresentantive}/client/{idClient}/orders")
 	public ResponseEntity<?> create(
@@ -91,67 +95,51 @@ public class OrderResource {
 		order.setCompany(company.get());
 		order.setRepresentativeId(1L);
 		order.setClientId(1L);
+		order.setStatus("created");
+		
+		Order orderSave = orderRepository.save(order);
 		
 		// Calcular preço total do pedido
 		Double totalPrice = 0.0;
+		
+		
+		List<OrderItem> items = new ArrayList<OrderItem>();
+		
 		for(int i = 0; i < order.getItems().size(); i++) {
+			
 			OrderItem orderItem = order.getItems().get(i);
 			Optional<Product> product = productRepository.findById(orderItem.getProductId());
+			
+			orderItem.setPrice(product.get().getPrice());
+			orderItem.setOrder(orderSave);
+			
+			OrderItem orderItemSave = orderItemRepository.save(orderItem);
+			
+			
+			items.add(orderItemSave);
+			
+			
 			
 			
 			Double priceItemQuantity = orderItem.getQuantity() * product.get().getPrice();
 			totalPrice += priceItemQuantity;
 		}
 		
-		//DecimalFormat df = new DecimalFormat("#0.00");
-		order.setTotalPrice(totalPrice);
-		order.setStatus("created");
+		orderSave.setTotalPrice(totalPrice);
+		orderSave.setItems(items);
 		
-		Order orderSave = orderRepository.save(order);
+		orderRepository.save(orderSave);
 		
 		return ResponseEntity.status(HttpStatus.CREATED).body(orderSave);
 		
-		
-		//return ResponseEntity.ok(null);
-		
-		/*for (OrderItem item : orderSave.getItems()) {
-			item.setOrder(orderSave);
-			orderItemRepository.save(item);
-			
-		}
-		
-		Order orderSave = orderRepository.save(order);
-		
-		
-		/*for (OrderItem item : orderSave.getItems()) {
-			item.setOrder(orderSave);
-			orderItemRepository.save(item);
-			System.out.println("2");
-		}*/
-		
-		
-		/*Optional<Order> res = orderRepository.findById(orderSave.getId());
-		
-		return ResponseEntity.status(HttpStatus.CREATED).body(res);*/
-		/*Optional<Company> company = companyRepository.findById(idCompany);
-		
-		System.out.println("idCompany -> " + idCompany);
-		if(company.toString() == null) {
-			System.out.println("sem empresa");
-			return ResponseEntity.notFound().build();
-		}
-		
-		Optional<Representative> representative = representativeRepository.findById(idRepresentantive);
-		
-		System.out.println("idRepresentantive -> " + idRepresentantive);
-		if(company.toString() == null) {
-			System.out.println("sem representante");
-			return ResponseEntity.notFound().build();
-		}
-		
-		OrderDTO order1 = new OrderDTO(order, company, representative);
-		
-		return ResponseEntity.ok(order1);*/
+	}
+	
+	
+	
+	
+	@DeleteMapping("/orders/{id}")
+	public void deleta(@PathVariable Long id) {
+		orderRepository.deleteById(id);
 	}
 	
 	

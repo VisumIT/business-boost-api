@@ -17,6 +17,7 @@ public class BusinessBoostApplication {
 		return new FirebaseStorageService();
 	}
 	
-	
+	// Aplication.properts, ver os comandos sqls executados
+	//spring.jpa.show-sql=true
 
 }

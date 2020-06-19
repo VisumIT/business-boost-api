@@ -30,8 +30,6 @@ import lombok.ToString;
 
 @Entity
 @ToString
-@NoArgsConstructor
-@AllArgsConstructor
 @Data
 @Table(name = "tbl_orders")
 public class Order implements Serializable{
@@ -58,7 +56,7 @@ public class Order implements Serializable{
 	private Double totalPrice;
 	private Calendar createDate = Calendar.getInstance();
 	
-	@OneToMany(mappedBy = "order")
+	@OneToMany(mappedBy = "order", cascade = CascadeType.ALL)
 	private List<OrderItem> items = new ArrayList<OrderItem>();
 	
 }

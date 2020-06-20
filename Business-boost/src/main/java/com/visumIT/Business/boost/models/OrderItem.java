@@ -43,14 +43,16 @@ public class OrderItem implements Serializable{
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	
-	private Double price;
-	private int quantity;
-	
 	/*@JsonIgnore
 	@OneToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name = "fk_product")*/
 	private Long productId;
 	
+	private Double price;
+	private int quantity;
+	private Double discountPrice;
+	private Double totalPrice;
+
 	@JsonIgnore
 	@ManyToOne
 	@JoinColumn(name = "order_id", referencedColumnName = "id")

@@ -51,8 +51,12 @@ public class Product implements Serializable{
 	
 	@NotNull
 	private Double price;
-	private Integer discount;
+	@NotNull
+	private Double discount;
 	private String brand;
+	
+	private Double discontPrice;
+	private Double totalPrice;
 	private String category;
 	private String reference;
 	private String deliveryTime;

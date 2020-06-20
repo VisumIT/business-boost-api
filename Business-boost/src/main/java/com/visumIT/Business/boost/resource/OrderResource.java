@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
+import javax.persistence.PrePersist;
 import javax.validation.Valid;
 import javax.websocket.server.PathParam;
 
@@ -18,6 +19,7 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -59,6 +61,7 @@ public class OrderResource {
 		return orderRepository.findAll();
 	}
 	
+	DecimalFormat df = new DecimalFormat();
 	
 	/*@GetMapping("/orders/company/{id}")
 	public List<Order> getOrdersCompany(@PathVariable Long id){
@@ -80,7 +83,7 @@ public class OrderResource {
 	
 	
 	
-	@PostMapping("/company/{idCompany}/representantive/{idRepresentantive}/client/{idClient}/orders")
+	/*@PostMapping("/company/{idCompany}/representantive/{idRepresentantive}/client/{idClient}/orders")
 	public ResponseEntity<?> create(
 						@PathVariable("idCompany") Long idCompany,
 						@PathVariable("idRepresentantive") Long idRepresentantive,
@@ -132,8 +135,126 @@ public class OrderResource {
 		
 		return ResponseEntity.status(HttpStatus.CREATED).body(orderSave);
 		
-	}
+	}*/
 	
+	@PostMapping("/company/{idCompany}/representantive/{idRepresentantive}/client/{idClient}/orders")
+    public ResponseEntity<?> create(
+                        @PathVariable("idCompany") Long idCompany,
+                        @PathVariable("idRepresentantive") Long idRepresentantive,
+                        @PathVariable("idClient") Long idClient,
+                        @RequestBody Order order) {
+        // Verificando empresa
+        Optional<Company> company = companyRepository.findById(idCompany);
+        
+        if(!company.isPresent()) {
+            return ResponseEntity.status(400).build();
+        }
+        order.setCompany(company.get());
+        order.setRepresentativeId(1L);
+        order.setClientId(1L);
+        order.setStatus("created");
+        
+        
+        
+        Double valorTotal = 0.0;
+        Double valorDesconto = 0.0;
+        for(OrderItem item : order.getItems()){
+            Product p = productRepository.findById(item.getProductId()).orElse(null);
+            
+            //definir mensagem de produto não encontrado
+            if(p == null) return ResponseEntity.notFound().build();
+            
+            item.setPrice(p.getPrice());
+            item.setDiscountPrice(p.getDiscontPrice());
+            
+            
+            Double totalPriceItem = p.getTotalPrice() * item.getQuantity();
+            Double totalDicount = p.getDiscontPrice() * item.getQuantity();
+            
+            
+            item.setTotalPrice(totalPriceItem);
+            item.setDiscountPrice(totalDicount);
+            
+            valorDesconto += item.getDiscountPrice();
+            valorTotal += item.getTotalPrice();
+            
+        }
+        order.setTotalPrice(valorTotal);
+        
+        Double discountPrice = order.getTotalPrice() * (order.getDicountId()/100);
+        order.setDiscountPrice(discountPrice);
+
+        order.setPriceToPay(order.getTotalPrice() - order.getDiscountPrice());
+
+        Order orderSave = orderRepository.save(order);
+
+        return ResponseEntity.status(HttpStatus.CREATED).body(orderSave);
+        
+    }
+	
+	@PutMapping("/company/{idCompany}/representantive/{idRepresentantive}/client/{idClient}/orders/{idOrder}")
+	public ResponseEntity<?> addItems(
+							@PathVariable("idCompany") Long idCompany,
+							@PathVariable("idRepresentantive") Long idRepresentantive,
+	                        @PathVariable("idClient") Long idClient,
+							@PathVariable("idOrder") Long idOrder,
+				            @RequestBody OrderItem orderItem){
+		// Verificando empresa
+        Optional<Company> company = companyRepository.findById(idCompany);
+        
+        if(!company.isPresent()) {
+            return ResponseEntity.status(400).build();
+        }
+        
+        Order order = orderRepository.findById(idOrder).orElse(null);
+        if(order == null) return ResponseEntity.notFound().build();
+        
+        
+        orderItem.setOrder(order);
+        List<OrderItem> itemsNew = new ArrayList<OrderItem>(order.getItems());
+        itemsNew.add(orderItem);
+        
+        order.setItems(itemsNew);
+        
+        
+        Double valorTotal = 0.0;
+        Double valorDesconto = 0.0;
+        for(OrderItem item : order.getItems()){
+        	System.out.println("/");
+        	
+            Product p = productRepository.findById(item.getProductId()).orElse(null);
+            
+            //definir mensagem de produto não encontrado
+            if(p == null) return ResponseEntity.notFound().build();
+            
+            item.setPrice(p.getPrice());
+            item.setDiscountPrice(p.getDiscontPrice());
+            
+            
+            Double totalPriceItem = p.getTotalPrice() * item.getQuantity();
+            Double totalDicount = p.getDiscontPrice() * item.getQuantity();
+            
+            
+            item.setTotalPrice(totalPriceItem);
+            item.setDiscountPrice(totalDicount);
+            
+            valorDesconto += item.getDiscountPrice();
+            valorTotal += item.getTotalPrice();
+            
+        }
+        System.out.println(" ");
+        System.out.println(" ");
+        order.setTotalPrice(valorTotal);
+        
+        Double discountPrice = order.getTotalPrice() * (order.getDicountId()/100);
+        order.setDiscountPrice(discountPrice);
+
+        order.setPriceToPay(order.getTotalPrice() - order.getDiscountPrice());
+
+        Order orderSave = orderRepository.save(order);
+
+        return ResponseEntity.status(HttpStatus.CREATED).body(orderSave);
+	}
 	
 	
 	
@@ -141,8 +262,6 @@ public class OrderResource {
 	public void deleta(@PathVariable Long id) {
 		orderRepository.deleteById(id);
 	}
-	
-	
 }
 
 

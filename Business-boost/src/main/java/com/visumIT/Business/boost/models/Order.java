@@ -16,6 +16,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.persistence.PrePersist;
 import javax.persistence.Table;
 
 import org.hibernate.annotations.ManyToAny;
@@ -51,12 +52,20 @@ public class Order implements Serializable{
 	
 	private Long representativeId;
 	private Long clientId;
-	private Long dicountId;
+	private Double dicountId;
 	private String status;
 	private Double totalPrice;
+	private Double discountPrice;
+	private Double priceToPay;
 	private Calendar createDate = Calendar.getInstance();
 	
 	@OneToMany(mappedBy = "order", cascade = CascadeType.ALL)
 	private List<OrderItem> items = new ArrayList<OrderItem>();
+	
+	@PrePersist
+    public void prePersist(){
+        items.forEach( i -> i.setOrder(this));
+    }
+	
 	
 }

@@ -68,7 +68,15 @@ public class ProductResource {
 		if(company.isEmpty()) {
 			return ResponseEntity.status(400).build();
 		}
+		
+		if(product.getDiscount() > 0.0 && product.getDiscount() < 100.0) {
+			Double priceDiscount = product.getPrice() * ( product.getDiscount() / 100);
+			product.setDiscontPrice(priceDiscount);
+		}else {
+			product.setDiscontPrice(0.00);
+		}
 
+		product.setTotalPrice(product.getPrice() - product.getDiscontPrice());
 		product.setStatus("active");
 		product.setSold(0);
 		product.setCompany(company.get());
@@ -85,6 +93,10 @@ public class ProductResource {
 		if(company.isEmpty()) {
 			return ResponseEntity.notFound().build();
 		}
+		Double priceDiscount = product.getPrice() * (product.getDiscount() / 100);
+		System.out.println(priceDiscount);
+		product.setDiscontPrice(priceDiscount);
+		product.setTotalPrice(product.getPrice() - product.getDiscontPrice());
 		
 		product.setCompany(company.get());
 		return ResponseEntity.ok(productRepository.save(product));

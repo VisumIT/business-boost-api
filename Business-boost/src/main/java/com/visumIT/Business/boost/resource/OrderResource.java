@@ -22,6 +22,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.visumIT.Business.boost.DTO.OrderDTO;
@@ -56,18 +57,34 @@ public class OrderResource {
 	@Autowired
 	private RepresentativeRepository representativeRepository;
 	
+	DecimalFormat df = new DecimalFormat();
+	
 	@GetMapping("/orders")
 	public List<Order> getOrders(){
 		return orderRepository.findAll();
 	}
 	
-	DecimalFormat df = new DecimalFormat();
+	@GetMapping("/orders/{idOrder}")
+	public ResponseEntity<?> getOrdersById(@PathVariable Long idOrder){
+		Order order = orderRepository.findById(idOrder).orElse(null);
+		if(order == null) return ResponseEntity.badRequest().build();
+		
+		return ResponseEntity.ok(order);
+	}
 	
-	/*@GetMapping("/orders/company/{id}")
-	public List<Order> getOrdersCompany(@PathVariable Long id){
-		List<Order> orders = orderRepository.findAllByCompabyId(id);
-		return orders;
-	}*/
+	@GetMapping("/company/{idCompany}/orders")
+	public ResponseEntity<?> getOrdersByCOmpany(@PathVariable Long idCompany){
+		Optional<Company> company = companyRepository.findById(idCompany);
+        
+        if(!company.isPresent()) {
+            return ResponseEntity.badRequest().build();
+        }
+        
+         
+		return ResponseEntity.ok(company.get().getOrders());
+	}
+	
+	
 	
 	/*@GetMapping("/orders/representantive/{id}")
 	public List<Order> getOrdersRepresentantive(@PathVariable Long id){
@@ -145,7 +162,6 @@ public class OrderResource {
                         @RequestBody Order order) {
         // Verificando empresa
         Optional<Company> company = companyRepository.findById(idCompany);
-        
         if(!company.isPresent()) {
             return ResponseEntity.status(400).build();
         }
@@ -256,12 +272,39 @@ public class OrderResource {
         return ResponseEntity.status(HttpStatus.CREATED).body(orderSave);
 	}
 	
+	@DeleteMapping("/company/{idCompany}/orders/{idOrder}/orders-items/{idOrderItem}")
+	@ResponseStatus(HttpStatus.NO_CONTENT)
+	public ResponseEntity<?> removeItem(
+			@PathVariable("idCompany") Long idCompany, 
+			@PathVariable("idOrder") Long idOrder,
+			@PathVariable("idOrderItem") Long idOrderItem) {
+		Optional<Company> company = companyRepository.findById(idCompany);
+		 
+		if(!company.isPresent()) {
+	        return ResponseEntity.status(400).build();
+	    }
+		
+		Order order = orderRepository.findById(idOrder).orElse(null);
+		if(order == null) return ResponseEntity.status(400).build();
+		OrderItem orderItem = orderItemRepository.findById(idOrderItem).orElse(null);
+		if(orderItem == null) return ResponseEntity.status(400).build();
+		
+		order.getItems().remove(orderItem);
+		
+		orderItemRepository.delete(orderItem);
+		orderRepository.save(order);
+		 
+		
+		return ResponseEntity.ok(null);
+	}
 	
 	
 	@DeleteMapping("/orders/{id}")
 	public void deleta(@PathVariable Long id) {
 		orderRepository.deleteById(id);
 	}
+	
+
 }
 
 

@@ -37,9 +37,9 @@ import com.visumIT.Business.boost.models.Representative;
 import com.visumIT.Business.boost.repository.CompanyRepository;
 import com.visumIT.Business.boost.repository.PhoneRepository;
 import com.visumIT.Business.boost.repository.RepresentativeRepository;
-import com.viumIT.business.boost.upload.FileUpload;
-import com.viumIT.business.boost.upload.FileUploadUrl;
-import com.viumIT.business.boost.upload.FirebaseStorageService;
+import com.visumIT.Business.boost.upload.FileUpload;
+import com.visumIT.Business.boost.upload.FileUploadUrl;
+import com.visumIT.Business.boost.upload.FirebaseStorageService;
 
 @RestController
 @RequestMapping("/companies")

@@ -1,4 +1,4 @@
-package com.viumIT.business.boost.upload;
+package com.visumIT.Business.boost.upload;
 
 public class FileUploadUrl {
 	private String url;

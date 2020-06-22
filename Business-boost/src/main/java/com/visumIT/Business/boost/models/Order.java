@@ -44,8 +44,8 @@ public class Order implements Serializable{
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
-	
-	@JsonIgnoreProperties({"product", "brand"})
+	@JsonIgnore
+	//@JsonIgnoreProperties({"product", "brand"})
 	@ManyToOne
 	@JoinColumn(nullable = false)
 	private Company company;

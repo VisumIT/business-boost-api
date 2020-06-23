@@ -2,7 +2,7 @@ package com.visumIT.Business.boost.functions;
 
 import java.util.ArrayList;
 
-import com.viumIT.business.boost.upload.FileUpload;
+import com.visumIT.Business.boost.upload.FileUpload;
 
 public class ImageValidations {
 

@@ -16,6 +16,7 @@ import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -40,9 +41,9 @@ import com.visumIT.Business.boost.models.Representative;
 import com.visumIT.Business.boost.repository.CompanyRepository;
 import com.visumIT.Business.boost.repository.PhoneRepository;
 import com.visumIT.Business.boost.repository.RepresentativeRepository;
-import com.viumIT.business.boost.upload.FileUpload;
-import com.viumIT.business.boost.upload.FileUploadUrl;
-import com.viumIT.business.boost.upload.FirebaseStorageService;
+import com.visumIT.Business.boost.upload.FileUpload;
+import com.visumIT.Business.boost.upload.FileUploadUrl;
+import com.visumIT.Business.boost.upload.FirebaseStorageService;
 
 @RestController
 @RequestMapping("/companies")
@@ -54,6 +55,9 @@ public class CompanyResource {
 	@Autowired
 	private RepresentativeRepository representativeRepository;
 
+	@Autowired
+	private BCryptPasswordEncoder bCryptEncoder;
+	
 	@Autowired
 	private FirebaseStorageService firebase;
 
@@ -139,6 +143,8 @@ public class CompanyResource {
 		} else {
 			// ImageResource imageResource = new ImageResource();
 			company.setLogo(standardImage);
+			//criptografar senha
+			company.setPassword(bCryptEncoder.encode(company.getPassword()));
 			Company e = companyRepository.save(company);
 			for (Phone tel : e.getPhones()) {
 				tel.setCompany(e);

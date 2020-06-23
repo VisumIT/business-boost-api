@@ -1,4 +1,4 @@
-package com.viumIT.business.boost.upload;
+package com.visumIT.Business.boost.upload;
 
 import java.io.IOException;
 import java.io.InputStream;

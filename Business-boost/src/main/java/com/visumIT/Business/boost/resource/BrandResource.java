@@ -1,28 +1,37 @@
 package com.visumIT.Business.boost.resource;
 
-import com.visumIT.Business.boost.exception.ValidationFormat;
-import com.visumIT.Business.boost.functions.ImageValidations;
-import com.visumIT.Business.boost.functions.PartialUpdateValidation;
-import com.visumIT.Business.boost.models.Company;
-import com.visumIT.Business.boost.models.Brand;
-import com.visumIT.Business.boost.repository.CompanyRepository;
-import com.viumIT.business.boost.upload.FileUpload;
-import com.viumIT.business.boost.upload.FileUploadUrl;
-import com.viumIT.business.boost.upload.FirebaseStorageService;
-import com.visumIT.Business.boost.repository.BrandRepository;
+import java.util.Calendar;
+import java.util.List;
+import java.util.Optional;
+
+import javax.validation.Valid;
 
 import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PatchMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseStatus;
+import org.springframework.web.bind.annotation.RestController;
 
-import java.util.Calendar;
-import java.util.List;
-import java.util.Optional;
-
-import javax.validation.Valid;
+import com.visumIT.Business.boost.exception.ValidationFormat;
+import com.visumIT.Business.boost.functions.ImageValidations;
+import com.visumIT.Business.boost.functions.PartialUpdateValidation;
+import com.visumIT.Business.boost.models.Brand;
+import com.visumIT.Business.boost.models.Company;
+import com.visumIT.Business.boost.repository.BrandRepository;
+import com.visumIT.Business.boost.repository.CompanyRepository;
+import com.visumIT.Business.boost.upload.FileUpload;
+import com.visumIT.Business.boost.upload.FileUploadUrl;
+import com.visumIT.Business.boost.upload.FirebaseStorageService;
 
 @RestController
 @RequestMapping("/companies/{id_company}/brands")
@@ -34,30 +43,11 @@ public class BrandResource {
 	@Autowired
 	private CompanyRepository companyRepository;
 
-	
-	private FirebaseStorageService firebase = new FirebaseStorageService();
+	@Autowired
+	FirebaseStorageService firebase;
 
 	private Company company = new Company();
-
-	private Brand validUpdate(Brand bodyBrand, Long id) {
-		Brand baseBrand = bodyBrand.optionalToBrand(brandRepository.findById(id));
-		bodyBrand.setId(id);
-		if (bodyBrand.getCompany() == null) {
-			bodyBrand.setCompany(baseBrand.getCompany());
-		}
-		if (bodyBrand.getDescription() == null) {
-			bodyBrand.setDescription(baseBrand.getDescription());
-		}
-		if (bodyBrand.getLogo() == null) {
-			bodyBrand.setLogo(baseBrand.getLogo());
-		}
-		if (bodyBrand.getName() == null) {
-			bodyBrand.setName(baseBrand.getName());
-		}
-
-		return bodyBrand;
-	}
-
+	
 	// listar brands de uma company
 	@GetMapping
 	public ResponseEntity<?> getBrands(@PathVariable(name = "id_company") Long id) {

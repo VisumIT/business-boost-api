@@ -13,14 +13,15 @@ import com.visumIT.Business.boost.models.Phone;
 import com.visumIT.Business.boost.repository.CompanyRepository;
 import com.visumIT.Business.boost.repository.EmployeeRepository;
 import com.visumIT.Business.boost.repository.PhoneRepository;
-import com.viumIT.business.boost.upload.FileUpload;
-import com.viumIT.business.boost.upload.FileUploadUrl;
-import com.viumIT.business.boost.upload.FirebaseStorageService;
+import com.visumIT.Business.boost.upload.FileUpload;
+import com.visumIT.Business.boost.upload.FileUploadUrl;
+import com.visumIT.Business.boost.upload.FirebaseStorageService;
 
 import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
@@ -36,6 +37,9 @@ public class EmployeeResource {
 
 	@Autowired
 	private EmployeeRepository employeeRepository;
+	
+	@Autowired
+	private BCryptPasswordEncoder bCryptEncoder;
 	
 	@Autowired
 	private FirebaseStorageService firebase;
@@ -108,6 +112,7 @@ public class EmployeeResource {
 			return ResponseEntity.badRequest().body(ValidationFormat.formatarErros(bindingResult));
 
 		} else {
+			employee.setPassword(bCryptEncoder.encode(employee.getPassword()));
 			employeeRepository.save(employee);
 			Optional<Company> companyOptional = companyRepository.findById(id_company);
 

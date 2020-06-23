@@ -6,12 +6,17 @@
 package com.visumIT.Business.boost.models;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Optional;
+import java.util.Set;
 
 import javax.persistence.CascadeType;
+import javax.persistence.CollectionTable;
 import javax.persistence.Column;
+import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -26,7 +31,6 @@ import org.hibernate.validator.constraints.br.CNPJ;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
-import lombok.Data;
 @Entity
 @Table(name = "tbl_companies")
 public class Company {
@@ -34,6 +38,10 @@ public class Company {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
+	
+    @ElementCollection(fetch=FetchType.EAGER)
+    @CollectionTable(name="tbl_profiles")
+    private Set<Integer> profiles = new HashSet<>();
 	
 	//Representative
 	@ManyToMany(mappedBy = "companies")
@@ -92,8 +100,8 @@ public class Company {
 	private String companyName;
 	
 	@NotBlank(message="{cnpj.not.blank}")
-	@CNPJ(message="{CNPJ.Company.cnpj}")
-	@Column(name = "cnpj", columnDefinition = "VARCHAR(20)")
+	@CNPJ(message="{cnpj.Company.cnpj}")
+	@Column(name = "cnpj", columnDefinition = "VARCHAR(20)", unique=true)
 	private String cnpj;
 
 	@Size(max = 40)
@@ -108,6 +116,7 @@ public class Company {
 	@NotBlank(message="{Password.not.blank}")
 	@Size(min = 8, message="{Size.Company.Password}")
 	@Column(name = "password", columnDefinition = "VARCHAR(255)")
+	@JsonIgnore
 	private String password;
 	
 	@Column(name = "description", columnDefinition = "VARCHAR(200)")

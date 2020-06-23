@@ -16,6 +16,7 @@ import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -34,13 +35,13 @@ import com.visumIT.Business.boost.exception.ValidationFormat;
 import com.visumIT.Business.boost.functions.ImageValidations;
 import com.visumIT.Business.boost.functions.PartialUpdateValidation;
 import com.visumIT.Business.boost.models.Company;
-import com.visumIT.Business.boost.models.Representative;
 import com.visumIT.Business.boost.models.Phone;
-import com.visumIT.Business.boost.repository.RepresentativeRepository;
-import com.viumIT.business.boost.upload.FileUpload;
-import com.viumIT.business.boost.upload.FileUploadUrl;
-import com.viumIT.business.boost.upload.FirebaseStorageService;
+import com.visumIT.Business.boost.models.Representative;
 import com.visumIT.Business.boost.repository.PhoneRepository;
+import com.visumIT.Business.boost.repository.RepresentativeRepository;
+import com.visumIT.Business.boost.upload.FileUpload;
+import com.visumIT.Business.boost.upload.FileUploadUrl;
+import com.visumIT.Business.boost.upload.FirebaseStorageService;
 
 @RestController
 @RequestMapping("/representatives")
@@ -50,11 +51,15 @@ public class RepresentativeResource {
 	private RepresentativeRepository representativeRepository;
 	
 	@Autowired
+	private BCryptPasswordEncoder bCryptEncoder;
+	
+	@Autowired
 	private PhoneRepository phoneRepository;
 	
 	private RepresentativeDTO dto = new RepresentativeDTO();
 	
-	private FirebaseStorageService firebase = new FirebaseStorageService();
+	@Autowired
+	FirebaseStorageService firebase;
 	
 	//listar representatives
 	@GetMapping
@@ -108,6 +113,7 @@ public class RepresentativeResource {
 		} 
 		//se não houver erros
 		else {
+			representative.setPassword(bCryptEncoder.encode(representative.getPassword()));
 			Representative r = representativeRepository.save(representative);
 			for (Phone tel : r.getPhones()) {
 				tel.setRepresentative(r);

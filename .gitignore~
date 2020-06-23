@@ -4,7 +4,6 @@ target/
 !**/src/main/**
 !**/src/test/**
 /src/main/resources/application.properties
-/src/main/resources/teste-ds3-5ded5-firebase-adminsdk-aganc-78ab6fc3d5.json
 
 ### STS ###
 .apt_generated

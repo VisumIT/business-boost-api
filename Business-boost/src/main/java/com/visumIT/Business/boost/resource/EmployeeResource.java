@@ -54,9 +54,6 @@ public class EmployeeResource {
 		Company company = new Company();
 		Optional<Company> companyWanted = companyRepository.findById(id);
 		company = company.optionalToCompany(companyWanted);
-		if (!employeeRepository.existsByCompany(company)) {
-			return "404";
-		}
 		if (employeeRepository.existsByEmail(employee.getEmail())) {
 			return "E-mail allready in use";
 
@@ -124,7 +121,8 @@ public class EmployeeResource {
 				phoneRepository.save(tel);
 			}
 			employeeRepository.save(employee);
-			return ResponseEntity.status(HttpStatus.CREATED).body(employee);
+			EmployeeDTO dto = new EmployeeDTO();
+			return ResponseEntity.status(HttpStatus.CREATED).body(dto.toEmployeeDTO(employee));
 
 		}
 	}

@@ -4,7 +4,8 @@ public enum Profile {
 	
 	ADMIN(1,"ROLE_ADMIN"),
 	HR(2,"ROLE_HR"),
-	PRODUCTS(3,"ROLE_PRODUCTS");
+	PRODUCTS(3,"ROLE_PRODUCTS"),
+	REPRESENTATIVE(4,"ROLE_REPRESENTATIVE");
 	
 	private int id;
 	private String description;

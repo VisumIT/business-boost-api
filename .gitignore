@@ -13,7 +13,8 @@ target/
 .settings
 .springBeans
 .sts4-cache
-teste-ds3-5ded5-firebase-adminsdk-aganc-3172c7833e.json
+Business-boost/src/main/resources/teste-ds3-5ded5-firebase-adminsdk-aganc-3172c7833e.json
+Business-boost/src/main/resources/application.properties
 .metadata
 
 ### IntelliJ IDEA ###

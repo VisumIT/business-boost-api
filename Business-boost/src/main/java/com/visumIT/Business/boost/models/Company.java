@@ -10,6 +10,7 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Optional;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 import javax.persistence.CascadeType;
 import javax.persistence.CollectionTable;
@@ -30,6 +31,7 @@ import javax.validation.constraints.Size;
 import org.hibernate.validator.constraints.br.CNPJ;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.visumIT.Business.boost.enums.Profile;
 
 @Entity
 @Table(name = "tbl_companies")
@@ -116,7 +118,6 @@ public class Company {
 	@NotBlank(message="{Password.not.blank}")
 	@Size(min = 8, message="{Size.Company.Password}")
 	@Column(name = "password", columnDefinition = "VARCHAR(255)")
-	@JsonIgnore
 	private String password;
 	
 	@Column(name = "description", columnDefinition = "VARCHAR(200)")
@@ -324,4 +325,17 @@ public class Company {
 	public void setEmployees(List<Employee> employees) {
 		this.employees = employees;
 	}
+    
+    public Set<Profile> getProfiles() {
+    	return profiles.stream().map(x -> Profile.toEnum(x)).collect(Collectors.toSet());
+    }
+    
+    public void addProfile(Profile profile) {
+    	profiles.add(profile.getId());
+    }
+    @Override
+    public String toString() {
+    	return this.companyName;
+    }
+	
 }

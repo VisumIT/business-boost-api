@@ -1,10 +1,7 @@
 package com.visumIT.Business.boost.resource;
 
-import java.util.List;
 import java.util.Optional;
-
-import javax.validation.Valid;
-import javax.websocket.server.PathParam;
+import java.util.Random;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -12,7 +9,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
@@ -21,11 +17,14 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.visumIT.Business.boost.models.Company;
 import com.visumIT.Business.boost.models.Product;
 import com.visumIT.Business.boost.repository.CompanyRepository;
 import com.visumIT.Business.boost.repository.ProductRepository;
+import com.visumIT.Business.boost.upload.FileUpload;
+import com.visumIT.Business.boost.upload.FileUploadUrl;
+import com.visumIT.Business.boost.upload.FirebaseStorageService;
+
 
 @RestController
 @RequestMapping("/company")
@@ -36,6 +35,9 @@ public class ProductResource {
 	
 	@Autowired
 	private CompanyRepository companyRepository;
+	
+	@Autowired
+	private FirebaseStorageService firebase;
 	
 	// Listar produtos da empresa
 	@GetMapping("/{idCompany}/products")
@@ -114,5 +116,29 @@ public class ProductResource {
 		productRepository.deleteById(idProduct);
 		
 		return ResponseEntity.ok(null);
+	}
+	
+	@PostMapping("/{idCompany}/products/{idProduct}/upload")
+	public ResponseEntity<FileUploadUrl> uploadImage(
+			@PathVariable Long idCompany, 
+			@PathVariable Long idProduct, 
+			@RequestBody FileUpload file) {
+		
+		Company company = companyRepository.findById(idCompany).orElse(null);
+		if(company == null) return ResponseEntity.notFound().build();
+			
+		Product product = productRepository.findById(idProduct).orElse(null);
+		if(product == null) return ResponseEntity.notFound().build();
+	
+		Random random = new Random();
+		file.setFileName(file.getFileName() + random.nextInt());
+		
+		FileUploadUrl url = new FileUploadUrl(firebase.upload(file));
+		
+		product.setImagesUrl(url.getUrl());
+		
+		productRepository.save(product);
+		
+		return ResponseEntity.ok(url);
 	}
 }

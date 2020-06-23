@@ -2,6 +2,8 @@ package com.visumIT.Business.boost.models;
 
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -11,6 +13,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
@@ -60,7 +63,9 @@ public class Product implements Serializable{
 	private String category;
 	private String reference;
 	private String deliveryTime;
-	private String imageUrl = "product-no-photo.jpg";
+	
+	private String imagesUrl;
+	
 	private Integer sold;
 	
 	@Column(name = "status")

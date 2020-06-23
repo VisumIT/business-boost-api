@@ -133,7 +133,7 @@ public class ProductResource {
 		Random random = new Random();
 		file.setFileName(file.getFileName() + random.nextInt());
 		
-		FileUploadUrl url = new FileUploadUrl(firebase.upload(file));
+		FileUploadUrl url = new FileUploadUrl(firebase.upload(file, file.getFileName()));
 		
 		product.setImagesUrl(url.getUrl());
 		

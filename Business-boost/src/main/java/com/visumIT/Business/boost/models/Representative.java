@@ -54,7 +54,7 @@ public class Representative {
 	@Column(name="password", columnDefinition = "VARCHAR(150)")
 	private String password;
 	
-	@Column(name="photograph", columnDefinition = "VARCHAR(40)")
+	@Column(name="photograph")
 	private String photograph;
 	
 	//relação

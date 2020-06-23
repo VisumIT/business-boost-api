@@ -3,7 +3,6 @@ package com.visumIT.Business.boost.upload;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.Base64;
-import java.util.Calendar;
 
 import javax.annotation.PostConstruct;
 
@@ -13,7 +12,6 @@ import com.google.auth.oauth2.GoogleCredentials;
 import com.google.cloud.storage.Acl;
 import com.google.cloud.storage.Blob;
 import com.google.cloud.storage.Bucket;
-import com.google.cloud.storage.Storage;
 import com.google.firebase.FirebaseApp;
 import com.google.firebase.FirebaseOptions;
 import com.google.firebase.cloud.StorageClient;
@@ -38,13 +36,14 @@ public class FirebaseStorageService {
 					  .setCredentials(GoogleCredentials.fromStream(serviceAccount))
 					  .setStorageBucket("teste-ds3-5ded5.appspot.com")
 					  .build();
-
+					
 			FirebaseApp.initializeApp(options);
+			
 		}
 		
 	}
 	
-	public String upload(FileUpload file) {
+	public String upload(FileUpload file, String name) {
 		
 		// Criar um acesso ao bucket
 		Bucket bucket = StorageClient.getInstance().bucket();
@@ -52,26 +51,21 @@ public class FirebaseStorageService {
 		// Pegar arquivo no formato base64 e converter ele novamente em bytes (arquivo)
 		byte[] arquivo = Base64.getDecoder().decode(file.getBase64());
 		
-		
-		Calendar calendar = Calendar.getInstance();
-		String name = calendar.getTimeInMillis() +file.getFileName();
 		// Criar o arquivo com os dados fornecidos
 		Blob blob = bucket.create(name, arquivo, file.getMimetype());
-		
 		// Configurar uma regra para que o arquivo possa ser lido
 		blob.createAcl(Acl.of(Acl.User.ofAllUsers(), Acl.Role.READER));
 		
-		String url = "https://storage.googleapis.com/" + bucket.getName() + "/" + file.getFileName();
-		return url;
+		String url = "https://storage.googleapis.com/" + bucket.getName() + "/" + name;
+		return url;	
+		
 	}
 	
-	public Boolean delete(String nameBucket, String nameFile) {
+	public boolean delete(String file) {	
 		Bucket bucket = StorageClient.getInstance().bucket();
-		boolean res = bucket.getStorage().delete(nameBucket, nameFile);
-		System.out.println("---------------------------");
-		System.out.println(res);
-		return res;
+		boolean arquivo = bucket.getStorage().delete("teste-ds3-5ded5.appspot.com",file);
+		return arquivo;
 	}
-	
-	
+
+
 }

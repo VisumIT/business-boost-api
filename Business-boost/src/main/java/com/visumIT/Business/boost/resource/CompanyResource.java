@@ -16,6 +16,7 @@ import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -32,6 +33,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.visumIT.Business.boost.DTO.CompanyDTO;
 import com.visumIT.Business.boost.DTO.CompanyWithoutEmployeesDTO;
 import com.visumIT.Business.boost.DTO.RepresentativeDTO;
+import com.visumIT.Business.boost.enums.Profile;
 import com.visumIT.Business.boost.exception.ValidationFormat;
 import com.visumIT.Business.boost.functions.ImageValidations;
 import com.visumIT.Business.boost.functions.PartialUpdateValidation;
@@ -41,6 +43,9 @@ import com.visumIT.Business.boost.models.Representative;
 import com.visumIT.Business.boost.repository.CompanyRepository;
 import com.visumIT.Business.boost.repository.PhoneRepository;
 import com.visumIT.Business.boost.repository.RepresentativeRepository;
+import com.visumIT.Business.boost.security.UserSS;
+import com.visumIT.Business.boost.services.UserService;
+import com.visumIT.Business.boost.services.exceptions.AuthorizationException;
 import com.visumIT.Business.boost.upload.FileUpload;
 import com.visumIT.Business.boost.upload.FileUploadUrl;
 import com.visumIT.Business.boost.upload.FirebaseStorageService;
@@ -107,10 +112,15 @@ public class CompanyResource {
 		CompanyWithoutEmployeesDTO companiesWithout = new CompanyWithoutEmployeesDTO();
 		return companiesWithout.toCompaniesDTO(companies);
 	}
-
-	// detalhes da empresa, está rota deve ser protegida
+	
+//	@PreAuthorize("hasAnyRole('ADMIN')")
 	@GetMapping("/{id}")
 	public ResponseEntity<?> getCompany(@PathVariable Long id) {
+//		UserSS user = UserService.authenticated();
+//		if(user==null || !user.hasRole(Profile.ADMIN) && !id.equals(user.getId())) {
+//			throw new AuthorizationException("Denied");			
+//		}
+		
 		Optional<Company> companyProcurada = companyRepository.findById(id);
 
 		return companyProcurada.isPresent() ? ResponseEntity.ok(companyProcurada.get())
@@ -118,6 +128,7 @@ public class CompanyResource {
 	}
 
 	// retorna representatives de um company
+	@PreAuthorize("hasAnyRole('ADMIN')")
 	@GetMapping("/{id}/representatives")
 	public ResponseEntity<?> getRepresentatives(@PathVariable Long id) {
 		Optional<Company> companyProcurada = companyRepository.findById(id);
@@ -145,6 +156,9 @@ public class CompanyResource {
 			company.setLogo(standardImage);
 			//criptografar senha
 			company.setPassword(bCryptEncoder.encode(company.getPassword()));
+			
+			Profile profile = Profile.ADMIN;
+			company.addProfile(profile);
 			Company e = companyRepository.save(company);
 			for (Phone tel : e.getPhones()) {
 				tel.setCompany(e);
@@ -157,6 +171,7 @@ public class CompanyResource {
 	}
 
 	// cadastro de novo representative
+	@PreAuthorize("hasAnyRole('ADMIN')")
 	@PostMapping("/{id}/novo-representative")
 	public ResponseEntity<?> saveRepresentative(@Valid @RequestBody Representative representative,
 			@PathVariable Long id, BindingResult bindingResult) {
@@ -194,6 +209,7 @@ public class CompanyResource {
 	}
 
 	// associar representative já cadastrado
+	@PreAuthorize("hasAnyRole('ADMIN')")
 	@PatchMapping("/{id_company}/representatives/{id_representative}")
 	public ResponseEntity<?> addRepresentative(@PathVariable Long id_company, @PathVariable Long id_representative) {
 		if (companyRepository.existsById(id_company) && representativeRepository.existsById(id_representative)) {
@@ -219,6 +235,7 @@ public class CompanyResource {
 	}
 
 	// desassociar representative
+	@PreAuthorize("hasAnyRole('ADMIN')")
 	@PatchMapping("/{id_company}/disassociate-representative/{id_representative}")
 	public ResponseEntity<?> removeRepresentative(@PathVariable Long id_company, @PathVariable Long id_representative) {
 		if (companyRepository.existsById(id_company) && representativeRepository.existsById(id_representative)) {
@@ -247,6 +264,7 @@ public class CompanyResource {
 
 	// usando o retorno response entity para poder retornar o erro 404 caso tente
 	// deletar algo q não existe
+	@PreAuthorize("hasAnyRole('ADMIN')")
 	@DeleteMapping("/{id}")
 	@ResponseStatus(HttpStatus.NO_CONTENT)
 	public ResponseEntity<?> deleteCompany(@PathVariable Long id) {
@@ -259,6 +277,7 @@ public class CompanyResource {
 	}
 
 	// atualização parcial da company
+	@PreAuthorize("hasAnyRole('ADMIN')")
 	@PatchMapping("/{id}")
 	public ResponseEntity<?> partialCompanyUpdate(@PathVariable Long id, @RequestBody Company bodyCompany)
 	throws IllegalAccessException{
@@ -275,6 +294,7 @@ public class CompanyResource {
 	}
 
 	// atualização completa
+	@PreAuthorize("hasAnyRole('ADMIN')")
 	@PutMapping("/{id}")
 	@ResponseStatus(HttpStatus.OK)
 	public ResponseEntity<?> fullCompanyUpdate(@RequestBody Company company, @PathVariable Long id) {
@@ -304,6 +324,7 @@ public class CompanyResource {
 	}
 
 	/* #############update de logo da empresa########### */
+	@PreAuthorize("hasAnyRole('ADMIN')")
 	@PatchMapping("{id}/logo")
 	public ResponseEntity<?> updateLogoCompany(@RequestBody FileUpload file, @PathVariable Long id) {
 		ImageValidations imageValidations = new ImageValidations();
@@ -336,6 +357,7 @@ public class CompanyResource {
 	}
 
 	/* #############delete do logo da empresa########### */
+	@PreAuthorize("hasAnyRole('ADMIN')")
 	@DeleteMapping("{id}/logo")
 	public ResponseEntity<?> deleteLogo(@PathVariable Long id) {
 		if (companyRepository.existsById(id)) {

@@ -1,9 +1,13 @@
 package com.visumIT.Business.boost.DTO;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Optional;
+import java.util.Set;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.visumIT.Business.boost.enums.Profile;
 import com.visumIT.Business.boost.models.Company;
 import com.visumIT.Business.boost.models.Employee;
 import com.visumIT.Business.boost.models.Phone;
@@ -51,6 +55,8 @@ public class CompanyWithoutEmployeesDTO {
 	private String description;
 
 	private String logo;
+	
+	private Set<Profile> profiles = new HashSet<>();
 
 	public CompanyWithoutEmployeesDTO toCompanyDTO( Company company) {
 		CompanyWithoutEmployeesDTO dto = new CompanyWithoutEmployeesDTO();
@@ -71,6 +77,7 @@ public class CompanyWithoutEmployeesDTO {
 		dto.setSite(company.getSite());
 		dto.setPhones(company.getPhones());
 		dto.setUf(company.getUf());
+		dto.setProfiles(company.getProfiles());
 		
 		dto.setRepresentatives(company.getRepresentatives());
 		return dto;
@@ -85,9 +92,6 @@ public class CompanyWithoutEmployeesDTO {
 		}
 		return companiesDTO;
 	}
-	
-	
-	
 	
 	/*getters e setters*/
 	public Long getId() {
@@ -234,6 +238,15 @@ public class CompanyWithoutEmployeesDTO {
 		this.logo = logo;
 	}
 	
-	
+    public Set<Profile> getProfiles() {
+    	return profiles;
+    }
+    
+	public void addProfile(Profile profile) {
+    	profiles.add(profile);
+    }
+	public void setProfiles(Set<Profile> profiles) {
+		this.profiles = profiles;
+	}
 	
 }

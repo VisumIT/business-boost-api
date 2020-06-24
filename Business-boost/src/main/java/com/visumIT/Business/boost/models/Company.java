@@ -36,10 +36,15 @@ import com.visumIT.Business.boost.enums.Profile;
 @Entity
 @Table(name = "tbl_companies")
 public class Company {
-
+	
+	public Company() {
+		this.addProfile(Profile.ADMIN);
+	}
+	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
+	
 	
     @ElementCollection(fetch=FetchType.EAGER)
     @CollectionTable(name="tbl_profiles")
@@ -327,10 +332,11 @@ public class Company {
 	}
     
     public Set<Profile> getProfiles() {
-    	return profiles.stream().map(x -> Profile.toEnum(x)).collect(Collectors.toSet());
+    	return profiles.stream().map(x -> Profile.toEnum(x))
+    			.collect(Collectors.toSet());
     }
     
-    public void addProfile(Profile profile) {
+	public void addProfile(Profile profile) {
     	profiles.add(profile.getId());
     }
     @Override

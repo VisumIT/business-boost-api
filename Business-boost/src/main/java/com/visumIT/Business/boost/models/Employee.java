@@ -21,6 +21,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.Email;
+import javax.validation.constraints.NotBlank;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.visumIT.Business.boost.enums.Profile;
@@ -37,7 +38,6 @@ public class Employee {
     @ManyToOne(fetch = FetchType.LAZY)
     @JsonIgnore
     private Company company;
-    
     
     @ElementCollection(fetch=FetchType.EAGER)
     @CollectionTable(name="tbl_profiles")
@@ -153,4 +153,8 @@ public class Employee {
     public void addProfile(Profile profile) {
     	profiles.add(profile.getId());
     }
+
+	public void setProfiles(Set<Integer> profiles) {
+		this.profiles = profiles;
+	}
 }

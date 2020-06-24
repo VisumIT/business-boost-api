@@ -1,25 +1,11 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <qualifiedTypeNameHistroy>
-<fullyQualifiedTypeName name="org.springframework.http.MediaType"/>
-<fullyQualifiedTypeName name="org.hibernate.mapping.Map"/>
-<fullyQualifiedTypeName name="org.hibernate.event.spi.SaveOrUpdateEvent"/>
-<fullyQualifiedTypeName name="javax.persistence.Entity"/>
-<fullyQualifiedTypeName name="java.util.Map"/>
-<fullyQualifiedTypeName name="com.visumIT.Business.boost.DTO.CompanyDTO"/>
-<fullyQualifiedTypeName name="com.visumIT.Business.boost.DTO.RepresentativeDTO"/>
-<fullyQualifiedTypeName name="org.springframework.stereotype.Component"/>
-<fullyQualifiedTypeName name="org.springframework.stereotype.Service"/>
-<fullyQualifiedTypeName name="javax.annotation.PostConstruct"/>
-<fullyQualifiedTypeName name="java.util.Optional"/>
-<fullyQualifiedTypeName name="com.google.firebase.FirebaseApp"/>
-<fullyQualifiedTypeName name="com.google.firebase.internal.FirebaseService"/>
 <fullyQualifiedTypeName name="com.google.firebase.internal.FirebaseAppStore"/>
 <fullyQualifiedTypeName name="com.google.firebase.cloud.StorageClient"/>
 <fullyQualifiedTypeName name="com.google.api.client.googleapis.auth.clientlogin.ClientLogin.Response"/>
 <fullyQualifiedTypeName name="org.springframework.web.bind.annotation.DeleteMapping"/>
 <fullyQualifiedTypeName name="com.google.cloud.storage.StorageOptions"/>
 <fullyQualifiedTypeName name="com.google.api.services.storage.Storage"/>
-<fullyQualifiedTypeName name="com.visumIT.Business.boost.DTO.EmployeeDTO"/>
 <fullyQualifiedTypeName name="com.visumIT.Business.boost.models.Company"/>
 <fullyQualifiedTypeName name="com.visumIT.Business.boost.DTO.CompanyWithoutEmployeesDTO"/>
 <fullyQualifiedTypeName name="org.springframework.web.bind.annotation.PatchMapping"/>
@@ -28,7 +14,6 @@
 <fullyQualifiedTypeName name="org.springframework.web.bind.annotation.PathVariable"/>
 <fullyQualifiedTypeName name="com.visumIT.Business.boost.functions.ImageValidations"/>
 <fullyQualifiedTypeName name="com.visumIT.Business.boost.models.Representative"/>
-<fullyQualifiedTypeName name="com.visumIT.Business.boost.repository.CompanyRepository"/>
 <fullyQualifiedTypeName name="java.util.Calendar"/>
 <fullyQualifiedTypeName name="com.viumIT.business.boost.upload.FileUploadUrl"/>
 <fullyQualifiedTypeName name="org.springframework.http.ResponseEntity"/>
@@ -46,13 +31,11 @@
 <fullyQualifiedTypeName name="com.fasterxml.jackson.annotation.JsonIgnore"/>
 <fullyQualifiedTypeName name="org.springframework.http.HttpMethod"/>
 <fullyQualifiedTypeName name="org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder"/>
-<fullyQualifiedTypeName name="org.springframework.beans.factory.annotation.Autowired"/>
 <fullyQualifiedTypeName name="java.lang.IllegalArgumentException"/>
 <fullyQualifiedTypeName name="javax.persistence.ElementCollection"/>
 <fullyQualifiedTypeName name="java.util.stream.Collector"/>
 <fullyQualifiedTypeName name="org.springframework.security.core.userdetails.UserDetails"/>
 <fullyQualifiedTypeName name="org.springframework.security.core.GrantedAuthority"/>
-<fullyQualifiedTypeName name="org.springframework.security.core.userdetails.UserDetailsService"/>
 <fullyQualifiedTypeName name="com.visumIT.Business.boost.repository.EmployeeRepository"/>
 <fullyQualifiedTypeName name="com.visumIT.Business.boost.models.Employee"/>
 <fullyQualifiedTypeName name="org.springframework.security.core.userdetails.UsernameNotFoundException"/>
@@ -60,4 +43,21 @@
 <fullyQualifiedTypeName name="com.visumIT.Business.boost.enums.Profile"/>
 <fullyQualifiedTypeName name="org.springframework.security.core.authority.SimpleGrantedAuthority"/>
 <fullyQualifiedTypeName name="java.util.stream.Collectors"/>
+<fullyQualifiedTypeName name="com.visumIT.business.boost.upload.FirebaseStorageService"/>
+<fullyQualifiedTypeName name="com.visumIT.business.boost.upload.FileUpload"/>
+<fullyQualifiedTypeName name="com.visumIT.Business.boost.repository.CompanyRepository"/>
+<fullyQualifiedTypeName name="org.springframework.beans.factory.annotation.Autowired"/>
+<fullyQualifiedTypeName name="org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder"/>
+<fullyQualifiedTypeName name="org.springframework.security.core.userdetails.UserDetailsService"/>
+<fullyQualifiedTypeName name="org.springframework.beans.factory.annotation.Value"/>
+<fullyQualifiedTypeName name="io.jsonwebtoken.Jwts"/>
+<fullyQualifiedTypeName name="java.util.Date"/>
+<fullyQualifiedTypeName name="io.jsonwebtoken.SignatureAlgorithm"/>
+<fullyQualifiedTypeName name="org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter"/>
+<fullyQualifiedTypeName name="com.visumIT.Business.boost.DTO.CredentialsDTO"/>
+<fullyQualifiedTypeName name="org.springframework.security.authentication.UsernamePasswordAuthenticationToken"/>
+<fullyQualifiedTypeName name="java.lang.RuntimeException"/>
+<fullyQualifiedTypeName name="com.visumIT.Business.boost.security.JWTAuthenticationFilter"/>
+<fullyQualifiedTypeName name="com.visumIT.Business.boost.security.JWTUtil"/>
+<fullyQualifiedTypeName name="com.visumIT.Business.boost.DTO.EmployeeDTO"/>
 </qualifiedTypeNameHistroy>

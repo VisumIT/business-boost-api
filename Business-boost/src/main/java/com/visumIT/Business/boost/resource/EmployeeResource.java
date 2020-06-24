@@ -4,6 +4,7 @@
 package com.visumIT.Business.boost.resource;
 
 import com.visumIT.Business.boost.DTO.EmployeeDTO;
+import com.visumIT.Business.boost.enums.Profile;
 import com.visumIT.Business.boost.exception.ValidationFormat;
 import com.visumIT.Business.boost.functions.ImageValidations;
 import com.visumIT.Business.boost.functions.PartialUpdateValidation;
@@ -21,6 +22,7 @@ import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
@@ -73,7 +75,7 @@ public class EmployeeResource {
 			EmployeeDTO employeeDTO = new EmployeeDTO();
 			// protegendo a senha dos usuarios
 			List<EmployeeDTO> employeesDTO = employeeDTO.toEmployeesDTO(employees);
-			return ResponseEntity.ok().body(employeesDTO);
+			return ResponseEntity.ok().body(employees);
 		} else
 			return ResponseEntity.notFound().build();
 	}
@@ -95,10 +97,12 @@ public class EmployeeResource {
 	}
 
 	// cadastro de um novo employee
+	@PreAuthorize("hasAnyRole('ADMIN')")
 	@PostMapping
 	public ResponseEntity<?> saveEmployee(@Valid @RequestBody Employee employee,
 			@PathVariable(name = "id") Long id_company, BindingResult bindingResult) {
 		String message = validEmployee(id_company, employee);
+		System.out.println(employee.getProfiles());
 		if (!message.equals("ok")) {
 			if (message.equals("404")) {
 				return ResponseEntity.badRequest().build();
@@ -110,6 +114,7 @@ public class EmployeeResource {
 
 		} else {
 			employee.setPassword(bCryptEncoder.encode(employee.getPassword()));
+			
 			employeeRepository.save(employee);
 			Optional<Company> companyOptional = companyRepository.findById(id_company);
 
@@ -120,6 +125,8 @@ public class EmployeeResource {
 				tel.setEmployee(employee);
 				phoneRepository.save(tel);
 			}
+			System.out.println("----------------------");
+			System.out.println(employee.getProfiles());
 			employeeRepository.save(employee);
 			EmployeeDTO dto = new EmployeeDTO();
 			return ResponseEntity.status(HttpStatus.CREATED).body(dto.toEmployeeDTO(employee));

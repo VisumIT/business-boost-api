@@ -1,5 +1,10 @@
 package com.visumIT.Business.boost.enums;
 
+import javax.persistence.Embeddable;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+@Embeddable
 public enum Profile {
 	
 	ADMIN(1,"ROLE_ADMIN"),
@@ -7,6 +12,8 @@ public enum Profile {
 	PRODUCTS(3,"ROLE_PRODUCTS"),
 	REPRESENTATIVE(4,"ROLE_REPRESENTATIVE");
 	
+	@Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
 	private String description;
 	

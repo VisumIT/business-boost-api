@@ -24,6 +24,7 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.Email;
 
+import org.hibernate.validator.constraints.br.CNPJ;
 import org.hibernate.validator.constraints.br.CPF;
 
 import com.visumIT.Business.boost.enums.Profile;
@@ -69,10 +70,10 @@ public class Representative {
 	
 	//relação
 	@OneToMany(cascade=CascadeType.ALL, mappedBy = "representative")
-	@Column(name = "phone", columnDefinition = "VARCHAR(20)")
+	@Column(name = "phones", columnDefinition = "VARCHAR(20)")
 	private List<Phone> phones = new  ArrayList<>();
 	
-	@CPF
+	@CPF(message="{cpf.Representative.cpf}")
 	@Column(name="cpf", columnDefinition="VARCHAR(20)")
 	private String cpf;
 	
@@ -85,6 +86,12 @@ public class Representative {
 	@Column(name="description")
 	private String description;
 	
+	
+	
+	public Representative() {
+		this.addProfile(Profile.REPRESENTATIVE);
+	}
+
 	public Representative optionalToRepresentative( Optional<Representative> optional) {
 		Representative rep = new Representative();
 		

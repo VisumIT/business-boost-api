@@ -31,6 +31,8 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.visumIT.Business.boost.DTO.CompanyDTO;
 import com.visumIT.Business.boost.DTO.RepresentativeDTO;
+import com.visumIT.Business.boost.DTO.RepresentativeWithoutCompaniesDTO;
+import com.visumIT.Business.boost.enums.Profile;
 import com.visumIT.Business.boost.exception.ValidationFormat;
 import com.visumIT.Business.boost.functions.ImageValidations;
 import com.visumIT.Business.boost.functions.PartialUpdateValidation;
@@ -98,7 +100,9 @@ public class RepresentativeResource {
 	@ResponseStatus(HttpStatus.CREATED)
 	public ResponseEntity<?> saveRepresentative(@Valid @RequestBody Representative representative, BindingResult bindingResult) {
 		//validações
-		//verifica se o email já está cadastrado
+		if(bindingResult.hasErrors()){
+			return ResponseEntity.badRequest().body(ValidationFormat.formatarErros(bindingResult));
+		}
 		if (representativeRepository.existsByEmail(representative.getEmail())) {
 			return ResponseEntity.badRequest().body(new JSONObject()
 					.put("message", "E-mail allready in use").toString());
@@ -108,20 +112,21 @@ public class RepresentativeResource {
 			return ResponseEntity.badRequest().body(new JSONObject()
 					.put("message", "CPF allready in use")
 					.toString());
-		} else if(bindingResult.hasErrors()){
-			return ResponseEntity.badRequest().body(ValidationFormat.formatarErros(bindingResult));
 		} 
 		//se não houver erros
 		else {
 			representative.setPassword(bCryptEncoder.encode(representative.getPassword()));
+			Profile profile = Profile.REPRESENTATIVE;
+			representative.addProfile(profile);
 			Representative r = representativeRepository.save(representative);
 			for (Phone tel : r.getPhones()) {
+
 				tel.setRepresentative(r);
 				phoneRepository.save(tel);
 			}
-			
-			RepresentativeDTO dtoProcurada = dto.toRepresentativeDTO(r);
-			return ResponseEntity.status(HttpStatus.CREATED).body(dtoProcurada);
+			RepresentativeWithoutCompaniesDTO dtoWC = new RepresentativeWithoutCompaniesDTO();
+			dtoWC = dtoWC.toRepresentativeDTO(r);
+			return ResponseEntity.status(HttpStatus.CREATED).body(dtoWC);
 		}
 	}
 	

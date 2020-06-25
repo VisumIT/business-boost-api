@@ -37,10 +37,6 @@ import com.visumIT.Business.boost.enums.Profile;
 @Table(name = "tbl_companies")
 public class Company {
 	
-	public Company() {
-		this.addProfile(Profile.ADMIN);
-	}
-	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
@@ -120,6 +116,7 @@ public class Company {
 	@Column(name = "email", columnDefinition = "VARCHAR(40)", unique=true)
 	private String email;
 	
+	@JsonIgnore
 	@NotBlank(message="{Password.not.blank}")
 	@Size(min = 8, message="{Size.Company.Password}")
 	@Column(name = "password", columnDefinition = "VARCHAR(255)")
@@ -136,6 +133,10 @@ public class Company {
 	@Column(name="employees")
 	private List<Employee> employees = new  ArrayList<>();
 
+	public Company() {
+		this.addProfile(Profile.ADMIN);
+	}
+	
 	//transformar um tipo opcional no tipo Company
 	public Company optionalToCompany( Optional<Company> optional) {
 			Company Company = new Company();

@@ -3,8 +3,30 @@
  * */
 package com.visumIT.Business.boost.resource;
 
+import java.util.Calendar;
+import java.util.List;
+import java.util.Optional;
+
+import javax.validation.Valid;
+
+import org.json.JSONObject;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PatchMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+
 import com.visumIT.Business.boost.DTO.EmployeeDTO;
-import com.visumIT.Business.boost.enums.Profile;
 import com.visumIT.Business.boost.exception.ValidationFormat;
 import com.visumIT.Business.boost.functions.ImageValidations;
 import com.visumIT.Business.boost.functions.PartialUpdateValidation;
@@ -17,21 +39,6 @@ import com.visumIT.Business.boost.repository.PhoneRepository;
 import com.visumIT.Business.boost.upload.FileUpload;
 import com.visumIT.Business.boost.upload.FileUploadUrl;
 import com.visumIT.Business.boost.upload.FirebaseStorageService;
-
-import org.json.JSONObject;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
-import org.springframework.security.access.prepost.PreAuthorize;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.*;
-
-import javax.validation.Valid;
-
-import java.util.Calendar;
-import java.util.List;
-import java.util.Optional;
 
 @RestController
 @RequestMapping("/companies/{id}/employees")
@@ -75,7 +82,7 @@ public class EmployeeResource {
 			EmployeeDTO employeeDTO = new EmployeeDTO();
 			// protegendo a senha dos usuarios
 			List<EmployeeDTO> employeesDTO = employeeDTO.toEmployeesDTO(employees);
-			return ResponseEntity.ok().body(employees);
+			return ResponseEntity.ok().body(employeesDTO);
 		} else
 			return ResponseEntity.notFound().build();
 	}
@@ -102,19 +109,19 @@ public class EmployeeResource {
 	public ResponseEntity<?> saveEmployee(@Valid @RequestBody Employee employee,
 			@PathVariable(name = "id") Long id_company, BindingResult bindingResult) {
 		String message = validEmployee(id_company, employee);
-		System.out.println(employee.getProfiles());
+
 		if (!message.equals("ok")) {
 			if (message.equals("404")) {
 				return ResponseEntity.badRequest().build();
 			}
-			return ResponseEntity.badRequest().body(new JSONObject().put("message", message.toString()));
+			return ResponseEntity.badRequest().body(new JSONObject().put("message", message).toString());
 		}
+
 		if (bindingResult.hasErrors()) {
 			return ResponseEntity.badRequest().body(ValidationFormat.formatarErros(bindingResult));
 
 		} else {
 			employee.setPassword(bCryptEncoder.encode(employee.getPassword()));
-			
 			employeeRepository.save(employee);
 			Optional<Company> companyOptional = companyRepository.findById(id_company);
 

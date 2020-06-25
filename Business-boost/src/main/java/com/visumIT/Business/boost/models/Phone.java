@@ -13,7 +13,6 @@ import javax.validation.constraints.Size;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
-import lombok.Data;
 
 @Entity
 @Table(name="tbl_phones")

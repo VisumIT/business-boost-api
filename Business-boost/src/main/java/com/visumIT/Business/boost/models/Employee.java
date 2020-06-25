@@ -40,7 +40,7 @@ public class Employee {
     private Company company;
     
     @ElementCollection(fetch=FetchType.EAGER)
-    @CollectionTable(name="tbl_profiles")
+    @CollectionTable(name="tbl_profiles", joinColumns = @JoinColumn(name="employee_id "))
     private Set<Integer> profiles = new HashSet<>();
 
     @Column(name="registration", columnDefinition = "VARCHAR(30)")

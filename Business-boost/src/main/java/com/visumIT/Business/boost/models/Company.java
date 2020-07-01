@@ -21,6 +21,7 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
@@ -39,13 +40,18 @@ public class Company {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Long id;
+	private Long id;	
+  @ElementCollection(fetch=FetchType.EAGER)
+  @CollectionTable(name="tbl_profiles")
+  private Set<Integer> profiles = new HashSet<>();
+
+	@OneToMany(mappedBy = "company")
+	private List<Order> orders = new ArrayList<>();
 	
-	
-    @ElementCollection(fetch=FetchType.EAGER)
-    @CollectionTable(name="tbl_profiles")
-    private Set<Integer> profiles = new HashSet<>();
-	
+	@OneToMany(mappedBy = "company")
+	private List<Product> products = new ArrayList<>();
+		
+
 	//Representative
 	@ManyToMany(mappedBy = "companies")
 	@JsonIgnore
@@ -167,11 +173,25 @@ public class Company {
 	public Long getId() {
 		return id;
 	}
-
+	
 	public void setId(Long id) {
 		this.id = id;
 	}
+	
+	
 
+	public List<Order> getOrders() {
+		return orders;
+	}
+	public void setOrders(List<Order> orders) {
+		this.orders = orders;
+	}
+	public List<Product> getProducts() {
+		return products;
+	}
+	public void setProducts(List<Product> products) {
+		this.products = products;
+	}
 	public List<Representative> getRepresentatives() {
 		return representatives;
 	}
@@ -331,7 +351,6 @@ public class Company {
 	public void setEmployees(List<Employee> employees) {
 		this.employees = employees;
 	}
-    
     public Set<Profile> getProfiles() {
     	return profiles.stream().map(x -> Profile.toEnum(x))
     			.collect(Collectors.toSet());
@@ -344,5 +363,10 @@ public class Company {
     public String toString() {
     	return this.companyName;
     }
-	
+	public List<Product> getProduct() {
+		return products;
+	}
+	public void setProduct(List<Product> products) {
+		this.products = products;
+	}
 }

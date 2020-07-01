@@ -1,10 +1,20 @@
 package com.visumIT.Business.boost.resource;
-
 import java.util.Calendar;
 import java.util.List;
 import java.util.Optional;
 
 import javax.validation.Valid;
+import com.visumIT.Business.boost.exception.ValidationFormat;
+import com.visumIT.Business.boost.functions.ImageValidations;
+import com.visumIT.Business.boost.functions.PartialUpdateValidation;
+import com.visumIT.Business.boost.models.Company;
+import com.visumIT.Business.boost.models.Brand;
+import com.visumIT.Business.boost.repository.CompanyRepository;
+import com.visumIT.Business.boost.upload.FileUpload;
+import com.visumIT.Business.boost.upload.FileUploadUrl;
+import com.visumIT.Business.boost.upload.FirebaseStorageService;
+import com.visumIT.Business.boost.repository.BrandRepository;
+
 
 import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -44,8 +54,7 @@ public class BrandResource {
 	private CompanyRepository companyRepository;
 
 	@Autowired
-	FirebaseStorageService firebase;
-
+	private FirebaseStorageService firebase;
 	private Company company = new Company();
 	
 	// listar brands de uma company

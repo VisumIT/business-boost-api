@@ -19,19 +19,11 @@ public class ProductInformation {
 	private Long id;
 	
 	@NotNull
-	private String price;
-	
-	@NotNull
-	private String stock;
+	private int stock;
 	
 	private String size;
 	
 	private String color;
-	
-	
-	
 
-	
-	
 	
 }

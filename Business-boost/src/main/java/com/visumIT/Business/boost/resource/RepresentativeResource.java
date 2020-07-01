@@ -39,6 +39,10 @@ import com.visumIT.Business.boost.functions.PartialUpdateValidation;
 import com.visumIT.Business.boost.models.Company;
 import com.visumIT.Business.boost.models.Phone;
 import com.visumIT.Business.boost.models.Representative;
+import com.visumIT.Business.boost.repository.RepresentativeRepository;
+import com.visumIT.Business.boost.upload.FileUpload;
+import com.visumIT.Business.boost.upload.FileUploadUrl;
+import com.visumIT.Business.boost.upload.FirebaseStorageService;
 import com.visumIT.Business.boost.repository.PhoneRepository;
 import com.visumIT.Business.boost.repository.RepresentativeRepository;
 import com.visumIT.Business.boost.security.UserSS;
@@ -61,11 +65,10 @@ public class RepresentativeResource {
 	private PhoneRepository phoneRepository;
 
 	private RepresentativeDTO dto = new RepresentativeDTO();
-
 	@Autowired
-	FirebaseStorageService firebase;
+	private FirebaseStorageService firebase;
+	//listar representatives
 
-	// listar representatives
 	@GetMapping
 	public List<RepresentativeDTO> getRepresentatives() {
 		List<Representative> representatives = representativeRepository.findAll();

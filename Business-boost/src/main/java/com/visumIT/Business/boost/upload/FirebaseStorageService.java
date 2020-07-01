@@ -5,12 +5,10 @@ import java.io.InputStream;
 import java.util.Base64;
 import java.util.Calendar;
 import java.util.Optional;
-
 import javax.annotation.PostConstruct;
-
 import org.springframework.stereotype.Service;
-
 import com.google.api.services.storage.Storage;
+
 import com.google.auth.oauth2.GoogleCredentials;
 import com.google.cloud.storage.Acl;
 import com.google.cloud.storage.Blob;
@@ -20,6 +18,9 @@ import com.google.firebase.FirebaseApp;
 import com.google.firebase.FirebaseOptions;
 import com.google.firebase.cloud.StorageClient;
 import com.google.firebase.internal.FirebaseAppStore;
+import com.google.firebase.FirebaseApp;
+import com.google.firebase.FirebaseOptions;
+import com.google.firebase.cloud.StorageClient;
 import com.google.firebase.internal.FirebaseService;
 
 @Service
@@ -71,5 +72,4 @@ public class FirebaseStorageService {
 		boolean arquivo = bucket.getStorage().delete("teste-ds3-5ded5.appspot.com",file);
 		return arquivo;
 	}
-
 }

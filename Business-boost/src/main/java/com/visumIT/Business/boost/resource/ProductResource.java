@@ -44,7 +44,7 @@ public class ProductResource {
 	public ResponseEntity<?> getProductCompany(@PathVariable Long idCompany){
 		Optional<Company> product = companyRepository.findById(idCompany);
 		
-		if(product.isEmpty()) {
+		if(!product.isPresent()) {
 			return ResponseEntity.notFound().build();
 		}
 			
@@ -67,7 +67,7 @@ public class ProductResource {
 								@Validated @RequestBody Product product) {
 		Optional<Company> company = companyRepository.findById(idCompany);
 		
-		if(company.isEmpty()) {
+		if(!company.isPresent()) {
 			return ResponseEntity.status(400).build();
 		}
 		
@@ -92,7 +92,7 @@ public class ProductResource {
 	public ResponseEntity<?> updateProduct(@PathVariable Long idCompany ,@Validated @RequestBody Product product) {
 		Optional<Company> company = companyRepository.findById(idCompany);
 		
-		if(company.isEmpty()) {
+		if(!company.isPresent()) {
 			return ResponseEntity.notFound().build();
 		}
 		Double priceDiscount = product.getPrice() * (product.getDiscount() / 100);
@@ -110,7 +110,7 @@ public class ProductResource {
 	@ResponseStatus(HttpStatus.NO_CONTENT)
 	public ResponseEntity<?> delete(@PathVariable Long idCompany, @PathVariable Long idProduct) {
 		Optional<Company> company = companyRepository.findById(idCompany);
-		if(company.isEmpty()) {
+		if(company.isPresent()) {
 			return ResponseEntity.notFound().build();
 		}
 		productRepository.deleteById(idProduct);

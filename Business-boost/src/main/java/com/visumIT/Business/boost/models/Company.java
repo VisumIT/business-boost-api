@@ -21,7 +21,6 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
 import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
@@ -37,65 +36,64 @@ import com.visumIT.Business.boost.enums.Profile;
 @Entity
 @Table(name = "tbl_companies")
 public class Company {
-	
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Long id;	
-  @ElementCollection(fetch=FetchType.EAGER)
-  @CollectionTable(name="tbl_profiles")
-  private Set<Integer> profiles = new HashSet<>();
+	private Long id;
+	@ElementCollection(fetch = FetchType.EAGER)
+	@CollectionTable(name = "tbl_profiles")
+	private Set<Integer> profiles = new HashSet<>();
 
 	@OneToMany(mappedBy = "company")
 	private List<Order> orders = new ArrayList<>();
-	
+
 	@OneToMany(mappedBy = "company")
 	private List<Product> products = new ArrayList<>();
-		
 
-	//Representative
+	// Representative
 	@ManyToMany(mappedBy = "companies")
 	@JsonIgnore
 	private List<Representative> representatives = new ArrayList<>();
-	
-	@OneToMany(cascade=CascadeType.ALL, mappedBy = "company")
+
+	@OneToMany(cascade = CascadeType.ALL, mappedBy = "company")
 	@Column(name = "phones", columnDefinition = "VARCHAR(20)")
-	private List<Phone> phones = new  ArrayList<>();
+	private List<Phone> phones = new ArrayList<>();
 
-	@OneToMany(cascade=CascadeType.ALL, mappedBy = "company")
-	private List<Brand> brand = new  ArrayList<>();
+	@OneToMany(cascade = CascadeType.ALL, mappedBy = "company")
+	private List<Brand> brand = new ArrayList<>();
 
-	//Address
+	// Address
 	@Size(max = 150)
-	@Column(name="address", columnDefinition = "VARCHAR(150)")
+	@Column(name = "address", columnDefinition = "VARCHAR(150)")
 	private String address;
 
 	@Size(min = 3, max = 20)
-	@Column(name="public_place", columnDefinition = "VARCHAR(20)")
+	@Column(name = "public_place", columnDefinition = "VARCHAR(20)")
 	private String publicPlace;
 
 	@Size(max = 10)
-	@Column(name="number", columnDefinition = "VARCHAR(10)")
+	@Column(name = "number", columnDefinition = "VARCHAR(10)")
 	private String number;
 
 	@Size(min = 2)
-	@Column(name="uf", columnDefinition = "VARCHAR(20)")
+	@Column(name = "uf", columnDefinition = "VARCHAR(20)")
 	private String uf;
 
 	@Size(max = 50)
-	@Column(name="neighborhood", columnDefinition = "VARCHAR(50)")
+	@Column(name = "neighborhood", columnDefinition = "VARCHAR(50)")
 	private String neighborhood;
 
 	@Size(max = 50)
-	@Column(name="city", columnDefinition = "VARCHAR(50)")
+	@Column(name = "city", columnDefinition = "VARCHAR(50)")
 	private String city;
 
 	@Size(min = 8)
-	@Column(name="cep", columnDefinition = "VARCHAR(20)")
+	@Column(name = "cep", columnDefinition = "VARCHAR(20)")
 	private String cep;
-	//********************
+	// ********************
 
 	@Size(max = 100)
-	@Column(name="site", columnDefinition = "VARCHAR(100)") 
+	@Column(name = "site", columnDefinition = "VARCHAR(100)")
 	private String site;
 
 	@Size(min = 14, max = 20)
@@ -107,91 +105,94 @@ public class Company {
 	@NotBlank
 	@Column(name = "company_name", columnDefinition = "VARCHAR(60)")
 	private String companyName;
-	
-	@NotBlank(message="{cnpj.not.blank}")
-	@CNPJ(message="{cnpj.Company.cnpj}")
-	@Column(name = "cnpj", columnDefinition = "VARCHAR(20)", unique=true)
+
+	@NotBlank(message = "{cnpj.not.blank}")
+	@CNPJ(message = "{cnpj.Company.cnpj}")
+	@Column(name = "cnpj", columnDefinition = "VARCHAR(20)", unique = true)
 	private String cnpj;
 
 	@Size(max = 40)
 	@Column(name = "fictitious_name", columnDefinition = "VARCHAR(40)")
 	private String fictitiousName;
-	
-	@NotBlank(message="{email.not.blank}")
-	@Email(message="{email.not.valid}")
-	@Column(name = "email", columnDefinition = "VARCHAR(40)", unique=true)
+
+	@NotBlank(message = "{email.not.blank}")
+	@Email(message = "{email.not.valid}")
+	@Column(name = "email", columnDefinition = "VARCHAR(40)", unique = true)
 	private String email;
-	
-	//@JsonIgnore
-	@NotBlank(message="{Password.not.blank}")
-	@Size(min = 8, message="{Size.Company.Password}")
+
+	// @JsonIgnore
+	@NotBlank(message = "{Password.not.blank}")
+	@Size(min = 8, message = "{Size.Company.Password}")
 	@Column(name = "password", columnDefinition = "VARCHAR(255)")
 	private String password;
-	
+
 	@Column(name = "description", columnDefinition = "VARCHAR(200)")
 	private String description;
-	
+
 	@Column(name = "logo", columnDefinition = "VARCHAR(255)")
 	private String logo;
 
 	@JsonIgnore
-	@OneToMany(cascade=CascadeType.ALL, mappedBy = "company")
-	@Column(name="employees")
-	private List<Employee> employees = new  ArrayList<>();
+	@OneToMany(cascade = CascadeType.ALL, mappedBy = "company")
+	@Column(name = "employees")
+	private List<Employee> employees = new ArrayList<>();
 
 	public Company() {
 		this.addProfile(Profile.ADMIN);
 	}
-	
-	//transformar um tipo opcional no tipo Company
-	public Company optionalToCompany( Optional<Company> optional) {
-			Company Company = new Company();
-			
-			Company.setId(optional.get().getId());
-			Company.setNeighborhood(optional.get().getNeighborhood());
-			Company.setCep(optional.get().getCep());
-			Company.setCity(optional.get().getCity());
-			Company.setCnpj(optional.get().getCnpj());
-			Company.setDescription(optional.get().getDescription());
-			Company.setEmail(optional.get().getEmail());
-			Company.setAddress(optional.get().getAddress());
-			Company.setStateRegistration(optional.get().getStateRegistration());
-			Company.setLogo(optional.get().getLogo());
-			Company.setPublicPlace(optional.get().getPublicPlace());
-			Company.setFictitiousName(optional.get().getFictitiousName());
-			Company.setNumber(optional.get().getNumber());
-			Company.setCompanyName(optional.get().getCompanyName());
-			Company.setRepresentatives(optional.get().getRepresentatives());
-			Company.setPassword(optional.get().getPassword());
-			Company.setSite(optional.get().getSite());
-			Company.setPhones(optional.get().getPhones());
-			Company.setUf(optional.get().getUf());
-			
-			return Company;
+
+	// transformar um tipo opcional no tipo Company
+	public Company optionalToCompany(Optional<Company> optional) {
+		Company Company = new Company();
+
+		Company.setId(optional.get().getId());
+		Company.setNeighborhood(optional.get().getNeighborhood());
+		Company.setCep(optional.get().getCep());
+		Company.setCity(optional.get().getCity());
+		Company.setCnpj(optional.get().getCnpj());
+		Company.setDescription(optional.get().getDescription());
+		Company.setEmail(optional.get().getEmail());
+		Company.setAddress(optional.get().getAddress());
+		Company.setStateRegistration(optional.get().getStateRegistration());
+		Company.setLogo(optional.get().getLogo());
+		Company.setPublicPlace(optional.get().getPublicPlace());
+		Company.setFictitiousName(optional.get().getFictitiousName());
+		Company.setNumber(optional.get().getNumber());
+		Company.setCompanyName(optional.get().getCompanyName());
+		Company.setRepresentatives(optional.get().getRepresentatives());
+		Company.setPassword(optional.get().getPassword());
+		Company.setSite(optional.get().getSite());
+		Company.setPhones(optional.get().getPhones());
+		Company.setUf(optional.get().getUf());
+
+		return Company;
 	}
-	/*######################## GETTERS AND SETTERS#############################*/
+
+	/* ######################## GETTERS AND SETTERS############################# */
 	public Long getId() {
 		return id;
 	}
-	
+
 	public void setId(Long id) {
 		this.id = id;
 	}
-	
-	
 
 	public List<Order> getOrders() {
 		return orders;
 	}
+
 	public void setOrders(List<Order> orders) {
 		this.orders = orders;
 	}
+
 	public List<Product> getProducts() {
 		return products;
 	}
+
 	public void setProducts(List<Product> products) {
 		this.products = products;
 	}
+
 	public List<Representative> getRepresentatives() {
 		return representatives;
 	}
@@ -351,21 +352,24 @@ public class Company {
 	public void setEmployees(List<Employee> employees) {
 		this.employees = employees;
 	}
-    public Set<Profile> getProfiles() {
-    	return profiles.stream().map(x -> Profile.toEnum(x))
-    			.collect(Collectors.toSet());
-    }
-    
+
+	public Set<Profile> getProfiles() {
+		return profiles.stream().map(x -> Profile.toEnum(x)).collect(Collectors.toSet());
+	}
+
 	public void addProfile(Profile profile) {
-    	profiles.add(profile.getId());
-    }
-    @Override
-    public String toString() {
-    	return this.companyName;
-    }
+		profiles.add(profile.getId());
+	}
+
+	@Override
+	public String toString() {
+		return this.companyName;
+	}
+
 	public List<Product> getProduct() {
 		return products;
 	}
+
 	public void setProduct(List<Product> products) {
 		this.products = products;
 	}

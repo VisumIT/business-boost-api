@@ -4176,6 +4176,7 @@ Caused by: java.io.FileNotFoundException: C:\Program Files\Git\mingw64\share\git
 	at org.eclipse.swt.graphics.ImageLoader.load(ImageLoader.java:289)
 	... 72 more
 
+<<<<<<< HEAD
 !ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2020-07-01 13:06:24.229
 !MESSAGE Entering DelegatingStreamConnectionProvider()
 
@@ -4481,3 +4482,119 @@ java.net.UnknownHostException: marketplace.eclipse.org
 
 !ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2020-07-01 13:17:31.738
 !MESSAGE executing callback sts4.classpath.nFZkXtAC SUCCESS [done]
+=======
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2020-06-17 16:28:14.005
+!MESSAGE ClasspathListenerHandler removeClasspathListener sts4.classpath.KTtNePQK
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2020-06-17 16:28:14.005
+!MESSAGE unsubscribing from classpath changes: sts4.classpath.KTtNePQK
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2020-06-17 16:28:14.006
+!MESSAGE subsribers = {}
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2020-06-17 16:28:14.006
+!MESSAGE ClasspathListenerHandler removeClasspathListener sts4.classpath.KTtNePQK => OK
+!SESSION 2020-06-18 13:24:49.751 -----------------------------------------------
+eclipse.buildId=4.14.0.I20191210-0610
+java.version=1.8.0_252
+java.vendor=Private Build
+BootLoader constants: OS=linux, ARCH=x86_64, WS=gtk, NL=pt_BR
+Framework arguments:  -product org.eclipse.epp.package.jee.product
+Command-line arguments:  -os linux -ws gtk -arch x86_64 -product org.eclipse.epp.package.jee.product
+
+!ENTRY org.eclipse.ui 2 0 2020-06-18 13:25:00.295
+!MESSAGE Warnings while parsing the key bindings from the 'org.eclipse.ui.commands' and 'org.eclipse.ui.bindings' extension point
+!SUBENTRY 1 org.eclipse.ui 2 0 2020-06-18 13:25:00.295
+!MESSAGE Defining a key binding with no key sequence has no effect: plug-in='org.springframework.ide.eclipse.boot.wizard', id='org.springframework.ide.eclipse.boot.wizard.addStarersSwitchHandler'
+
+!ENTRY org.eclipse.jface 2 0 2020-06-18 13:25:05.375
+!MESSAGE Keybinding conflicts occurred.  They may interfere with normal accelerator operation.
+!SUBENTRY 1 org.eclipse.jface 2 0 2020-06-18 13:25:05.375
+!MESSAGE A conflict occurred for CTRL+SHIFT+T:
+Binding(CTRL+SHIFT+T,
+	ParameterizedCommand(Command(org.eclipse.jdt.ui.navigate.open.type,Open Type,
+		Open a type in a Java editor,
+		Category(org.eclipse.ui.category.navigate,Navigate,null,true),
+		org.eclipse.ui.internal.WorkbenchHandlerServiceHandler@148f94dc,
+		,,true),null),
+	org.eclipse.ui.defaultAcceleratorConfiguration,
+	org.eclipse.ui.contexts.window,,,system)
+Binding(CTRL+SHIFT+T,
+	ParameterizedCommand(Command(org.eclipse.lsp4e.symbolinworkspace,Go to Symbol in Workspace,
+		,
+		Category(org.eclipse.lsp4e.category,Language Servers,null,true),
+		org.eclipse.ui.internal.WorkbenchHandlerServiceHandler@2f11d889,
+		,,true),null),
+	org.eclipse.ui.defaultAcceleratorConfiguration,
+	org.eclipse.ui.contexts.window,,,system)
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2020-06-18 13:25:25.932
+!MESSAGE Entering DelegatingStreamConnectionProvider()
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2020-06-18 13:25:25.933
+!MESSAGE DelegatingStreamConnectionProvider classloader = org.eclipse.osgi.internal.loader.EquinoxClassLoader@3e12aa8b[org.springframework.tooling.boot.ls:1.18.0.202005250744(id=1009)]
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2020-06-18 13:25:25.937
+!MESSAGE SpringBootLanguageServer exists!
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2020-06-18 13:25:26.092
+!MESSAGE Instantiating ReusableClasspathListenerHandler
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2020-06-18 13:25:40.291
+!MESSAGE Boot LS startup time from start to initialized: 14316ms
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2020-06-18 13:25:42.020
+!MESSAGE ClasspathListenerHandler addClasspathListener sts4.classpath.MAzSKulYisBatched = true
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2020-06-18 13:25:42.023
+!MESSAGE Creating project sorter...
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2020-06-18 13:25:42.025
+!MESSAGE Creating project sorter... DONE
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2020-06-18 13:25:42.027
+!MESSAGE Setting up ClasspathListenerManager
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2020-06-18 13:25:42.030
+!MESSAGE Scheduling initial event for all projects ...
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2020-06-18 13:25:42.031
+!MESSAGE Scheduling initial event for all projects DONE
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2020-06-18 13:25:42.032
+!MESSAGE exists = true open = true => deleted = false
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2020-06-18 13:25:42.032
+!MESSAGE ClasspathListenerHandler addClasspathListener sts4.classpath.MAzSKulY => OK
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2020-06-18 13:25:42.055
+!MESSAGE classpath=170 entries
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2020-06-18 13:25:42.057
+!MESSAGE buffering callback sts4.classpath.MAzSKulY Business-boost false 170
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2020-06-18 13:25:42.058
+!MESSAGE executing callback sts4.classpath.MAzSKulY 1 batched events
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2020-06-18 13:25:42.170
+!MESSAGE executing callback sts4.classpath.MAzSKulY SUCCESS [done]
+>>>>>>> master
+
+!ENTRY org.eclipse.jface 2 0 2020-07-01 14:09:12.445
+!MESSAGE Ignored reentrant call while viewer is busy. This is only logged once per viewer instance, but similar calls will still be ignored.
+!STACK 0
+java.lang.RuntimeException
+	at org.eclipse.jface.viewers.ColumnViewer.checkBusy(ColumnViewer.java:764)
+	at org.eclipse.jface.viewers.ColumnViewer.update(ColumnViewer.java:543)
+	at org.eclipse.ui.navigator.CommonViewer.update(CommonViewer.java:515)
+	at org.eclipse.jface.viewers.StructuredViewer.update(StructuredViewer.java:1970)
+	at org.eclipse.ui.internal.navigator.resources.nested.NestedProjectsLabelProvider.lambda$2(NestedProjectsLabelProvider.java:87)
+	at java.util.concurrent.CompletableFuture.uniAccept(CompletableFuture.java:670)
+	at java.util.concurrent.CompletableFuture$UniAccept.tryFire(CompletableFuture.java:646)
+	at java.util.concurrent.CompletableFuture.postComplete(CompletableFuture.java:488)
+	at java.util.concurrent.CompletableFuture$AsyncSupply.run(CompletableFuture.java:1609)
+	at java.util.concurrent.CompletableFuture$AsyncSupply.exec(CompletableFuture.java:1596)
+	at java.util.concurrent.ForkJoinTask.doExec(ForkJoinTask.java:289)
+	at java.util.concurrent.ForkJoinPool$WorkQueue.runTask(ForkJoinPool.java:1056)
+	at java.util.concurrent.ForkJoinPool.runWorker(ForkJoinPool.java:1692)
+	at java.util.concurrent.ForkJoinWorkerThread.run(ForkJoinWorkerThread.java:157)

@@ -1,13 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <section name="Workbench">
 	<section name="org.eclipse.ui.texteditor.FindReplaceDialog">
+<<<<<<< HEAD
 		<item key="selection" value="cnpj"/>
+=======
+		<item key="selection" value="parcial"/>
+>>>>>>> master
 		<item key="wrap" value="true"/>
 		<item key="casesensitive" value="true"/>
 		<item key="wholeword" value="false"/>
 		<item key="incremental" value="false"/>
 		<item key="isRegEx" value="false"/>
 		<list key="findhistory">
+<<<<<<< HEAD
 			<item value="cnpj"/>
 			<item value="ADMIN"/>
 			<item value="compan"/>
@@ -17,12 +22,26 @@
 			<item value="optional"/>
 			<item value="httpstatus"/>
 			<item value="profile"/>
+=======
+			<item value="parcial"/>
+>>>>>>> master
 			<item value="json"/>
 			<item value="associar"/>
 			<item value="dele"/>
 			<item value="calendar"/>
 			<item value="http"/>
 			<item value="employeeProcurado"/>
+<<<<<<< HEAD
+=======
+			<item value="companyProcurada"/>
+			<item value="Put"/>
+			<item value="put"/>
+			<item value="patch"/>
+			<item value="imagemPadrao"/>
+			<item value="ImagemPadrao"/>
+			<item value="atualizar"/>
+			<item value="empresa"/>
+>>>>>>> master
 		</list>
 		<list key="replacehistory">
 			<item value="REPRESENTATIVE"/>

@@ -8,5 +8,5 @@ spring.jpa.hibernate.ddl-auto=update
 spring.jackson.deserialization.fail-on-unknown-properties=true
 
 jwt.secret=segredo
-#1 minutos
-jwt.expiration=60000
+#30 minutos
+jwt.expiration=1800000

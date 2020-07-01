@@ -1,13 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <section name="Workbench">
 	<section name="org.eclipse.ui.texteditor.FindReplaceDialog">
-		<item key="selection" value="Compan"/>
+		<item key="selection" value="cnpj"/>
 		<item key="wrap" value="true"/>
-		<item key="casesensitive" value="false"/>
+		<item key="casesensitive" value="true"/>
 		<item key="wholeword" value="false"/>
 		<item key="incremental" value="false"/>
 		<item key="isRegEx" value="false"/>
 		<list key="findhistory">
+			<item value="cnpj"/>
+			<item value="ADMIN"/>
 			<item value="compan"/>
 			<item value="unique"/>
 			<item value="bcr"/>
@@ -21,10 +23,9 @@
 			<item value="calendar"/>
 			<item value="http"/>
 			<item value="employeeProcurado"/>
-			<item value="companyProcurada"/>
-			<item value="Put"/>
 		</list>
 		<list key="replacehistory">
+			<item value="REPRESENTATIVE"/>
 			<item value="employeeWanted"/>
 			<item value="companyWanted"/>
 			<item value="standardImage"/>
@@ -39,7 +40,6 @@
 			<item value="Company"/>
 			<item value="representative"/>
 			<item value="brand"/>
-			<item value="Brand"/>
 		</list>
 	</section>
 	<section name="org.eclipse.ui.texteditor.FindReplaceDialog_dialogBounds">

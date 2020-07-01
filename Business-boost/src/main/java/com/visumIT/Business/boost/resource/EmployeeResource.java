@@ -27,6 +27,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.visumIT.Business.boost.DTO.EmployeeDTO;
+import com.visumIT.Business.boost.enums.Profile;
 import com.visumIT.Business.boost.exception.ValidationFormat;
 import com.visumIT.Business.boost.functions.ImageValidations;
 import com.visumIT.Business.boost.functions.PartialUpdateValidation;
@@ -36,6 +37,8 @@ import com.visumIT.Business.boost.models.Phone;
 import com.visumIT.Business.boost.repository.CompanyRepository;
 import com.visumIT.Business.boost.repository.EmployeeRepository;
 import com.visumIT.Business.boost.repository.PhoneRepository;
+import com.visumIT.Business.boost.security.UserSS;
+import com.visumIT.Business.boost.services.UserService;
 import com.visumIT.Business.boost.upload.FileUpload;
 import com.visumIT.Business.boost.upload.FileUploadUrl;
 import com.visumIT.Business.boost.upload.FirebaseStorageService;
@@ -73,8 +76,14 @@ public class EmployeeResource {
 	}
 
 	// retorna os employees de uma company
+	@PreAuthorize("hasAnyRole('ADMIN')")
 	@GetMapping
 	public ResponseEntity<?> getEmployees(@PathVariable Long id) {
+		UserSS user = UserService.authenticated();
+		if (user == null || !user.hasRole(Profile.ADMIN) || !id.equals(user.getId())) {
+			return ResponseEntity.status(HttpStatus.FORBIDDEN).build();
+		}
+		
 		Optional<Company> companyWanted = companyRepository.findById(id);
 
 		if (companyWanted.isPresent()) {
@@ -88,9 +97,14 @@ public class EmployeeResource {
 	}
 
 	/* Retorna um employee especifico */
+	@PreAuthorize("hasAnyRole('ADMIN')")
 	@GetMapping("{id_employee}")
 	public ResponseEntity<?> getEmployee(@PathVariable(name = "id") Long id_company,
 			@PathVariable(name = "id_employee") Long id_employee) {
+		UserSS user = UserService.authenticated();
+		if (user == null || !user.hasRole(Profile.ADMIN) || !id_company.equals(user.getId())) {
+			return ResponseEntity.status(HttpStatus.FORBIDDEN).build();
+		}
 		Optional<Employee> employeeWanted = employeeRepository.findById(id_employee);
 		Optional<Company> companyWanted = companyRepository.findById(id_company);
 
@@ -108,6 +122,11 @@ public class EmployeeResource {
 	@PostMapping
 	public ResponseEntity<?> saveEmployee(@Valid @RequestBody Employee employee,
 			@PathVariable(name = "id") Long id_company, BindingResult bindingResult) {
+		UserSS user = UserService.authenticated();
+		if (user == null || !user.hasRole(Profile.ADMIN) || !id_company.equals(user.getId())) {
+			return ResponseEntity.status(HttpStatus.FORBIDDEN).build();
+		}
+		
 		String message = validEmployee(id_company, employee);
 
 		if (!message.equals("ok")) {
@@ -142,10 +161,15 @@ public class EmployeeResource {
 	}
 
 	// update parcial
+	@PreAuthorize("hasAnyRole('ADMIN')")
 	@PatchMapping("/{id_employee}")
 	public ResponseEntity<?> partialUpdate(@Valid @RequestBody Employee bodyEmployee,
 			@PathVariable(name = "id_employee") Long id_employee, @PathVariable(name = "id") Long id_company) 
 					throws IllegalAccessException {
+		UserSS user = UserService.authenticated();
+		if (user == null || !user.hasRole(Profile.ADMIN) || !id_company.equals(user.getId())) {
+			return ResponseEntity.status(HttpStatus.FORBIDDEN).build();
+		}
 		
 		Optional<Company> companyWanted = companyRepository.findById(id_company);
 		Company company = new Company();
@@ -165,10 +189,16 @@ public class EmployeeResource {
 	}
 
 	/* update completo */
+	@PreAuthorize("hasAnyRole('ADMIN')")
 	@PutMapping("/{id_employee}")
 	public ResponseEntity<?> fullEmployeeUpdate(@Valid @RequestBody Employee employee,
 			@PathVariable(name = "id") Long id_company, @PathVariable(name = "id_employee") Long id_employee,
 			BindingResult bindingResult) {
+		UserSS user = UserService.authenticated();
+		if (user == null || !user.hasRole(Profile.ADMIN) || !id_company.equals(user.getId())) {
+			return ResponseEntity.status(HttpStatus.FORBIDDEN).build();
+		}
+		
 
 		Optional<Company> companyWanted = companyRepository.findById(id_company);
 		Optional<Employee> employeeWanted = employeeRepository.findById(id_employee);
@@ -197,8 +227,14 @@ public class EmployeeResource {
 	}
 
 	/* deletar employee */
+	@PreAuthorize("hasAnyRole('ADMIN')")
 	@DeleteMapping("/{id_employee}")
-	public ResponseEntity<?> deletarEmployee(@PathVariable Long id_employee) {
+	public ResponseEntity<?> deletarEmployee(@PathVariable Long id_employee, @PathVariable(name="id") Long id) {
+		UserSS user = UserService.authenticated();
+		if (user == null || !user.hasRole(Profile.ADMIN) || !id.equals(user.getId())) {
+			return ResponseEntity.status(HttpStatus.FORBIDDEN).build();
+		}
+		
 		if (employeeRepository.existsById(id_employee)) {
 			employeeRepository.deleteById(id_employee);
 			return ResponseEntity.noContent().build();
@@ -208,9 +244,16 @@ public class EmployeeResource {
 	}
 
 	/*upload de foto*/
+	@PreAuthorize("hasAnyRole('EMPLOYEE')")
 	@PatchMapping("/{id_employee}/photos")
 	public ResponseEntity<?>updatePhotograph (@RequestBody FileUpload file,
 			@PathVariable(name = "id_employee") Long id_employee, @PathVariable(name = "id") Long id_company) {
+		UserSS user = UserService.authenticated();
+		if (user == null || !user.hasRole(Profile.EMPLOYEE) || !id_employee.equals(user.getId())) {
+			return ResponseEntity.status(HttpStatus.FORBIDDEN).build();
+		}
+		
+		
 		ImageValidations imageValidations = new ImageValidations();
 		Company company = new Company();
 		company = company.optionalToCompany(companyRepository.findById(id_company));
@@ -240,8 +283,13 @@ public class EmployeeResource {
 	}
 	
 	/*deletar foto*/
+	@PreAuthorize("hasAnyRole('EMPLOYEE')")
 	@DeleteMapping("{id_employee}/photos")
 	public ResponseEntity<?> deleteLogo(@PathVariable(name = "id_employee") Long id_employee, @PathVariable(name = "id") Long id_company){
+		UserSS user = UserService.authenticated();
+		if (user == null || !user.hasRole(Profile.EMPLOYEE) || !id_employee.equals(user.getId())) {
+			return ResponseEntity.status(HttpStatus.FORBIDDEN).build();
+		}
 		Company company = new Company();
 		company = company.optionalToCompany(companyRepository.findById(id_company));
 		if (employeeRepository.existsByCompany(company)) {

@@ -23,8 +23,8 @@ import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.Email;
+import javax.validation.constraints.NotBlank;
 
-import org.hibernate.validator.constraints.br.CNPJ;
 import org.hibernate.validator.constraints.br.CPF;
 
 import com.visumIT.Business.boost.enums.Profile;
@@ -59,9 +59,10 @@ public class Representative {
 	private String name;
 	
 	@Email
-	@Column(name="email",columnDefinition = "VARCHAR(40)")
+	@Column(name="email",columnDefinition = "VARCHAR(40)", unique=true)
 	private String email;
 	
+	@NotBlank
 	@Column(name="password", columnDefinition = "VARCHAR(150)")
 	private String password;
 	
@@ -73,8 +74,9 @@ public class Representative {
 	@Column(name = "phones", columnDefinition = "VARCHAR(20)")
 	private List<Phone> phones = new  ArrayList<>();
 	
+	@NotBlank
 	@CPF(message="{cpf.Representative.cpf}")
-	@Column(name="cpf", columnDefinition="VARCHAR(20)")
+	@Column(name="cpf", columnDefinition="VARCHAR(20)", unique=true)
 	private String cpf;
 	
 	@Column(name="date_birth")

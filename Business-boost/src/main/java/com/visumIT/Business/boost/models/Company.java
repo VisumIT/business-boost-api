@@ -116,7 +116,7 @@ public class Company {
 	@Column(name = "email", columnDefinition = "VARCHAR(40)", unique=true)
 	private String email;
 	
-	@JsonIgnore
+	//@JsonIgnore
 	@NotBlank(message="{Password.not.blank}")
 	@Size(min = 8, message="{Size.Company.Password}")
 	@Column(name = "password", columnDefinition = "VARCHAR(255)")

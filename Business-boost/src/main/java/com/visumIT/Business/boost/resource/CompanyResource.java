@@ -10,13 +10,18 @@ import java.util.Calendar;
 import java.util.List;
 import java.util.Optional;
 
+import javax.validation.ConstraintViolationException;
 import javax.validation.Valid;
 
+import org.json.JSONArray;
 import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PatchMapping;
@@ -31,6 +36,8 @@ import org.springframework.web.bind.annotation.RestController;
 import com.visumIT.Business.boost.DTO.CompanyDTO;
 import com.visumIT.Business.boost.DTO.CompanyWithoutEmployeesDTO;
 import com.visumIT.Business.boost.DTO.RepresentativeDTO;
+import com.visumIT.Business.boost.DTO.RepresentativeWithoutCompaniesDTO;
+import com.visumIT.Business.boost.enums.Profile;
 import com.visumIT.Business.boost.exception.ValidationFormat;
 import com.visumIT.Business.boost.functions.ImageValidations;
 import com.visumIT.Business.boost.functions.PartialUpdateValidation;
@@ -40,6 +47,9 @@ import com.visumIT.Business.boost.models.Representative;
 import com.visumIT.Business.boost.repository.CompanyRepository;
 import com.visumIT.Business.boost.repository.PhoneRepository;
 import com.visumIT.Business.boost.repository.RepresentativeRepository;
+import com.visumIT.Business.boost.security.UserSS;
+import com.visumIT.Business.boost.services.UserService;
+
 import com.visumIT.Business.boost.upload.FileUpload;
 import com.visumIT.Business.boost.upload.FileUploadUrl;
 import com.visumIT.Business.boost.upload.FirebaseStorageService;
@@ -53,6 +63,9 @@ public class CompanyResource {
 
 	@Autowired
 	private RepresentativeRepository representativeRepository;
+
+	@Autowired
+	private BCryptPasswordEncoder bCryptEncoder;
 
 	@Autowired
 	private FirebaseStorageService firebase;
@@ -73,26 +86,27 @@ public class CompanyResource {
 	// valida alguns campos para cadastro da company
 	private String validateCompany(Company company) {
 		if (companyRepository.existsByEmail(company.getEmail())) {
-			return "E-mail allready in use";
+			throw new ConstraintViolationException("E-mail allready in use", null);
 		} else if (companyRepository.existsByCnpj(company.getCnpj())) {
-			return "CNPJ allready in use";
+			throw new ConstraintViolationException("cnpj already in use", null);
+			// return "CNPJ allready in use";
 		} else if (company.getPassword().length() < 8) {
-			return "Password must be at least 8 characters";
+			throw new ConstraintViolationException("Password must be at least 8 characters", null);
 		} else {
-			return "valid";
+			return null;
 		}
 	}
 
 	// valida alguns campos de representantes para cadastro
 	private String validateRepresentative(Representative representative) {
 		if (representativeRepository.existsByEmail(representative.getEmail())) {
-			return "E-mail allready in use";
+			throw new ConstraintViolationException("E-mail allready in use", null);
 		} else if (representativeRepository.existsByCpf(representative.getCpf())) {
-			return "CPF allready in use";
+			throw new ConstraintViolationException("CPF allready in use", null);
 		} else if (representative.getPassword().length() < 8) {
-			return "Password must be at least 8 characters";
+			throw new ConstraintViolationException("Password must be at least 8 characters", null);
 		} else {
-			return "valid";
+			return null;
 		}
 	}
 
@@ -104,7 +118,6 @@ public class CompanyResource {
 		return companiesWithout.toCompaniesDTO(companies);
 	}
 
-	// detalhes da empresa, está rota deve ser protegida
 	@GetMapping("/{id}")
 	public ResponseEntity<?> getCompany(@PathVariable Long id) {
 		Optional<Company> companyProcurada = companyRepository.findById(id);
@@ -116,10 +129,14 @@ public class CompanyResource {
 	// retorna representatives de um company
 	@GetMapping("/{id}/representatives")
 	public ResponseEntity<?> getRepresentatives(@PathVariable Long id) {
+		UserSS user = UserService.authenticated();
+		if (user == null || !user.hasRole(Profile.ADMIN) || !id.equals(user.getId())) {
+			return ResponseEntity.status(HttpStatus.FORBIDDEN).build();
+		}
 		Optional<Company> companyProcurada = companyRepository.findById(id);
 		if (companyProcurada.isPresent()) {
-			RepresentativeDTO representativeDTO = new RepresentativeDTO();
-			List<RepresentativeDTO> representativesDTO = representativeDTO
+			RepresentativeWithoutCompaniesDTO dtoWC = new RepresentativeWithoutCompaniesDTO();
+			List<RepresentativeWithoutCompaniesDTO> representativesDTO = dtoWC
 					.toRepresentativesDTO(companyProcurada.get().getRepresentatives());
 			return ResponseEntity.ok().body(representativesDTO);
 		}
@@ -129,40 +146,52 @@ public class CompanyResource {
 	// cadastro da company
 	@PostMapping
 	public ResponseEntity<?> saveCompany(@Valid @RequestBody Company company, BindingResult bindingResult) {
-		if (!validateCompany(company).contains("valid")) {
-			String message = validateCompany(company);
-			return ResponseEntity.badRequest().body(new JSONObject().put("message", message).toString());
-		}
-		if (bindingResult.hasErrors()) {
-			return ResponseEntity.badRequest().body(ValidationFormat.formatarErros(bindingResult));
+		try {
+			validateCompany(company);
+			if (bindingResult.hasErrors()) {
+				return ResponseEntity.badRequest().body(ValidationFormat.formatarErros(bindingResult));
+			} else {
+				// ImageResource imageResource = new ImageResource();
+				company.setLogo(standardImage);
+				// criptografar senha
+				company.setPassword(bCryptEncoder.encode(company.getPassword()));
+				Profile profile = Profile.ADMIN;
+				company.addProfile(profile);
+				Company e = companyRepository.save(company);
+				for (Phone tel : e.getPhones()) {
+					tel.setCompany(e);
+					phoneRepository.save(tel);
+				}
 
-		} else {
-			// ImageResource imageResource = new ImageResource();
-			company.setLogo(standardImage);
-			Company e = companyRepository.save(company);
-			for (Phone tel : e.getPhones()) {
-				tel.setCompany(e);
-				phoneRepository.save(tel);
+				CompanyDTO dtoProcurada = dto.toCompanyDTO(e);
+				return ResponseEntity.status(HttpStatus.CREATED).body(dtoProcurada);
 			}
+		} catch (ConstraintViolationException e) {
+			JSONObject jsonObject = null;
+			JSONArray jsonArray = new JSONArray();
+			jsonObject = new JSONObject().put("Field", e.getCause());
+			jsonObject.put("Message", e.getMessage());
+			jsonArray.put(jsonObject);
+			JSONObject json = new JSONObject().put("Errors", jsonArray);
 
-			CompanyDTO dtoProcurada = dto.toCompanyDTO(e);
-			return ResponseEntity.status(HttpStatus.CREATED).body(dtoProcurada);
+			return ResponseEntity.badRequest().body(json.toString());
 		}
 	}
 
 	// cadastro de novo representative
-	@PostMapping("/{id}/novo-representative")
+	@PreAuthorize("hasAnyRole('ADMIN')")
+	@PostMapping("/{id}/new-representative")
 	public ResponseEntity<?> saveRepresentative(@Valid @RequestBody Representative representative,
-			@PathVariable Long id, BindingResult bindingResult) {
-		// validações
-		if (!validateRepresentative(representative).contains("valid")) {
-			String message = validateRepresentative(representative);
-			return ResponseEntity.badRequest().body(new JSONObject().put("message", message).toString());
-
-		} else if (bindingResult.hasErrors()) {
+			@PathVariable Long id, BindingResult bindingResult, MethodArgumentNotValidException m ) {
+		UserSS user = UserService.authenticated();
+		if (user == null || !user.hasRole(Profile.ADMIN) || !id.equals(user.getId())) {
+			return ResponseEntity.status(HttpStatus.FORBIDDEN).build();
+		}
+		if (bindingResult.hasErrors()) {
 			return ResponseEntity.badRequest().body(ValidationFormat.formatarErros(bindingResult));
-
-		} else {
+}
+		try {
+			validateRepresentative(representative);
 			// Representative r = representativeRepository.save(representative);
 			Optional<Company> company = companyRepository.findById(id);
 			Company emp = new Company();
@@ -171,7 +200,7 @@ public class CompanyResource {
 				List<Company> companies = new ArrayList<>();
 				companies.add(emp.optionalToCompany(company));
 				representative.setCompanies(companies);
-
+				representativeRepository.save(representative);
 				for (Phone tel : representative.getPhones()) {
 					tel.setRepresentative(representative);
 					phoneRepository.save(tel);
@@ -184,12 +213,28 @@ public class CompanyResource {
 			} else
 				return ResponseEntity.badRequest().build();
 
+		} catch (ConstraintViolationException e) {
+			
+			JSONObject jsonObject = null;
+			JSONArray jsonArray = new JSONArray();
+			jsonObject = new JSONObject().put("Field", e.getCause());
+			jsonObject.put("Message", e.getMessage());
+			jsonArray.put(jsonObject);
+			JSONObject json = new JSONObject().put("Errors", jsonArray);
+		
+			return ResponseEntity.badRequest().body(json.toString());
 		}
 	}
 
 	// associar representative já cadastrado
+	@PreAuthorize("hasAnyRole('ADMIN')")
 	@PatchMapping("/{id_company}/representatives/{id_representative}")
 	public ResponseEntity<?> addRepresentative(@PathVariable Long id_company, @PathVariable Long id_representative) {
+		UserSS user = UserService.authenticated();
+		if (user == null || !user.hasRole(Profile.ADMIN) || !id_company.equals(user.getId())) {
+			return ResponseEntity.status(HttpStatus.FORBIDDEN).build();
+		}
+
 		if (companyRepository.existsById(id_company) && representativeRepository.existsById(id_representative)) {
 			Optional<Company> companyOptional = companyRepository.findById(id_company);
 			Optional<Representative> representativeOptional = representativeRepository.findById(id_representative);
@@ -213,8 +258,14 @@ public class CompanyResource {
 	}
 
 	// desassociar representative
+	@PreAuthorize("hasAnyRole('ADMIN')")
 	@PatchMapping("/{id_company}/disassociate-representative/{id_representative}")
 	public ResponseEntity<?> removeRepresentative(@PathVariable Long id_company, @PathVariable Long id_representative) {
+		UserSS user = UserService.authenticated();
+		if (user == null || !user.hasRole(Profile.ADMIN) || !id_company.equals(user.getId())) {
+			return ResponseEntity.status(HttpStatus.FORBIDDEN).build();
+		}
+
 		if (companyRepository.existsById(id_company) && representativeRepository.existsById(id_representative)) {
 			Optional<Company> companyOptional = companyRepository.findById(id_company);
 			Optional<Representative> representativeOptional = representativeRepository.findById(id_representative);
@@ -241,9 +292,15 @@ public class CompanyResource {
 
 	// usando o retorno response entity para poder retornar o erro 404 caso tente
 	// deletar algo q não existe
+	@PreAuthorize("hasAnyRole('ADMIN')")
 	@DeleteMapping("/{id}")
 	@ResponseStatus(HttpStatus.NO_CONTENT)
 	public ResponseEntity<?> deleteCompany(@PathVariable Long id) {
+		UserSS user = UserService.authenticated();
+		if (user == null || !user.hasRole(Profile.ADMIN) || !id.equals(user.getId())) {
+			return ResponseEntity.status(HttpStatus.FORBIDDEN).build();
+		}
+
 		if (companyRepository.existsById(id)) {
 			companyRepository.deleteById(id);
 			return ResponseEntity.noContent().build();
@@ -253,15 +310,20 @@ public class CompanyResource {
 	}
 
 	// atualização parcial da company
+	@PreAuthorize("hasAnyRole('ADMIN')")
 	@PatchMapping("/{id}")
 	public ResponseEntity<?> partialCompanyUpdate(@PathVariable Long id, @RequestBody Company bodyCompany)
-	throws IllegalAccessException{
+			throws IllegalAccessException {
+		UserSS user = UserService.authenticated();
+		if (user == null || !user.hasRole(Profile.ADMIN) || !id.equals(user.getId())) {
+			return ResponseEntity.status(HttpStatus.FORBIDDEN).build();
+		}
 		Company baseCompany = new Company();
 		baseCompany = baseCompany.optionalToCompany(companyRepository.findById(id));
 		PartialUpdateValidation validation = new PartialUpdateValidation();
-		
-		bodyCompany = (Company)validation.updateFields(bodyCompany, baseCompany);
-		
+
+		bodyCompany = (Company) validation.updateFields(bodyCompany, baseCompany);
+
 		bodyCompany.setId(id);
 		companyRepository.save(bodyCompany);
 		dto = dto.toCompanyDTO(bodyCompany);
@@ -269,9 +331,14 @@ public class CompanyResource {
 	}
 
 	// atualização completa
+	@PreAuthorize("hasAnyRole('ADMIN')")
 	@PutMapping("/{id}")
 	@ResponseStatus(HttpStatus.OK)
 	public ResponseEntity<?> fullCompanyUpdate(@RequestBody Company company, @PathVariable Long id) {
+		UserSS user = UserService.authenticated();
+		if (user == null || !user.hasRole(Profile.ADMIN) || !id.equals(user.getId())) {
+			return ResponseEntity.status(HttpStatus.FORBIDDEN).build();
+		}
 		if (companyRepository.existsById(id)) {
 			// setando o id da company para atualizar corretamente
 			Optional<Company> emp = companyRepository.findById(id);
@@ -298,8 +365,13 @@ public class CompanyResource {
 	}
 
 	/* #############update de logo da empresa########### */
+	@PreAuthorize("hasAnyRole('ADMIN')")
 	@PatchMapping("{id}/logo")
 	public ResponseEntity<?> updateLogoCompany(@RequestBody FileUpload file, @PathVariable Long id) {
+		UserSS user = UserService.authenticated();
+		if (user == null || !user.hasRole(Profile.ADMIN) || !id.equals(user.getId())) {
+			return ResponseEntity.status(HttpStatus.FORBIDDEN).build();
+		}
 		ImageValidations imageValidations = new ImageValidations();
 		if (!imageValidations.validImage(file)) {
 			return ResponseEntity.badRequest()
@@ -307,20 +379,20 @@ public class CompanyResource {
 
 		} else if (companyRepository.existsById(id)) {
 			Optional<Company> companyOptional = companyRepository.findById(id);
-				
+
 			Company company = new Company();
 			company = company.optionalToCompany(companyOptional);
-			if(!company.getLogo().isEmpty()) {
+			if (!company.getLogo().isEmpty()) {
 				String[] fileName = companyOptional.get().getLogo().split("/");
 				firebase.delete(fileName[4]);
 			}
-						
-			//garantindo nome único, função será separada depois
+
+			// garantindo nome único, função será separada depois
 			Calendar calendar = Calendar.getInstance();
-			String name = calendar.getTimeInMillis() +file.getFileName();
-			
+			String name = calendar.getTimeInMillis() + file.getFileName();
+
 			FileUploadUrl url = new FileUploadUrl(firebase.upload(file, name));
-			
+
 			company = company.optionalToCompany(companyOptional);
 			company.setLogo(url.getUrl());
 			companyRepository.save(company);
@@ -330,19 +402,24 @@ public class CompanyResource {
 	}
 
 	/* #############delete do logo da empresa########### */
+	@PreAuthorize("hasAnyRole('ADMIN')")
 	@DeleteMapping("{id}/logo")
 	public ResponseEntity<?> deleteLogo(@PathVariable Long id) {
+		UserSS user = UserService.authenticated();
+		if (user == null || !user.hasRole(Profile.ADMIN) || !id.equals(user.getId())) {
+			return ResponseEntity.status(HttpStatus.FORBIDDEN).build();
+		}
 		if (companyRepository.existsById(id)) {
 			Optional<Company> companyOptional = companyRepository.findById(id);
 			String logo = companyOptional.get().getLogo();
-			String[] fileName = logo.split("/");			
-			
+			String[] fileName = logo.split("/");
+
 			if (firebase.delete(fileName[4])) {
 				Company company = new Company();
 				company = company.optionalToCompany(companyOptional);
 				company.setLogo(" ");
 				companyRepository.save(company);
-				
+
 				return ResponseEntity.noContent().build();
 			} else {
 				return ResponseEntity.notFound().build();

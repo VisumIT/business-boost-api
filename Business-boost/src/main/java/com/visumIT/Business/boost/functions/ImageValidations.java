@@ -3,8 +3,6 @@ package com.visumIT.Business.boost.functions;
 import java.util.ArrayList;
 
 import com.visumIT.Business.boost.upload.FileUpload;
-
-
 public class ImageValidations {
 
 	private ArrayList<String> allowedExtensions = new ArrayList<>();

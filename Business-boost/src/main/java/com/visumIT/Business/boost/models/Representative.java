@@ -2,12 +2,18 @@ package com.visumIT.Business.boost.models;
 
 import java.sql.Date;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Optional;
+import java.util.Set;
+import java.util.stream.Collectors;
 
 import javax.persistence.CascadeType;
+import javax.persistence.CollectionTable;
 import javax.persistence.Column;
+import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -17,10 +23,11 @@ import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.Email;
+import javax.validation.constraints.NotBlank;
 
 import org.hibernate.validator.constraints.br.CPF;
 
-import lombok.Data;
+import com.visumIT.Business.boost.enums.Profile;
 
 /* Author: kaique
  * Classe para representar a tabela de representative do banco
@@ -36,6 +43,10 @@ public class Representative {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	
+    @ElementCollection(fetch=FetchType.EAGER)
+    @CollectionTable(name="tbl_profiles")
+    private Set<Integer> profiles = new HashSet<>();
+	
 	//company
 	@ManyToMany
 	@JoinTable(name = "tbl_company_representative", joinColumns = @JoinColumn
@@ -48,9 +59,10 @@ public class Representative {
 	private String name;
 	
 	@Email
-	@Column(name="email",columnDefinition = "VARCHAR(40)")
+	@Column(name="email",columnDefinition = "VARCHAR(40)", unique=true)
 	private String email;
 	
+	@NotBlank
 	@Column(name="password", columnDefinition = "VARCHAR(150)")
 	private String password;
 	
@@ -59,11 +71,12 @@ public class Representative {
 	
 	//relação
 	@OneToMany(cascade=CascadeType.ALL, mappedBy = "representative")
-	@Column(name = "phone", columnDefinition = "VARCHAR(20)")
+	@Column(name = "phones", columnDefinition = "VARCHAR(20)")
 	private List<Phone> phones = new  ArrayList<>();
 	
-	//@CPF
-	@Column(name="cpf", columnDefinition="VARCHAR(20)")
+	@NotBlank
+	@CPF(message="{cpf.Representative.cpf}")
+	@Column(name="cpf", columnDefinition="VARCHAR(20)", unique=true)
 	private String cpf;
 	
 	@Column(name="date_birth")
@@ -75,6 +88,12 @@ public class Representative {
 	@Column(name="description")
 	private String description;
 	
+	
+	
+	public Representative() {
+		this.addProfile(Profile.REPRESENTATIVE);
+	}
+
 	public Representative optionalToRepresentative( Optional<Representative> optional) {
 		Representative rep = new Representative();
 		
@@ -178,7 +197,14 @@ public class Representative {
 	public void setDescription(String description) {
 		this.description = description;
 	}
-	
+    
+	public Set<Profile> getProfiles() {
+    	return profiles.stream().map(x -> Profile.toEnum(x)).collect(Collectors.toSet());
+    }
+    
+    public void addProfile(Profile profile) {
+    	profiles.add(profile.getId());
+    }
 	
 	
 }

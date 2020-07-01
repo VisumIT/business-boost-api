@@ -4,6 +4,8 @@ package com.visumIT.Business.boost.exception;
 
 import java.util.List;
 
+import javax.validation.ConstraintViolationException;
+
 import org.json.JSONArray;
 import org.json.JSONObject;
 import org.springframework.validation.BindingResult;

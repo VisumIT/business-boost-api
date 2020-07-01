@@ -1,11 +1,16 @@
 package com.visumIT.Business.boost.models;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Optional;
+import java.util.Set;
+import java.util.stream.Collectors;
 
 import javax.persistence.CascadeType;
+import javax.persistence.CollectionTable;
 import javax.persistence.Column;
+import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
@@ -16,9 +21,10 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.Email;
-import javax.validation.constraints.Size;
+import javax.validation.constraints.NotBlank;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.visumIT.Business.boost.enums.Profile;
 
 @Entity
 @Table(name="tbl_employees")
@@ -32,6 +38,10 @@ public class Employee {
     @ManyToOne(fetch = FetchType.LAZY)
     @JsonIgnore
     private Company company;
+    
+    @ElementCollection(fetch=FetchType.EAGER)
+    @CollectionTable(name="tbl_profiles", joinColumns = @JoinColumn(name="employee_id "))
+    private Set<Integer> profiles = new HashSet<>();
 
     @Column(name="registration", columnDefinition = "VARCHAR(30)")
     private String registration;
@@ -135,4 +145,16 @@ public class Employee {
     public void setPhones(List<Phone> phones) {
         this.phones = phones;
     }
+    
+    public Set<Profile> getProfiles() {
+    	return profiles.stream().map(x -> Profile.toEnum(x)).collect(Collectors.toSet());
+    }
+    
+    public void addProfile(Profile profile) {
+    	profiles.add(profile.getId());
+    }
+
+	public void setProfiles(Set<Integer> profiles) {
+		this.profiles = profiles;
+	}
 }

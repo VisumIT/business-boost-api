@@ -54,7 +54,6 @@ public class RepresentativeDTO {
 		return dto;
 	}
 
-
 	public List<RepresentativeDTO> toRepresentativesDTO(List<Representative> representatives) {
 		//criando o array de empresas dto 
 		RepresentativeDTO dto = new RepresentativeDTO();
@@ -175,12 +174,4 @@ public class RepresentativeDTO {
 	public void setCompanies(List<CompanyWithoutEmployeesDTO> companies) {
 		this.companies = companies;
 	}
-
-
-
-
-
-
-	
-
 }

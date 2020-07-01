@@ -6,12 +6,18 @@
 package com.visumIT.Business.boost.models;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Optional;
+import java.util.Set;
+import java.util.stream.Collectors;
 
 import javax.persistence.CascadeType;
+import javax.persistence.CollectionTable;
 import javax.persistence.Column;
+import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -26,22 +32,26 @@ import javax.validation.constraints.Size;
 import org.hibernate.validator.constraints.br.CNPJ;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.visumIT.Business.boost.enums.Profile;
 
-import lombok.Data;
 @Entity
 @Table(name = "tbl_companies")
 public class Company {
-
+	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Long id;
-	
+	private Long id;	
+  @ElementCollection(fetch=FetchType.EAGER)
+  @CollectionTable(name="tbl_profiles")
+  private Set<Integer> profiles = new HashSet<>();
+
 	@OneToMany(mappedBy = "company")
 	private List<Order> orders = new ArrayList<>();
 	
 	@OneToMany(mappedBy = "company")
 	private List<Product> products = new ArrayList<>();
 		
+
 	//Representative
 	@ManyToMany(mappedBy = "companies")
 	@JsonIgnore
@@ -99,8 +109,8 @@ public class Company {
 	private String companyName;
 	
 	@NotBlank(message="{cnpj.not.blank}")
-	@CNPJ(message="{CNPJ.Company.cnpj}")
-	@Column(name = "cnpj", columnDefinition = "VARCHAR(20)")
+	@CNPJ(message="{cnpj.Company.cnpj}")
+	@Column(name = "cnpj", columnDefinition = "VARCHAR(20)", unique=true)
 	private String cnpj;
 
 	@Size(max = 40)
@@ -112,6 +122,7 @@ public class Company {
 	@Column(name = "email", columnDefinition = "VARCHAR(40)", unique=true)
 	private String email;
 	
+	//@JsonIgnore
 	@NotBlank(message="{Password.not.blank}")
 	@Size(min = 8, message="{Size.Company.Password}")
 	@Column(name = "password", columnDefinition = "VARCHAR(255)")
@@ -128,6 +139,10 @@ public class Company {
 	@Column(name="employees")
 	private List<Employee> employees = new  ArrayList<>();
 
+	public Company() {
+		this.addProfile(Profile.ADMIN);
+	}
+	
 	//transformar um tipo opcional no tipo Company
 	public Company optionalToCompany( Optional<Company> optional) {
 			Company Company = new Company();
@@ -336,12 +351,22 @@ public class Company {
 	public void setEmployees(List<Employee> employees) {
 		this.employees = employees;
 	}
+    public Set<Profile> getProfiles() {
+    	return profiles.stream().map(x -> Profile.toEnum(x))
+    			.collect(Collectors.toSet());
+    }
+    
+	public void addProfile(Profile profile) {
+    	profiles.add(profile.getId());
+    }
+    @Override
+    public String toString() {
+    	return this.companyName;
+    }
 	public List<Product> getProduct() {
 		return products;
 	}
 	public void setProduct(List<Product> products) {
 		this.products = products;
 	}
-	
-	
 }

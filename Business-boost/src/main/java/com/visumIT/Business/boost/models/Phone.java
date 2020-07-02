@@ -35,6 +35,11 @@ public class Phone {
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JsonIgnore
 	private Representative representative;
+	
+	@JoinColumn(name = "client_id")
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JsonIgnore
+	private Client client;
 
 	@JoinColumn(name = "employees_id")
 	@ManyToOne(fetch = FetchType.LAZY)
@@ -81,6 +86,14 @@ public class Phone {
 
 	public void setEmployee(Employee employee) {
 		this.employee = employee;
+	}
+
+	public Client getClient() {
+		return client;
+	}
+
+	public void setClient(Client client) {
+		this.client = client;
 	}
 	
 

@@ -207,9 +207,11 @@ public class CompanyResource {
 		if (bindingResult.hasErrors()) {
 			return ResponseEntity.badRequest().body(ValidationFormat.formatarErros(bindingResult));
 		}
-		Optional<Company> company = companyRepository.findById(id);
-		System.out.println("---------------------------");
-		System.out.println(company);
+
+		if (clientRepository.existsByEmail(client.getEmail())) {
+			return ResponseEntity.badRequest().body(new JSONObject().put("message", "Email already in use").toString());
+		}
+		Optional<Company> company = companyRepository.findById(id);	
 		if (company.isPresent()) {
 			Company emp = new Company();
 			List<Company> companies = new ArrayList<>();

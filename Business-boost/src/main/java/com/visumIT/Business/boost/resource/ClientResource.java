@@ -1,7 +1,10 @@
 package com.visumIT.Business.boost.resource;
 
+import javax.validation.ConstraintViolationException;
 import javax.validation.Valid;
 
+import org.json.JSONArray;
+import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -25,21 +28,21 @@ import com.visumIT.Business.boost.repository.PhoneRepository;
 @RestController
 @RequestMapping("/customers")
 public class ClientResource {
-	
+
 	@Autowired
 	private ClientRepository clientRepository;
-	
+
 	@Autowired
 	PhoneRepository phoneRepository;
-	
+
 	@PreAuthorize("hasAnyRole('ADMIN')")
 	@GetMapping
-	public ResponseEntity<?> getCustomers(){
+	public ResponseEntity<?> getCustomers() {
 		return ResponseEntity.ok().body(clientRepository.findAll());
 	}
-	
+
 	@PreAuthorize("hasAnyRole('ADMIN')")
-	public ResponseEntity<?> saveClient(@Valid @RequestBody Client client,BindingResult bindingResult) {
+	public ResponseEntity<?> saveClient(@Valid @RequestBody Client client, BindingResult bindingResult) {
 		if (bindingResult.hasErrors()) {
 			return ResponseEntity.badRequest().body(ValidationFormat.formatarErros(bindingResult));
 		}
@@ -50,25 +53,33 @@ public class ClientResource {
 		}
 		return ResponseEntity.status(HttpStatus.CREATED).body(client);
 	}
+
 	@PreAuthorize("hasAnyRole('ADMIN')")
 	@PutMapping("/{id}")
-	public ResponseEntity<?> updateClient(@Valid @RequestBody Client client, @PathVariable Long id, BindingResult bindingResult){
+	public ResponseEntity<?> updateClient(@Valid @RequestBody Client client, @PathVariable Long id,
+			BindingResult bindingResult) {
 		if (bindingResult.hasErrors()) {
 			return ResponseEntity.badRequest().body(ValidationFormat.formatarErros(bindingResult));
-		}	
-		if(clientRepository.existsById(id)) {
-			Client opt =clientRepository.findClientById(id);
-			client.setCompanies(opt.getCompanies());
-			client = clientRepository.save(client);
-			return ResponseEntity.status(HttpStatus.CREATED).body(client);
-		}else {
-			return ResponseEntity.notFound().build();
 		}
+			if (clientRepository.existsByEmail(client.getEmail())) {
+				System.out.println("---------------------");
+				return ResponseEntity.badRequest().body(new JSONObject().put("message", "Email already in use").toString());
+			}
+			if (clientRepository.existsById(id)) {
+				Client opt = clientRepository.findClientById(id);
+				client.setCompanies(opt.getCompanies());
+				client = clientRepository.save(client);
+				return ResponseEntity.status(HttpStatus.CREATED).body(client);
+			} else {
+				return ResponseEntity.notFound().build();
+			}
+		
 	}
+
 	@PreAuthorize("hasAnyRole('ADMIN')")
 	@DeleteMapping("/{id}")
 	public ResponseEntity<?> deleteClient(@PathVariable Long id) {
-		if(clientRepository.existsById(id)) {
+		if (clientRepository.existsById(id)) {
 			clientRepository.deleteById(id);
 			return ResponseEntity.noContent().build();
 		}

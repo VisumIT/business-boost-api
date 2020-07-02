@@ -8180,3 +8180,51 @@ Binding(CTRL+SHIFT+T,
 
 !ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2020-07-02 13:54:52.207
 !MESSAGE executing callback sts4.classpath.dWhNPzjS SUCCESS [done]
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2020-07-02 16:57:50.734
+!MESSAGE Entering DelegatingStreamConnectionProvider()
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2020-07-02 16:57:50.735
+!MESSAGE DelegatingStreamConnectionProvider classloader = org.eclipse.osgi.internal.loader.EquinoxClassLoader@17dfa412[org.springframework.tooling.boot.ls:1.18.0.202005250744(id=1009)]
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2020-07-02 16:57:50.735
+!MESSAGE SpringBootLanguageServer exists!
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2020-07-02 16:57:55.289
+!MESSAGE Boot LS startup time from start to initialized: 4554ms
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2020-07-02 16:57:55.343
+!MESSAGE ClasspathListenerHandler addClasspathListener sts4.classpath.mbtfizKvisBatched = true
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2020-07-02 16:57:55.343
+!MESSAGE Creating project sorter...
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2020-07-02 16:57:55.344
+!MESSAGE Creating project sorter... DONE
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2020-07-02 16:57:55.345
+!MESSAGE Setting up ClasspathListenerManager
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2020-07-02 16:57:55.345
+!MESSAGE Scheduling initial event for all projects ...
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2020-07-02 16:57:55.345
+!MESSAGE Scheduling initial event for all projects DONE
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2020-07-02 16:57:55.345
+!MESSAGE ClasspathListenerHandler addClasspathListener sts4.classpath.mbtfizKv => OK
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2020-07-02 16:57:55.346
+!MESSAGE exists = true open = true => deleted = false
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2020-07-02 16:57:55.350
+!MESSAGE classpath=175 entries
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2020-07-02 16:57:55.351
+!MESSAGE buffering callback sts4.classpath.mbtfizKv Business-boost false 175
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2020-07-02 16:57:55.351
+!MESSAGE executing callback sts4.classpath.mbtfizKv 1 batched events
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2020-07-02 16:57:55.471
+!MESSAGE executing callback sts4.classpath.mbtfizKv SUCCESS [done]

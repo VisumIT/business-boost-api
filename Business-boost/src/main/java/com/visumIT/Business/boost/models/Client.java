@@ -10,11 +10,16 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 @Table(name = "tbl_customers")
@@ -43,6 +48,13 @@ public class Client {
 	@Size(max = 50)
 	@Column(name = "neighborhood", columnDefinition = "VARCHAR(50)")
 	private String neighborhood;
+	
+	@JsonIgnore
+	@ManyToMany
+	@JoinTable(name = "tbl_company_client", joinColumns = @JoinColumn
+													(name = "client_id", referencedColumnName = "id"),
+													inverseJoinColumns = @JoinColumn(name = "company_id", referencedColumnName = "id"))
+	private List <Company> companies = new ArrayList<>();
 
 	@Size(max = 50)
 	@Column(name = "city", columnDefinition = "VARCHAR(50)")
@@ -166,4 +178,13 @@ public class Client {
 	public void setPhones(List<Phone> phones) {
 		this.phones = phones;
 	}
+
+	public List<Company> getCompanies() {
+		return companies;
+	}
+
+	public void setCompanies(List<Company> companies) {
+		this.companies = companies;
+	}
+	
 }

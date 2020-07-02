@@ -54,6 +54,10 @@ public class Company {
 	@ManyToMany(mappedBy = "companies")
 	@JsonIgnore
 	private List<Representative> representatives = new ArrayList<>();
+	
+	@ManyToMany(mappedBy = "companies")
+	@JsonIgnore
+	private List<Client> customers = new ArrayList<>();
 
 	@OneToMany(cascade = CascadeType.ALL, mappedBy = "company")
 	@Column(name = "phones", columnDefinition = "VARCHAR(20)")
@@ -373,4 +377,13 @@ public class Company {
 	public void setProduct(List<Product> products) {
 		this.products = products;
 	}
+
+	public List<Client> getCustomers() {
+		return customers;
+	}
+
+	public void setCustomers(List<Client> customers) {
+		this.customers = customers;
+	}
+	
 }

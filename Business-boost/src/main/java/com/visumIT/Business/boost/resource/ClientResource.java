@@ -39,7 +39,6 @@ public class ClientResource {
 	}
 	
 	@PreAuthorize("hasAnyRole('ADMIN')")
-	@PostMapping
 	public ResponseEntity<?> saveClient(@Valid @RequestBody Client client,BindingResult bindingResult) {
 		if (bindingResult.hasErrors()) {
 			return ResponseEntity.badRequest().body(ValidationFormat.formatarErros(bindingResult));
@@ -58,6 +57,8 @@ public class ClientResource {
 			return ResponseEntity.badRequest().body(ValidationFormat.formatarErros(bindingResult));
 		}	
 		if(clientRepository.existsById(id)) {
+			Client opt =clientRepository.findClientById(id);
+			client.setCompanies(opt.getCompanies());
 			client = clientRepository.save(client);
 			return ResponseEntity.status(HttpStatus.CREATED).body(client);
 		}else {

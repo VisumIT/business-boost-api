@@ -41,9 +41,11 @@ import com.visumIT.Business.boost.enums.Profile;
 import com.visumIT.Business.boost.exception.ValidationFormat;
 import com.visumIT.Business.boost.functions.ImageValidations;
 import com.visumIT.Business.boost.functions.PartialUpdateValidation;
+import com.visumIT.Business.boost.models.Client;
 import com.visumIT.Business.boost.models.Company;
 import com.visumIT.Business.boost.models.Phone;
 import com.visumIT.Business.boost.models.Representative;
+import com.visumIT.Business.boost.repository.ClientRepository;
 import com.visumIT.Business.boost.repository.CompanyRepository;
 import com.visumIT.Business.boost.repository.PhoneRepository;
 import com.visumIT.Business.boost.repository.RepresentativeRepository;
@@ -63,6 +65,9 @@ public class CompanyResource {
 	@Autowired
 	private RepresentativeRepository representativeRepository;
 
+	@Autowired
+	private ClientRepository clientRepository;
+	
 	@Autowired
 	private BCryptPasswordEncoder bCryptEncoder;
 
@@ -141,6 +146,21 @@ public class CompanyResource {
 		}
 		return ResponseEntity.notFound().build();
 	}
+	
+	@GetMapping("/{id}/customers")
+	public ResponseEntity<?> getCustomers(@PathVariable Long id) {
+		UserSS user = UserService.authenticated();
+		if (user == null || !user.hasRole(Profile.ADMIN) || !id.equals(user.getId())) {
+			return ResponseEntity.status(HttpStatus.FORBIDDEN).build();
+		}
+		Optional<Company> companyProcurada = companyRepository.findById(id);
+		if (companyProcurada.isPresent()) {
+			
+			List<Client> customers = companyProcurada.get().getCustomers();
+			return ResponseEntity.ok().body(customers);
+		}
+		return ResponseEntity.notFound().build();
+	}
 
 	// cadastro da company
 	@PostMapping
@@ -176,7 +196,37 @@ public class CompanyResource {
 			return ResponseEntity.badRequest().body(json.toString());
 		}
 	}
-
+	
+	@PreAuthorize("hasAnyRole('ADMIN')")
+	@PostMapping("/{id}/new-client")
+	public ResponseEntity<?> saveClient(@Valid @RequestBody Client client, BindingResult bindingResult,@PathVariable Long id){
+		UserSS user = UserService.authenticated();
+		if (user == null || !user.hasRole(Profile.ADMIN) || !id.equals(user.getId())) {
+			return ResponseEntity.status(HttpStatus.FORBIDDEN).build();
+		}
+		if (bindingResult.hasErrors()) {
+			return ResponseEntity.badRequest().body(ValidationFormat.formatarErros(bindingResult));
+		}
+		Optional<Company> company = companyRepository.findById(id);
+		System.out.println("---------------------------");
+		System.out.println(company);
+		if (company.isPresent()) {
+			Company emp = new Company();
+			List<Company> companies = new ArrayList<>();
+			companies.add(emp.optionalToCompany(company));
+			client.setCompanies(companies);
+			clientRepository.save(client);
+			for (Phone tel : client.getPhones()) {
+				tel.setClient(client);
+				phoneRepository.save(tel);
+			}
+			return ResponseEntity.status(HttpStatus.CREATED).body(client);
+		}
+		
+		return ResponseEntity.notFound().build();
+	}
+	
+	
 	// cadastro de novo representative
 	@PreAuthorize("hasAnyRole('ADMIN')")
 	@PostMapping("/{id}/new-representative")
@@ -188,10 +238,9 @@ public class CompanyResource {
 		}
 		if (bindingResult.hasErrors()) {
 			return ResponseEntity.badRequest().body(ValidationFormat.formatarErros(bindingResult));
-}
+		}
 		try {
 			validateRepresentative(representative);
-			// Representative r = representativeRepository.save(representative);
 			Optional<Company> company = companyRepository.findById(id);
 			Company emp = new Company();
 

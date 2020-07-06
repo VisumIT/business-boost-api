@@ -1,10 +1,7 @@
 package com.visumIT.Business.boost.resource;
 
-import javax.validation.ConstraintViolationException;
 import javax.validation.Valid;
 
-import org.json.JSONArray;
-import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -13,7 +10,6 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -61,10 +57,6 @@ public class ClientResource {
 		if (bindingResult.hasErrors()) {
 			return ResponseEntity.badRequest().body(ValidationFormat.formatarErros(bindingResult));
 		}
-			if (clientRepository.existsByEmail(client.getEmail())) {
-				System.out.println("---------------------");
-				return ResponseEntity.badRequest().body(new JSONObject().put("message", "Email already in use").toString());
-			}
 			if (clientRepository.existsById(id)) {
 				Client opt = clientRepository.findClientById(id);
 				client.setCompanies(opt.getCompanies());

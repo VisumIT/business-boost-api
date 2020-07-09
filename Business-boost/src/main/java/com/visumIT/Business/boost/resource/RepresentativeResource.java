@@ -254,7 +254,7 @@ public class RepresentativeResource {
 
 			representative.setPhotograph(url.getUrl());
 			representativeRepository.save(representative);
-			return ResponseEntity.ok().body(representative.getPhotograph());
+			return ResponseEntity.ok().body(new JSONObject().put("imageUrl", representative.getPhotograph()).toString());
 		}
 		return ResponseEntity.badRequest().build();
 	}

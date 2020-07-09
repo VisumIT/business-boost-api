@@ -250,6 +250,9 @@ public class CompanyResource {
 				List<Company> companies = new ArrayList<>();
 				companies.add(emp.optionalToCompany(company));
 				representative.setCompanies(companies);
+				representative.setPassword(bCryptEncoder.encode(representative.getPassword()));
+				Profile profile = Profile.REPRESENTATIVE;
+				representative.addProfile(profile);
 				representativeRepository.save(representative);
 				for (Phone tel : representative.getPhones()) {
 					tel.setRepresentative(representative);

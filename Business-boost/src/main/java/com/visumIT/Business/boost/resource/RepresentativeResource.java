@@ -144,6 +144,21 @@ public class RepresentativeResource {
 	}
 
 	@PreAuthorize("hasAnyRole('REPRESENTATIVE')")
+	@GetMapping("whois")
+	public ResponseEntity<?> whois() {
+		UserSS user = UserService.authenticated();
+		Long id = user.getId();
+		if(representativeRepository.existsById(id)) {
+			return ResponseEntity.ok().body(representativeRepository.findById(id));
+		}else {
+			return ResponseEntity.notFound().build();
+		}
+		
+	}
+	
+	
+	
+	@PreAuthorize("hasAnyRole('REPRESENTATIVE')")
 	@DeleteMapping("/{id}")
 	public ResponseEntity<?> deleteRepresentative(@PathVariable Long id) {
 		UserSS user = UserService.authenticated();

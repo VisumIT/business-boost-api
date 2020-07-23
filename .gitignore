@@ -134,3 +134,6 @@ local.properties
 hs_err_pid*
 
 # End of https://www.gitignore.io/api/java,eclipse
+
+# arquivo do firebase
+/Business-boost/src/main/resources/teste-ds3-5ded5-firebase-adminsdk-aganc-78ab6fc3d5.json

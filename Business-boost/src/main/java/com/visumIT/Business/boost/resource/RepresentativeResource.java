@@ -227,7 +227,7 @@ public class RepresentativeResource {
 
 	/* upload de foto */
 	@PreAuthorize("hasAnyRole('REPRESENTATIVE')")
-	@PatchMapping("{id}/photos")
+	@PatchMapping("/{id}/photos")
 	public ResponseEntity<?> uploadPhotograph(@RequestBody FileUpload file, @PathVariable Long id) {
 		UserSS user = UserService.authenticated();
 		if (user == null || !user.hasRole(Profile.REPRESENTATIVE) || !id.equals(user.getId())) {
@@ -254,6 +254,7 @@ public class RepresentativeResource {
 
 			representative.setPhotograph(url.getUrl());
 			representativeRepository.save(representative);
+			System.out.println(url.getUrl());
 			return ResponseEntity.ok().body(new JSONObject().put("imageUrl", representative.getPhotograph()).toString());
 		}
 		return ResponseEntity.badRequest().build();

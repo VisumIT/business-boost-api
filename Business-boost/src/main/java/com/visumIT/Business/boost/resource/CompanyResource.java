@@ -113,6 +113,19 @@ public class CompanyResource {
 			return null;
 		}
 	}
+	
+	@PreAuthorize("hasAnyRole('ADMIN')")
+	@GetMapping("/whois")
+	public ResponseEntity<?> whois() {
+		UserSS user = UserService.authenticated();
+		Long id = user.getId();
+		if(companyRepository.existsById(id)) {
+			return ResponseEntity.ok().body(companyRepository.findById(id));
+		}else {
+			return ResponseEntity.notFound().build();
+		}
+		
+	}
 
 	// lista todas as empresas
 	@GetMapping

@@ -144,6 +144,37 @@ public class Company {
 	public Company() {
 		this.addProfile(Profile.ADMIN);
 	}
+	
+
+
+	public Company(@Size(max = 150) String address, @Size(min = 3, max = 20) String publicPlace, @Size(max = 10) String number,
+			@Size(min = 2) String uf, @Size(max = 50) String neighborhood, @Size(max = 50) String city,
+			@Size(min = 8) String cep,@Size(min = 14, max = 20) @NotBlank String stateRegistration, @Size(max = 60) @NotBlank String companyName,
+			@NotBlank(message = "{cnpj.not.blank}") @CNPJ(message = "{cnpj.Company.cnpj}") String cnpj,
+			@Size(max = 40) String fictitiousName,
+			@NotBlank(message = "{email.not.blank}") @Email(message = "{email.not.valid}") String email,
+			@NotBlank(message = "{Password.not.blank}") @Size(min = 8, message = "{Size.Company.Password}") String password,
+			String description) {
+		
+		Profile profile = Profile.ADMIN;
+		this.addProfile(profile);
+		this.address = address;
+		this.publicPlace = publicPlace;
+		this.number = number;
+		this.uf = uf;
+		this.neighborhood = neighborhood;
+		this.city = city;
+		this.cep = cep;
+		this.stateRegistration = stateRegistration;
+		this.companyName = companyName;
+		this.cnpj = cnpj;
+		this.fictitiousName = fictitiousName;
+		this.email = email;
+		this.password = password;
+		this.description = description;
+	}
+
+
 
 	// transformar um tipo opcional no tipo Company
 	public Company optionalToCompany(Optional<Company> optional) {

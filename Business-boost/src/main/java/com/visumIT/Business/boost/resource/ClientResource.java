@@ -1,5 +1,8 @@
 package com.visumIT.Business.boost.resource;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,11 +18,17 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.visumIT.Business.boost.enums.Profile;
 import com.visumIT.Business.boost.exception.ValidationFormat;
 import com.visumIT.Business.boost.models.Client;
+import com.visumIT.Business.boost.models.Company;
 import com.visumIT.Business.boost.models.Phone;
+import com.visumIT.Business.boost.models.Representative;
 import com.visumIT.Business.boost.repository.ClientRepository;
 import com.visumIT.Business.boost.repository.PhoneRepository;
+import com.visumIT.Business.boost.repository.RepresentativeRepository;
+import com.visumIT.Business.boost.security.UserSS;
+import com.visumIT.Business.boost.services.UserService;
 
 @RestController
 @RequestMapping("/customers")
@@ -30,13 +39,38 @@ public class ClientResource {
 
 	@Autowired
 	PhoneRepository phoneRepository;
+	
+	@Autowired
+	RepresentativeRepository representativeRepository;
 
 	@PreAuthorize("hasAnyRole('ADMIN')")
 	@GetMapping
 	public ResponseEntity<?> getCustomers() {
 		return ResponseEntity.ok().body(clientRepository.findAll());
 	}
-
+	
+	@GetMapping("/representative")
+	public ResponseEntity<?> getCustomersRepresentative() {
+		UserSS user = UserService.authenticated();
+		if (user == null || !user.hasRole(Profile.REPRESENTATIVE)) {
+			return ResponseEntity.status(HttpStatus.FORBIDDEN).build();
+		}
+		else {
+			Long id = user.getId();
+			Representative  representative = new Representative();
+			representative = representative.optionalToRepresentative(representativeRepository.findById(id));
+			List<Company> companies= representative.getCompanies();
+			ArrayList<Client> customers = new ArrayList<>();
+			for (Company comp : companies) {
+				for(Client cli : comp.getCustomers()) {
+					customers.add(cli);
+				}
+			}
+			
+			return ResponseEntity.ok().body(customers);
+		}
+	}
+	
 	@PreAuthorize("hasAnyRole('ADMIN')")
 	public ResponseEntity<?> saveClient(@Valid @RequestBody Client client, BindingResult bindingResult) {
 		if (bindingResult.hasErrors()) {

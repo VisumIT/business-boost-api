@@ -8610,3 +8610,1687 @@ Binding(CTRL+SHIFT+T,
 
 !ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2020-07-09 11:53:30.173
 !MESSAGE executing callback sts4.classpath.MGPcxbBF SUCCESS [done]
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2020-07-09 12:02:01.752
+!MESSAGE ClasspathListenerHandler removeClasspathListener sts4.classpath.MGPcxbBF
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2020-07-09 12:02:01.752
+!MESSAGE unsubscribing from classpath changes: sts4.classpath.MGPcxbBF
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2020-07-09 12:02:01.753
+!MESSAGE subsribers = {}
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2020-07-09 12:02:01.753
+!MESSAGE ClasspathListenerHandler removeClasspathListener sts4.classpath.MGPcxbBF => OK
+
+!ENTRY org.eclipse.ui 2 2 2020-07-09 12:02:02.718
+!MESSAGE Invalid property category path: org.springframework.ide.eclipse.beans.ui.properties.ProjectPropertyPage (bundle: org.springframework.ide.eclipse.xml.namespaces, propertyPage: org.springframework.ide.eclipse.beans.ui.namespaces.projectPropertyPage)
+!SESSION 2020-07-09 15:25:06.915 -----------------------------------------------
+eclipse.buildId=4.14.0.I20191210-0610
+java.version=1.8.0_252
+java.vendor=Private Build
+BootLoader constants: OS=linux, ARCH=x86_64, WS=gtk, NL=pt_BR
+Framework arguments:  -product org.eclipse.epp.package.jee.product
+Command-line arguments:  -os linux -ws gtk -arch x86_64 -product org.eclipse.epp.package.jee.product
+
+!ENTRY org.eclipse.ui 2 0 2020-07-09 15:25:30.527
+!MESSAGE Warnings while parsing the key bindings from the 'org.eclipse.ui.commands' and 'org.eclipse.ui.bindings' extension point
+!SUBENTRY 1 org.eclipse.ui 2 0 2020-07-09 15:25:30.527
+!MESSAGE Defining a key binding with no key sequence has no effect: plug-in='org.springframework.ide.eclipse.boot.wizard', id='org.springframework.ide.eclipse.boot.wizard.addStarersSwitchHandler'
+
+!ENTRY org.eclipse.jface 2 0 2020-07-09 15:25:35.738
+!MESSAGE Keybinding conflicts occurred.  They may interfere with normal accelerator operation.
+!SUBENTRY 1 org.eclipse.jface 2 0 2020-07-09 15:25:35.738
+!MESSAGE A conflict occurred for CTRL+SHIFT+T:
+Binding(CTRL+SHIFT+T,
+	ParameterizedCommand(Command(org.eclipse.jdt.ui.navigate.open.type,Open Type,
+		Open a type in a Java editor,
+		Category(org.eclipse.ui.category.navigate,Navigate,null,true),
+		org.eclipse.ui.internal.WorkbenchHandlerServiceHandler@7388486e,
+		,,true),null),
+	org.eclipse.ui.defaultAcceleratorConfiguration,
+	org.eclipse.ui.contexts.window,,,system)
+Binding(CTRL+SHIFT+T,
+	ParameterizedCommand(Command(org.eclipse.lsp4e.symbolinworkspace,Go to Symbol in Workspace,
+		,
+		Category(org.eclipse.lsp4e.category,Language Servers,null,true),
+		org.eclipse.ui.internal.WorkbenchHandlerServiceHandler@7bdf8c92,
+		,,true),null),
+	org.eclipse.ui.defaultAcceleratorConfiguration,
+	org.eclipse.ui.contexts.window,,,system)
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2020-07-09 15:25:50.805
+!MESSAGE Entering DelegatingStreamConnectionProvider()
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2020-07-09 15:25:50.805
+!MESSAGE DelegatingStreamConnectionProvider classloader = org.eclipse.osgi.internal.loader.EquinoxClassLoader@8872669[org.springframework.tooling.boot.ls:1.18.0.202005250744(id=1009)]
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2020-07-09 15:25:50.809
+!MESSAGE SpringBootLanguageServer exists!
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2020-07-09 15:25:51.326
+!MESSAGE Instantiating ReusableClasspathListenerHandler
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2020-07-09 15:26:04.729
+!MESSAGE Boot LS startup time from start to initialized: 13790ms
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2020-07-09 15:26:07.465
+!MESSAGE ClasspathListenerHandler addClasspathListener sts4.classpath.lxTeDJcSisBatched = true
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2020-07-09 15:26:07.467
+!MESSAGE Creating project sorter...
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2020-07-09 15:26:07.468
+!MESSAGE Creating project sorter... DONE
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2020-07-09 15:26:07.470
+!MESSAGE Setting up ClasspathListenerManager
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2020-07-09 15:26:07.473
+!MESSAGE Scheduling initial event for all projects ...
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2020-07-09 15:26:07.473
+!MESSAGE Scheduling initial event for all projects DONE
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2020-07-09 15:26:07.474
+!MESSAGE ClasspathListenerHandler addClasspathListener sts4.classpath.lxTeDJcS => OK
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2020-07-09 15:26:07.474
+!MESSAGE exists = true open = true => deleted = false
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2020-07-09 15:26:07.505
+!MESSAGE classpath=175 entries
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2020-07-09 15:26:07.507
+!MESSAGE buffering callback sts4.classpath.lxTeDJcS Business-boost false 175
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2020-07-09 15:26:07.507
+!MESSAGE executing callback sts4.classpath.lxTeDJcS 1 batched events
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2020-07-09 15:26:07.631
+!MESSAGE executing callback sts4.classpath.lxTeDJcS SUCCESS [done]
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2020-07-09 15:26:40.576
+!MESSAGE ClasspathListenerHandler removeClasspathListener sts4.classpath.lxTeDJcS
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2020-07-09 15:26:40.576
+!MESSAGE unsubscribing from classpath changes: sts4.classpath.lxTeDJcS
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2020-07-09 15:26:40.577
+!MESSAGE subsribers = {}
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2020-07-09 15:26:40.578
+!MESSAGE ClasspathListenerHandler removeClasspathListener sts4.classpath.lxTeDJcS => OK
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2020-07-09 15:27:02.114
+!MESSAGE Entering DelegatingStreamConnectionProvider()
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2020-07-09 15:27:02.114
+!MESSAGE DelegatingStreamConnectionProvider classloader = org.eclipse.osgi.internal.loader.EquinoxClassLoader@8872669[org.springframework.tooling.boot.ls:1.18.0.202005250744(id=1009)]
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2020-07-09 15:27:02.115
+!MESSAGE SpringBootLanguageServer exists!
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2020-07-09 15:27:04.579
+!MESSAGE Boot LS startup time from start to initialized: 2463ms
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2020-07-09 15:27:04.616
+!MESSAGE ClasspathListenerHandler addClasspathListener sts4.classpath.AijBTfrBisBatched = true
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2020-07-09 15:27:04.617
+!MESSAGE Creating project sorter...
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2020-07-09 15:27:04.617
+!MESSAGE Creating project sorter... DONE
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2020-07-09 15:27:04.620
+!MESSAGE Setting up ClasspathListenerManager
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2020-07-09 15:27:04.623
+!MESSAGE Scheduling initial event for all projects ...
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2020-07-09 15:27:04.623
+!MESSAGE Scheduling initial event for all projects DONE
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2020-07-09 15:27:04.624
+!MESSAGE ClasspathListenerHandler addClasspathListener sts4.classpath.AijBTfrB => OK
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2020-07-09 15:27:04.625
+!MESSAGE exists = true open = true => deleted = false
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2020-07-09 15:27:04.633
+!MESSAGE classpath=175 entries
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2020-07-09 15:27:04.636
+!MESSAGE buffering callback sts4.classpath.AijBTfrB Business-boost false 175
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2020-07-09 15:27:04.636
+!MESSAGE executing callback sts4.classpath.AijBTfrB 1 batched events
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2020-07-09 15:27:04.689
+!MESSAGE executing callback sts4.classpath.AijBTfrB SUCCESS [done]
+
+!ENTRY org.eclipse.jface 2 0 2020-07-09 15:35:36.718
+!MESSAGE Ignored reentrant call while viewer is busy. This is only logged once per viewer instance, but similar calls will still be ignored.
+!STACK 0
+java.lang.RuntimeException
+	at org.eclipse.jface.viewers.ColumnViewer.checkBusy(ColumnViewer.java:764)
+	at org.eclipse.jface.viewers.ColumnViewer.update(ColumnViewer.java:543)
+	at org.eclipse.ui.navigator.CommonViewer.update(CommonViewer.java:512)
+	at org.eclipse.jface.viewers.StructuredViewer.update(StructuredViewer.java:1970)
+	at org.eclipse.ui.internal.navigator.resources.nested.NestedProjectsLabelProvider.lambda$2(NestedProjectsLabelProvider.java:87)
+	at java.util.concurrent.CompletableFuture.uniAccept(CompletableFuture.java:670)
+	at java.util.concurrent.CompletableFuture$UniAccept.tryFire(CompletableFuture.java:646)
+	at java.util.concurrent.CompletableFuture.postComplete(CompletableFuture.java:488)
+	at java.util.concurrent.CompletableFuture$AsyncSupply.run(CompletableFuture.java:1609)
+	at java.util.concurrent.CompletableFuture$AsyncSupply.exec(CompletableFuture.java:1596)
+	at java.util.concurrent.ForkJoinTask.doExec(ForkJoinTask.java:289)
+	at java.util.concurrent.ForkJoinPool$WorkQueue.runTask(ForkJoinPool.java:1056)
+	at java.util.concurrent.ForkJoinPool.runWorker(ForkJoinPool.java:1692)
+	at java.util.concurrent.ForkJoinWorkerThread.run(ForkJoinWorkerThread.java:157)
+
+!ENTRY org.springsource.ide.eclipse.commons.frameworks.core 4 0 2020-07-09 17:40:12.852
+!MESSAGE DebugException: Terminate failed
+!STACK 1
+org.eclipse.debug.core.DebugException: Terminate failed
+	at org.eclipse.debug.core.Launch.terminate(Launch.java:298)
+	at org.springsource.ide.eclipse.commons.ui.launch.LaunchUtils.terminate(LaunchUtils.java:155)
+	at org.springsource.ide.eclipse.commons.ui.launch.LaunchUtils.terminate(LaunchUtils.java:178)
+	at org.springsource.ide.eclipse.commons.ui.launch.StopProcessPullDownToolbarDelegate.performOperation(StopProcessPullDownToolbarDelegate.java:22)
+	at org.springsource.ide.eclipse.commons.ui.launch.AbstractLaunchToolbarPulldown$2.run(AbstractLaunchToolbarPulldown.java:82)
+	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:63)
+!SUBENTRY 1 org.eclipse.debug.core 4 5010 2020-07-09 17:40:12.862
+!MESSAGE Terminate failed
+!SESSION 2020-07-09 18:06:03.947 -----------------------------------------------
+eclipse.buildId=4.14.0.I20191210-0610
+java.version=1.8.0_252
+java.vendor=Private Build
+BootLoader constants: OS=linux, ARCH=x86_64, WS=gtk, NL=pt_BR
+Framework arguments:  -product org.eclipse.epp.package.jee.product
+Command-line arguments:  -os linux -ws gtk -arch x86_64 -product org.eclipse.epp.package.jee.product
+
+!ENTRY org.eclipse.core.resources 2 10035 2020-07-09 18:06:14.380
+!MESSAGE The workspace exited with unsaved changes in the previous session; refreshing workspace to recover changes.
+
+!ENTRY org.eclipse.ui 2 0 2020-07-09 18:06:16.691
+!MESSAGE Warnings while parsing the key bindings from the 'org.eclipse.ui.commands' and 'org.eclipse.ui.bindings' extension point
+!SUBENTRY 1 org.eclipse.ui 2 0 2020-07-09 18:06:16.691
+!MESSAGE Defining a key binding with no key sequence has no effect: plug-in='org.springframework.ide.eclipse.boot.wizard', id='org.springframework.ide.eclipse.boot.wizard.addStarersSwitchHandler'
+
+!ENTRY org.eclipse.jface 2 0 2020-07-09 18:06:22.274
+!MESSAGE Keybinding conflicts occurred.  They may interfere with normal accelerator operation.
+!SUBENTRY 1 org.eclipse.jface 2 0 2020-07-09 18:06:22.274
+!MESSAGE A conflict occurred for CTRL+SHIFT+T:
+Binding(CTRL+SHIFT+T,
+	ParameterizedCommand(Command(org.eclipse.jdt.ui.navigate.open.type,Open Type,
+		Open a type in a Java editor,
+		Category(org.eclipse.ui.category.navigate,Navigate,null,true),
+		org.eclipse.ui.internal.WorkbenchHandlerServiceHandler@42ea14b8,
+		,,true),null),
+	org.eclipse.ui.defaultAcceleratorConfiguration,
+	org.eclipse.ui.contexts.window,,,system)
+Binding(CTRL+SHIFT+T,
+	ParameterizedCommand(Command(org.eclipse.lsp4e.symbolinworkspace,Go to Symbol in Workspace,
+		,
+		Category(org.eclipse.lsp4e.category,Language Servers,null,true),
+		org.eclipse.ui.internal.WorkbenchHandlerServiceHandler@5837cb9e,
+		,,true),null),
+	org.eclipse.ui.defaultAcceleratorConfiguration,
+	org.eclipse.ui.contexts.window,,,system)
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2020-07-09 18:06:32.813
+!MESSAGE Entering DelegatingStreamConnectionProvider()
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2020-07-09 18:06:32.814
+!MESSAGE DelegatingStreamConnectionProvider classloader = org.eclipse.osgi.internal.loader.EquinoxClassLoader@20f1c8ed[org.springframework.tooling.boot.ls:1.18.0.202005250744(id=1009)]
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2020-07-09 18:06:32.818
+!MESSAGE SpringBootLanguageServer exists!
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2020-07-09 18:06:33.223
+!MESSAGE Instantiating ReusableClasspathListenerHandler
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2020-07-09 18:06:46.895
+!MESSAGE Boot LS startup time from start to initialized: 13925ms
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2020-07-09 18:06:48.955
+!MESSAGE ClasspathListenerHandler addClasspathListener sts4.classpath.HXgOuhwkisBatched = true
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2020-07-09 18:06:48.957
+!MESSAGE Creating project sorter...
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2020-07-09 18:06:48.958
+!MESSAGE Creating project sorter... DONE
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2020-07-09 18:06:48.961
+!MESSAGE Setting up ClasspathListenerManager
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2020-07-09 18:06:48.964
+!MESSAGE Scheduling initial event for all projects ...
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2020-07-09 18:06:48.965
+!MESSAGE Scheduling initial event for all projects DONE
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2020-07-09 18:06:48.965
+!MESSAGE ClasspathListenerHandler addClasspathListener sts4.classpath.HXgOuhwk => OK
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2020-07-09 18:06:48.965
+!MESSAGE exists = true open = true => deleted = false
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2020-07-09 18:06:49.072
+!MESSAGE classpath=175 entries
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2020-07-09 18:06:49.074
+!MESSAGE buffering callback sts4.classpath.HXgOuhwk Business-boost false 175
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2020-07-09 18:06:49.075
+!MESSAGE executing callback sts4.classpath.HXgOuhwk 1 batched events
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2020-07-09 18:06:49.213
+!MESSAGE executing callback sts4.classpath.HXgOuhwk SUCCESS [done]
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2020-07-09 18:21:36.342
+!MESSAGE ClasspathListenerHandler removeClasspathListener sts4.classpath.HXgOuhwk
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2020-07-09 18:21:36.375
+!MESSAGE unsubscribing from classpath changes: sts4.classpath.HXgOuhwk
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2020-07-09 18:21:36.376
+!MESSAGE subsribers = {}
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2020-07-09 18:21:36.377
+!MESSAGE ClasspathListenerHandler removeClasspathListener sts4.classpath.HXgOuhwk => OK
+
+!ENTRY org.eclipse.ui 2 2 2020-07-09 18:21:37.989
+!MESSAGE Invalid property category path: org.springframework.ide.eclipse.beans.ui.properties.ProjectPropertyPage (bundle: org.springframework.ide.eclipse.xml.namespaces, propertyPage: org.springframework.ide.eclipse.beans.ui.namespaces.projectPropertyPage)
+!SESSION 2020-07-17 14:34:16.789 -----------------------------------------------
+eclipse.buildId=4.14.0.I20191210-0610
+java.version=1.8.0_252
+java.vendor=Private Build
+BootLoader constants: OS=linux, ARCH=x86_64, WS=gtk, NL=pt_BR
+Framework arguments:  -product org.eclipse.epp.package.jee.product
+Command-line arguments:  -os linux -ws gtk -arch x86_64 -product org.eclipse.epp.package.jee.product
+
+!ENTRY org.eclipse.ui 2 0 2020-07-17 14:34:32.365
+!MESSAGE Warnings while parsing the key bindings from the 'org.eclipse.ui.commands' and 'org.eclipse.ui.bindings' extension point
+!SUBENTRY 1 org.eclipse.ui 2 0 2020-07-17 14:34:32.365
+!MESSAGE Defining a key binding with no key sequence has no effect: plug-in='org.springframework.ide.eclipse.boot.wizard', id='org.springframework.ide.eclipse.boot.wizard.addStarersSwitchHandler'
+
+!ENTRY org.eclipse.jface 2 0 2020-07-17 14:34:38.221
+!MESSAGE Keybinding conflicts occurred.  They may interfere with normal accelerator operation.
+!SUBENTRY 1 org.eclipse.jface 2 0 2020-07-17 14:34:38.221
+!MESSAGE A conflict occurred for CTRL+SHIFT+T:
+Binding(CTRL+SHIFT+T,
+	ParameterizedCommand(Command(org.eclipse.jdt.ui.navigate.open.type,Open Type,
+		Open a type in a Java editor,
+		Category(org.eclipse.ui.category.navigate,Navigate,null,true),
+		org.eclipse.ui.internal.WorkbenchHandlerServiceHandler@7bdf8c92,
+		,,true),null),
+	org.eclipse.ui.defaultAcceleratorConfiguration,
+	org.eclipse.ui.contexts.window,,,system)
+Binding(CTRL+SHIFT+T,
+	ParameterizedCommand(Command(org.eclipse.lsp4e.symbolinworkspace,Go to Symbol in Workspace,
+		,
+		Category(org.eclipse.lsp4e.category,Language Servers,null,true),
+		org.eclipse.ui.internal.WorkbenchHandlerServiceHandler@7c0b792e,
+		,,true),null),
+	org.eclipse.ui.defaultAcceleratorConfiguration,
+	org.eclipse.ui.contexts.window,,,system)
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2020-07-17 14:34:51.152
+!MESSAGE Entering DelegatingStreamConnectionProvider()
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2020-07-17 14:34:51.153
+!MESSAGE DelegatingStreamConnectionProvider classloader = org.eclipse.osgi.internal.loader.EquinoxClassLoader@33822750[org.springframework.tooling.boot.ls:1.18.0.202005250744(id=1009)]
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2020-07-17 14:34:51.158
+!MESSAGE SpringBootLanguageServer exists!
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2020-07-17 14:34:51.500
+!MESSAGE Instantiating ReusableClasspathListenerHandler
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2020-07-17 14:35:09.018
+!MESSAGE Boot LS startup time from start to initialized: 17765ms
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2020-07-17 14:35:10.766
+!MESSAGE ClasspathListenerHandler addClasspathListener sts4.classpath.MmWnUzFQisBatched = true
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2020-07-17 14:35:10.770
+!MESSAGE Creating project sorter...
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2020-07-17 14:35:10.773
+!MESSAGE Creating project sorter... DONE
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2020-07-17 14:35:10.776
+!MESSAGE Setting up ClasspathListenerManager
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2020-07-17 14:35:10.783
+!MESSAGE Scheduling initial event for all projects ...
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2020-07-17 14:35:10.784
+!MESSAGE Scheduling initial event for all projects DONE
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2020-07-17 14:35:10.785
+!MESSAGE exists = true open = true => deleted = false
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2020-07-17 14:35:10.785
+!MESSAGE ClasspathListenerHandler addClasspathListener sts4.classpath.MmWnUzFQ => OK
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2020-07-17 14:35:10.971
+!MESSAGE classpath=175 entries
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2020-07-17 14:35:10.972
+!MESSAGE buffering callback sts4.classpath.MmWnUzFQ Business-boost false 175
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2020-07-17 14:35:10.973
+!MESSAGE executing callback sts4.classpath.MmWnUzFQ 1 batched events
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2020-07-17 14:35:11.065
+!MESSAGE executing callback sts4.classpath.MmWnUzFQ SUCCESS [done]
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2020-07-17 14:42:54.543
+!MESSAGE ClasspathListenerHandler removeClasspathListener sts4.classpath.MmWnUzFQ
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2020-07-17 14:42:54.549
+!MESSAGE unsubscribing from classpath changes: sts4.classpath.MmWnUzFQ
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2020-07-17 14:42:54.550
+!MESSAGE subsribers = {}
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2020-07-17 14:42:54.550
+!MESSAGE ClasspathListenerHandler removeClasspathListener sts4.classpath.MmWnUzFQ => OK
+
+!ENTRY org.eclipse.ui 2 2 2020-07-17 14:43:05.660
+!MESSAGE Invalid property category path: org.springframework.ide.eclipse.beans.ui.properties.ProjectPropertyPage (bundle: org.springframework.ide.eclipse.xml.namespaces, propertyPage: org.springframework.ide.eclipse.beans.ui.namespaces.projectPropertyPage)
+
+!ENTRY org.eclipse.ui 4 0 2020-07-17 14:43:08.544
+!MESSAGE Unhandled event loop exception
+!STACK 0
+org.eclipse.e4.core.di.InjectionException: org.eclipse.swt.SWTException: i/o error (java.io.FileNotFoundException: C:\Program Files\Git\mingw64\share\git\git-for-windows.ico (Arquivo ou diretório inexistente))
+	at org.eclipse.e4.core.internal.di.MethodRequestor.execute(MethodRequestor.java:68)
+	at org.eclipse.e4.ui.internal.di.UIEventObjectSupplier$UIEventHandler.lambda$0(UIEventObjectSupplier.java:64)
+	at org.eclipse.swt.widgets.Synchronizer.syncExec(Synchronizer.java:236)
+	at org.eclipse.ui.internal.UISynchronizer.syncExec(UISynchronizer.java:146)
+	at org.eclipse.swt.widgets.Display.syncExec(Display.java:5786)
+	at org.eclipse.e4.ui.internal.workbench.swt.E4Application$1.syncExec(E4Application.java:219)
+	at org.eclipse.e4.ui.internal.di.UIEventObjectSupplier$UIEventHandler.handleEvent(UIEventObjectSupplier.java:64)
+	at org.eclipse.equinox.internal.event.EventHandlerWrapper.handleEvent(EventHandlerWrapper.java:205)
+	at org.eclipse.equinox.internal.event.EventHandlerTracker.dispatchEvent(EventHandlerTracker.java:203)
+	at org.eclipse.equinox.internal.event.EventHandlerTracker.dispatchEvent(EventHandlerTracker.java:1)
+	at org.eclipse.osgi.framework.eventmgr.EventManager.dispatchEvent(EventManager.java:234)
+	at org.eclipse.osgi.framework.eventmgr.ListenerQueue.dispatchEventSynchronous(ListenerQueue.java:151)
+	at org.eclipse.equinox.internal.event.EventAdminImpl.dispatchEvent(EventAdminImpl.java:132)
+	at org.eclipse.equinox.internal.event.EventAdminImpl.sendEvent(EventAdminImpl.java:75)
+	at org.eclipse.equinox.internal.event.EventComponent.sendEvent(EventComponent.java:44)
+	at org.eclipse.e4.ui.services.internal.events.EventBroker.send(EventBroker.java:55)
+	at org.eclipse.e4.ui.internal.workbench.UIEventPublisher.notifyChanged(UIEventPublisher.java:63)
+	at org.eclipse.emf.common.notify.impl.BasicNotifierImpl.eNotify(BasicNotifierImpl.java:424)
+	at org.eclipse.e4.ui.model.application.ui.impl.UIElementImpl.setVisible(UIElementImpl.java:361)
+	at org.eclipse.e4.ui.workbench.renderers.swt.ContributionRecord.updateVisibility(ContributionRecord.java:113)
+	at org.eclipse.e4.ui.workbench.renderers.swt.MenuManagerRendererFilter.updateElementVisibility(MenuManagerRendererFilter.java:194)
+	at org.eclipse.e4.ui.workbench.renderers.swt.MenuManagerRendererFilter.updateElementVisibility(MenuManagerRendererFilter.java:205)
+	at org.eclipse.e4.ui.workbench.renderers.swt.MenuManagerShowProcessor.showMenu(MenuManagerShowProcessor.java:258)
+	at org.eclipse.e4.ui.workbench.renderers.swt.MenuManagerShowProcessor.menuAboutToHide(MenuManagerShowProcessor.java:115)
+	at org.eclipse.jface.internal.MenuManagerEventHelper.showEventPostHelper(MenuManagerEventHelper.java:95)
+	at org.eclipse.jface.action.MenuManager.handleAboutToShow(MenuManager.java:469)
+	at org.eclipse.jface.action.MenuManager.access$1(MenuManager.java:463)
+	at org.eclipse.jface.action.MenuManager$2.menuShown(MenuManager.java:495)
+	at org.eclipse.swt.widgets.TypedListener.handleEvent(TypedListener.java:259)
+	at org.eclipse.swt.widgets.EventTable.sendEvent(EventTable.java:89)
+	at org.eclipse.swt.widgets.Display.sendEvent(Display.java:5676)
+	at org.eclipse.swt.widgets.Widget.sendEvent(Widget.java:1423)
+	at org.eclipse.swt.widgets.Widget.sendEvent(Widget.java:1449)
+	at org.eclipse.swt.widgets.Widget.sendEvent(Widget.java:1428)
+	at org.eclipse.swt.widgets.Menu._setVisible(Menu.java:219)
+	at org.eclipse.swt.widgets.Display.runPopups(Display.java:4977)
+	at org.eclipse.swt.widgets.Display.readAndDispatch(Display.java:4419)
+	at org.eclipse.e4.ui.internal.workbench.swt.PartRenderingEngine$5.run(PartRenderingEngine.java:1160)
+	at org.eclipse.core.databinding.observable.Realm.runWithDefault(Realm.java:338)
+	at org.eclipse.e4.ui.internal.workbench.swt.PartRenderingEngine.run(PartRenderingEngine.java:1049)
+	at org.eclipse.e4.ui.internal.workbench.E4Workbench.createAndRunUI(E4Workbench.java:155)
+	at org.eclipse.ui.internal.Workbench.lambda$3(Workbench.java:660)
+	at org.eclipse.core.databinding.observable.Realm.runWithDefault(Realm.java:338)
+	at org.eclipse.ui.internal.Workbench.createAndRunWorkbench(Workbench.java:559)
+	at org.eclipse.ui.PlatformUI.createAndRunWorkbench(PlatformUI.java:154)
+	at org.eclipse.ui.internal.ide.application.IDEApplication.start(IDEApplication.java:150)
+	at org.eclipse.equinox.internal.app.EclipseAppHandle.run(EclipseAppHandle.java:203)
+	at org.eclipse.core.runtime.internal.adaptor.EclipseAppLauncher.runApplication(EclipseAppLauncher.java:137)
+	at org.eclipse.core.runtime.internal.adaptor.EclipseAppLauncher.start(EclipseAppLauncher.java:107)
+	at org.eclipse.core.runtime.adaptor.EclipseStarter.run(EclipseStarter.java:401)
+	at org.eclipse.core.runtime.adaptor.EclipseStarter.run(EclipseStarter.java:255)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:498)
+	at org.eclipse.equinox.launcher.Main.invokeFramework(Main.java:657)
+	at org.eclipse.equinox.launcher.Main.basicRun(Main.java:594)
+	at org.eclipse.equinox.launcher.Main.run(Main.java:1465)
+	at org.eclipse.equinox.launcher.Main.main(Main.java:1438)
+Caused by: org.eclipse.swt.SWTException: i/o error (java.io.FileNotFoundException: C:\Program Files\Git\mingw64\share\git\git-for-windows.ico (Arquivo ou diretório inexistente))
+	at org.eclipse.swt.SWT.error(SWT.java:4720)
+	at org.eclipse.swt.SWT.error(SWT.java:4635)
+	at org.eclipse.swt.graphics.ImageLoader.load(ImageLoader.java:292)
+	at org.eclipse.tm.terminal.view.ui.local.showin.ExternalExecutablesManager.loadImage(ExternalExecutablesManager.java:266)
+	at org.eclipse.tm.terminal.view.ui.local.showin.DynamicContributionItems.getContributionItems(DynamicContributionItems.java:79)
+	at org.eclipse.ui.actions.CompoundContributionItem.getContributionItemsToFill(CompoundContributionItem.java:83)
+	at org.eclipse.ui.actions.CompoundContributionItem.fill(CompoundContributionItem.java:57)
+	at org.eclipse.ui.internal.menus.DynamicMenuContributionItem.fill(DynamicMenuContributionItem.java:146)
+	at org.eclipse.jface.action.MenuManager.doItemFill(MenuManager.java:729)
+	at org.eclipse.jface.action.MenuManager.update(MenuManager.java:806)
+	at org.eclipse.jface.action.MenuManager.update(MenuManager.java:673)
+	at org.eclipse.e4.ui.workbench.renderers.swt.MenuManagerRenderer.scheduleManagerUpdate(MenuManagerRenderer.java:1224)
+	at org.eclipse.e4.ui.workbench.renderers.swt.MenuManagerRenderer.subscribeUIElementTopicAllRenderedVisibility(MenuManagerRenderer.java:218)
+	at sun.reflect.GeneratedMethodAccessor22.invoke(Unknown Source)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:498)
+	at org.eclipse.e4.core.internal.di.MethodRequestor.execute(MethodRequestor.java:58)
+	... 58 more
+Caused by: java.io.FileNotFoundException: C:\Program Files\Git\mingw64\share\git\git-for-windows.ico (Arquivo ou diretório inexistente)
+	at java.io.FileInputStream.open0(Native Method)
+	at java.io.FileInputStream.open(FileInputStream.java:195)
+	at java.io.FileInputStream.<init>(FileInputStream.java:138)
+	at java.io.FileInputStream.<init>(FileInputStream.java:93)
+	at org.eclipse.swt.graphics.ImageLoader.load(ImageLoader.java:289)
+	... 72 more
+
+!ENTRY org.eclipse.ui 4 0 2020-07-17 14:43:18.122
+!MESSAGE Unhandled event loop exception
+!STACK 0
+org.eclipse.e4.core.di.InjectionException: org.eclipse.swt.SWTException: i/o error (java.io.FileNotFoundException: C:\Program Files\Git\mingw64\share\git\git-for-windows.ico (Arquivo ou diretório inexistente))
+	at org.eclipse.e4.core.internal.di.MethodRequestor.execute(MethodRequestor.java:68)
+	at org.eclipse.e4.ui.internal.di.UIEventObjectSupplier$UIEventHandler.lambda$0(UIEventObjectSupplier.java:64)
+	at org.eclipse.swt.widgets.Synchronizer.syncExec(Synchronizer.java:236)
+	at org.eclipse.ui.internal.UISynchronizer.syncExec(UISynchronizer.java:146)
+	at org.eclipse.swt.widgets.Display.syncExec(Display.java:5786)
+	at org.eclipse.e4.ui.internal.workbench.swt.E4Application$1.syncExec(E4Application.java:219)
+	at org.eclipse.e4.ui.internal.di.UIEventObjectSupplier$UIEventHandler.handleEvent(UIEventObjectSupplier.java:64)
+	at org.eclipse.equinox.internal.event.EventHandlerWrapper.handleEvent(EventHandlerWrapper.java:205)
+	at org.eclipse.equinox.internal.event.EventHandlerTracker.dispatchEvent(EventHandlerTracker.java:203)
+	at org.eclipse.equinox.internal.event.EventHandlerTracker.dispatchEvent(EventHandlerTracker.java:1)
+	at org.eclipse.osgi.framework.eventmgr.EventManager.dispatchEvent(EventManager.java:234)
+	at org.eclipse.osgi.framework.eventmgr.ListenerQueue.dispatchEventSynchronous(ListenerQueue.java:151)
+	at org.eclipse.equinox.internal.event.EventAdminImpl.dispatchEvent(EventAdminImpl.java:132)
+	at org.eclipse.equinox.internal.event.EventAdminImpl.sendEvent(EventAdminImpl.java:75)
+	at org.eclipse.equinox.internal.event.EventComponent.sendEvent(EventComponent.java:44)
+	at org.eclipse.e4.ui.services.internal.events.EventBroker.send(EventBroker.java:55)
+	at org.eclipse.e4.ui.internal.workbench.UIEventPublisher.notifyChanged(UIEventPublisher.java:63)
+	at org.eclipse.emf.common.notify.impl.BasicNotifierImpl.eNotify(BasicNotifierImpl.java:424)
+	at org.eclipse.e4.ui.model.application.ui.impl.UIElementImpl.setVisible(UIElementImpl.java:361)
+	at org.eclipse.e4.ui.workbench.renderers.swt.ContributionRecord.updateVisibility(ContributionRecord.java:113)
+	at org.eclipse.e4.ui.workbench.renderers.swt.MenuManagerRendererFilter.updateElementVisibility(MenuManagerRendererFilter.java:194)
+	at org.eclipse.e4.ui.workbench.renderers.swt.MenuManagerRendererFilter.updateElementVisibility(MenuManagerRendererFilter.java:205)
+	at org.eclipse.e4.ui.workbench.renderers.swt.MenuManagerShowProcessor.showMenu(MenuManagerShowProcessor.java:258)
+	at org.eclipse.e4.ui.workbench.renderers.swt.MenuManagerShowProcessor.menuAboutToHide(MenuManagerShowProcessor.java:115)
+	at org.eclipse.jface.internal.MenuManagerEventHelper.showEventPostHelper(MenuManagerEventHelper.java:95)
+	at org.eclipse.jface.action.MenuManager.handleAboutToShow(MenuManager.java:469)
+	at org.eclipse.jface.action.MenuManager.access$1(MenuManager.java:463)
+	at org.eclipse.jface.action.MenuManager$2.menuShown(MenuManager.java:495)
+	at org.eclipse.swt.widgets.TypedListener.handleEvent(TypedListener.java:259)
+	at org.eclipse.swt.widgets.EventTable.sendEvent(EventTable.java:89)
+	at org.eclipse.swt.widgets.Display.sendEvent(Display.java:5676)
+	at org.eclipse.swt.widgets.Widget.sendEvent(Widget.java:1423)
+	at org.eclipse.swt.widgets.Widget.sendEvent(Widget.java:1449)
+	at org.eclipse.swt.widgets.Widget.sendEvent(Widget.java:1428)
+	at org.eclipse.swt.widgets.Menu._setVisible(Menu.java:219)
+	at org.eclipse.swt.widgets.Display.runPopups(Display.java:4977)
+	at org.eclipse.swt.widgets.Display.readAndDispatch(Display.java:4419)
+	at org.eclipse.e4.ui.internal.workbench.swt.PartRenderingEngine$5.run(PartRenderingEngine.java:1160)
+	at org.eclipse.core.databinding.observable.Realm.runWithDefault(Realm.java:338)
+	at org.eclipse.e4.ui.internal.workbench.swt.PartRenderingEngine.run(PartRenderingEngine.java:1049)
+	at org.eclipse.e4.ui.internal.workbench.E4Workbench.createAndRunUI(E4Workbench.java:155)
+	at org.eclipse.ui.internal.Workbench.lambda$3(Workbench.java:660)
+	at org.eclipse.core.databinding.observable.Realm.runWithDefault(Realm.java:338)
+	at org.eclipse.ui.internal.Workbench.createAndRunWorkbench(Workbench.java:559)
+	at org.eclipse.ui.PlatformUI.createAndRunWorkbench(PlatformUI.java:154)
+	at org.eclipse.ui.internal.ide.application.IDEApplication.start(IDEApplication.java:150)
+	at org.eclipse.equinox.internal.app.EclipseAppHandle.run(EclipseAppHandle.java:203)
+	at org.eclipse.core.runtime.internal.adaptor.EclipseAppLauncher.runApplication(EclipseAppLauncher.java:137)
+	at org.eclipse.core.runtime.internal.adaptor.EclipseAppLauncher.start(EclipseAppLauncher.java:107)
+	at org.eclipse.core.runtime.adaptor.EclipseStarter.run(EclipseStarter.java:401)
+	at org.eclipse.core.runtime.adaptor.EclipseStarter.run(EclipseStarter.java:255)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:498)
+	at org.eclipse.equinox.launcher.Main.invokeFramework(Main.java:657)
+	at org.eclipse.equinox.launcher.Main.basicRun(Main.java:594)
+	at org.eclipse.equinox.launcher.Main.run(Main.java:1465)
+	at org.eclipse.equinox.launcher.Main.main(Main.java:1438)
+Caused by: org.eclipse.swt.SWTException: i/o error (java.io.FileNotFoundException: C:\Program Files\Git\mingw64\share\git\git-for-windows.ico (Arquivo ou diretório inexistente))
+	at org.eclipse.swt.SWT.error(SWT.java:4720)
+	at org.eclipse.swt.SWT.error(SWT.java:4635)
+	at org.eclipse.swt.graphics.ImageLoader.load(ImageLoader.java:292)
+	at org.eclipse.tm.terminal.view.ui.local.showin.ExternalExecutablesManager.loadImage(ExternalExecutablesManager.java:266)
+	at org.eclipse.tm.terminal.view.ui.local.showin.DynamicContributionItems.getContributionItems(DynamicContributionItems.java:79)
+	at org.eclipse.ui.actions.CompoundContributionItem.getContributionItemsToFill(CompoundContributionItem.java:83)
+	at org.eclipse.ui.actions.CompoundContributionItem.fill(CompoundContributionItem.java:57)
+	at org.eclipse.ui.internal.menus.DynamicMenuContributionItem.fill(DynamicMenuContributionItem.java:146)
+	at org.eclipse.jface.action.MenuManager.doItemFill(MenuManager.java:729)
+	at org.eclipse.jface.action.MenuManager.update(MenuManager.java:806)
+	at org.eclipse.jface.action.MenuManager.update(MenuManager.java:673)
+	at org.eclipse.e4.ui.workbench.renderers.swt.MenuManagerRenderer.scheduleManagerUpdate(MenuManagerRenderer.java:1224)
+	at org.eclipse.e4.ui.workbench.renderers.swt.MenuManagerRenderer.subscribeUIElementTopicAllRenderedVisibility(MenuManagerRenderer.java:218)
+	at sun.reflect.GeneratedMethodAccessor22.invoke(Unknown Source)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:498)
+	at org.eclipse.e4.core.internal.di.MethodRequestor.execute(MethodRequestor.java:58)
+	... 58 more
+Caused by: java.io.FileNotFoundException: C:\Program Files\Git\mingw64\share\git\git-for-windows.ico (Arquivo ou diretório inexistente)
+	at java.io.FileInputStream.open0(Native Method)
+	at java.io.FileInputStream.open(FileInputStream.java:195)
+	at java.io.FileInputStream.<init>(FileInputStream.java:138)
+	at java.io.FileInputStream.<init>(FileInputStream.java:93)
+	at org.eclipse.swt.graphics.ImageLoader.load(ImageLoader.java:289)
+	... 72 more
+
+!ENTRY org.eclipse.ui 4 0 2020-07-17 14:44:23.286
+!MESSAGE Unhandled event loop exception
+!STACK 0
+org.eclipse.e4.core.di.InjectionException: org.eclipse.swt.SWTException: i/o error (java.io.FileNotFoundException: C:\Program Files\Git\mingw64\share\git\git-for-windows.ico (Arquivo ou diretório inexistente))
+	at org.eclipse.e4.core.internal.di.MethodRequestor.execute(MethodRequestor.java:68)
+	at org.eclipse.e4.ui.internal.di.UIEventObjectSupplier$UIEventHandler.lambda$0(UIEventObjectSupplier.java:64)
+	at org.eclipse.swt.widgets.Synchronizer.syncExec(Synchronizer.java:236)
+	at org.eclipse.ui.internal.UISynchronizer.syncExec(UISynchronizer.java:146)
+	at org.eclipse.swt.widgets.Display.syncExec(Display.java:5786)
+	at org.eclipse.e4.ui.internal.workbench.swt.E4Application$1.syncExec(E4Application.java:219)
+	at org.eclipse.e4.ui.internal.di.UIEventObjectSupplier$UIEventHandler.handleEvent(UIEventObjectSupplier.java:64)
+	at org.eclipse.equinox.internal.event.EventHandlerWrapper.handleEvent(EventHandlerWrapper.java:205)
+	at org.eclipse.equinox.internal.event.EventHandlerTracker.dispatchEvent(EventHandlerTracker.java:203)
+	at org.eclipse.equinox.internal.event.EventHandlerTracker.dispatchEvent(EventHandlerTracker.java:1)
+	at org.eclipse.osgi.framework.eventmgr.EventManager.dispatchEvent(EventManager.java:234)
+	at org.eclipse.osgi.framework.eventmgr.ListenerQueue.dispatchEventSynchronous(ListenerQueue.java:151)
+	at org.eclipse.equinox.internal.event.EventAdminImpl.dispatchEvent(EventAdminImpl.java:132)
+	at org.eclipse.equinox.internal.event.EventAdminImpl.sendEvent(EventAdminImpl.java:75)
+	at org.eclipse.equinox.internal.event.EventComponent.sendEvent(EventComponent.java:44)
+	at org.eclipse.e4.ui.services.internal.events.EventBroker.send(EventBroker.java:55)
+	at org.eclipse.e4.ui.internal.workbench.UIEventPublisher.notifyChanged(UIEventPublisher.java:63)
+	at org.eclipse.emf.common.notify.impl.BasicNotifierImpl.eNotify(BasicNotifierImpl.java:424)
+	at org.eclipse.e4.ui.model.application.ui.impl.UIElementImpl.setVisible(UIElementImpl.java:361)
+	at org.eclipse.e4.ui.workbench.renderers.swt.ContributionRecord.updateVisibility(ContributionRecord.java:113)
+	at org.eclipse.e4.ui.workbench.renderers.swt.MenuManagerRendererFilter.updateElementVisibility(MenuManagerRendererFilter.java:194)
+	at org.eclipse.e4.ui.workbench.renderers.swt.MenuManagerRendererFilter.updateElementVisibility(MenuManagerRendererFilter.java:205)
+	at org.eclipse.e4.ui.workbench.renderers.swt.MenuManagerShowProcessor.showMenu(MenuManagerShowProcessor.java:258)
+	at org.eclipse.e4.ui.workbench.renderers.swt.MenuManagerShowProcessor.menuAboutToHide(MenuManagerShowProcessor.java:115)
+	at org.eclipse.jface.internal.MenuManagerEventHelper.showEventPostHelper(MenuManagerEventHelper.java:95)
+	at org.eclipse.jface.action.MenuManager.handleAboutToShow(MenuManager.java:469)
+	at org.eclipse.jface.action.MenuManager.access$1(MenuManager.java:463)
+	at org.eclipse.jface.action.MenuManager$2.menuShown(MenuManager.java:495)
+	at org.eclipse.swt.widgets.TypedListener.handleEvent(TypedListener.java:259)
+	at org.eclipse.swt.widgets.EventTable.sendEvent(EventTable.java:89)
+	at org.eclipse.swt.widgets.Display.sendEvent(Display.java:5676)
+	at org.eclipse.swt.widgets.Widget.sendEvent(Widget.java:1423)
+	at org.eclipse.swt.widgets.Widget.sendEvent(Widget.java:1449)
+	at org.eclipse.swt.widgets.Widget.sendEvent(Widget.java:1428)
+	at org.eclipse.swt.widgets.Menu._setVisible(Menu.java:219)
+	at org.eclipse.swt.widgets.Display.runPopups(Display.java:4977)
+	at org.eclipse.swt.widgets.Display.readAndDispatch(Display.java:4419)
+	at org.eclipse.e4.ui.internal.workbench.swt.PartRenderingEngine$5.run(PartRenderingEngine.java:1160)
+	at org.eclipse.core.databinding.observable.Realm.runWithDefault(Realm.java:338)
+	at org.eclipse.e4.ui.internal.workbench.swt.PartRenderingEngine.run(PartRenderingEngine.java:1049)
+	at org.eclipse.e4.ui.internal.workbench.E4Workbench.createAndRunUI(E4Workbench.java:155)
+	at org.eclipse.ui.internal.Workbench.lambda$3(Workbench.java:660)
+	at org.eclipse.core.databinding.observable.Realm.runWithDefault(Realm.java:338)
+	at org.eclipse.ui.internal.Workbench.createAndRunWorkbench(Workbench.java:559)
+	at org.eclipse.ui.PlatformUI.createAndRunWorkbench(PlatformUI.java:154)
+	at org.eclipse.ui.internal.ide.application.IDEApplication.start(IDEApplication.java:150)
+	at org.eclipse.equinox.internal.app.EclipseAppHandle.run(EclipseAppHandle.java:203)
+	at org.eclipse.core.runtime.internal.adaptor.EclipseAppLauncher.runApplication(EclipseAppLauncher.java:137)
+	at org.eclipse.core.runtime.internal.adaptor.EclipseAppLauncher.start(EclipseAppLauncher.java:107)
+	at org.eclipse.core.runtime.adaptor.EclipseStarter.run(EclipseStarter.java:401)
+	at org.eclipse.core.runtime.adaptor.EclipseStarter.run(EclipseStarter.java:255)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:498)
+	at org.eclipse.equinox.launcher.Main.invokeFramework(Main.java:657)
+	at org.eclipse.equinox.launcher.Main.basicRun(Main.java:594)
+	at org.eclipse.equinox.launcher.Main.run(Main.java:1465)
+	at org.eclipse.equinox.launcher.Main.main(Main.java:1438)
+Caused by: org.eclipse.swt.SWTException: i/o error (java.io.FileNotFoundException: C:\Program Files\Git\mingw64\share\git\git-for-windows.ico (Arquivo ou diretório inexistente))
+	at org.eclipse.swt.SWT.error(SWT.java:4720)
+	at org.eclipse.swt.SWT.error(SWT.java:4635)
+	at org.eclipse.swt.graphics.ImageLoader.load(ImageLoader.java:292)
+	at org.eclipse.tm.terminal.view.ui.local.showin.ExternalExecutablesManager.loadImage(ExternalExecutablesManager.java:266)
+	at org.eclipse.tm.terminal.view.ui.local.showin.DynamicContributionItems.getContributionItems(DynamicContributionItems.java:79)
+	at org.eclipse.ui.actions.CompoundContributionItem.getContributionItemsToFill(CompoundContributionItem.java:83)
+	at org.eclipse.ui.actions.CompoundContributionItem.fill(CompoundContributionItem.java:57)
+	at org.eclipse.ui.internal.menus.DynamicMenuContributionItem.fill(DynamicMenuContributionItem.java:146)
+	at org.eclipse.jface.action.MenuManager.doItemFill(MenuManager.java:729)
+	at org.eclipse.jface.action.MenuManager.update(MenuManager.java:806)
+	at org.eclipse.jface.action.MenuManager.update(MenuManager.java:673)
+	at org.eclipse.e4.ui.workbench.renderers.swt.MenuManagerRenderer.scheduleManagerUpdate(MenuManagerRenderer.java:1224)
+	at org.eclipse.e4.ui.workbench.renderers.swt.MenuManagerRenderer.subscribeUIElementTopicAllRenderedVisibility(MenuManagerRenderer.java:218)
+	at sun.reflect.GeneratedMethodAccessor22.invoke(Unknown Source)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:498)
+	at org.eclipse.e4.core.internal.di.MethodRequestor.execute(MethodRequestor.java:58)
+	... 58 more
+Caused by: java.io.FileNotFoundException: C:\Program Files\Git\mingw64\share\git\git-for-windows.ico (Arquivo ou diretório inexistente)
+	at java.io.FileInputStream.open0(Native Method)
+	at java.io.FileInputStream.open(FileInputStream.java:195)
+	at java.io.FileInputStream.<init>(FileInputStream.java:138)
+	at java.io.FileInputStream.<init>(FileInputStream.java:93)
+	at org.eclipse.swt.graphics.ImageLoader.load(ImageLoader.java:289)
+	... 72 more
+
+!ENTRY org.eclipse.ui 4 0 2020-07-17 14:44:51.923
+!MESSAGE Unhandled event loop exception
+!STACK 0
+org.eclipse.e4.core.di.InjectionException: org.eclipse.swt.SWTException: i/o error (java.io.FileNotFoundException: C:\Program Files\Git\mingw64\share\git\git-for-windows.ico (Arquivo ou diretório inexistente))
+	at org.eclipse.e4.core.internal.di.MethodRequestor.execute(MethodRequestor.java:68)
+	at org.eclipse.e4.ui.internal.di.UIEventObjectSupplier$UIEventHandler.lambda$0(UIEventObjectSupplier.java:64)
+	at org.eclipse.swt.widgets.Synchronizer.syncExec(Synchronizer.java:236)
+	at org.eclipse.ui.internal.UISynchronizer.syncExec(UISynchronizer.java:146)
+	at org.eclipse.swt.widgets.Display.syncExec(Display.java:5786)
+	at org.eclipse.e4.ui.internal.workbench.swt.E4Application$1.syncExec(E4Application.java:219)
+	at org.eclipse.e4.ui.internal.di.UIEventObjectSupplier$UIEventHandler.handleEvent(UIEventObjectSupplier.java:64)
+	at org.eclipse.equinox.internal.event.EventHandlerWrapper.handleEvent(EventHandlerWrapper.java:205)
+	at org.eclipse.equinox.internal.event.EventHandlerTracker.dispatchEvent(EventHandlerTracker.java:203)
+	at org.eclipse.equinox.internal.event.EventHandlerTracker.dispatchEvent(EventHandlerTracker.java:1)
+	at org.eclipse.osgi.framework.eventmgr.EventManager.dispatchEvent(EventManager.java:234)
+	at org.eclipse.osgi.framework.eventmgr.ListenerQueue.dispatchEventSynchronous(ListenerQueue.java:151)
+	at org.eclipse.equinox.internal.event.EventAdminImpl.dispatchEvent(EventAdminImpl.java:132)
+	at org.eclipse.equinox.internal.event.EventAdminImpl.sendEvent(EventAdminImpl.java:75)
+	at org.eclipse.equinox.internal.event.EventComponent.sendEvent(EventComponent.java:44)
+	at org.eclipse.e4.ui.services.internal.events.EventBroker.send(EventBroker.java:55)
+	at org.eclipse.e4.ui.internal.workbench.UIEventPublisher.notifyChanged(UIEventPublisher.java:63)
+	at org.eclipse.emf.common.notify.impl.BasicNotifierImpl.eNotify(BasicNotifierImpl.java:424)
+	at org.eclipse.e4.ui.model.application.ui.impl.UIElementImpl.setVisible(UIElementImpl.java:361)
+	at org.eclipse.e4.ui.workbench.renderers.swt.ContributionRecord.updateVisibility(ContributionRecord.java:113)
+	at org.eclipse.e4.ui.workbench.renderers.swt.MenuManagerRendererFilter.updateElementVisibility(MenuManagerRendererFilter.java:194)
+	at org.eclipse.e4.ui.workbench.renderers.swt.MenuManagerRendererFilter.updateElementVisibility(MenuManagerRendererFilter.java:205)
+	at org.eclipse.e4.ui.workbench.renderers.swt.MenuManagerShowProcessor.showMenu(MenuManagerShowProcessor.java:258)
+	at org.eclipse.e4.ui.workbench.renderers.swt.MenuManagerShowProcessor.menuAboutToHide(MenuManagerShowProcessor.java:115)
+	at org.eclipse.jface.internal.MenuManagerEventHelper.showEventPostHelper(MenuManagerEventHelper.java:95)
+	at org.eclipse.jface.action.MenuManager.handleAboutToShow(MenuManager.java:469)
+	at org.eclipse.jface.action.MenuManager.access$1(MenuManager.java:463)
+	at org.eclipse.jface.action.MenuManager$2.menuShown(MenuManager.java:495)
+	at org.eclipse.swt.widgets.TypedListener.handleEvent(TypedListener.java:259)
+	at org.eclipse.swt.widgets.EventTable.sendEvent(EventTable.java:89)
+	at org.eclipse.swt.widgets.Display.sendEvent(Display.java:5676)
+	at org.eclipse.swt.widgets.Widget.sendEvent(Widget.java:1423)
+	at org.eclipse.swt.widgets.Widget.sendEvent(Widget.java:1449)
+	at org.eclipse.swt.widgets.Widget.sendEvent(Widget.java:1428)
+	at org.eclipse.swt.widgets.Menu._setVisible(Menu.java:219)
+	at org.eclipse.swt.widgets.Display.runPopups(Display.java:4977)
+	at org.eclipse.swt.widgets.Display.readAndDispatch(Display.java:4419)
+	at org.eclipse.e4.ui.internal.workbench.swt.PartRenderingEngine$5.run(PartRenderingEngine.java:1160)
+	at org.eclipse.core.databinding.observable.Realm.runWithDefault(Realm.java:338)
+	at org.eclipse.e4.ui.internal.workbench.swt.PartRenderingEngine.run(PartRenderingEngine.java:1049)
+	at org.eclipse.e4.ui.internal.workbench.E4Workbench.createAndRunUI(E4Workbench.java:155)
+	at org.eclipse.ui.internal.Workbench.lambda$3(Workbench.java:660)
+	at org.eclipse.core.databinding.observable.Realm.runWithDefault(Realm.java:338)
+	at org.eclipse.ui.internal.Workbench.createAndRunWorkbench(Workbench.java:559)
+	at org.eclipse.ui.PlatformUI.createAndRunWorkbench(PlatformUI.java:154)
+	at org.eclipse.ui.internal.ide.application.IDEApplication.start(IDEApplication.java:150)
+	at org.eclipse.equinox.internal.app.EclipseAppHandle.run(EclipseAppHandle.java:203)
+	at org.eclipse.core.runtime.internal.adaptor.EclipseAppLauncher.runApplication(EclipseAppLauncher.java:137)
+	at org.eclipse.core.runtime.internal.adaptor.EclipseAppLauncher.start(EclipseAppLauncher.java:107)
+	at org.eclipse.core.runtime.adaptor.EclipseStarter.run(EclipseStarter.java:401)
+	at org.eclipse.core.runtime.adaptor.EclipseStarter.run(EclipseStarter.java:255)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:498)
+	at org.eclipse.equinox.launcher.Main.invokeFramework(Main.java:657)
+	at org.eclipse.equinox.launcher.Main.basicRun(Main.java:594)
+	at org.eclipse.equinox.launcher.Main.run(Main.java:1465)
+	at org.eclipse.equinox.launcher.Main.main(Main.java:1438)
+Caused by: org.eclipse.swt.SWTException: i/o error (java.io.FileNotFoundException: C:\Program Files\Git\mingw64\share\git\git-for-windows.ico (Arquivo ou diretório inexistente))
+	at org.eclipse.swt.SWT.error(SWT.java:4720)
+	at org.eclipse.swt.SWT.error(SWT.java:4635)
+	at org.eclipse.swt.graphics.ImageLoader.load(ImageLoader.java:292)
+	at org.eclipse.tm.terminal.view.ui.local.showin.ExternalExecutablesManager.loadImage(ExternalExecutablesManager.java:266)
+	at org.eclipse.tm.terminal.view.ui.local.showin.DynamicContributionItems.getContributionItems(DynamicContributionItems.java:79)
+	at org.eclipse.ui.actions.CompoundContributionItem.getContributionItemsToFill(CompoundContributionItem.java:83)
+	at org.eclipse.ui.actions.CompoundContributionItem.fill(CompoundContributionItem.java:57)
+	at org.eclipse.ui.internal.menus.DynamicMenuContributionItem.fill(DynamicMenuContributionItem.java:146)
+	at org.eclipse.jface.action.MenuManager.doItemFill(MenuManager.java:729)
+	at org.eclipse.jface.action.MenuManager.update(MenuManager.java:806)
+	at org.eclipse.jface.action.MenuManager.update(MenuManager.java:673)
+	at org.eclipse.e4.ui.workbench.renderers.swt.MenuManagerRenderer.scheduleManagerUpdate(MenuManagerRenderer.java:1224)
+	at org.eclipse.e4.ui.workbench.renderers.swt.MenuManagerRenderer.subscribeUIElementTopicAllRenderedVisibility(MenuManagerRenderer.java:218)
+	at sun.reflect.GeneratedMethodAccessor22.invoke(Unknown Source)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:498)
+	at org.eclipse.e4.core.internal.di.MethodRequestor.execute(MethodRequestor.java:58)
+	... 58 more
+Caused by: java.io.FileNotFoundException: C:\Program Files\Git\mingw64\share\git\git-for-windows.ico (Arquivo ou diretório inexistente)
+	at java.io.FileInputStream.open0(Native Method)
+	at java.io.FileInputStream.open(FileInputStream.java:195)
+	at java.io.FileInputStream.<init>(FileInputStream.java:138)
+	at java.io.FileInputStream.<init>(FileInputStream.java:93)
+	at org.eclipse.swt.graphics.ImageLoader.load(ImageLoader.java:289)
+	... 72 more
+
+!ENTRY org.eclipse.jface 2 0 2020-07-17 14:44:52.438
+!MESSAGE Ignored reentrant call while viewer is busy. This is only logged once per viewer instance, but similar calls will still be ignored.
+!STACK 0
+java.lang.RuntimeException
+	at org.eclipse.jface.viewers.ColumnViewer.checkBusy(ColumnViewer.java:764)
+	at org.eclipse.jface.viewers.ColumnViewer.update(ColumnViewer.java:543)
+	at org.eclipse.ui.navigator.CommonViewer.update(CommonViewer.java:512)
+	at org.eclipse.jface.viewers.StructuredViewer.update(StructuredViewer.java:1970)
+	at org.eclipse.ui.internal.navigator.resources.nested.NestedProjectsLabelProvider.lambda$2(NestedProjectsLabelProvider.java:87)
+	at java.util.concurrent.CompletableFuture.uniAccept(CompletableFuture.java:670)
+	at java.util.concurrent.CompletableFuture$UniAccept.tryFire(CompletableFuture.java:646)
+	at java.util.concurrent.CompletableFuture.postComplete(CompletableFuture.java:488)
+	at java.util.concurrent.CompletableFuture$AsyncSupply.run(CompletableFuture.java:1609)
+	at java.util.concurrent.CompletableFuture$AsyncSupply.exec(CompletableFuture.java:1596)
+	at java.util.concurrent.ForkJoinTask.doExec(ForkJoinTask.java:289)
+	at java.util.concurrent.ForkJoinPool$WorkQueue.runTask(ForkJoinPool.java:1056)
+	at java.util.concurrent.ForkJoinPool.runWorker(ForkJoinPool.java:1692)
+	at java.util.concurrent.ForkJoinWorkerThread.run(ForkJoinWorkerThread.java:157)
+
+!ENTRY org.eclipse.ui 4 0 2020-07-17 14:45:36.420
+!MESSAGE Unhandled event loop exception
+!STACK 0
+org.eclipse.e4.core.di.InjectionException: org.eclipse.swt.SWTException: i/o error (java.io.FileNotFoundException: C:\Program Files\Git\mingw64\share\git\git-for-windows.ico (Arquivo ou diretório inexistente))
+	at org.eclipse.e4.core.internal.di.MethodRequestor.execute(MethodRequestor.java:68)
+	at org.eclipse.e4.ui.internal.di.UIEventObjectSupplier$UIEventHandler.lambda$0(UIEventObjectSupplier.java:64)
+	at org.eclipse.swt.widgets.Synchronizer.syncExec(Synchronizer.java:236)
+	at org.eclipse.ui.internal.UISynchronizer.syncExec(UISynchronizer.java:146)
+	at org.eclipse.swt.widgets.Display.syncExec(Display.java:5786)
+	at org.eclipse.e4.ui.internal.workbench.swt.E4Application$1.syncExec(E4Application.java:219)
+	at org.eclipse.e4.ui.internal.di.UIEventObjectSupplier$UIEventHandler.handleEvent(UIEventObjectSupplier.java:64)
+	at org.eclipse.equinox.internal.event.EventHandlerWrapper.handleEvent(EventHandlerWrapper.java:205)
+	at org.eclipse.equinox.internal.event.EventHandlerTracker.dispatchEvent(EventHandlerTracker.java:203)
+	at org.eclipse.equinox.internal.event.EventHandlerTracker.dispatchEvent(EventHandlerTracker.java:1)
+	at org.eclipse.osgi.framework.eventmgr.EventManager.dispatchEvent(EventManager.java:234)
+	at org.eclipse.osgi.framework.eventmgr.ListenerQueue.dispatchEventSynchronous(ListenerQueue.java:151)
+	at org.eclipse.equinox.internal.event.EventAdminImpl.dispatchEvent(EventAdminImpl.java:132)
+	at org.eclipse.equinox.internal.event.EventAdminImpl.sendEvent(EventAdminImpl.java:75)
+	at org.eclipse.equinox.internal.event.EventComponent.sendEvent(EventComponent.java:44)
+	at org.eclipse.e4.ui.services.internal.events.EventBroker.send(EventBroker.java:55)
+	at org.eclipse.e4.ui.internal.workbench.UIEventPublisher.notifyChanged(UIEventPublisher.java:63)
+	at org.eclipse.emf.common.notify.impl.BasicNotifierImpl.eNotify(BasicNotifierImpl.java:424)
+	at org.eclipse.e4.ui.model.application.ui.impl.UIElementImpl.setVisible(UIElementImpl.java:361)
+	at org.eclipse.e4.ui.workbench.renderers.swt.ContributionRecord.updateVisibility(ContributionRecord.java:113)
+	at org.eclipse.e4.ui.workbench.renderers.swt.MenuManagerRendererFilter.updateElementVisibility(MenuManagerRendererFilter.java:194)
+	at org.eclipse.e4.ui.workbench.renderers.swt.MenuManagerRendererFilter.updateElementVisibility(MenuManagerRendererFilter.java:205)
+	at org.eclipse.e4.ui.workbench.renderers.swt.MenuManagerShowProcessor.showMenu(MenuManagerShowProcessor.java:258)
+	at org.eclipse.e4.ui.workbench.renderers.swt.MenuManagerShowProcessor.menuAboutToHide(MenuManagerShowProcessor.java:115)
+	at org.eclipse.jface.internal.MenuManagerEventHelper.showEventPostHelper(MenuManagerEventHelper.java:95)
+	at org.eclipse.jface.action.MenuManager.handleAboutToShow(MenuManager.java:469)
+	at org.eclipse.jface.action.MenuManager.access$1(MenuManager.java:463)
+	at org.eclipse.jface.action.MenuManager$2.menuShown(MenuManager.java:495)
+	at org.eclipse.swt.widgets.TypedListener.handleEvent(TypedListener.java:259)
+	at org.eclipse.swt.widgets.EventTable.sendEvent(EventTable.java:89)
+	at org.eclipse.swt.widgets.Display.sendEvent(Display.java:5676)
+	at org.eclipse.swt.widgets.Widget.sendEvent(Widget.java:1423)
+	at org.eclipse.swt.widgets.Widget.sendEvent(Widget.java:1449)
+	at org.eclipse.swt.widgets.Widget.sendEvent(Widget.java:1428)
+	at org.eclipse.swt.widgets.Menu._setVisible(Menu.java:219)
+	at org.eclipse.swt.widgets.Display.runPopups(Display.java:4977)
+	at org.eclipse.swt.widgets.Display.readAndDispatch(Display.java:4419)
+	at org.eclipse.e4.ui.internal.workbench.swt.PartRenderingEngine$5.run(PartRenderingEngine.java:1160)
+	at org.eclipse.core.databinding.observable.Realm.runWithDefault(Realm.java:338)
+	at org.eclipse.e4.ui.internal.workbench.swt.PartRenderingEngine.run(PartRenderingEngine.java:1049)
+	at org.eclipse.e4.ui.internal.workbench.E4Workbench.createAndRunUI(E4Workbench.java:155)
+	at org.eclipse.ui.internal.Workbench.lambda$3(Workbench.java:660)
+	at org.eclipse.core.databinding.observable.Realm.runWithDefault(Realm.java:338)
+	at org.eclipse.ui.internal.Workbench.createAndRunWorkbench(Workbench.java:559)
+	at org.eclipse.ui.PlatformUI.createAndRunWorkbench(PlatformUI.java:154)
+	at org.eclipse.ui.internal.ide.application.IDEApplication.start(IDEApplication.java:150)
+	at org.eclipse.equinox.internal.app.EclipseAppHandle.run(EclipseAppHandle.java:203)
+	at org.eclipse.core.runtime.internal.adaptor.EclipseAppLauncher.runApplication(EclipseAppLauncher.java:137)
+	at org.eclipse.core.runtime.internal.adaptor.EclipseAppLauncher.start(EclipseAppLauncher.java:107)
+	at org.eclipse.core.runtime.adaptor.EclipseStarter.run(EclipseStarter.java:401)
+	at org.eclipse.core.runtime.adaptor.EclipseStarter.run(EclipseStarter.java:255)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:498)
+	at org.eclipse.equinox.launcher.Main.invokeFramework(Main.java:657)
+	at org.eclipse.equinox.launcher.Main.basicRun(Main.java:594)
+	at org.eclipse.equinox.launcher.Main.run(Main.java:1465)
+	at org.eclipse.equinox.launcher.Main.main(Main.java:1438)
+Caused by: org.eclipse.swt.SWTException: i/o error (java.io.FileNotFoundException: C:\Program Files\Git\mingw64\share\git\git-for-windows.ico (Arquivo ou diretório inexistente))
+	at org.eclipse.swt.SWT.error(SWT.java:4720)
+	at org.eclipse.swt.SWT.error(SWT.java:4635)
+	at org.eclipse.swt.graphics.ImageLoader.load(ImageLoader.java:292)
+	at org.eclipse.tm.terminal.view.ui.local.showin.ExternalExecutablesManager.loadImage(ExternalExecutablesManager.java:266)
+	at org.eclipse.tm.terminal.view.ui.local.showin.DynamicContributionItems.getContributionItems(DynamicContributionItems.java:79)
+	at org.eclipse.ui.actions.CompoundContributionItem.getContributionItemsToFill(CompoundContributionItem.java:83)
+	at org.eclipse.ui.actions.CompoundContributionItem.fill(CompoundContributionItem.java:57)
+	at org.eclipse.ui.internal.menus.DynamicMenuContributionItem.fill(DynamicMenuContributionItem.java:146)
+	at org.eclipse.jface.action.MenuManager.doItemFill(MenuManager.java:729)
+	at org.eclipse.jface.action.MenuManager.update(MenuManager.java:806)
+	at org.eclipse.jface.action.MenuManager.update(MenuManager.java:673)
+	at org.eclipse.e4.ui.workbench.renderers.swt.MenuManagerRenderer.scheduleManagerUpdate(MenuManagerRenderer.java:1224)
+	at org.eclipse.e4.ui.workbench.renderers.swt.MenuManagerRenderer.subscribeUIElementTopicAllRenderedVisibility(MenuManagerRenderer.java:218)
+	at sun.reflect.GeneratedMethodAccessor22.invoke(Unknown Source)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:498)
+	at org.eclipse.e4.core.internal.di.MethodRequestor.execute(MethodRequestor.java:58)
+	... 58 more
+Caused by: java.io.FileNotFoundException: C:\Program Files\Git\mingw64\share\git\git-for-windows.ico (Arquivo ou diretório inexistente)
+	at java.io.FileInputStream.open0(Native Method)
+	at java.io.FileInputStream.open(FileInputStream.java:195)
+	at java.io.FileInputStream.<init>(FileInputStream.java:138)
+	at java.io.FileInputStream.<init>(FileInputStream.java:93)
+	at org.eclipse.swt.graphics.ImageLoader.load(ImageLoader.java:289)
+	... 72 more
+
+!ENTRY org.eclipse.ui 4 0 2020-07-17 14:46:16.869
+!MESSAGE Unhandled event loop exception
+!STACK 0
+org.eclipse.e4.core.di.InjectionException: org.eclipse.swt.SWTException: i/o error (java.io.FileNotFoundException: C:\Program Files\Git\mingw64\share\git\git-for-windows.ico (Arquivo ou diretório inexistente))
+	at org.eclipse.e4.core.internal.di.MethodRequestor.execute(MethodRequestor.java:68)
+	at org.eclipse.e4.ui.internal.di.UIEventObjectSupplier$UIEventHandler.lambda$0(UIEventObjectSupplier.java:64)
+	at org.eclipse.swt.widgets.Synchronizer.syncExec(Synchronizer.java:236)
+	at org.eclipse.ui.internal.UISynchronizer.syncExec(UISynchronizer.java:146)
+	at org.eclipse.swt.widgets.Display.syncExec(Display.java:5786)
+	at org.eclipse.e4.ui.internal.workbench.swt.E4Application$1.syncExec(E4Application.java:219)
+	at org.eclipse.e4.ui.internal.di.UIEventObjectSupplier$UIEventHandler.handleEvent(UIEventObjectSupplier.java:64)
+	at org.eclipse.equinox.internal.event.EventHandlerWrapper.handleEvent(EventHandlerWrapper.java:205)
+	at org.eclipse.equinox.internal.event.EventHandlerTracker.dispatchEvent(EventHandlerTracker.java:203)
+	at org.eclipse.equinox.internal.event.EventHandlerTracker.dispatchEvent(EventHandlerTracker.java:1)
+	at org.eclipse.osgi.framework.eventmgr.EventManager.dispatchEvent(EventManager.java:234)
+	at org.eclipse.osgi.framework.eventmgr.ListenerQueue.dispatchEventSynchronous(ListenerQueue.java:151)
+	at org.eclipse.equinox.internal.event.EventAdminImpl.dispatchEvent(EventAdminImpl.java:132)
+	at org.eclipse.equinox.internal.event.EventAdminImpl.sendEvent(EventAdminImpl.java:75)
+	at org.eclipse.equinox.internal.event.EventComponent.sendEvent(EventComponent.java:44)
+	at org.eclipse.e4.ui.services.internal.events.EventBroker.send(EventBroker.java:55)
+	at org.eclipse.e4.ui.internal.workbench.UIEventPublisher.notifyChanged(UIEventPublisher.java:63)
+	at org.eclipse.emf.common.notify.impl.BasicNotifierImpl.eNotify(BasicNotifierImpl.java:424)
+	at org.eclipse.e4.ui.model.application.ui.impl.UIElementImpl.setVisible(UIElementImpl.java:361)
+	at org.eclipse.e4.ui.workbench.renderers.swt.ContributionRecord.updateVisibility(ContributionRecord.java:113)
+	at org.eclipse.e4.ui.workbench.renderers.swt.MenuManagerRendererFilter.updateElementVisibility(MenuManagerRendererFilter.java:194)
+	at org.eclipse.e4.ui.workbench.renderers.swt.MenuManagerRendererFilter.updateElementVisibility(MenuManagerRendererFilter.java:205)
+	at org.eclipse.e4.ui.workbench.renderers.swt.MenuManagerShowProcessor.showMenu(MenuManagerShowProcessor.java:258)
+	at org.eclipse.e4.ui.workbench.renderers.swt.MenuManagerShowProcessor.menuAboutToHide(MenuManagerShowProcessor.java:115)
+	at org.eclipse.jface.internal.MenuManagerEventHelper.showEventPostHelper(MenuManagerEventHelper.java:95)
+	at org.eclipse.jface.action.MenuManager.handleAboutToShow(MenuManager.java:469)
+	at org.eclipse.jface.action.MenuManager.access$1(MenuManager.java:463)
+	at org.eclipse.jface.action.MenuManager$2.menuShown(MenuManager.java:495)
+	at org.eclipse.swt.widgets.TypedListener.handleEvent(TypedListener.java:259)
+	at org.eclipse.swt.widgets.EventTable.sendEvent(EventTable.java:89)
+	at org.eclipse.swt.widgets.Display.sendEvent(Display.java:5676)
+	at org.eclipse.swt.widgets.Widget.sendEvent(Widget.java:1423)
+	at org.eclipse.swt.widgets.Widget.sendEvent(Widget.java:1449)
+	at org.eclipse.swt.widgets.Widget.sendEvent(Widget.java:1428)
+	at org.eclipse.swt.widgets.Menu._setVisible(Menu.java:219)
+	at org.eclipse.swt.widgets.Display.runPopups(Display.java:4977)
+	at org.eclipse.swt.widgets.Display.readAndDispatch(Display.java:4419)
+	at org.eclipse.e4.ui.internal.workbench.swt.PartRenderingEngine$5.run(PartRenderingEngine.java:1160)
+	at org.eclipse.core.databinding.observable.Realm.runWithDefault(Realm.java:338)
+	at org.eclipse.e4.ui.internal.workbench.swt.PartRenderingEngine.run(PartRenderingEngine.java:1049)
+	at org.eclipse.e4.ui.internal.workbench.E4Workbench.createAndRunUI(E4Workbench.java:155)
+	at org.eclipse.ui.internal.Workbench.lambda$3(Workbench.java:660)
+	at org.eclipse.core.databinding.observable.Realm.runWithDefault(Realm.java:338)
+	at org.eclipse.ui.internal.Workbench.createAndRunWorkbench(Workbench.java:559)
+	at org.eclipse.ui.PlatformUI.createAndRunWorkbench(PlatformUI.java:154)
+	at org.eclipse.ui.internal.ide.application.IDEApplication.start(IDEApplication.java:150)
+	at org.eclipse.equinox.internal.app.EclipseAppHandle.run(EclipseAppHandle.java:203)
+	at org.eclipse.core.runtime.internal.adaptor.EclipseAppLauncher.runApplication(EclipseAppLauncher.java:137)
+	at org.eclipse.core.runtime.internal.adaptor.EclipseAppLauncher.start(EclipseAppLauncher.java:107)
+	at org.eclipse.core.runtime.adaptor.EclipseStarter.run(EclipseStarter.java:401)
+	at org.eclipse.core.runtime.adaptor.EclipseStarter.run(EclipseStarter.java:255)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:498)
+	at org.eclipse.equinox.launcher.Main.invokeFramework(Main.java:657)
+	at org.eclipse.equinox.launcher.Main.basicRun(Main.java:594)
+	at org.eclipse.equinox.launcher.Main.run(Main.java:1465)
+	at org.eclipse.equinox.launcher.Main.main(Main.java:1438)
+Caused by: org.eclipse.swt.SWTException: i/o error (java.io.FileNotFoundException: C:\Program Files\Git\mingw64\share\git\git-for-windows.ico (Arquivo ou diretório inexistente))
+	at org.eclipse.swt.SWT.error(SWT.java:4720)
+	at org.eclipse.swt.SWT.error(SWT.java:4635)
+	at org.eclipse.swt.graphics.ImageLoader.load(ImageLoader.java:292)
+	at org.eclipse.tm.terminal.view.ui.local.showin.ExternalExecutablesManager.loadImage(ExternalExecutablesManager.java:266)
+	at org.eclipse.tm.terminal.view.ui.local.showin.DynamicContributionItems.getContributionItems(DynamicContributionItems.java:79)
+	at org.eclipse.ui.actions.CompoundContributionItem.getContributionItemsToFill(CompoundContributionItem.java:83)
+	at org.eclipse.ui.actions.CompoundContributionItem.fill(CompoundContributionItem.java:57)
+	at org.eclipse.ui.internal.menus.DynamicMenuContributionItem.fill(DynamicMenuContributionItem.java:146)
+	at org.eclipse.jface.action.MenuManager.doItemFill(MenuManager.java:729)
+	at org.eclipse.jface.action.MenuManager.update(MenuManager.java:806)
+	at org.eclipse.jface.action.MenuManager.update(MenuManager.java:673)
+	at org.eclipse.e4.ui.workbench.renderers.swt.MenuManagerRenderer.scheduleManagerUpdate(MenuManagerRenderer.java:1224)
+	at org.eclipse.e4.ui.workbench.renderers.swt.MenuManagerRenderer.subscribeUIElementTopicAllRenderedVisibility(MenuManagerRenderer.java:218)
+	at sun.reflect.GeneratedMethodAccessor22.invoke(Unknown Source)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:498)
+	at org.eclipse.e4.core.internal.di.MethodRequestor.execute(MethodRequestor.java:58)
+	... 58 more
+Caused by: java.io.FileNotFoundException: C:\Program Files\Git\mingw64\share\git\git-for-windows.ico (Arquivo ou diretório inexistente)
+	at java.io.FileInputStream.open0(Native Method)
+	at java.io.FileInputStream.open(FileInputStream.java:195)
+	at java.io.FileInputStream.<init>(FileInputStream.java:138)
+	at java.io.FileInputStream.<init>(FileInputStream.java:93)
+	at org.eclipse.swt.graphics.ImageLoader.load(ImageLoader.java:289)
+	... 72 more
+
+!ENTRY org.eclipse.ui 4 0 2020-07-17 14:47:41.077
+!MESSAGE Unhandled event loop exception
+!STACK 0
+org.eclipse.e4.core.di.InjectionException: org.eclipse.swt.SWTException: i/o error (java.io.FileNotFoundException: C:\Program Files\Git\mingw64\share\git\git-for-windows.ico (Arquivo ou diretório inexistente))
+	at org.eclipse.e4.core.internal.di.MethodRequestor.execute(MethodRequestor.java:68)
+	at org.eclipse.e4.ui.internal.di.UIEventObjectSupplier$UIEventHandler.lambda$0(UIEventObjectSupplier.java:64)
+	at org.eclipse.swt.widgets.Synchronizer.syncExec(Synchronizer.java:236)
+	at org.eclipse.ui.internal.UISynchronizer.syncExec(UISynchronizer.java:146)
+	at org.eclipse.swt.widgets.Display.syncExec(Display.java:5786)
+	at org.eclipse.e4.ui.internal.workbench.swt.E4Application$1.syncExec(E4Application.java:219)
+	at org.eclipse.e4.ui.internal.di.UIEventObjectSupplier$UIEventHandler.handleEvent(UIEventObjectSupplier.java:64)
+	at org.eclipse.equinox.internal.event.EventHandlerWrapper.handleEvent(EventHandlerWrapper.java:205)
+	at org.eclipse.equinox.internal.event.EventHandlerTracker.dispatchEvent(EventHandlerTracker.java:203)
+	at org.eclipse.equinox.internal.event.EventHandlerTracker.dispatchEvent(EventHandlerTracker.java:1)
+	at org.eclipse.osgi.framework.eventmgr.EventManager.dispatchEvent(EventManager.java:234)
+	at org.eclipse.osgi.framework.eventmgr.ListenerQueue.dispatchEventSynchronous(ListenerQueue.java:151)
+	at org.eclipse.equinox.internal.event.EventAdminImpl.dispatchEvent(EventAdminImpl.java:132)
+	at org.eclipse.equinox.internal.event.EventAdminImpl.sendEvent(EventAdminImpl.java:75)
+	at org.eclipse.equinox.internal.event.EventComponent.sendEvent(EventComponent.java:44)
+	at org.eclipse.e4.ui.services.internal.events.EventBroker.send(EventBroker.java:55)
+	at org.eclipse.e4.ui.internal.workbench.UIEventPublisher.notifyChanged(UIEventPublisher.java:63)
+	at org.eclipse.emf.common.notify.impl.BasicNotifierImpl.eNotify(BasicNotifierImpl.java:424)
+	at org.eclipse.e4.ui.model.application.ui.impl.UIElementImpl.setVisible(UIElementImpl.java:361)
+	at org.eclipse.e4.ui.workbench.renderers.swt.ContributionRecord.updateVisibility(ContributionRecord.java:113)
+	at org.eclipse.e4.ui.workbench.renderers.swt.MenuManagerRendererFilter.updateElementVisibility(MenuManagerRendererFilter.java:194)
+	at org.eclipse.e4.ui.workbench.renderers.swt.MenuManagerRendererFilter.updateElementVisibility(MenuManagerRendererFilter.java:205)
+	at org.eclipse.e4.ui.workbench.renderers.swt.MenuManagerShowProcessor.showMenu(MenuManagerShowProcessor.java:258)
+	at org.eclipse.e4.ui.workbench.renderers.swt.MenuManagerShowProcessor.menuAboutToHide(MenuManagerShowProcessor.java:115)
+	at org.eclipse.jface.internal.MenuManagerEventHelper.showEventPostHelper(MenuManagerEventHelper.java:95)
+	at org.eclipse.jface.action.MenuManager.handleAboutToShow(MenuManager.java:469)
+	at org.eclipse.jface.action.MenuManager.access$1(MenuManager.java:463)
+	at org.eclipse.jface.action.MenuManager$2.menuShown(MenuManager.java:495)
+	at org.eclipse.swt.widgets.TypedListener.handleEvent(TypedListener.java:259)
+	at org.eclipse.swt.widgets.EventTable.sendEvent(EventTable.java:89)
+	at org.eclipse.swt.widgets.Display.sendEvent(Display.java:5676)
+	at org.eclipse.swt.widgets.Widget.sendEvent(Widget.java:1423)
+	at org.eclipse.swt.widgets.Widget.sendEvent(Widget.java:1449)
+	at org.eclipse.swt.widgets.Widget.sendEvent(Widget.java:1428)
+	at org.eclipse.swt.widgets.Menu._setVisible(Menu.java:219)
+	at org.eclipse.swt.widgets.Display.runPopups(Display.java:4977)
+	at org.eclipse.swt.widgets.Display.readAndDispatch(Display.java:4419)
+	at org.eclipse.e4.ui.internal.workbench.swt.PartRenderingEngine$5.run(PartRenderingEngine.java:1160)
+	at org.eclipse.core.databinding.observable.Realm.runWithDefault(Realm.java:338)
+	at org.eclipse.e4.ui.internal.workbench.swt.PartRenderingEngine.run(PartRenderingEngine.java:1049)
+	at org.eclipse.e4.ui.internal.workbench.E4Workbench.createAndRunUI(E4Workbench.java:155)
+	at org.eclipse.ui.internal.Workbench.lambda$3(Workbench.java:660)
+	at org.eclipse.core.databinding.observable.Realm.runWithDefault(Realm.java:338)
+	at org.eclipse.ui.internal.Workbench.createAndRunWorkbench(Workbench.java:559)
+	at org.eclipse.ui.PlatformUI.createAndRunWorkbench(PlatformUI.java:154)
+	at org.eclipse.ui.internal.ide.application.IDEApplication.start(IDEApplication.java:150)
+	at org.eclipse.equinox.internal.app.EclipseAppHandle.run(EclipseAppHandle.java:203)
+	at org.eclipse.core.runtime.internal.adaptor.EclipseAppLauncher.runApplication(EclipseAppLauncher.java:137)
+	at org.eclipse.core.runtime.internal.adaptor.EclipseAppLauncher.start(EclipseAppLauncher.java:107)
+	at org.eclipse.core.runtime.adaptor.EclipseStarter.run(EclipseStarter.java:401)
+	at org.eclipse.core.runtime.adaptor.EclipseStarter.run(EclipseStarter.java:255)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:498)
+	at org.eclipse.equinox.launcher.Main.invokeFramework(Main.java:657)
+	at org.eclipse.equinox.launcher.Main.basicRun(Main.java:594)
+	at org.eclipse.equinox.launcher.Main.run(Main.java:1465)
+	at org.eclipse.equinox.launcher.Main.main(Main.java:1438)
+Caused by: org.eclipse.swt.SWTException: i/o error (java.io.FileNotFoundException: C:\Program Files\Git\mingw64\share\git\git-for-windows.ico (Arquivo ou diretório inexistente))
+	at org.eclipse.swt.SWT.error(SWT.java:4720)
+	at org.eclipse.swt.SWT.error(SWT.java:4635)
+	at org.eclipse.swt.graphics.ImageLoader.load(ImageLoader.java:292)
+	at org.eclipse.tm.terminal.view.ui.local.showin.ExternalExecutablesManager.loadImage(ExternalExecutablesManager.java:266)
+	at org.eclipse.tm.terminal.view.ui.local.showin.DynamicContributionItems.getContributionItems(DynamicContributionItems.java:79)
+	at org.eclipse.ui.actions.CompoundContributionItem.getContributionItemsToFill(CompoundContributionItem.java:83)
+	at org.eclipse.ui.actions.CompoundContributionItem.fill(CompoundContributionItem.java:57)
+	at org.eclipse.ui.internal.menus.DynamicMenuContributionItem.fill(DynamicMenuContributionItem.java:146)
+	at org.eclipse.jface.action.MenuManager.doItemFill(MenuManager.java:729)
+	at org.eclipse.jface.action.MenuManager.update(MenuManager.java:806)
+	at org.eclipse.jface.action.MenuManager.update(MenuManager.java:673)
+	at org.eclipse.e4.ui.workbench.renderers.swt.MenuManagerRenderer.scheduleManagerUpdate(MenuManagerRenderer.java:1224)
+	at org.eclipse.e4.ui.workbench.renderers.swt.MenuManagerRenderer.subscribeUIElementTopicAllRenderedVisibility(MenuManagerRenderer.java:218)
+	at sun.reflect.GeneratedMethodAccessor22.invoke(Unknown Source)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:498)
+	at org.eclipse.e4.core.internal.di.MethodRequestor.execute(MethodRequestor.java:58)
+	... 58 more
+Caused by: java.io.FileNotFoundException: C:\Program Files\Git\mingw64\share\git\git-for-windows.ico (Arquivo ou diretório inexistente)
+	at java.io.FileInputStream.open0(Native Method)
+	at java.io.FileInputStream.open(FileInputStream.java:195)
+	at java.io.FileInputStream.<init>(FileInputStream.java:138)
+	at java.io.FileInputStream.<init>(FileInputStream.java:93)
+	at org.eclipse.swt.graphics.ImageLoader.load(ImageLoader.java:289)
+	... 72 more
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2020-07-17 14:48:00.757
+!MESSAGE Entering DelegatingStreamConnectionProvider()
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2020-07-17 14:48:00.757
+!MESSAGE DelegatingStreamConnectionProvider classloader = org.eclipse.osgi.internal.loader.EquinoxClassLoader@33822750[org.springframework.tooling.boot.ls:1.18.0.202005250744(id=1009)]
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2020-07-17 14:48:00.758
+!MESSAGE SpringBootLanguageServer exists!
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2020-07-17 14:48:03.502
+!MESSAGE Boot LS startup time from start to initialized: 2744ms
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2020-07-17 14:48:03.575
+!MESSAGE ClasspathListenerHandler addClasspathListener sts4.classpath.TuUsaneZisBatched = true
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2020-07-17 14:48:03.575
+!MESSAGE Creating project sorter...
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2020-07-17 14:48:03.576
+!MESSAGE Creating project sorter... DONE
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2020-07-17 14:48:03.577
+!MESSAGE Setting up ClasspathListenerManager
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2020-07-17 14:48:03.577
+!MESSAGE Scheduling initial event for all projects ...
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2020-07-17 14:48:03.578
+!MESSAGE Scheduling initial event for all projects DONE
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2020-07-17 14:48:03.578
+!MESSAGE exists = true open = true => deleted = false
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2020-07-17 14:48:03.578
+!MESSAGE ClasspathListenerHandler addClasspathListener sts4.classpath.TuUsaneZ => OK
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2020-07-17 14:48:03.589
+!MESSAGE classpath=175 entries
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2020-07-17 14:48:03.591
+!MESSAGE buffering callback sts4.classpath.TuUsaneZ Business-boost false 175
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2020-07-17 14:48:03.591
+!MESSAGE executing callback sts4.classpath.TuUsaneZ 1 batched events
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2020-07-17 14:48:03.655
+!MESSAGE executing callback sts4.classpath.TuUsaneZ SUCCESS [done]
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2020-07-17 14:50:31.324
+!MESSAGE exists = true open = true => deleted = false
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2020-07-17 14:50:31.328
+!MESSAGE classpath=177 entries
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2020-07-17 14:50:31.330
+!MESSAGE buffering callback sts4.classpath.TuUsaneZ Business-boost false 177
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2020-07-17 14:50:31.330
+!MESSAGE executing callback sts4.classpath.TuUsaneZ 1 batched events
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2020-07-17 14:50:31.363
+!MESSAGE executing callback sts4.classpath.TuUsaneZ SUCCESS [done]
+
+!ENTRY org.eclipse.ui 4 0 2020-07-17 15:02:16.674
+!MESSAGE Unhandled event loop exception
+!STACK 0
+org.eclipse.e4.core.di.InjectionException: org.eclipse.swt.SWTException: i/o error (java.io.FileNotFoundException: C:\Program Files\Git\mingw64\share\git\git-for-windows.ico (Arquivo ou diretório inexistente))
+	at org.eclipse.e4.core.internal.di.MethodRequestor.execute(MethodRequestor.java:68)
+	at org.eclipse.e4.ui.internal.di.UIEventObjectSupplier$UIEventHandler.lambda$0(UIEventObjectSupplier.java:64)
+	at org.eclipse.swt.widgets.Synchronizer.syncExec(Synchronizer.java:236)
+	at org.eclipse.ui.internal.UISynchronizer.syncExec(UISynchronizer.java:146)
+	at org.eclipse.swt.widgets.Display.syncExec(Display.java:5786)
+	at org.eclipse.e4.ui.internal.workbench.swt.E4Application$1.syncExec(E4Application.java:219)
+	at org.eclipse.e4.ui.internal.di.UIEventObjectSupplier$UIEventHandler.handleEvent(UIEventObjectSupplier.java:64)
+	at org.eclipse.equinox.internal.event.EventHandlerWrapper.handleEvent(EventHandlerWrapper.java:205)
+	at org.eclipse.equinox.internal.event.EventHandlerTracker.dispatchEvent(EventHandlerTracker.java:203)
+	at org.eclipse.equinox.internal.event.EventHandlerTracker.dispatchEvent(EventHandlerTracker.java:1)
+	at org.eclipse.osgi.framework.eventmgr.EventManager.dispatchEvent(EventManager.java:234)
+	at org.eclipse.osgi.framework.eventmgr.ListenerQueue.dispatchEventSynchronous(ListenerQueue.java:151)
+	at org.eclipse.equinox.internal.event.EventAdminImpl.dispatchEvent(EventAdminImpl.java:132)
+	at org.eclipse.equinox.internal.event.EventAdminImpl.sendEvent(EventAdminImpl.java:75)
+	at org.eclipse.equinox.internal.event.EventComponent.sendEvent(EventComponent.java:44)
+	at org.eclipse.e4.ui.services.internal.events.EventBroker.send(EventBroker.java:55)
+	at org.eclipse.e4.ui.internal.workbench.UIEventPublisher.notifyChanged(UIEventPublisher.java:63)
+	at org.eclipse.emf.common.notify.impl.BasicNotifierImpl.eNotify(BasicNotifierImpl.java:424)
+	at org.eclipse.e4.ui.model.application.ui.impl.UIElementImpl.setVisible(UIElementImpl.java:361)
+	at org.eclipse.e4.ui.workbench.renderers.swt.ContributionRecord.updateVisibility(ContributionRecord.java:113)
+	at org.eclipse.e4.ui.workbench.renderers.swt.MenuManagerRendererFilter.updateElementVisibility(MenuManagerRendererFilter.java:194)
+	at org.eclipse.e4.ui.workbench.renderers.swt.MenuManagerRendererFilter.updateElementVisibility(MenuManagerRendererFilter.java:205)
+	at org.eclipse.e4.ui.workbench.renderers.swt.MenuManagerShowProcessor.showMenu(MenuManagerShowProcessor.java:258)
+	at org.eclipse.e4.ui.workbench.renderers.swt.MenuManagerShowProcessor.menuAboutToHide(MenuManagerShowProcessor.java:115)
+	at org.eclipse.jface.internal.MenuManagerEventHelper.showEventPostHelper(MenuManagerEventHelper.java:95)
+	at org.eclipse.jface.action.MenuManager.handleAboutToShow(MenuManager.java:469)
+	at org.eclipse.jface.action.MenuManager.access$1(MenuManager.java:463)
+	at org.eclipse.jface.action.MenuManager$2.menuShown(MenuManager.java:495)
+	at org.eclipse.swt.widgets.TypedListener.handleEvent(TypedListener.java:259)
+	at org.eclipse.swt.widgets.EventTable.sendEvent(EventTable.java:89)
+	at org.eclipse.swt.widgets.Display.sendEvent(Display.java:5676)
+	at org.eclipse.swt.widgets.Widget.sendEvent(Widget.java:1423)
+	at org.eclipse.swt.widgets.Widget.sendEvent(Widget.java:1449)
+	at org.eclipse.swt.widgets.Widget.sendEvent(Widget.java:1428)
+	at org.eclipse.swt.widgets.Menu._setVisible(Menu.java:219)
+	at org.eclipse.swt.widgets.Display.runPopups(Display.java:4977)
+	at org.eclipse.swt.widgets.Display.readAndDispatch(Display.java:4419)
+	at org.eclipse.e4.ui.internal.workbench.swt.PartRenderingEngine$5.run(PartRenderingEngine.java:1160)
+	at org.eclipse.core.databinding.observable.Realm.runWithDefault(Realm.java:338)
+	at org.eclipse.e4.ui.internal.workbench.swt.PartRenderingEngine.run(PartRenderingEngine.java:1049)
+	at org.eclipse.e4.ui.internal.workbench.E4Workbench.createAndRunUI(E4Workbench.java:155)
+	at org.eclipse.ui.internal.Workbench.lambda$3(Workbench.java:660)
+	at org.eclipse.core.databinding.observable.Realm.runWithDefault(Realm.java:338)
+	at org.eclipse.ui.internal.Workbench.createAndRunWorkbench(Workbench.java:559)
+	at org.eclipse.ui.PlatformUI.createAndRunWorkbench(PlatformUI.java:154)
+	at org.eclipse.ui.internal.ide.application.IDEApplication.start(IDEApplication.java:150)
+	at org.eclipse.equinox.internal.app.EclipseAppHandle.run(EclipseAppHandle.java:203)
+	at org.eclipse.core.runtime.internal.adaptor.EclipseAppLauncher.runApplication(EclipseAppLauncher.java:137)
+	at org.eclipse.core.runtime.internal.adaptor.EclipseAppLauncher.start(EclipseAppLauncher.java:107)
+	at org.eclipse.core.runtime.adaptor.EclipseStarter.run(EclipseStarter.java:401)
+	at org.eclipse.core.runtime.adaptor.EclipseStarter.run(EclipseStarter.java:255)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:498)
+	at org.eclipse.equinox.launcher.Main.invokeFramework(Main.java:657)
+	at org.eclipse.equinox.launcher.Main.basicRun(Main.java:594)
+	at org.eclipse.equinox.launcher.Main.run(Main.java:1465)
+	at org.eclipse.equinox.launcher.Main.main(Main.java:1438)
+Caused by: org.eclipse.swt.SWTException: i/o error (java.io.FileNotFoundException: C:\Program Files\Git\mingw64\share\git\git-for-windows.ico (Arquivo ou diretório inexistente))
+	at org.eclipse.swt.SWT.error(SWT.java:4720)
+	at org.eclipse.swt.SWT.error(SWT.java:4635)
+	at org.eclipse.swt.graphics.ImageLoader.load(ImageLoader.java:292)
+	at org.eclipse.tm.terminal.view.ui.local.showin.ExternalExecutablesManager.loadImage(ExternalExecutablesManager.java:266)
+	at org.eclipse.tm.terminal.view.ui.local.showin.DynamicContributionItems.getContributionItems(DynamicContributionItems.java:79)
+	at org.eclipse.ui.actions.CompoundContributionItem.getContributionItemsToFill(CompoundContributionItem.java:83)
+	at org.eclipse.ui.actions.CompoundContributionItem.fill(CompoundContributionItem.java:57)
+	at org.eclipse.ui.internal.menus.DynamicMenuContributionItem.fill(DynamicMenuContributionItem.java:146)
+	at org.eclipse.jface.action.MenuManager.doItemFill(MenuManager.java:729)
+	at org.eclipse.jface.action.MenuManager.update(MenuManager.java:806)
+	at org.eclipse.jface.action.MenuManager.update(MenuManager.java:673)
+	at org.eclipse.e4.ui.workbench.renderers.swt.MenuManagerRenderer.scheduleManagerUpdate(MenuManagerRenderer.java:1224)
+	at org.eclipse.e4.ui.workbench.renderers.swt.MenuManagerRenderer.subscribeUIElementTopicAllRenderedVisibility(MenuManagerRenderer.java:218)
+	at sun.reflect.GeneratedMethodAccessor22.invoke(Unknown Source)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:498)
+	at org.eclipse.e4.core.internal.di.MethodRequestor.execute(MethodRequestor.java:58)
+	... 58 more
+Caused by: java.io.FileNotFoundException: C:\Program Files\Git\mingw64\share\git\git-for-windows.ico (Arquivo ou diretório inexistente)
+	at java.io.FileInputStream.open0(Native Method)
+	at java.io.FileInputStream.open(FileInputStream.java:195)
+	at java.io.FileInputStream.<init>(FileInputStream.java:138)
+	at java.io.FileInputStream.<init>(FileInputStream.java:93)
+	at org.eclipse.swt.graphics.ImageLoader.load(ImageLoader.java:289)
+	... 72 more
+
+!ENTRY org.eclipse.ui 4 0 2020-07-17 15:02:51.813
+!MESSAGE Unhandled event loop exception
+!STACK 0
+org.eclipse.e4.core.di.InjectionException: org.eclipse.swt.SWTException: i/o error (java.io.FileNotFoundException: C:\Program Files\Git\mingw64\share\git\git-for-windows.ico (Arquivo ou diretório inexistente))
+	at org.eclipse.e4.core.internal.di.MethodRequestor.execute(MethodRequestor.java:68)
+	at org.eclipse.e4.ui.internal.di.UIEventObjectSupplier$UIEventHandler.lambda$0(UIEventObjectSupplier.java:64)
+	at org.eclipse.swt.widgets.Synchronizer.syncExec(Synchronizer.java:236)
+	at org.eclipse.ui.internal.UISynchronizer.syncExec(UISynchronizer.java:146)
+	at org.eclipse.swt.widgets.Display.syncExec(Display.java:5786)
+	at org.eclipse.e4.ui.internal.workbench.swt.E4Application$1.syncExec(E4Application.java:219)
+	at org.eclipse.e4.ui.internal.di.UIEventObjectSupplier$UIEventHandler.handleEvent(UIEventObjectSupplier.java:64)
+	at org.eclipse.equinox.internal.event.EventHandlerWrapper.handleEvent(EventHandlerWrapper.java:205)
+	at org.eclipse.equinox.internal.event.EventHandlerTracker.dispatchEvent(EventHandlerTracker.java:203)
+	at org.eclipse.equinox.internal.event.EventHandlerTracker.dispatchEvent(EventHandlerTracker.java:1)
+	at org.eclipse.osgi.framework.eventmgr.EventManager.dispatchEvent(EventManager.java:234)
+	at org.eclipse.osgi.framework.eventmgr.ListenerQueue.dispatchEventSynchronous(ListenerQueue.java:151)
+	at org.eclipse.equinox.internal.event.EventAdminImpl.dispatchEvent(EventAdminImpl.java:132)
+	at org.eclipse.equinox.internal.event.EventAdminImpl.sendEvent(EventAdminImpl.java:75)
+	at org.eclipse.equinox.internal.event.EventComponent.sendEvent(EventComponent.java:44)
+	at org.eclipse.e4.ui.services.internal.events.EventBroker.send(EventBroker.java:55)
+	at org.eclipse.e4.ui.internal.workbench.UIEventPublisher.notifyChanged(UIEventPublisher.java:63)
+	at org.eclipse.emf.common.notify.impl.BasicNotifierImpl.eNotify(BasicNotifierImpl.java:424)
+	at org.eclipse.e4.ui.model.application.ui.impl.UIElementImpl.setVisible(UIElementImpl.java:361)
+	at org.eclipse.e4.ui.workbench.renderers.swt.ContributionRecord.updateVisibility(ContributionRecord.java:113)
+	at org.eclipse.e4.ui.workbench.renderers.swt.MenuManagerRendererFilter.updateElementVisibility(MenuManagerRendererFilter.java:194)
+	at org.eclipse.e4.ui.workbench.renderers.swt.MenuManagerRendererFilter.updateElementVisibility(MenuManagerRendererFilter.java:205)
+	at org.eclipse.e4.ui.workbench.renderers.swt.MenuManagerShowProcessor.showMenu(MenuManagerShowProcessor.java:258)
+	at org.eclipse.e4.ui.workbench.renderers.swt.MenuManagerShowProcessor.menuAboutToHide(MenuManagerShowProcessor.java:115)
+	at org.eclipse.jface.internal.MenuManagerEventHelper.showEventPostHelper(MenuManagerEventHelper.java:95)
+	at org.eclipse.jface.action.MenuManager.handleAboutToShow(MenuManager.java:469)
+	at org.eclipse.jface.action.MenuManager.access$1(MenuManager.java:463)
+	at org.eclipse.jface.action.MenuManager$2.menuShown(MenuManager.java:495)
+	at org.eclipse.swt.widgets.TypedListener.handleEvent(TypedListener.java:259)
+	at org.eclipse.swt.widgets.EventTable.sendEvent(EventTable.java:89)
+	at org.eclipse.swt.widgets.Display.sendEvent(Display.java:5676)
+	at org.eclipse.swt.widgets.Widget.sendEvent(Widget.java:1423)
+	at org.eclipse.swt.widgets.Widget.sendEvent(Widget.java:1449)
+	at org.eclipse.swt.widgets.Widget.sendEvent(Widget.java:1428)
+	at org.eclipse.swt.widgets.Menu._setVisible(Menu.java:219)
+	at org.eclipse.swt.widgets.Display.runPopups(Display.java:4977)
+	at org.eclipse.swt.widgets.Display.readAndDispatch(Display.java:4419)
+	at org.eclipse.e4.ui.internal.workbench.swt.PartRenderingEngine$5.run(PartRenderingEngine.java:1160)
+	at org.eclipse.core.databinding.observable.Realm.runWithDefault(Realm.java:338)
+	at org.eclipse.e4.ui.internal.workbench.swt.PartRenderingEngine.run(PartRenderingEngine.java:1049)
+	at org.eclipse.e4.ui.internal.workbench.E4Workbench.createAndRunUI(E4Workbench.java:155)
+	at org.eclipse.ui.internal.Workbench.lambda$3(Workbench.java:660)
+	at org.eclipse.core.databinding.observable.Realm.runWithDefault(Realm.java:338)
+	at org.eclipse.ui.internal.Workbench.createAndRunWorkbench(Workbench.java:559)
+	at org.eclipse.ui.PlatformUI.createAndRunWorkbench(PlatformUI.java:154)
+	at org.eclipse.ui.internal.ide.application.IDEApplication.start(IDEApplication.java:150)
+	at org.eclipse.equinox.internal.app.EclipseAppHandle.run(EclipseAppHandle.java:203)
+	at org.eclipse.core.runtime.internal.adaptor.EclipseAppLauncher.runApplication(EclipseAppLauncher.java:137)
+	at org.eclipse.core.runtime.internal.adaptor.EclipseAppLauncher.start(EclipseAppLauncher.java:107)
+	at org.eclipse.core.runtime.adaptor.EclipseStarter.run(EclipseStarter.java:401)
+	at org.eclipse.core.runtime.adaptor.EclipseStarter.run(EclipseStarter.java:255)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:498)
+	at org.eclipse.equinox.launcher.Main.invokeFramework(Main.java:657)
+	at org.eclipse.equinox.launcher.Main.basicRun(Main.java:594)
+	at org.eclipse.equinox.launcher.Main.run(Main.java:1465)
+	at org.eclipse.equinox.launcher.Main.main(Main.java:1438)
+Caused by: org.eclipse.swt.SWTException: i/o error (java.io.FileNotFoundException: C:\Program Files\Git\mingw64\share\git\git-for-windows.ico (Arquivo ou diretório inexistente))
+	at org.eclipse.swt.SWT.error(SWT.java:4720)
+	at org.eclipse.swt.SWT.error(SWT.java:4635)
+	at org.eclipse.swt.graphics.ImageLoader.load(ImageLoader.java:292)
+	at org.eclipse.tm.terminal.view.ui.local.showin.ExternalExecutablesManager.loadImage(ExternalExecutablesManager.java:266)
+	at org.eclipse.tm.terminal.view.ui.local.showin.DynamicContributionItems.getContributionItems(DynamicContributionItems.java:79)
+	at org.eclipse.ui.actions.CompoundContributionItem.getContributionItemsToFill(CompoundContributionItem.java:83)
+	at org.eclipse.ui.actions.CompoundContributionItem.fill(CompoundContributionItem.java:57)
+	at org.eclipse.ui.internal.menus.DynamicMenuContributionItem.fill(DynamicMenuContributionItem.java:146)
+	at org.eclipse.jface.action.MenuManager.doItemFill(MenuManager.java:729)
+	at org.eclipse.jface.action.MenuManager.update(MenuManager.java:806)
+	at org.eclipse.jface.action.MenuManager.update(MenuManager.java:673)
+	at org.eclipse.e4.ui.workbench.renderers.swt.MenuManagerRenderer.scheduleManagerUpdate(MenuManagerRenderer.java:1224)
+	at org.eclipse.e4.ui.workbench.renderers.swt.MenuManagerRenderer.subscribeUIElementTopicAllRenderedVisibility(MenuManagerRenderer.java:218)
+	at sun.reflect.GeneratedMethodAccessor22.invoke(Unknown Source)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:498)
+	at org.eclipse.e4.core.internal.di.MethodRequestor.execute(MethodRequestor.java:58)
+	... 58 more
+Caused by: java.io.FileNotFoundException: C:\Program Files\Git\mingw64\share\git\git-for-windows.ico (Arquivo ou diretório inexistente)
+	at java.io.FileInputStream.open0(Native Method)
+	at java.io.FileInputStream.open(FileInputStream.java:195)
+	at java.io.FileInputStream.<init>(FileInputStream.java:138)
+	at java.io.FileInputStream.<init>(FileInputStream.java:93)
+	at org.eclipse.swt.graphics.ImageLoader.load(ImageLoader.java:289)
+	... 72 more
+
+!ENTRY org.eclipse.jdt.ui 4 10001 2020-07-17 15:37:47.397
+!MESSAGE Internal Error
+!STACK 1
+Java Model Exception: Java Model Status [Company(List<Phone>, List<Brand>, String, String, String, String, String, String, String, String, String, String, String, String, String, String, String, String, List<Employee>) [in Company [in [Working copy] Company.java [in com.visumIT.Business.boost.models [in src/main/java [in Business-boost]]]]] does not exist]
+	at org.eclipse.jdt.internal.core.JavaElement.newNotPresentException(JavaElement.java:573)
+	at org.eclipse.jdt.internal.core.JavaElement.openWhenClosed(JavaElement.java:614)
+	at org.eclipse.jdt.internal.core.JavaElement.getElementInfo(JavaElement.java:326)
+	at org.eclipse.jdt.internal.core.JavaElement.getElementInfo(JavaElement.java:312)
+	at org.eclipse.jdt.internal.core.SourceRefElement.getSourceRange(SourceRefElement.java:233)
+	at org.eclipse.jdt.internal.core.Member.getJavadocRange(Member.java:301)
+	at org.eclipse.jdt.internal.ui.text.javadoc.JavadocContentAccess2.getHTMLContentFromSource(JavadocContentAccess2.java:662)
+	at org.eclipse.jdt.internal.ui.text.javadoc.JavadocContentAccess2.getHTMLContent(JavadocContentAccess2.java:538)
+	at org.eclipse.jdt.internal.ui.text.java.hover.JavadocHover.getHoverInfo(JavadocHover.java:760)
+	at org.eclipse.jdt.internal.ui.text.java.hover.JavadocHover.internalGetHoverInfo(JavadocHover.java:678)
+	at org.eclipse.jdt.internal.ui.text.java.hover.JavadocHover.getHoverInfo2(JavadocHover.java:670)
+	at org.eclipse.lsp4e.jdt.LSJavaHoverProvider.lambda$0(LSJavaHoverProvider.java:68)
+	at java.util.concurrent.CompletableFuture$AsyncRun.run(CompletableFuture.java:1640)
+	at java.util.concurrent.CompletableFuture$AsyncRun.exec(CompletableFuture.java:1632)
+	at java.util.concurrent.ForkJoinTask.doExec(ForkJoinTask.java:289)
+	at java.util.concurrent.ForkJoinPool$WorkQueue.runTask(ForkJoinPool.java:1056)
+	at java.util.concurrent.ForkJoinPool.runWorker(ForkJoinPool.java:1692)
+	at java.util.concurrent.ForkJoinWorkerThread.run(ForkJoinWorkerThread.java:157)
+!SUBENTRY 1 org.eclipse.jdt.core 4 969 2020-07-17 15:37:47.399
+!MESSAGE Company(List<Phone>, List<Brand>, String, String, String, String, String, String, String, String, String, String, String, String, String, String, String, String, List<Employee>) [in Company [in [Working copy] Company.java [in com.visumIT.Business.boost.models [in src/main/java [in Business-boost]]]]] does not exist
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2020-07-17 16:48:12.270
+!MESSAGE ClasspathListenerHandler removeClasspathListener sts4.classpath.TuUsaneZ
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2020-07-17 16:48:12.271
+!MESSAGE unsubscribing from classpath changes: sts4.classpath.TuUsaneZ
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2020-07-17 16:48:12.271
+!MESSAGE subsribers = {}
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2020-07-17 16:48:12.272
+!MESSAGE ClasspathListenerHandler removeClasspathListener sts4.classpath.TuUsaneZ => OK
+!SESSION 2020-07-20 14:46:00.874 -----------------------------------------------
+eclipse.buildId=4.14.0.I20191210-0610
+java.version=1.8.0_252
+java.vendor=Private Build
+BootLoader constants: OS=linux, ARCH=x86_64, WS=gtk, NL=pt_BR
+Framework arguments:  -product org.eclipse.epp.package.jee.product
+Command-line arguments:  -os linux -ws gtk -arch x86_64 -product org.eclipse.epp.package.jee.product
+
+!ENTRY org.eclipse.ui 2 0 2020-07-20 14:46:54.792
+!MESSAGE Warnings while parsing the key bindings from the 'org.eclipse.ui.commands' and 'org.eclipse.ui.bindings' extension point
+!SUBENTRY 1 org.eclipse.ui 2 0 2020-07-20 14:46:54.792
+!MESSAGE Defining a key binding with no key sequence has no effect: plug-in='org.springframework.ide.eclipse.boot.wizard', id='org.springframework.ide.eclipse.boot.wizard.addStarersSwitchHandler'
+
+!ENTRY org.eclipse.jface 2 0 2020-07-20 14:47:02.000
+!MESSAGE Keybinding conflicts occurred.  They may interfere with normal accelerator operation.
+!SUBENTRY 1 org.eclipse.jface 2 0 2020-07-20 14:47:02.000
+!MESSAGE A conflict occurred for CTRL+SHIFT+T:
+Binding(CTRL+SHIFT+T,
+	ParameterizedCommand(Command(org.eclipse.jdt.ui.navigate.open.type,Open Type,
+		Open a type in a Java editor,
+		Category(org.eclipse.ui.category.navigate,Navigate,null,true),
+		org.eclipse.ui.internal.WorkbenchHandlerServiceHandler@81cd90e,
+		,,true),null),
+	org.eclipse.ui.defaultAcceleratorConfiguration,
+	org.eclipse.ui.contexts.window,,,system)
+Binding(CTRL+SHIFT+T,
+	ParameterizedCommand(Command(org.eclipse.lsp4e.symbolinworkspace,Go to Symbol in Workspace,
+		,
+		Category(org.eclipse.lsp4e.category,Language Servers,null,true),
+		org.eclipse.ui.internal.WorkbenchHandlerServiceHandler@65fa56f7,
+		,,true),null),
+	org.eclipse.ui.defaultAcceleratorConfiguration,
+	org.eclipse.ui.contexts.window,,,system)
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2020-07-20 14:47:14.600
+!MESSAGE Entering DelegatingStreamConnectionProvider()
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2020-07-20 14:47:14.601
+!MESSAGE DelegatingStreamConnectionProvider classloader = org.eclipse.osgi.internal.loader.EquinoxClassLoader@250fc0d1[org.springframework.tooling.boot.ls:1.18.0.202005250744(id=1009)]
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2020-07-20 14:47:14.607
+!MESSAGE SpringBootLanguageServer exists!
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2020-07-20 14:47:14.932
+!MESSAGE Instantiating ReusableClasspathListenerHandler
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2020-07-20 14:47:31.040
+!MESSAGE Boot LS startup time from start to initialized: 16309ms
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2020-07-20 14:47:32.919
+!MESSAGE ClasspathListenerHandler addClasspathListener sts4.classpath.boKuDdPAisBatched = true
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2020-07-20 14:47:32.943
+!MESSAGE Creating project sorter...
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2020-07-20 14:47:32.944
+!MESSAGE Creating project sorter... DONE
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2020-07-20 14:47:32.948
+!MESSAGE Setting up ClasspathListenerManager
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2020-07-20 14:47:32.954
+!MESSAGE Scheduling initial event for all projects ...
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2020-07-20 14:47:32.955
+!MESSAGE Scheduling initial event for all projects DONE
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2020-07-20 14:47:32.955
+!MESSAGE exists = true open = true => deleted = false
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2020-07-20 14:47:32.956
+!MESSAGE ClasspathListenerHandler addClasspathListener sts4.classpath.boKuDdPA => OK
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2020-07-20 14:47:33.076
+!MESSAGE classpath=177 entries
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2020-07-20 14:47:33.080
+!MESSAGE buffering callback sts4.classpath.boKuDdPA Business-boost false 177
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2020-07-20 14:47:33.081
+!MESSAGE executing callback sts4.classpath.boKuDdPA 1 batched events
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2020-07-20 14:47:33.207
+!MESSAGE executing callback sts4.classpath.boKuDdPA SUCCESS [done]
+
+!ENTRY org.eclipse.ui 4 0 2020-07-20 14:53:30.768
+!MESSAGE Unhandled event loop exception
+!STACK 0
+java.lang.NullPointerException
+	at org.eclipse.jface.text.contentassist.AdditionalInfoController.computeInformation(AdditionalInfoController.java:541)
+	at org.eclipse.jface.text.AbstractInformationControlManager.doShowInformation(AbstractInformationControlManager.java:1101)
+	at org.eclipse.jface.text.AbstractInformationControlManager.showInformation(AbstractInformationControlManager.java:1091)
+	at org.eclipse.jface.text.contentassist.AdditionalInfoController.showInformation(AdditionalInfoController.java:530)
+	at org.eclipse.jface.text.contentassist.AdditionalInfoController$1.showInformation(AdditionalInfoController.java:477)
+	at org.eclipse.jface.text.contentassist.AdditionalInfoController$Timer.lambda$1(AdditionalInfoController.java:362)
+	at org.eclipse.swt.widgets.RunnableLock.run(RunnableLock.java:40)
+	at org.eclipse.swt.widgets.Synchronizer.runAsyncMessages(Synchronizer.java:185)
+	at org.eclipse.swt.widgets.Display.runAsyncMessages(Display.java:4910)
+	at org.eclipse.swt.widgets.Display.readAndDispatch(Display.java:4432)
+	at org.eclipse.e4.ui.internal.workbench.swt.PartRenderingEngine$5.run(PartRenderingEngine.java:1160)
+	at org.eclipse.core.databinding.observable.Realm.runWithDefault(Realm.java:338)
+	at org.eclipse.e4.ui.internal.workbench.swt.PartRenderingEngine.run(PartRenderingEngine.java:1049)
+	at org.eclipse.e4.ui.internal.workbench.E4Workbench.createAndRunUI(E4Workbench.java:155)
+	at org.eclipse.ui.internal.Workbench.lambda$3(Workbench.java:660)
+	at org.eclipse.core.databinding.observable.Realm.runWithDefault(Realm.java:338)
+	at org.eclipse.ui.internal.Workbench.createAndRunWorkbench(Workbench.java:559)
+	at org.eclipse.ui.PlatformUI.createAndRunWorkbench(PlatformUI.java:154)
+	at org.eclipse.ui.internal.ide.application.IDEApplication.start(IDEApplication.java:150)
+	at org.eclipse.equinox.internal.app.EclipseAppHandle.run(EclipseAppHandle.java:203)
+	at org.eclipse.core.runtime.internal.adaptor.EclipseAppLauncher.runApplication(EclipseAppLauncher.java:137)
+	at org.eclipse.core.runtime.internal.adaptor.EclipseAppLauncher.start(EclipseAppLauncher.java:107)
+	at org.eclipse.core.runtime.adaptor.EclipseStarter.run(EclipseStarter.java:401)
+	at org.eclipse.core.runtime.adaptor.EclipseStarter.run(EclipseStarter.java:255)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:498)
+	at org.eclipse.equinox.launcher.Main.invokeFramework(Main.java:657)
+	at org.eclipse.equinox.launcher.Main.basicRun(Main.java:594)
+	at org.eclipse.equinox.launcher.Main.run(Main.java:1465)
+	at org.eclipse.equinox.launcher.Main.main(Main.java:1438)
+
+!ENTRY org.eclipse.ui 2 2 2020-07-20 16:15:13.606
+!MESSAGE Invalid property category path: org.springframework.ide.eclipse.beans.ui.properties.ProjectPropertyPage (bundle: org.springframework.ide.eclipse.xml.namespaces, propertyPage: org.springframework.ide.eclipse.beans.ui.namespaces.projectPropertyPage)
+
+!ENTRY org.eclipse.ui 4 0 2020-07-20 16:15:15.984
+!MESSAGE Unhandled event loop exception
+!STACK 0
+org.eclipse.e4.core.di.InjectionException: org.eclipse.swt.SWTException: i/o error (java.io.FileNotFoundException: C:\Program Files\Git\mingw64\share\git\git-for-windows.ico (Arquivo ou diretório inexistente))
+	at org.eclipse.e4.core.internal.di.MethodRequestor.execute(MethodRequestor.java:68)
+	at org.eclipse.e4.ui.internal.di.UIEventObjectSupplier$UIEventHandler.lambda$0(UIEventObjectSupplier.java:64)
+	at org.eclipse.swt.widgets.Synchronizer.syncExec(Synchronizer.java:236)
+	at org.eclipse.ui.internal.UISynchronizer.syncExec(UISynchronizer.java:146)
+	at org.eclipse.swt.widgets.Display.syncExec(Display.java:5786)
+	at org.eclipse.e4.ui.internal.workbench.swt.E4Application$1.syncExec(E4Application.java:219)
+	at org.eclipse.e4.ui.internal.di.UIEventObjectSupplier$UIEventHandler.handleEvent(UIEventObjectSupplier.java:64)
+	at org.eclipse.equinox.internal.event.EventHandlerWrapper.handleEvent(EventHandlerWrapper.java:205)
+	at org.eclipse.equinox.internal.event.EventHandlerTracker.dispatchEvent(EventHandlerTracker.java:203)
+	at org.eclipse.equinox.internal.event.EventHandlerTracker.dispatchEvent(EventHandlerTracker.java:1)
+	at org.eclipse.osgi.framework.eventmgr.EventManager.dispatchEvent(EventManager.java:234)
+	at org.eclipse.osgi.framework.eventmgr.ListenerQueue.dispatchEventSynchronous(ListenerQueue.java:151)
+	at org.eclipse.equinox.internal.event.EventAdminImpl.dispatchEvent(EventAdminImpl.java:132)
+	at org.eclipse.equinox.internal.event.EventAdminImpl.sendEvent(EventAdminImpl.java:75)
+	at org.eclipse.equinox.internal.event.EventComponent.sendEvent(EventComponent.java:44)
+	at org.eclipse.e4.ui.services.internal.events.EventBroker.send(EventBroker.java:55)
+	at org.eclipse.e4.ui.internal.workbench.UIEventPublisher.notifyChanged(UIEventPublisher.java:63)
+	at org.eclipse.emf.common.notify.impl.BasicNotifierImpl.eNotify(BasicNotifierImpl.java:424)
+	at org.eclipse.e4.ui.model.application.ui.impl.UIElementImpl.setVisible(UIElementImpl.java:361)
+	at org.eclipse.e4.ui.workbench.renderers.swt.ContributionRecord.updateVisibility(ContributionRecord.java:113)
+	at org.eclipse.e4.ui.workbench.renderers.swt.MenuManagerRendererFilter.updateElementVisibility(MenuManagerRendererFilter.java:194)
+	at org.eclipse.e4.ui.workbench.renderers.swt.MenuManagerRendererFilter.updateElementVisibility(MenuManagerRendererFilter.java:205)
+	at org.eclipse.e4.ui.workbench.renderers.swt.MenuManagerShowProcessor.showMenu(MenuManagerShowProcessor.java:258)
+	at org.eclipse.e4.ui.workbench.renderers.swt.MenuManagerShowProcessor.menuAboutToHide(MenuManagerShowProcessor.java:115)
+	at org.eclipse.jface.internal.MenuManagerEventHelper.showEventPostHelper(MenuManagerEventHelper.java:95)
+	at org.eclipse.jface.action.MenuManager.handleAboutToShow(MenuManager.java:469)
+	at org.eclipse.jface.action.MenuManager.access$1(MenuManager.java:463)
+	at org.eclipse.jface.action.MenuManager$2.menuShown(MenuManager.java:495)
+	at org.eclipse.swt.widgets.TypedListener.handleEvent(TypedListener.java:259)
+	at org.eclipse.swt.widgets.EventTable.sendEvent(EventTable.java:89)
+	at org.eclipse.swt.widgets.Display.sendEvent(Display.java:5676)
+	at org.eclipse.swt.widgets.Widget.sendEvent(Widget.java:1423)
+	at org.eclipse.swt.widgets.Widget.sendEvent(Widget.java:1449)
+	at org.eclipse.swt.widgets.Widget.sendEvent(Widget.java:1428)
+	at org.eclipse.swt.widgets.Menu._setVisible(Menu.java:219)
+	at org.eclipse.swt.widgets.Display.runPopups(Display.java:4977)
+	at org.eclipse.swt.widgets.Display.readAndDispatch(Display.java:4419)
+	at org.eclipse.e4.ui.internal.workbench.swt.PartRenderingEngine$5.run(PartRenderingEngine.java:1160)
+	at org.eclipse.core.databinding.observable.Realm.runWithDefault(Realm.java:338)
+	at org.eclipse.e4.ui.internal.workbench.swt.PartRenderingEngine.run(PartRenderingEngine.java:1049)
+	at org.eclipse.e4.ui.internal.workbench.E4Workbench.createAndRunUI(E4Workbench.java:155)
+	at org.eclipse.ui.internal.Workbench.lambda$3(Workbench.java:660)
+	at org.eclipse.core.databinding.observable.Realm.runWithDefault(Realm.java:338)
+	at org.eclipse.ui.internal.Workbench.createAndRunWorkbench(Workbench.java:559)
+	at org.eclipse.ui.PlatformUI.createAndRunWorkbench(PlatformUI.java:154)
+	at org.eclipse.ui.internal.ide.application.IDEApplication.start(IDEApplication.java:150)
+	at org.eclipse.equinox.internal.app.EclipseAppHandle.run(EclipseAppHandle.java:203)
+	at org.eclipse.core.runtime.internal.adaptor.EclipseAppLauncher.runApplication(EclipseAppLauncher.java:137)
+	at org.eclipse.core.runtime.internal.adaptor.EclipseAppLauncher.start(EclipseAppLauncher.java:107)
+	at org.eclipse.core.runtime.adaptor.EclipseStarter.run(EclipseStarter.java:401)
+	at org.eclipse.core.runtime.adaptor.EclipseStarter.run(EclipseStarter.java:255)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:498)
+	at org.eclipse.equinox.launcher.Main.invokeFramework(Main.java:657)
+	at org.eclipse.equinox.launcher.Main.basicRun(Main.java:594)
+	at org.eclipse.equinox.launcher.Main.run(Main.java:1465)
+	at org.eclipse.equinox.launcher.Main.main(Main.java:1438)
+Caused by: org.eclipse.swt.SWTException: i/o error (java.io.FileNotFoundException: C:\Program Files\Git\mingw64\share\git\git-for-windows.ico (Arquivo ou diretório inexistente))
+	at org.eclipse.swt.SWT.error(SWT.java:4720)
+	at org.eclipse.swt.SWT.error(SWT.java:4635)
+	at org.eclipse.swt.graphics.ImageLoader.load(ImageLoader.java:292)
+	at org.eclipse.tm.terminal.view.ui.local.showin.ExternalExecutablesManager.loadImage(ExternalExecutablesManager.java:266)
+	at org.eclipse.tm.terminal.view.ui.local.showin.DynamicContributionItems.getContributionItems(DynamicContributionItems.java:79)
+	at org.eclipse.ui.actions.CompoundContributionItem.getContributionItemsToFill(CompoundContributionItem.java:83)
+	at org.eclipse.ui.actions.CompoundContributionItem.fill(CompoundContributionItem.java:57)
+	at org.eclipse.ui.internal.menus.DynamicMenuContributionItem.fill(DynamicMenuContributionItem.java:146)
+	at org.eclipse.jface.action.MenuManager.doItemFill(MenuManager.java:729)
+	at org.eclipse.jface.action.MenuManager.update(MenuManager.java:806)
+	at org.eclipse.jface.action.MenuManager.update(MenuManager.java:673)
+	at org.eclipse.e4.ui.workbench.renderers.swt.MenuManagerRenderer.scheduleManagerUpdate(MenuManagerRenderer.java:1224)
+	at org.eclipse.e4.ui.workbench.renderers.swt.MenuManagerRenderer.subscribeUIElementTopicAllRenderedVisibility(MenuManagerRenderer.java:218)
+	at sun.reflect.GeneratedMethodAccessor22.invoke(Unknown Source)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:498)
+	at org.eclipse.e4.core.internal.di.MethodRequestor.execute(MethodRequestor.java:58)
+	... 58 more
+Caused by: java.io.FileNotFoundException: C:\Program Files\Git\mingw64\share\git\git-for-windows.ico (Arquivo ou diretório inexistente)
+	at java.io.FileInputStream.open0(Native Method)
+	at java.io.FileInputStream.open(FileInputStream.java:195)
+	at java.io.FileInputStream.<init>(FileInputStream.java:138)
+	at java.io.FileInputStream.<init>(FileInputStream.java:93)
+	at org.eclipse.swt.graphics.ImageLoader.load(ImageLoader.java:289)
+	... 72 more
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2020-07-20 16:15:31.484
+!MESSAGE exists = true open = true => deleted = false
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2020-07-20 16:15:31.487
+!MESSAGE classpath=178 entries
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2020-07-20 16:15:31.491
+!MESSAGE buffering callback sts4.classpath.boKuDdPA Business-boost false 178
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2020-07-20 16:15:31.492
+!MESSAGE executing callback sts4.classpath.boKuDdPA 1 batched events
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2020-07-20 16:15:31.543
+!MESSAGE executing callback sts4.classpath.boKuDdPA SUCCESS [done]
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2020-07-20 16:15:31.938
+!MESSAGE exists = true open = true => deleted = false
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2020-07-20 16:15:31.950
+!MESSAGE classpath=178 entries
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2020-07-20 16:15:31.951
+!MESSAGE buffering callback sts4.classpath.boKuDdPA Business-boost false 178
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2020-07-20 16:15:31.952
+!MESSAGE executing callback sts4.classpath.boKuDdPA 1 batched events
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2020-07-20 16:15:31.994
+!MESSAGE executing callback sts4.classpath.boKuDdPA SUCCESS [done]
+
+!ENTRY org.eclipse.jface 2 0 2020-07-20 16:15:34.243
+!MESSAGE Ignored reentrant call while viewer is busy. This is only logged once per viewer instance, but similar calls will still be ignored.
+!STACK 0
+java.lang.RuntimeException
+	at org.eclipse.jface.viewers.ColumnViewer.checkBusy(ColumnViewer.java:764)
+	at org.eclipse.jface.viewers.ColumnViewer.update(ColumnViewer.java:543)
+	at org.eclipse.ui.navigator.CommonViewer.update(CommonViewer.java:512)
+	at org.eclipse.jface.viewers.StructuredViewer.update(StructuredViewer.java:1970)
+	at org.eclipse.ui.internal.navigator.resources.nested.NestedProjectsLabelProvider.lambda$2(NestedProjectsLabelProvider.java:87)
+	at java.util.concurrent.CompletableFuture.uniAccept(CompletableFuture.java:670)
+	at java.util.concurrent.CompletableFuture.uniAcceptStage(CompletableFuture.java:683)
+	at java.util.concurrent.CompletableFuture.thenAccept(CompletableFuture.java:2010)
+	at org.eclipse.ui.internal.navigator.resources.nested.NestedProjectsLabelProvider.lambda$0(NestedProjectsLabelProvider.java:80)
+	at org.eclipse.core.internal.events.NotificationManager$1.run(NotificationManager.java:305)
+	at org.eclipse.core.runtime.SafeRunner.run(SafeRunner.java:45)
+	at org.eclipse.core.internal.events.NotificationManager.notify(NotificationManager.java:295)
+	at org.eclipse.core.internal.events.NotificationManager.broadcastChanges(NotificationManager.java:158)
+	at org.eclipse.core.internal.resources.Workspace.broadcastPostChange(Workspace.java:380)
+	at org.eclipse.core.internal.resources.Workspace.endOperation(Workspace.java:1502)
+	at org.eclipse.core.internal.resources.Workspace.run(Workspace.java:2306)
+	at org.eclipse.core.internal.events.NotificationManager$NotifyJob.run(NotificationManager.java:44)
+	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:63)
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2020-07-20 17:11:42.565
+!MESSAGE ClasspathListenerHandler removeClasspathListener sts4.classpath.boKuDdPA
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2020-07-20 17:11:42.589
+!MESSAGE unsubscribing from classpath changes: sts4.classpath.boKuDdPA
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2020-07-20 17:11:42.589
+!MESSAGE subsribers = {}
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2020-07-20 17:11:42.590
+!MESSAGE ClasspathListenerHandler removeClasspathListener sts4.classpath.boKuDdPA => OK
+!SESSION 2020-07-23 13:20:47.103 -----------------------------------------------
+eclipse.buildId=4.14.0.I20191210-0610
+java.version=1.8.0_252
+java.vendor=Private Build
+BootLoader constants: OS=linux, ARCH=x86_64, WS=gtk, NL=pt_BR
+Framework arguments:  -product org.eclipse.epp.package.jee.product
+Command-line arguments:  -os linux -ws gtk -arch x86_64 -product org.eclipse.epp.package.jee.product
+
+!ENTRY org.eclipse.ui 2 0 2020-07-23 13:20:59.409
+!MESSAGE Warnings while parsing the key bindings from the 'org.eclipse.ui.commands' and 'org.eclipse.ui.bindings' extension point
+!SUBENTRY 1 org.eclipse.ui 2 0 2020-07-23 13:20:59.409
+!MESSAGE Defining a key binding with no key sequence has no effect: plug-in='org.springframework.ide.eclipse.boot.wizard', id='org.springframework.ide.eclipse.boot.wizard.addStarersSwitchHandler'
+
+!ENTRY org.eclipse.jface 2 0 2020-07-23 13:21:08.929
+!MESSAGE Keybinding conflicts occurred.  They may interfere with normal accelerator operation.
+!SUBENTRY 1 org.eclipse.jface 2 0 2020-07-23 13:21:08.929
+!MESSAGE A conflict occurred for CTRL+SHIFT+T:
+Binding(CTRL+SHIFT+T,
+	ParameterizedCommand(Command(org.eclipse.jdt.ui.navigate.open.type,Open Type,
+		Open a type in a Java editor,
+		Category(org.eclipse.ui.category.navigate,Navigate,null,true),
+		org.eclipse.ui.internal.WorkbenchHandlerServiceHandler@531292ed,
+		,,true),null),
+	org.eclipse.ui.defaultAcceleratorConfiguration,
+	org.eclipse.ui.contexts.window,,,system)
+Binding(CTRL+SHIFT+T,
+	ParameterizedCommand(Command(org.eclipse.lsp4e.symbolinworkspace,Go to Symbol in Workspace,
+		,
+		Category(org.eclipse.lsp4e.category,Language Servers,null,true),
+		org.eclipse.ui.internal.WorkbenchHandlerServiceHandler@41538150,
+		,,true),null),
+	org.eclipse.ui.defaultAcceleratorConfiguration,
+	org.eclipse.ui.contexts.window,,,system)
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2020-07-23 13:21:29.406
+!MESSAGE Entering DelegatingStreamConnectionProvider()
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2020-07-23 13:21:29.406
+!MESSAGE DelegatingStreamConnectionProvider classloader = org.eclipse.osgi.internal.loader.EquinoxClassLoader@7657cc5[org.springframework.tooling.boot.ls:1.18.0.202005250744(id=1009)]
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2020-07-23 13:21:29.409
+!MESSAGE SpringBootLanguageServer exists!
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2020-07-23 13:21:29.591
+!MESSAGE Instantiating ReusableClasspathListenerHandler
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2020-07-23 13:21:48.812
+!MESSAGE Boot LS startup time from start to initialized: 19361ms
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2020-07-23 13:21:50.261
+!MESSAGE ClasspathListenerHandler addClasspathListener sts4.classpath.nheerHWPisBatched = true
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2020-07-23 13:21:50.264
+!MESSAGE Creating project sorter...
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2020-07-23 13:21:50.266
+!MESSAGE Creating project sorter... DONE
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2020-07-23 13:21:50.269
+!MESSAGE Setting up ClasspathListenerManager
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2020-07-23 13:21:50.273
+!MESSAGE Scheduling initial event for all projects ...
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2020-07-23 13:21:50.275
+!MESSAGE Scheduling initial event for all projects DONE
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2020-07-23 13:21:50.275
+!MESSAGE ClasspathListenerHandler addClasspathListener sts4.classpath.nheerHWP => OK
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2020-07-23 13:21:50.279
+!MESSAGE exists = true open = true => deleted = false
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2020-07-23 13:21:50.288
+!MESSAGE classpath=178 entries
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2020-07-23 13:21:50.290
+!MESSAGE buffering callback sts4.classpath.nheerHWP Business-boost false 178
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2020-07-23 13:21:50.290
+!MESSAGE executing callback sts4.classpath.nheerHWP 1 batched events
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2020-07-23 13:21:50.421
+!MESSAGE executing callback sts4.classpath.nheerHWP SUCCESS [done]

@@ -40,6 +40,7 @@ import com.visumIT.Business.boost.repository.RepresentativeRepository;
 
 @RestController
 @RequestMapping("")
+@CrossOrigin
 public class OrderResource {
 	
 	@Autowired

@@ -10874,3 +10874,24 @@ Caused by: java.io.FileNotFoundException: C:\Program Files\Git\mingw64\share\git
 	at java.io.FileInputStream.<init>(FileInputStream.java:93)
 	at org.eclipse.swt.graphics.ImageLoader.load(ImageLoader.java:289)
 	... 72 more
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2020-07-23 17:22:13.965
+!MESSAGE ClasspathListenerHandler removeClasspathListener sts4.classpath.nheerHWP
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2020-07-23 17:22:13.975
+!MESSAGE unsubscribing from classpath changes: sts4.classpath.nheerHWP
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2020-07-23 17:22:13.975
+!MESSAGE subsribers = {}
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2020-07-23 17:22:13.976
+!MESSAGE ClasspathListenerHandler removeClasspathListener sts4.classpath.nheerHWP => OK
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2020-07-23 17:22:13.995
+!MESSAGE Entering DelegatingStreamConnectionProvider()
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2020-07-23 17:22:13.996
+!MESSAGE DelegatingStreamConnectionProvider classloader = org.eclipse.osgi.internal.loader.EquinoxClassLoader@7657cc5[org.springframework.tooling.boot.ls:1.18.0.202005250744(id=1009)]
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2020-07-23 17:22:13.996
+!MESSAGE SpringBootLanguageServer exists!
